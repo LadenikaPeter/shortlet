@@ -13,11 +13,11 @@
     grid-template-columns: auto auto auto auto;
     /* grid-template-columns: 1fr 1fr 1fr 1fr; */
     /* grid-template-columns: auto auto auto; */
-    /* grid-column-gap: 2rem; */
-    /* grid-row-gap: 1.5rem; */
+    grid-column-gap: 2rem;
+    grid-row-gap: 1.5rem;
     /* margin: 4rem; */
     /* width: 310px; */
-    
+    padding: 0rem 2rem;
 }
 
 .shortlet-listings{
