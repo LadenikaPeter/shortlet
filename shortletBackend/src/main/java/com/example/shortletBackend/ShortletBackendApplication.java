@@ -1,4 +1,4 @@
-package com.shortlet_backend.shortlet_backend;
+package com.example.shortletBackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
