@@ -1,0 +1,28 @@
+p {
+  display: inline;
+  padding: 0 12px;
+}
+
+.navbar {
+  padding: 1.3rem 0;
+  border-bottom: 1px solid #e6eaee;
+}
+
+.navbar-brand {
+  padding-left: 108px;
+}
+
+.links {
+  padding-right: 108px;
+}
+
+.button_profile {
+  background-color: transparent;
+  border-radius: 19px;
+  padding: 5px 13px;
+  border: 1px solid #e6eaee;
+}
+
+.profile_icon {
+  margin-left: 10px;
+}
