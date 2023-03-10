@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+
+import com.example.shortletBackend.enums.State;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +20,7 @@ public class Apartments {
     private String name;
     private String address;
     private String houseRefCode;
-
+    private State state;
     private int price;
     private double rating;
 

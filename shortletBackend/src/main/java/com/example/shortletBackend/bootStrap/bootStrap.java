@@ -2,6 +2,7 @@ package com.example.shortletBackend.bootStrap;
 
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Pictures;
+import com.example.shortletBackend.enums.State;
 import com.example.shortletBackend.repositories.ApartmentRepo;
 import com.example.shortletBackend.repositories.PicturesRepository;
 import lombok.AllArgsConstructor;
@@ -41,7 +42,7 @@ public class bootStrap implements CommandLineRunner {
 
         firstHouse.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture1, picture2, picture3, picture4,
                 picture5})) );
-
+        firstHouse.setState(State.VERIFIED);
 
         //2nd
         Apartments House2= new Apartments();
@@ -50,6 +51,7 @@ public class bootStrap implements CommandLineRunner {
 //        House2.setHouseRefCode(House2.getName().substring(0,5),apartmentRepo.findAll().size());
         House2.setPrice(1371);
         House2.setRating(3.9);
+        House2.setState(State.VERIFIED);
 
         Pictures picture6 = new Pictures();
         picture6.setUrl(" https://a0.muscache.com/im/pictures/6a9cae57-dfe1-4ea6-a570-84856e20d410.jpg?im_w=7200 ");
@@ -70,6 +72,7 @@ public class bootStrap implements CommandLineRunner {
         picture9,picture10})));
 
 
+
         //3rd
         Apartments House3= new Apartments();
         House3.setAddress("Santi Ferriol, Spain");
@@ -77,6 +80,7 @@ public class bootStrap implements CommandLineRunner {
         //House3.setHouseRefCode(House3.getName().substring(0,5),apartmentRepo.findAll().size());
         House3.setPrice(838);
         House3.setRating(5.0);
+        House3.setState(State.VERIFIED);
 
         Pictures picture11 = new Pictures();
         picture11.setUrl("https://a0.muscache.com/im/pictures/6e75f583-5c1f-41e8-b705-511dbffe92b5.jpg?im_w=1200 ");
@@ -102,6 +106,7 @@ public class bootStrap implements CommandLineRunner {
 //        House4.setHouseRefCode(House4.getName().substring(0,5),apartmentRepo.findAll().size());
         House4.setPrice(734);
         House4.setRating(4.5);
+        House4.setState(State.VERIFIED);
 
         Pictures picture16 = new Pictures();
         picture16.setUrl("https://a0.muscache.com/im/pictures/11755737/cbefb5d6_original.jpg?im_w=1200 ");
@@ -126,6 +131,7 @@ public class bootStrap implements CommandLineRunner {
 //        House5.setHouseRefCode(House5.getName().substring(0,5),apartmentRepo.findAll().size());
         House5.setPrice(1265);
         House5.setRating(4.7);
+        House5.setState(State.VERIFIED);
 
         Pictures picture21 = new Pictures();
         picture21.setUrl("https://a0.muscache.com/im/pictures/32233013/785da15f_original.jpg?im_w=1200 ");
@@ -151,6 +157,7 @@ public class bootStrap implements CommandLineRunner {
 //        House6.setHouseRefCode(House6.getName().substring(0,5),apartmentRepo.findAll().size());
         House6.setPrice(923);
         House6.setRating(5.0);
+        House6.setState(State.VERIFIED);
 
         Pictures pictures26 = new Pictures();
         pictures26.setUrl("https://a0.muscache.com/im/pictures/prohost-api/Hosting-2631155/original/e5f83d80-6e85-4cdc-99b4-ae9cc89e7020.jpeg?im_w=1200 ");
@@ -175,6 +182,7 @@ public class bootStrap implements CommandLineRunner {
 //        House7.setHouseRefCode(House7.getName().substring(0,5),apartmentRepo.findAll().size());
         House7.setPrice(182);
         House7.setRating(4.9);
+        House7.setState(State.VERIFIED);
 
         Pictures pictures33 = new Pictures();
         pictures33.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-49937547/original/0109bbe0-90ca-4645-8112-99b4544a372b.jpeg?im_w=1200 ");
@@ -199,6 +207,7 @@ public class bootStrap implements CommandLineRunner {
 //        House8.setHouseRefCode(House8.getName().substring(0,5),apartmentRepo.findAll().size());
         House8.setPrice(374);
         House8.setRating(5.0);
+        House8.setState(State.VERIFIED);
 
         Pictures pictures36 = new Pictures();
         pictures36.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-44272075/original/e9a6ab35-85b0-4ffb-b254-7901edf70aed.jpeg?im_w=1200");
@@ -223,6 +232,7 @@ public class bootStrap implements CommandLineRunner {
 //        House9.setHouseRefCode(House9.getName().substring(0,5),apartmentRepo.findAll().size());
         House9.setPrice(380);
         House9.setRating(5.0);
+        House9.setState(State.VERIFIED);
 
         Pictures pictures41 = new Pictures();
         pictures41.setUrl("https://a0.muscache.com/im/pictures/e17c7207-25e4-4824-a03b-d2b66847ebed.jpg?im_w=1200 ");
@@ -246,6 +256,7 @@ public class bootStrap implements CommandLineRunner {
 //        House10.setHouseRefCode(House10.getName().substring(0,5),apartmentRepo.findAll().size());
         House10.setPrice(120);
         House10.setRating(3.9);
+        House10.setState(State.VERIFIED);
 
         Pictures pictures46 = new Pictures("https://a0.muscache.com/im/pictures/3e327003-1cb2-4113-89eb-dfc83de633a9.jpg?im_w=1200 ");
 
@@ -267,6 +278,7 @@ public class bootStrap implements CommandLineRunner {
 //        House11.setHouseRefCode(House11.getName().substring(0,5),apartmentRepo.findAll().size());
         House11.setPrice(445);
         House11.setRating(3.9);
+        House11.setState(State.VERIFIED);
 
         Pictures pictures51 = new Pictures("https://a0.muscache.com/im/pictures/ba8d2e6f-968a-4fde-a21b-c56bdd60556c.jpg?im_w=1200 ");
 
@@ -291,6 +303,7 @@ public class bootStrap implements CommandLineRunner {
 //        House12.setHouseRefCode(House12.getName().substring(0,5),apartmentRepo.findAll().size());
         House12.setPrice(962);
         House12.setRating(5.0);
+        House12.setState(State.VERIFIED);
 
         Pictures pictures56 = new Pictures("https://a0.muscache.com/im/pictures/74192cff-0e84-43fc-ac8c-1c5a98039ca8.jpg?im_w=1200");
 
