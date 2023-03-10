@@ -15,3 +15,14 @@ p {
 .links {
   padding-right: 108px;
 }
+
+.button_profile {
+  background-color: transparent;
+  border-radius: 19px;
+  padding: 5px 13px;
+  border: 1px solid #e6eaee;
+}
+
+.profile_icon {
+  margin-left: 10px;
+}
