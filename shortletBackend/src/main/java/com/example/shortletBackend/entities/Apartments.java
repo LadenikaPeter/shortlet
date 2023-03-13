@@ -28,7 +28,6 @@ public class Apartments {
     private int maxNoOfGuests;
 
     @ManyToOne
-//    @ToString.Exclude
     private Users users;
 
     @OneToMany(mappedBy = "apartment")

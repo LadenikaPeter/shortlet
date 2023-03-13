@@ -1,5 +1,6 @@
 package com.example.shortletBackend.controllers;
 
+import com.example.shortletBackend.dto.ReservationDTO;
 import com.example.shortletBackend.dto.UserDTO;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
@@ -78,7 +79,7 @@ public class UserController {
         apartmentRepo.save(apartments.get());
         reservationRepo.save(reservation);
         userRepo.save(user.get());
-        return ResponseEntity.ok(mapper.map(user.get(), UserDTO.class));
+        return ResponseEntity.ok(mapper.map(reservation, ReservationDTO.class));
 
     }
 }

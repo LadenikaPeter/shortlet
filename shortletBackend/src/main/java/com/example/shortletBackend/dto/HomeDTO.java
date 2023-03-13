@@ -18,6 +18,7 @@ public class HomeDTO {
     private int price;
     private double rating;
 
+    private String houseRefCode;
     private UserDTO users;
     private Set<Pictures> pictures = new HashSet<>();
 }
