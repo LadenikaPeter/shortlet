@@ -1,3 +1,16 @@
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+  .removemine {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .removeboot {
+    display: none;
+  }
+}
+
 p {
   display: inline;
   padding: 0 12px;

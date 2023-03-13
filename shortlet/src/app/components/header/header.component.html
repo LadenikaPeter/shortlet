@@ -1,22 +1,76 @@
-<nav class="navbar">
+<nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand">Logo Name</a>
+    <a class="navbar-brand" style="margin-left: 100px" href="#">Navbar</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      style="flex-grow: 0; margin-right: 100px"
+      id="navbarNavDropdown"
+    >
+      <div class="removeboot" *ngIf="!isAuthenticated">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
 
-    <div class="float-end links">
-      <div class="profile" (click)="toggleProfileDiv()">
-        <button class="button_profile">
-          <img
-            src="../../../assets/svg/content.svg"
-            style="height: 30px; width: 30px"
-            alt=""
-          />
-          <img
-            class="profile_icon"
-            style="width: 30px; height: 30px"
-            src="../../../assets/svg/profile.svg"
-            alt=""
-          />
-        </button>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              >Log In</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Rent your home</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="removeboot" *ngIf="isAuthenticated">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Trips</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Account</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Rent your home</a>
+          </li>
+          <li class="nav-item" (click)="onLogOut()">
+            <a class="nav-link" style="color: red" href="#">Log out</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="float-end links removemine">
+        <div class="profile" (click)="toggleProfileDiv()">
+          <button class="button_profile">
+            <img
+              src="../../../assets/svg/content.svg"
+              style="height: 30px; width: 30px"
+              alt=""
+            />
+            <img
+              class="profile_icon"
+              style="width: 30px; height: 30px"
+              src="../../../assets/svg/profile.svg"
+              alt=""
+            />
+          </button>
+        </div>
       </div>
     </div>
   </div>
