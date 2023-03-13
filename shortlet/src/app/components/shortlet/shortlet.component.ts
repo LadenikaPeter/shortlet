@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 
 @Component({
   selector: 'app-shortlet',
@@ -6,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shortlet.component.css']
 })
 export class ShortletComponent implements OnInit {
+  shortletData: any= []
+  // dataStorage: any;
+
+  constructor(private dataStorage: DataStorageService, private activatedRoute: ActivatedRoute){}
 
   ngOnInit(){
-    console.log("e dey work");
+    this.activatedRoute.params.subscribe((data) => {
+      let id = data['id']
+      
+      console.log(id);
+      this.displayShortlet(id);
+    })
+    
+    // console.log("e dey work");
+  }
+
+  displayShortlet(id: number){
+    this.dataStorage.displayShortlet(id).subscribe(
+      (response) => {
+        console.log(this.shortletData = response)
+      }, error => console.log(error)
+    );
+
   }
 
 }

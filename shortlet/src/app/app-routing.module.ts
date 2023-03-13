@@ -9,8 +9,9 @@ const routes: Routes = [
   // { path: '', redirectTo: '/', pathMatch: 'full' },
   {path: '', component: HomeComponent},
   {
-    path: 'shortlet', component: ShortletComponent
+    path: 'shortlet/:id', component: ShortletComponent
   },
+
 ];
 
 @NgModule({

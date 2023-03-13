@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.dataStorage.getShortlets().subscribe((shortlet) => {
       this.availableShortlets = shortlet;
-      console.log(this.availableShortlets);
+      // console.log(this.availableShortlets);
     });
   }
 }

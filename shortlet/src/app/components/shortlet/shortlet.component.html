@@ -1,13 +1,13 @@
 <app-header></app-header>
 
 <div class="container">
-    <h2>Sunflower House</h2>
+    <h2 style="padding-top: 1rem;">{{shortletData.name}}</h2>
     <div style="display: flex; justify-content: space-between">
-        <div style="display: flex;  gap: 1rem;">
-            <p>★ 4.6</p>
-            <p>148 reviews</p>
-            <p>Superhost</p>
-            <p>El Port de la Selva, Catalonia, Spain</p>
+        <div style="display: flex; gap: 0.5rem;">
+            <p>★ {{shortletData.rating}}</p>
+            <p>· 148 reviews</p>
+            <p>· Superhost</p>
+            <p>· {{shortletData.address}}</p>
         </div>
         <div style="display: flex; gap: 1rem;">
             <p>Share</p>
@@ -15,7 +15,8 @@
         </div>
     </div>
 
-    <div class="shortlet-images" style="  border-radius: 20px;">
+    <div class="shortlet-images" style="  border-radius: 20px;" >
+        <!-- <img ngModel="shortletData" src="{{shortletData.pictures.url.id}}" alt=""> -->
         <img src="https://a0.muscache.com/im/pictures/81723679/e5e479c0_original.jpg?im_w=720" alt="" class="shortlet-image" id="img-one">
         <img src="https://a0.muscache.com/im/pictures/81723679/e5e479c0_original.jpg?im_w=720" alt="" class="shortlet-image" id="img-two">
         <img src="https://a0.muscache.com/im/pictures/81723679/e5e479c0_original.jpg?im_w=720" alt="" class="shortlet-image" id="img-three">
