@@ -1,4 +1,4 @@
-package com.shortlet_backend.shortlet_backend;
+package com.example.shortletBackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

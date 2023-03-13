@@ -8,15 +8,19 @@
 		<version>2.7.9</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.shortlet_backend</groupId>
-	<artifactId>shortlet_backend</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>shortletBackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>shortlet_backend</name>
+	<name>shortletBackend</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -47,6 +51,20 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
