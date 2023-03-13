@@ -1,7 +1,10 @@
 <app-header></app-header>
 <div class="container shortlet_div">
   <div class="row">
-    <div class="col-md-3">
+    <div
+      class="col-md-3"
+      *ngFor="let shortlet of availableShortlets; let i = index"
+    >
       <div class="carousel">
         <div id="carouselExampleIndicators" class="carousel slide">
           <div class="carousel-indicators">
@@ -24,6 +27,18 @@
               data-bs-target="#carouselExampleIndicators"
               data-bs-slide-to="2"
               aria-label="Slide 3"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="3"
+              aria-label="Slide 4"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="4"
+              aria-label="Slide 5"
             ></button>
           </div>
           <div class="carousel-inner">
@@ -72,24 +87,17 @@
       <div class="shortlet_details">
         <div style="margin-top: 15px; margin-bottom: 5px">
           <p class="shortlet_name" style="font-weight: 600" routerLink="shortlet">
-            Cul-de-Sac, St. Martin
+            {{shortlet.address}}
           </p>
-          <p class="shortlet_rating float-end">★ 4.6</p>
+          <p class="shortlet_rating float-end">★ {{shortlet.rating}}</p>
         </div>
-        <p style="margin: 0; font-weight: 300">7,297 kilometers away</p>
-        <p style="margin: 0; font-weight: 300">Jun 3 - 10</p>
+        <!-- <p style="margin: 0; font-weight: 300">7,297 kilometers away</p> -->
+        <!-- <p style="margin: 0; font-weight: 300">Jun 3 - 10</p> -->
         <p style="margin-top: 5px; font-weight: 300">
-          <span style="font-weight: 600">$1,000</span> per night
+          <span style="font-weight: 600">$ {{shortlet.price}}</span> per night
         </p>
       </div>
       
     </div>
-    <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
   </div>
 </div>
