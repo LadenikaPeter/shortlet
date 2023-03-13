@@ -50,19 +50,19 @@ public class bootStrap implements CommandLineRunner {
 
 //        firstHouse.getPictures().add(picture5);
         firstHouse.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture1,picture2,picture3,picture4,picture5})));
-//        System.out.println(firstHouse);
+        firstHouse.setUsers(Admin);
 
         //2nd
         Apartments House2= new Apartments();
         House2.setAddress("Route de IOurika, Morocco");
         House2.setName(" A beautiful house in a beautiful country");
-//        House2.setHouseRefCode(House2.getName().substring(0,5),apartmentRepo.findAll().size());
+        House2.setHouseRefCode(House2.getAddress().substring(0,3),2);
         House2.setPrice(1371);
         House2.setRating(3.9);
         House2.setState(State.VERIFIED);
 
         Pictures picture6 = new Pictures();
-        picture6.setUrl(" https://a0.muscache.com/im/pictures/6a9cae57-dfe1-4ea6-a570-84856e20d410.jpg?im_w=7200 ");
+        picture6.setUrl("https://a0.muscache.com/im/pictures/6a9cae57-dfe1-4ea6-a570-84856e20d410.jpg?im_w=7200 ");
 
         Pictures picture7 = new Pictures();
         picture7.setUrl("https://a0.muscache.com/im/pictures/52737d90-1113-42c9-8787-0911ed7444dc.jpg?im_w=1200 ");
@@ -87,7 +87,7 @@ public class bootStrap implements CommandLineRunner {
         Apartments House3= new Apartments();
         House3.setAddress("Santi Ferriol, Spain");
         House3.setName("Beautiful house with a view and a pool");
-        //House3.setHouseRefCode(House3.getName().substring(0,5),apartmentRepo.findAll().size());
+        House3.setHouseRefCode(House3.getAddress().substring(0,5),3);
         House3.setPrice(838);
         House3.setRating(5.0);
         House3.setState(State.VERIFIED);
@@ -114,7 +114,7 @@ public class bootStrap implements CommandLineRunner {
         Apartments House4= new Apartments();
         House4.setAddress("Al Haouz, Morocco");
         House4.setName("Beach house with cabana and a pool");
-//        House4.setHouseRefCode(House4.getName().substring(0,5),apartmentRepo.findAll().size());
+        House4.setHouseRefCode(House4.getAddress().substring(0,3),4);
         House4.setPrice(734);
         House4.setRating(4.5);
         House4.setState(State.VERIFIED);
@@ -142,7 +142,7 @@ public class bootStrap implements CommandLineRunner {
         Apartments House5= new Apartments();
         House5.setAddress(" Naxos,Greece");
         House5.setName("A beautiful home over looking the beach");
-//        House5.setHouseRefCode(House5.getName().substring(0,5),apartmentRepo.findAll().size());
+        House5.setHouseRefCode(House5.getAddress().substring(0,3),5);
         House5.setPrice(1265);
         House5.setRating(4.7);
         House5.setState(State.VERIFIED);
@@ -169,7 +169,7 @@ public class bootStrap implements CommandLineRunner {
         Apartments House6= new Apartments();
         House6.setAddress("Chania, Greece");
         House6.setName("A beutiful home with a large yard and a pool");
-//        House6.setHouseRefCode(House6.getName().substring(0,5),apartmentRepo.findAll().size());
+        House6.setHouseRefCode(House6.getAddress().substring(0,3),6);
         House6.setPrice(923);
         House6.setRating(5.0);
         House6.setState(State.VERIFIED);
@@ -195,7 +195,7 @@ public class bootStrap implements CommandLineRunner {
         Apartments House7= new Apartments();
         House7.setAddress("La Lajita, Spain");
         House7.setName("A home atop a cliff");
-//        House7.setHouseRefCode(House7.getName().substring(0,5),apartmentRepo.findAll().size());
+        House7.setHouseRefCode(House7.getAddress().substring(0,3),7);
         House7.setPrice(182);
         House7.setRating(4.9);
         House7.setState(State.VERIFIED);
@@ -221,7 +221,7 @@ public class bootStrap implements CommandLineRunner {
         Apartments House8= new Apartments();
         House8.setAddress("Mogan, Spain");
         House8.setName("A nice house with a luscious pool");
-//        House8.setHouseRefCode(House8.getName().substring(0,5),apartmentRepo.findAll().size());
+        House8.setHouseRefCode(House8.getAddress().substring(0,3),8);
         House8.setPrice(374);
         House8.setRating(5.0);
         House8.setState(State.VERIFIED);
@@ -247,7 +247,7 @@ public class bootStrap implements CommandLineRunner {
         Apartments House9= new Apartments();
         House9.setAddress("Lekki, Nigeria");
         House9.setName("A beautiful space that has a pool");
-//        House9.setHouseRefCode(House9.getName().substring(0,5),apartmentRepo.findAll().size());
+        House9.setHouseRefCode(House9.getAddress().substring(0,3),9);
         House9.setPrice(380);
         House9.setRating(5.0);
         House9.setState(State.VERIFIED);
@@ -272,7 +272,7 @@ public class bootStrap implements CommandLineRunner {
         Apartments House10= new Apartments();
         House10.setAddress("Ikoyi, Nigeria");
         House10.setName("A nice home with a game room");
-//        House10.setHouseRefCode(House10.getName().substring(0,5),apartmentRepo.findAll().size());
+        House10.setHouseRefCode(House10.getAddress().substring(0,5),10);
         House10.setPrice(120);
         House10.setRating(3.9);
         House10.setState(State.VERIFIED);
@@ -295,7 +295,7 @@ public class bootStrap implements CommandLineRunner {
         Apartments House11= new Apartments();
         House11.setAddress(" Avendia Juan carlos , Spain ");
         House11.setName("A spanish villa overlooking the beach");
-//        House11.setHouseRefCode(House11.getName().substring(0,5),apartmentRepo.findAll().size());
+        House11.setHouseRefCode(House11.getAddress().substring(0,3),11);
         House11.setPrice(445);
         House11.setRating(3.9);
         House11.setState(State.VERIFIED);
@@ -321,7 +321,7 @@ public class bootStrap implements CommandLineRunner {
         Apartments House12= new Apartments();
         House12.setAddress(" Milopotas, Greece");
         House12.setName("A beautiful spot for stargazing ");
-//        House12.setHouseRefCode(House12.getName().substring(0,5),apartmentRepo.findAll().size());
+        House12.setHouseRefCode(House12.getAddress().substring(0,3),12);
         House12.setPrice(962);
         House12.setRating(5.0);
         House12.setState(State.VERIFIED);
