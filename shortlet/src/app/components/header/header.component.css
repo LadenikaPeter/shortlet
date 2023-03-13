@@ -26,3 +26,73 @@ p {
 .profile_icon {
   margin-left: 10px;
 }
+
+.profile_div_not_auth {
+  /* display: none; */
+  position: absolute;
+  right: 120px;
+  top: 75px;
+  width: 200px;
+  height: 210px;
+  z-index: 9;
+  background-color: white;
+  border: 1px solid #e6eaee;
+  border-radius: 12px;
+}
+
+.profile_div_auth {
+  position: absolute;
+  right: 120px;
+  top: 75px;
+  width: 200px;
+  height: 245px;
+  z-index: 9;
+  background-color: white;
+  border: 1px solid #e6eaee;
+  border-radius: 12px;
+}
+
+.showProfile_div {
+  display: none;
+}
+
+ul > li {
+  padding: 10px 0 5px 15px;
+  cursor: pointer;
+}
+
+ul > li:hover {
+  background-color: #e6eaee;
+}
+
+.social_buttons > button {
+  padding: 10px 0;
+  border-radius: 5px;
+  background-color: transparent;
+  margin-top: 15px;
+}
+
+.social_buttons > button:hover {
+  background-color: #f0f0f0;
+}
+
+/* goole colors */
+
+#g {
+  color: #4285f4;
+}
+#o_first {
+  color: #ea4335;
+}
+#o_second {
+  color: #fbbc05;
+}
+#g_second {
+  color: #4285f4;
+}
+#l {
+  color: #34a853;
+}
+#e {
+  color: #ea4335;
+}

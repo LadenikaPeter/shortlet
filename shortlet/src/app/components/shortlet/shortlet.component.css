@@ -1,0 +1,44 @@
+.shortlet-images {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    /* grid-column-gap: 10px; */
+    /* grid-row-gap: 10px; */
+    height: 500px;
+}
+
+#img-one{
+    grid-area: 1 / 1 / 5 / 6;
+    width: 430px;
+    height: 430px;
+}
+
+#img-two { 
+    grid-area: 1 / 6 / 3 / 9;
+
+    width: 207px;
+    height: 215px;
+}
+
+ #img-three {
+    grid-area: 3 / 6 / 5 / 9;
+    width: 207px;
+    height: 215px;
+}
+
+#img-four {
+    grid-area: 1 / 9 / 3 / 12;
+    width: 207px;
+    height: 215px;
+}
+
+#img-five {
+    grid-area: 3 / 9 / 5 / 12;;
+    width: 207px;
+    height: 215px;
+}
+
+.amenities {
+    display: flex;
+    gap: 32rem;
+}
