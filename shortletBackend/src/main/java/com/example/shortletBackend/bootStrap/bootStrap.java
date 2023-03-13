@@ -62,11 +62,9 @@ public class bootStrap implements CommandLineRunner {
         House2.setState(State.VERIFIED);
 
         Pictures picture6 = new Pictures();
-<<<<<<< HEAD
+
         picture6.setUrl("https://a0.muscache.com/im/pictures/6a9cae57-dfe1-4ea6-a570-84856e20d410.jpg?im_w=7200");
-=======
-        picture6.setUrl("https://a0.muscache.com/im/pictures/6a9cae57-dfe1-4ea6-a570-84856e20d410.jpg?im_w=7200 ");
->>>>>>> 304f9dd71b0085137b1e6376561b96e8bb096dcf
+
 
         Pictures picture7 = new Pictures();
         picture7.setUrl("https://a0.muscache.com/im/pictures/52737d90-1113-42c9-8787-0911ed7444dc.jpg?im_w=1200");
