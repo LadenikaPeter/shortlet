@@ -42,14 +42,14 @@
             ></button>
           </div>
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img
-                src="https://a0.muscache.com/im/pictures/83738e60-4654-4faa-af1a-f53d02acbe6c.jpg?im_w=1200"
-                class="d-block w-100"
-                alt="..."
-              />
+            <div
+              class="carousel-item"
+              *ngFor="let shortletPics of shortlet.pictures; let i = index"
+              [ngClass]="{ active: i === 0 }"
+            >
+              <img [src]="shortletPics.url" class="d-block w-100" alt="..." />
             </div>
-            <div class="carousel-item">
+            <!-- <div class="carousel-item">
               <img
                 src="https://a0.muscache.com/im/pictures/69faa681-fb85-4817-86f6-9d727c3fe9d2.jpg?im_w=720"
                 class="d-block w-100"
@@ -62,7 +62,7 @@
                 class="d-block w-100"
                 alt="..."
               />
-            </div>
+            </div> -->
           </div>
           <button
             class="carousel-control-prev"
