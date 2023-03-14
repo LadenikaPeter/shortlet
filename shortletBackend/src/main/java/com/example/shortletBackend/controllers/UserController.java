@@ -1,6 +1,7 @@
 package com.example.shortletBackend.controllers;
 
 import com.example.shortletBackend.dto.ReservationDTO;
+import com.example.shortletBackend.dto.ReservationHomeDTO;
 import com.example.shortletBackend.dto.UserDTO;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
@@ -70,16 +71,24 @@ public class UserController {
          @RequestParam("user_email")String email,@RequestParam("apartment_id") long home_id){
         Optional<Users> user = userRepo.findUsersByEmail(email);
         Optional<Apartments> apartments= apartmentRepo.findById(home_id);
-
-        user.get().getReservationSet().add(reservation);
-        apartments.get().getReservations().add(reservation);
-        reservation.setUsers(user.get());
-        reservation.setApartment(apartments.get());
+        Reservation ticket= new Reservation();
+        if(user.isPresent()){
+            if(apartments.isPresent()){
+                ticket.setCheckIn(reservation.getCheckIn());
+                ticket.setCheckOut(reservation.getCheckOut());
+                ticket.setUsers(user.get());
+                ticket.setApartment(apartments.get());
+                ticket.setPrice(reservation.getPrice());
+                user.get().getReservationSet().add(ticket);
+                apartments.get().getReservations().add(ticket);
+            }
+        }
 
         apartmentRepo.save(apartments.get());
-        reservationRepo.save(reservation);
+        reservationRepo.save(ticket);
         userRepo.save(user.get());
-        return ResponseEntity.ok(mapper.map(reservation, ReservationDTO.class));
+
+        return ResponseEntity.ok(mapper.map(ticket, ReservationDTO.class));
 
     }
 }

@@ -18,6 +18,7 @@ public class Reservation {
 
     private Date checkIn;
     private Date checkOut;
+    private int price;
 
     @ManyToOne
     private Users users;
