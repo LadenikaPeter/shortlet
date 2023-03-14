@@ -17,7 +17,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { ShortletComponent } from './components/shortlet/shortlet.component';
 import { CommonModule } from '@angular/common';
-import { RandomComponent } from './random/random.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { RandomComponent } from './random/random.component';
     HeaderComponent,
     ShortletComponent,
     FooterComponent,
-    RandomComponent,
   ],
   imports: [
     CommonModule,
@@ -44,5 +42,4 @@ import { RandomComponent } from './random/random.component';
   providers: [],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {}
