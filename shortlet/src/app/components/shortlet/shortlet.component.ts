@@ -9,6 +9,7 @@ import { DataStorageService } from 'src/app/services/data-storage.service';
 })
 export class ShortletComponent implements OnInit {
   shortletData: any= []
+  showAmenities: boolean = false;
   // dataStorage: any;
 
   constructor(private dataStorage: DataStorageService, private activatedRoute: ActivatedRoute){}
@@ -31,6 +32,9 @@ export class ShortletComponent implements OnInit {
       }, error => console.log(error)
     );
 
+  }
+  toggleAmenities() {
+    this.showAmenities = !this.showAmenities;
   }
 
 }

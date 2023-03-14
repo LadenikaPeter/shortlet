@@ -37,8 +37,62 @@
     width: 207px;
     height: 215px;
 }
+.modal-button{
+    background-color: #fff;
+    color: black;
+    border: 1px solid black;
+}
+
+.modal-button:hover {
+    background-color: #f5f5f5;
+    color: black;
+    border: 1px solid black;
+}
 
 .amenities {
     display: flex;
-    gap: 32rem;
+    gap: 20rem;
+}
+
+.bill {
+    display: flex;
+    justify-content: space-between;
+}
+
+.small{
+    /* font-size: 1.1rem; */
+}
+.reservation {
+    min-width: 350px; 
+    /* border: 1px solid red; */
+    padding: 1.2rem;
+    max-height: 450px;
+    border-radius:10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: 3rem 4rem;
+}
+
+.reserve-btn {
+    margin: auto;
+  /* width: 70%; */
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.reserve-btn button {
+    background-color: #ff0066;
+    border-radius: 5px;
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  /* width: 320px; */
+  text-align: center;
+  padding: 10px 70px;
+    
+    border: none;
 }

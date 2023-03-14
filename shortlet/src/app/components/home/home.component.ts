@@ -9,6 +9,8 @@ import { DataStorageService } from 'src/app/services/data-storage.service';
 })
 export class HomeComponent implements OnInit {
   availableShortlets: any = [];
+
+
   constructor(private dataStorage: DataStorageService) {}
   ngOnInit(): void {
     this.dataStorage.getShortlets().subscribe((shortlet) => {
@@ -17,4 +19,7 @@ export class HomeComponent implements OnInit {
     });
     console.log("WORKING!")
   }
+
+  
+
 }
