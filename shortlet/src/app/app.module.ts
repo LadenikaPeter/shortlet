@@ -15,10 +15,20 @@ import { HeaderComponent } from './components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { ShortletComponent } from './components/shortlet/shortlet.component';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent, ShortletComponent, FooterComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    ShortletComponent,
+    FooterComponent,
+  ],
   imports: [
+    CommonModule,
+    RouterModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -32,4 +42,5 @@ import { ShortletComponent } from './components/shortlet/shortlet.component';
   providers: [],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}

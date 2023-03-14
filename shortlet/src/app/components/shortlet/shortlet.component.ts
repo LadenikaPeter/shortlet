@@ -15,13 +15,13 @@ export class ShortletComponent implements OnInit {
 
   ngOnInit(){
     this.activatedRoute.params.subscribe((data) => {
-      let id = data['id']
+      let id:number = data['id']
       
       console.log(id);
       this.displayShortlet(id);
     })
     
-    // console.log("e dey work");
+    console.log("e dey work");
   }
 
   displayShortlet(id: number){
