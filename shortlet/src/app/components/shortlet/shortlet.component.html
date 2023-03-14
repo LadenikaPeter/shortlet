@@ -57,7 +57,7 @@
                 <hr />
                 
                 <div style="display: flex; gap: 0.5rem">
-                    <p>icon</p>
+                    <i class="pi-calendar"></i>
                     <div>
                         <h5>Designed by</h5>
                         <p>Cadaval & Solà-Morales</p>
@@ -154,7 +154,18 @@
                     <hr>
                     <div>
                         <h5>5 nights in {{shortletData.address}} </h5>
-                        <p>Apr 1, 2023 - Apr 6, 2023</p>
+
+
+                        <!-- <h5>Inline</h5> -->
+<p-calendar [(ngModel)]="date14" [inline]="true" [showWeek]="true"></p-calendar>
+
+
+
+                        <!-- <p>{{checkinDate | date}} - {{checkoutDate | date}}</p>
+                        Check in: <input type="date" name="" id="" [(ngModel)]="checkinDate">
+                        Check out: <input type="date" name="" id="" [(ngModel)]="checkoutDate">
+                        <br>
+                        <button (click)="fetchDateSelected()">Book shortlet</button> -->
                     </div>
                     
                     
@@ -206,32 +217,5 @@
   <hr>  
   
   <!-- end -->
-  <div >
-    <p>Total before taxes</p>
-    <p>$1,864</p>
-</div>
-<div>
-<p>Total before taxes</p>
-<p>$1,864</p>
-</div>
-<div>
-<p>Total before taxes</p>
-<p>$1,864</p>
-</div>
-<div>
-    <p>Total before taxes</p>
-<p>$1,864</p>
-</div>
-<div>
-<p>Total before taxes</p>
-<p>$1,864</p>
-</div>
-<div>
-    <p>Total before taxes</p>
-    <p>$1,864</p>
-</div>
-<div>
-    <p>Total before taxes</p>
-    <p>$1,864</p>
-</div>
+  
 </div>

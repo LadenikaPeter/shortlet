@@ -42,4 +42,22 @@ export class ShortletComponent implements OnInit {
   toggleAmenities(){
     this.showAmenities != this.showAmenities; 
   }
+
+  // dateSelected: any
+  checkinDate: any | Date
+  checkoutDate: any | Date
+
+  fetchDateSelected() {
+    console.log("the check in date: " + this.checkinDate);
+    console.log("the check out date: " + this.checkoutDate);
+
+
+
+
+    
+  }
+  
+  date14: Date;
+
+
 }

@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { ShortletComponent } from './components/shortlet/shortlet.component';
 import { CommonModule } from '@angular/common';
+import {CalendarModule} from 'primeng/calendar';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    CalendarModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
