@@ -12,20 +12,17 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
-import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ShortletComponent } from './components/shortlet/shortlet.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent, ShortletComponent],
+  declarations: [AppComponent, HomeComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    BrowserModule, 
-    AppRoutingModule,
     ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
