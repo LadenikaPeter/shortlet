@@ -3,6 +3,7 @@
 
 * {
   font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
 }
 
 .grey-text {

@@ -38,4 +38,8 @@ export class ShortletComponent implements OnInit {
       (error) => console.log(error)
     );
   }
+
+  toggleAmenities(){
+    this.showAmenities != this.showAmenities; 
+  }
 }
