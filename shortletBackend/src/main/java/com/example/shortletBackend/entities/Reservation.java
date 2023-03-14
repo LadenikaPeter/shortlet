@@ -23,6 +23,6 @@ public class Reservation {
     private Users users;
 
     @ManyToOne
-    private Reservation reservation;
+    private Apartments apartment;
 
 }

@@ -6,11 +6,11 @@
       *ngFor="let shortlet of availableShortlets; let i = index"
     >
       <div class="carousel">
-        <div id="carouselExampleIndicators" class="carousel slide">
+        <div [id]="shortlet.houseRefCode" class="carousel slide">
           <div class="carousel-indicators">
             <button
               type="button"
-              data-bs-target="#carouselExampleIndicators"
+              [attr.data-bs-target]="'#' + shortlet.houseRefCode"
               data-bs-slide-to="0"
               class="active"
               aria-current="true"
@@ -18,38 +18,38 @@
             ></button>
             <button
               type="button"
-              data-bs-target="#carouselExampleIndicators"
+              [attr.data-bs-target]="'#' + shortlet.houseRefCode"
               data-bs-slide-to="1"
               aria-label="Slide 2"
             ></button>
             <button
               type="button"
-              data-bs-target="#carouselExampleIndicators"
+              [attr.data-bs-target]="'#' + shortlet.houseRefCode"
               data-bs-slide-to="2"
               aria-label="Slide 3"
             ></button>
             <button
               type="button"
-              data-bs-target="#carouselExampleIndicators"
+              [attr.data-bs-target]="'#' + shortlet.houseRefCode"
               data-bs-slide-to="3"
               aria-label="Slide 4"
             ></button>
             <button
               type="button"
-              data-bs-target="#carouselExampleIndicators"
+              [attr.data-bs-target]="'#' + shortlet.houseRefCode"
               data-bs-slide-to="4"
               aria-label="Slide 5"
             ></button>
           </div>
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img
-                src="https://a0.muscache.com/im/pictures/83738e60-4654-4faa-af1a-f53d02acbe6c.jpg?im_w=1200"
-                class="d-block w-100"
-                alt="..."
-              />
+            <div
+              class="carousel-item"
+              *ngFor="let shortletPics of shortlet.pictures; let i = index"
+              [ngClass]="{ active: i === 0 }"
+            >
+              <img [src]="shortletPics.url" class="d-block w-100" alt="..." />
             </div>
-            <div class="carousel-item">
+            <!-- <div class="carousel-item">
               <img
                 src="https://a0.muscache.com/im/pictures/69faa681-fb85-4817-86f6-9d727c3fe9d2.jpg?im_w=720"
                 class="d-block w-100"
@@ -62,12 +62,12 @@
                 class="d-block w-100"
                 alt="..."
               />
-            </div>
+            </div> -->
           </div>
           <button
             class="carousel-control-prev"
             type="button"
-            data-bs-target="#carouselExampleIndicators"
+            [attr.data-bs-target]="'#' + shortlet.houseRefCode"
             data-bs-slide="prev"
           >
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -76,7 +76,7 @@
           <button
             class="carousel-control-next"
             type="button"
-            data-bs-target="#carouselExampleIndicators"
+            [attr.data-bs-target]="'#' + shortlet.houseRefCode"
             data-bs-slide="next"
           >
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
