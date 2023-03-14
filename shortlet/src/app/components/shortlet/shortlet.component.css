@@ -1,44 +1,97 @@
 .shortlet-images {
-    display: grid;
-    grid-template-columns: repeat(11, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    /* grid-column-gap: 10px; */
-    /* grid-row-gap: 10px; */
-    height: 500px;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  /* grid-column-gap: 10px; */
+  /* grid-row-gap: 10px; */
+  height: 500px;
 }
 
-#img-one{
-    grid-area: 1 / 1 / 5 / 6;
-    width: 430px;
-    height: 430px;
+#img-one {
+  grid-area: 1 / 1 / 5 / 6;
+  width: 430px;
+  height: 430px;
 }
 
-#img-two { 
-    grid-area: 1 / 6 / 3 / 9;
+#img-two {
+  grid-area: 1 / 6 / 3 / 9;
 
-    width: 207px;
-    height: 215px;
+  width: 207px;
+  height: 215px;
 }
 
- #img-three {
-    grid-area: 3 / 6 / 5 / 9;
-    width: 207px;
-    height: 215px;
+#img-three {
+  grid-area: 3 / 6 / 5 / 9;
+  width: 207px;
+  height: 215px;
 }
 
 #img-four {
-    grid-area: 1 / 9 / 3 / 12;
-    width: 207px;
-    height: 215px;
+  grid-area: 1 / 9 / 3 / 12;
+  width: 207px;
+  height: 215px;
 }
 
 #img-five {
-    grid-area: 3 / 9 / 5 / 12;;
-    width: 207px;
-    height: 215px;
+  grid-area: 3 / 9 / 5 / 12;
+  width: 207px;
+  height: 215px;
 }
 
 .amenities {
-    display: flex;
-    gap: 32rem;
+  display: flex;
+  gap: 32rem;
+}
+
+/* test */
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  border-radius: 20px;
+}
+
+.div1 {
+  grid-area: 1 / 1 / 3 / 3;
+}
+/* .div1 > img {
+  max-width: 100%;
+  border-radius: 20px 0 0 20px;
+} */
+.div2 {
+  grid-area: 1 / 3 / 2 / 4;
+}
+
+/* .div2 > img {
+  max-width: 100%;
+} */
+.div3 {
+  grid-area: 1 / 4 / 2 / 5;
+}
+
+/* .div3 > img {
+  max-width: 100%;
+  border-radius: 0 20px 0 0;
+} */
+.div4 {
+  grid-area: 2 / 3 / 3 / 4;
+}
+
+/* .div4 > img {
+  max-width: 100%;
+} */
+.div5 {
+  grid-area: 2 / 4 / 3 / 5;
+}
+
+/* .div5 > img {
+  max-width: 100%;
+  border-radius: 0 0 20px 0;
+} */
+
+parent:nth-child() {
+  max-width: 100%;
 }
