@@ -28,7 +28,7 @@ public class bootStrap implements CommandLineRunner {
 
         Apartments firstHouse= new Apartments();
         firstHouse.setAddress("Provincia di Leece, Italy ");
-        firstHouse.setName("Italian dream home");
+        firstHouse.setName("Kristi J. Walters");
         firstHouse.setHouseRefCode(firstHouse.getAddress().substring(0, 3),1);
         firstHouse.setPrice(533);
         firstHouse.setRating(4.7);
@@ -57,7 +57,7 @@ public class bootStrap implements CommandLineRunner {
         //2nd
         Apartments House2= new Apartments();
         House2.setAddress("Route de IOurika, Morocco");
-        House2.setName(" A beautiful house in a beautiful country");
+        House2.setName("Kathleen Kammer");
         House2.setHouseRefCode(House2.getAddress().substring(0,3),2);
         House2.setPrice(1371);
         House2.setRating(3.9);
@@ -91,7 +91,7 @@ public class bootStrap implements CommandLineRunner {
         //3rd
         Apartments House3= new Apartments();
         House3.setAddress("Santi Ferriol, Spain");
-        House3.setName("Beautiful house with a view and a pool");
+        House3.setName("Samuel Altieri");
         House3.setHouseRefCode(House3.getAddress().substring(0,5),3);
         House3.setPrice(838);
         House3.setRating(5.0);
@@ -119,7 +119,7 @@ public class bootStrap implements CommandLineRunner {
         //4
         Apartments House4= new Apartments();
         House4.setAddress("AlHaouz, Morocco");
-        House4.setName("Beach house with cabana and a pool");
+        House4.setName("Melissa Marino");
         House4.setHouseRefCode(House4.getAddress().substring(0,3),4);
         House4.setPrice(734);
         House4.setRating(4.5);
@@ -148,7 +148,7 @@ public class bootStrap implements CommandLineRunner {
 
         Apartments House5= new Apartments();
         House5.setAddress("Naxos, Greece");
-        House5.setName("A beautiful home over looking the beach");
+        House5.setName("Emily Hannah");
         House5.setHouseRefCode(House5.getAddress().substring(0,3),5);
         House5.setPrice(1265);
         House5.setRating(4.7);
@@ -176,7 +176,7 @@ public class bootStrap implements CommandLineRunner {
 
         Apartments House6= new Apartments();
         House6.setAddress("Chania, Greece");
-        House6.setName("A beutiful home with a large yard and a pool");
+        House6.setName("Maik Beyer");
         House6.setHouseRefCode(House6.getAddress().substring(0,3),6);
         House6.setPrice(923);
         House6.setRating(5.0);
@@ -203,7 +203,7 @@ public class bootStrap implements CommandLineRunner {
 
         Apartments House7= new Apartments();
         House7.setAddress("Lajita, Spain");
-        House7.setName("A home atop a cliff");
+        House7.setName("Satordi Aubé");
         House7.setHouseRefCode(House7.getAddress().substring(0,3),7);
         House7.setPrice(182);
         House7.setRating(4.9);
@@ -230,7 +230,7 @@ public class bootStrap implements CommandLineRunner {
 
         Apartments House8= new Apartments();
         House8.setAddress("Mogan, Spain");
-        House8.setName("A nice house with a luscious pool");
+        House8.setName("Arnaude Barteaux");
         House8.setHouseRefCode(House8.getAddress().substring(0,3),8);
         House8.setPrice(374);
         House8.setRating(5.0);
@@ -257,7 +257,7 @@ public class bootStrap implements CommandLineRunner {
 
         Apartments House9= new Apartments();
         House9.setAddress("Lekki, Nigeria");
-        House9.setName("A beautiful space that has a pool");
+        House9.setName("Oluchukwu Chiwetelu");
         House9.setHouseRefCode(House9.getAddress().substring(0,3),9);
         House9.setPrice(380);
         House9.setRating(5.0);
@@ -283,7 +283,7 @@ public class bootStrap implements CommandLineRunner {
 
         Apartments House10= new Apartments();
         House10.setAddress("Ikoyi, Nigeria");
-        House10.setName("A nice home with a game room");
+        House10.setName("Chiabuotu Chinomso");
         House10.setHouseRefCode(House10.getAddress().substring(0,5),10);
         House10.setPrice(120);
         House10.setRating(3.9);
@@ -307,7 +307,7 @@ public class bootStrap implements CommandLineRunner {
 
         Apartments House11= new Apartments();
         House11.setAddress("Avendia Juan carlos , Spain ");
-        House11.setName("A spanish villa overlooking the beach");
+        House11.setName("Oscar Olsen");
         House11.setHouseRefCode(House11.getAddress().substring(0,3),11);
         House11.setPrice(445);
         House11.setRating(3.9);
@@ -334,7 +334,7 @@ public class bootStrap implements CommandLineRunner {
 
         Apartments House12= new Apartments();
         House12.setAddress("Milopotas, Greece");
-        House12.setName("A beautiful spot for stargazing ");
+        House12.setName("Isak Lennert");
         House12.setHouseRefCode(House12.getAddress().substring(0,3),12);
         House12.setPrice(962);
         House12.setRating(5.0);

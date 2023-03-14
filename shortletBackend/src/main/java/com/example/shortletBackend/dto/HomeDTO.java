@@ -19,6 +19,7 @@ public class HomeDTO {
     private double rating;
 
     private String houseRefCode;
+    private int maxNoOfGuests;
     private UserDTO users;
     private Set<Pictures> pictures = new HashSet<>();
 }
