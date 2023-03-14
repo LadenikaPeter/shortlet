@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -16,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { ShortletComponent } from './components/shortlet/shortlet.component';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RandomComponent } from './random/random.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,12 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     ShortletComponent,
     FooterComponent,
+    RandomComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule,
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
