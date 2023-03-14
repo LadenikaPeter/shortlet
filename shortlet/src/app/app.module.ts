@@ -14,9 +14,10 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
+import { ShortletComponent } from './components/shortlet/shortlet.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent, FooterComponent],
+  declarations: [AppComponent, HomeComponent, HeaderComponent, ShortletComponent, FooterComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
