@@ -85,19 +85,25 @@
       </div>
       <div class="shortlet_details">
         <div style="margin-top: 15px; margin-bottom: 5px">
-          <p class="shortlet_name" style="font-weight: 600" routerLink="shortlet/{{shortlet.id}}">
+          <p
+            class="shortlet_name"
+            style="font-weight: 600"
+            routerLink="shortlet/{{shortlet.id}}"
+          >
             {{shortlet.address}}
           </p>
           <p class="shortlet_rating float-end">★ {{shortlet.rating}}</p>
         </div>
-        <!-- <p style="margin: 0; font-weight: 300">7,297 kilometers away</p> -->
-        <!-- <p style="margin: 0; font-weight: 300">Jun 3 - 10</p> -->
+        <p style="margin: 0; font-weight: 300; color: #6c6f71">
+          {{shortlet.name}}
+        </p>
+        <p style="margin: 0; font-weight: 300; color: #6c6f71">
+          Allowed number of guests: {{shortlet.maxNoOfGuests}}
+        </p>
         <p style="margin-top: 5px; font-weight: 300">
           <span style="font-weight: 600">$ {{shortlet.price}}</span> per night
         </p>
       </div>
-      
     </div>
   </div>
 </div>
-
