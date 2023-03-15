@@ -13,6 +13,7 @@ export class ShortletComponent implements OnInit {
   numberOfNights: number
   shortletData: any= []
   shortletPictures: any = [];
+  shortletPrice: any  
   showAmenities: boolean = false;
 
   // dataStorage: any;
@@ -35,6 +36,7 @@ export class ShortletComponent implements OnInit {
     newCheckoutDate.setDate(new Date().getDate() + 2) // 2 days to the default checkin and out date
 
     this.fetchDateSelected();
+    this.bill();
   }
 
   
@@ -43,8 +45,9 @@ export class ShortletComponent implements OnInit {
   displayShortlet(id: number) {
     this.dataStorage.displayShortlet(id).subscribe(
       (response) => {
-        console.log(this.shortletData = response)
+        // console.log(this.shortletData = response)
         this.shortletData = response; //details of shortlet from API
+        // console.log(this.shortletPrice = response.price)
         this.shortletPictures = response.pictures; //pictures of shortlet from API
       },
       (error) => console.log(error)
@@ -54,13 +57,14 @@ export class ShortletComponent implements OnInit {
   toggleAmenities(){
     this.showAmenities != this.showAmenities; 
   }
+
   fetchDateSelected() {
     
     
     let timeDiff = Math.abs(new Date(this.checkoutDate).getTime() - new Date(this.checkinDate).getTime())
     this.numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-    console.log(this.numberOfNights)
+    // console.log(typeof(this.numberOfNights)
 
     this.bill();
   }
@@ -70,13 +74,13 @@ export class ShortletComponent implements OnInit {
   total: number
 
   bill() {
-    console.log(this.numberOfNights)
-    console.log(this.calculateNumberOfNights)
+    // console.log(this.numberOfNights)
+    // console.log(this.calculateNumberOfNights)
 
 
-    console.log(this.shortletData.price)
+    // console.log(this.shortletPrice)
     
-    this.calculateNumberOfNights = (this.shortletData.price *  this.numberOfNights)
+    this.calculateNumberOfNights = this.shortletPrice *  this.numberOfNights
     
     
     this.total = this.calculateNumberOfNights + 107 + 231;

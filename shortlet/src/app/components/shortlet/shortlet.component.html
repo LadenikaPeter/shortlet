@@ -176,7 +176,8 @@
             <!-- if check in date and checkout dates are picked, display this -->
             <div class="bill">
                 <p>${{ shortletData.price}} x {{ numberOfNights }} nights</p>
-                <p>${{ shortletData.price * numberOfNights }}</p>
+                <!-- <p>${{ shortletData.price * numberOfNights }}</p> -->
+                <p>${{ calculateNumberOfNights }}</p>
             </div>
             <div class="bill">
                 <p>Cleaning fee</p>
