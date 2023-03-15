@@ -153,19 +153,22 @@
                     </div>
                     <hr>
                     <div>
+                        <!-- <h5>Select checkout date</h5>
+                        <p>Minimum of 5 nights</p> -->
                         <h5>5 nights in {{shortletData.address}} </h5>
 
 
                         <!-- <h5>Inline</h5> -->
-<p-calendar [(ngModel)]="date14" [inline]="true" [showWeek]="true"></p-calendar>
+                        <!-- <p-calendar [(ngModel)]="date14" [inline]="true" [showWeek]="true" [style]="{'background-color': 'blue'}"></p-calendar> -->
+
+                        <!-- <p-calendar [(ngModel)]="date14" [inline]="true"></p-calendar> -->
 
 
-
-                        <!-- <p>{{checkinDate | date}} - {{checkoutDate | date}}</p>
+                        <p>{{checkinDate | date}} - {{checkoutDate | date}}</p>
                         Check in: <input type="date" name="" id="" [(ngModel)]="checkinDate">
                         Check out: <input type="date" name="" id="" [(ngModel)]="checkoutDate">
                         <br>
-                        <button (click)="fetchDateSelected()">Book shortlet</button> -->
+                        <button (click)="fetchDateSelected()">Book shortlet</button>
                     </div>
                     
                     

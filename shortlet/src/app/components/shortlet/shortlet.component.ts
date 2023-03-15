@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 
+import { differenceInDays} from 'date-fns';
+// import {  } from '@date-fns';
+
 @Component({
   selector: 'app-shortlet',
   templateUrl: './shortlet.component.html',
@@ -44,20 +47,24 @@ export class ShortletComponent implements OnInit {
   }
 
   // dateSelected: any
-  checkinDate: any | Date
-  checkoutDate: any | Date
+  checkinDate: number
+  checkoutDate: number
+
+  // dateLeft: number
+  // dateRight: number
 
   fetchDateSelected() {
     console.log("the check in date: " + this.checkinDate);
-    console.log("the check out date: " + this.checkoutDate);
+    console.log("the check out date: " + this.checkoutDate);  
+    console.log(differenceInDays(new Date(2023, 5, 1), new Date(2023, 2, 1)));
+  }
 
-
-
-
-    
+  showNight(){
+    // console.log(differenceInDays(this.checkinDate, this.checkoutDate));
   }
   
-  date14: Date;
+  // date14: Date;
+
 
 
 }
