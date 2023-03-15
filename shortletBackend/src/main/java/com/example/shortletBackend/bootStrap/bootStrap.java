@@ -239,7 +239,7 @@ public class bootStrap implements CommandLineRunner {
         House8.setUsers(Admin);
 
         Pictures pictures36 = new Pictures();
-        pictures36.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-44272075/original/e9a6ab35-85b0-4ffb-b254-7901edf70aed.jpeg?im_w=1200");
+        pictures36.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-842511498702667444/original/ca793819-9385-412e-87ec-a0562b674f42.jpeg?im_w=720");
 
         Pictures pictures37 = new Pictures();
         pictures37.setUrl("https://a0.muscache.com/im/pictures/b0e551a4-fd58-44ec-9be7-10f53da910ea.jpg?im_w=720 ");
@@ -266,7 +266,7 @@ public class bootStrap implements CommandLineRunner {
         House9.setUsers(Admin);
 
         Pictures pictures41 = new Pictures();
-        pictures41.setUrl("https://a0.muscache.com/im/pictures/e17c7207-25e4-4824-a03b-d2b66847ebed.jpg?im_w=1200 ");
+        pictures41.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-822280454813797636/original/28910836-2cbf-4793-ad56-9068d8414ebb.jpeg?im_w=720");
 
         Pictures pictures42 = new Pictures();
         pictures42.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-51327545/original/286568cd-c8aa-4665-a73d-ec6cd6884da6.jpeg?im_w=720 ");

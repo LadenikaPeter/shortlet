@@ -44,6 +44,8 @@ export class ShortletComponent implements OnInit {
       (response) => {
         // console.log(this.shortletData = response)
         this.shortletData = response; //details of shortlet from API
+        this.shortletPrice = response.price;
+        console.log(this.shortletPrice);
         // console.log(this.shortletPrice = response.price)
         this.shortletPictures = response.pictures; //pictures of shortlet from API
       },
@@ -76,8 +78,11 @@ export class ShortletComponent implements OnInit {
     // console.log(this.calculateNumberOfNights)
 
     // console.log(this.shortletPrice)
+    console.log(this.shortletPrice);
+    console.log(this.numberOfNights);
 
     this.calculateNumberOfNights = this.shortletPrice * this.numberOfNights;
+    // console.log(this.calculateNumberOfNights);
 
     this.total = this.calculateNumberOfNights + 107 + 231;
   }
