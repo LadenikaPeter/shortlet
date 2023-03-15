@@ -154,10 +154,9 @@
 
 
                         <p>{{checkinDate | date}} - {{checkoutDate | date}}</p>
-                        Check in: <input type="date" name="" id="" [(ngModel)]="checkinDate">
-                        Check out: <input type="date" name="" id="" [(ngModel)]="checkoutDate">
-                        <br>
-                        <button (click)="fetchDateSelected()">Book shortlet</button>
+                        Check in: <input type="date" name="" id="" [(ngModel)]="checkinDate"
+                        min="2023-03-15">
+                        Check out: <input type="date" name="" id="" [(ngModel)]="checkoutDate" min="2023-03-17">
                     </div>
                     
                     
@@ -181,7 +180,7 @@
             <!-- check in and out picker -->
             
             <div class="reserve-btn">
-                <button>Reserve</button>
+                <button (click)="fetchDateSelected()">Reserve</button>
                 <p class="small">You won't be charged yet</p>
             </div>
             <!-- if check in date and checkout dates are picked, display this -->
