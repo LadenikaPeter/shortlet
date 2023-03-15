@@ -1,0 +1,39 @@
+entity Users{
+  id Long,
+  name String,
+  email String,
+  phoneNo String,
+  role Role
+}
+entity Apartment{
+  id Long,
+  name String,
+  address String,
+  houseRefCode String,
+  status Status,
+  price Integer,
+  reservationStatus Status
+}
+
+entity Reservation{
+  id Long,
+  checkIn Date,
+  checkOut Date,
+  userid Integer,
+  apartmentId Integer
+
+}
+enum Role{
+  ADMIN,USER
+}
+
+enum Status{
+  OCCUPIED,UNOCCUPIED
+}
+
+relationship OneToMany{
+  Reservation{userId} to Users {Reservation}
+  Reservation{id} to Apartment
+  Apartment{userid} to Users
+}
+

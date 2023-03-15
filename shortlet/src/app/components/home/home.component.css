@@ -1,0 +1,48 @@
+.shortlet_div {
+  margin-top: 1.875rem;
+}
+
+.row {
+  justify-content: space-around;
+}
+
+.col-md-3 {
+  width: 310px;
+  height: 400px;
+  padding: 0;
+  margin-bottom: 2.7rem;
+  border-radius: 12px 12px 0 0;
+}
+
+img {
+  width: 279px;
+  height: 265px;
+  border-radius: 12px 12px 12px 12px;
+}
+
+.shortlet_name {
+  display: inline;
+}
+
+.shortlet_rating {
+  display: inline;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  visibility: hidden;
+}
+
+.carousel:hover .carousel-control-next {
+  visibility: visible;
+}
+
+.carousel:hover .carousel-control-prev {
+  visibility: visible;
+}
+
+.carousel-indicators > button {
+  border-radius: 50%;
+  height: 7px;
+  width: 7px;
+}

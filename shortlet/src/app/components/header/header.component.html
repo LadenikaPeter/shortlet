@@ -1,0 +1,190 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      style="flex-grow: 0; margin-right: 100px"
+      id="navbarNavDropdown"
+    >
+      <div class="removeboot" *ngIf="!isAuthenticated">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              >Log In</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Rent your home</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="removeboot" *ngIf="isAuthenticated">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Trips</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Account</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Rent your home</a>
+          </li>
+          <li class="nav-item" (click)="onLogOut()">
+            <a class="nav-link" style="color: red" href="#">Log out</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="float-end links removemine">
+        <div class="profile" (click)="toggleProfileDiv()">
+          <button class="button_profile">
+            <img
+              src="../../../assets/svg/content.svg"
+              style="height: 30px; width: 30px"
+              alt=""
+            />
+            <img
+              class="profile_icon"
+              style="width: 30px; height: 30px"
+              src="../../../assets/svg/profile.svg"
+              alt=""
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div
+  *ngIf="!isAuthenticated"
+  class="profile_div_not_auth"
+  [ngClass]="{ showProfile_div: !isProfileClicked }"
+>
+  <ul style="list-style-type: none; padding: 0">
+    <li
+      style="margin-top: 10px; font-weight: 600"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      (click)="toggleProfileDiv()"
+    >
+      Sign up
+    </li>
+    <li
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      (click)="toggleProfileDiv()"
+    >
+      Log in
+    </li>
+  </ul>
+  <hr />
+  <ul style="list-style-type: none; padding: 0">
+    <li>Rent your home</li>
+    <li style="margin-bottom: 10px">Help</li>
+  </ul>
+</div>
+
+<div
+  *ngIf="isAuthenticated"
+  class="profile_div_auth"
+  [ngClass]="{ showProfile_div: !isProfileClicked }"
+>
+  <ul style="list-style-type: none; padding: 0">
+    <li style="margin-top: 10px; font-weight: 600" (click)="toggleProfileDiv()">
+      Trips
+    </li>
+    <li (click)="toggleProfileDiv()">Account</li>
+  </ul>
+  <hr />
+  <ul style="list-style-type: none; padding: 0">
+    <li (click)="toggleProfileDiv()">Rent your home</li>
+    <li (click)="toggleProfileDiv()">Help</li>
+    <li (click)="toggleProfileDiv(); onLogOut()" style="color: red">Log out</li>
+  </ul>
+</div>
+
+<!-- Button trigger modal -->
+<!-- <button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Log in or sign up
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h5>Welcome to Logo name</h5>
+        <div class="social_buttons">
+          <button
+            class="w-100"
+            (click)="authenticateWithGoogle()"
+            data-bs-dismiss="modal"
+          >
+            Continue with
+            <span>
+              <span id="g">G</span> <span id="o_first">o</span>
+              <span id="o_second">o</span> <span id="g_second">g</span>
+              <span id="l">l</span> <span id="e">e</span>
+            </span>
+          </button>
+          <!-- <button
+            class="w-100"
+            data-bs-dismiss="modal"
+            (click)="authenticateWithFacebook()"x
+          >
+            Continue with facebook
+          </button> -->
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
