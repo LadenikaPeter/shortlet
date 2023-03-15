@@ -30,7 +30,9 @@ export class ShortletComponent implements OnInit {
       this.displayShortlet(id);
     });
 
-    console.log('e dey work');
+    this.checkinDate = new Date()
+    console.log(this.checkinDate.getDate())
+    
   }
 
   displayShortlet(id: number) {
@@ -49,13 +51,19 @@ export class ShortletComponent implements OnInit {
   }
 
   // dateSelected: any
+<<<<<<< HEAD
   checkinDate: Date;
   checkoutDate: Date;
+=======
+  checkinDate: Date 
+  checkoutDate: Date
+>>>>>>> ea41d1a4ab5f9d008e6abe5e80be67427cdeb28e
 
   // dateLeft: number
   // dateRight: number
 
   fetchDateSelected() {
+<<<<<<< HEAD
     // console.log("the check in date: " + this.checkinDate);
     // console.log("the check out date: " + this.checkoutDate);
     // console.log(differenceInDays(new Date(2023, 5, 1), new Date(2023, 2, 1)));
@@ -64,6 +72,20 @@ export class ShortletComponent implements OnInit {
 
   showNight() {
     // console.log(differenceInDays(this.checkinDate, this.checkoutDate));
+=======
+    console.log("the check in date: " + this.checkinDate);
+    console.log("the check out date: " + this.checkoutDate);
+    console.log()
+    // console.log()
+    this.showNight();
+  }
+
+  showNight(){
+    let timeDiff = Math.abs(new Date(this.checkoutDate).getTime() - new Date(this.checkinDate).getTime())
+    // let timeDiff = Math.abs(1200);
+    let numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    console.log(numberOfNights + " nights");
+>>>>>>> ea41d1a4ab5f9d008e6abe5e80be67427cdeb28e
   }
 
   // date14: Date;
