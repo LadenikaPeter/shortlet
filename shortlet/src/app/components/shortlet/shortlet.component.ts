@@ -29,16 +29,19 @@ export class ShortletComponent implements OnInit {
       console.log(id);
       this.displayShortlet(id);
     });
+    this.forCalendar();
+    // this.dateForCalendar = new Date(Date.now()).toLocaleString();
+    this.checkinDate = new Date();
+    console.log(this.checkinDate.getDate());
 
-    this.checkinDate = new Date()
-    console.log(this.checkinDate.getDate())
-    
+    // console.log(new Date(Date.now()).toLocaleString());
   }
 
   displayShortlet(id: number) {
     this.dataStorage.displayShortlet(id).subscribe(
       (response) => {
         // console.log(this.shortletData = response)
+        console.log(response.price);
         this.shortletData = response;
         this.shortletPictures = response.pictures;
       },
@@ -51,41 +54,49 @@ export class ShortletComponent implements OnInit {
   }
 
   // dateSelected: any
-<<<<<<< HEAD
+
   checkinDate: Date;
   checkoutDate: Date;
-=======
-  checkinDate: Date 
-  checkoutDate: Date
->>>>>>> ea41d1a4ab5f9d008e6abe5e80be67427cdeb28e
+  dateForCalendar: string;
+
+  forCalendar() {
+    // Create a date object from a date string
+    const date = new Date();
+
+    // Get year, month, and day part from the date
+    const year = date.toLocaleString('default', { year: 'numeric' });
+    const month = date.toLocaleString('default', { month: '2-digit' });
+    const day = date.toLocaleString('default', { day: '2-digit' });
+
+    // Generate yyyy-mm-dd date string
+    const formattedDate = year + '-' + month + '-' + day;
+    this.dateForCalendar = formattedDate;
+    console.log(formattedDate); // Prints: 2022-05-04
+  }
+
+  calendarTest(event: Event) {
+    console.log(event);
+  }
 
   // dateLeft: number
   // dateRight: number
 
   fetchDateSelected() {
-<<<<<<< HEAD
-    // console.log("the check in date: " + this.checkinDate);
-    // console.log("the check out date: " + this.checkoutDate);
-    // console.log(differenceInDays(new Date(2023, 5, 1), new Date(2023, 2, 1)));
-    // console.log(new Date(this.checkinDate.getTime()));
-  }
-
-  showNight() {
-    // console.log(differenceInDays(this.checkinDate, this.checkoutDate));
-=======
-    console.log("the check in date: " + this.checkinDate);
-    console.log("the check out date: " + this.checkoutDate);
-    console.log()
+    console.log('the check in date: ' + this.checkinDate);
+    console.log('the check out date: ' + this.checkoutDate);
+    console.log();
     // console.log()
     this.showNight();
   }
 
-  showNight(){
-    let timeDiff = Math.abs(new Date(this.checkoutDate).getTime() - new Date(this.checkinDate).getTime())
+  showNight() {
+    let timeDiff = Math.abs(
+      new Date(this.checkoutDate).getTime() -
+        new Date(this.checkinDate).getTime()
+    );
     // let timeDiff = Math.abs(1200);
     let numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    console.log(numberOfNights + " nights");
->>>>>>> ea41d1a4ab5f9d008e6abe5e80be67427cdeb28e
+    console.log(numberOfNights + ' nights');
   }
 
   // date14: Date;
