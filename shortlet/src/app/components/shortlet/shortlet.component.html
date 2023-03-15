@@ -154,8 +154,7 @@
 
 
                         <p>{{checkinDate | date}} - {{checkoutDate | date}}</p>
-                        Check in: <input type="date" name="" id="" [(ngModel)]="checkinDate"
-                        min="2023-03-15">
+                        Check in: <input type="date" name="" id=""  [value]="checkinDate" min="2023-03-15" [(ngModel)]="checkinDate">
                         Check out: <input type="date" name="" id="" [(ngModel)]="checkoutDate" min="2023-03-17">
                     </div>
                     

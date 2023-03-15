@@ -30,7 +30,8 @@ export class ShortletComponent implements OnInit {
       this.displayShortlet(id);
     });
 
-    // console.log('e dey work');
+    this.checkinDate = new Date()
+    console.log(this.checkinDate.getDate())
     
   }
 
@@ -51,7 +52,7 @@ export class ShortletComponent implements OnInit {
   }
 
   // dateSelected: any
-  checkinDate: Date
+  checkinDate: Date 
   checkoutDate: Date
 
   // dateLeft: number
