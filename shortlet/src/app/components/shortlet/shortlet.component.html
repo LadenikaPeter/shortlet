@@ -87,6 +87,7 @@
       <!-- amenities -->
       <div class="amenities">
         <div>
+<<<<<<< HEAD
           <p>Beach access</p>
           <p>Bay view</p>
           <p>Ocean View</p>
@@ -137,6 +138,16 @@
               <div class="modal-body">
                 <h6>Scenic view</h6>
                 <p>Park view</p>
+=======
+            <div>
+                <h2>Entire home hosted by {{shortletData.name}}</h2>
+                <div style="display: flex; gap: 0.5rem">
+                    <p>{{shortletData.maxNoOfGuests}} guests</p>
+                    <p>4 bedrooms</p>
+                    <p>5 beds</p>
+                    <p>3 baths</p>
+                </div>
+>>>>>>> bf557c26f79b7688bff1e8edb0ca7a43abc110f2
                 <hr />
                 <p>Bay view</p>
                 <hr />
@@ -165,31 +176,56 @@
         <div>
           <!-- <h5>Select checkout date</h5>
                         <p>Minimum of 5 nights</p> -->
-          <h5>5 nights in {{shortletData.address}}</h5>
 
-          <!-- <h5>Inline</h5> -->
-          <!-- <p-calendar [(ngModel)]="date14" [inline]="true" [showWeek]="true" [style]="{'background-color': 'blue'}"></p-calendar> -->
+                        <h5 >{{numberOfNights}} nights in {{shortletData.address}} </h5>
 
-          <!-- <p-calendar [(ngModel)]="date14" [inline]="true"></p-calendar> -->
+                        <p>{{ checkinDate | date}} - {{ checkoutDate | date}}</p>
+                        Check in: <input type="date" name="" id=""  min="2023-03-15" [(ngModel)]="checkinDate" (change)="fetchDateSelected()">
+                        Check out: <input type="date" name="" id="" [(ngModel)]="checkoutDate" min="2023-03-17" (change)="fetchDateSelected()">
+                    </div>
+                    
+                    
+                </div>
+        </div>
+                    
+        <!-- here -->
+        <!-- reservation -->
+        <div class="reservation">
+            <div   style="display: flex; justify-content: space-between; ">
+                <!-- <p ><span style="font-size: 1.3rem; font-weight: bold;">$509</span> night</p> -->
+                <p >${{shortletData.price}} per night</p>
 
-          <p>{{checkinDate | date}} - {{checkoutDate | date}}</p>
-          Check in:
-          <input
-            type="date"
-            name=""
-            id=""
-            [value]="dateForCalendar"
-            (change)="calendarTest($event)"
-            min="2023-03-15"
-          />
-          Check out:
-          <input
-            type="date"
-            name=""
-            id=""
-            [(ngModel)]="checkoutDate"
-            min="2023-03-17"
-          />
+                <div  style="display: flex; gap: 0.1rem;">
+                    <p>★ {{shortletData.rating}}</p> 
+                    <p>· 148 reviews</p>
+                </div>
+            </div>
+            <!-- check in and out picker -->
+            
+            <div class="reserve-btn">
+                <button>Reserve</button>
+                <p class="small">You won't be charged yet</p>
+            </div>
+            <!-- if check in date and checkout dates are picked, display this -->
+            <div class="bill">
+                <p>${{ shortletData.price}} x {{ numberOfNights }} nights</p>
+                <!-- <p>${{ shortletData.price * numberOfNights }}</p> -->
+                <p>${{ calculateNumberOfNights }}</p>
+            </div>
+            <div class="bill">
+                <p>Cleaning fee</p>
+                <p>$107</p>
+            </div>
+            <div class="bill">
+                <p>Airbnb service fee</p>
+                <p>$231</p>
+            </div>
+            <hr>
+            <div class="bill">
+                <p>Total before taxes</p>
+                <p>${{total}}</p>
+            </div>
+>>>>>>> bf557c26f79b7688bff1e8edb0ca7a43abc110f2
         </div>
       </div>
     </div>

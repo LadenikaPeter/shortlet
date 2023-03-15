@@ -13,6 +13,7 @@ import { differenceInDays } from 'date-fns';
 export class ShortletComponent implements OnInit {
   shortletData: any = [];
   shortletPictures: any = [];
+  shortletPrice: any;
   showAmenities: boolean = false;
 
   // dataStorage: any;
@@ -25,23 +26,18 @@ export class ShortletComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((data) => {
       let id: number = data['id'];
-
-      console.log(id);
       this.displayShortlet(id);
     });
-    this.forCalendar();
-    // this.dateForCalendar = new Date(Date.now()).toLocaleString();
+
     this.checkinDate = new Date();
     console.log(this.checkinDate.getDate());
-
-    // console.log(new Date(Date.now()).toLocaleString());
   }
 
+  //to diplay hortlet
   displayShortlet(id: number) {
     this.dataStorage.displayShortlet(id).subscribe(
       (response) => {
         // console.log(this.shortletData = response)
-        console.log(response.price);
         this.shortletData = response;
         this.shortletPictures = response.pictures;
       },
@@ -54,29 +50,8 @@ export class ShortletComponent implements OnInit {
   }
 
   // dateSelected: any
-
   checkinDate: Date;
   checkoutDate: Date;
-  dateForCalendar: string;
-
-  forCalendar() {
-    // Create a date object from a date string
-    const date = new Date();
-
-    // Get year, month, and day part from the date
-    const year = date.toLocaleString('default', { year: 'numeric' });
-    const month = date.toLocaleString('default', { month: '2-digit' });
-    const day = date.toLocaleString('default', { day: '2-digit' });
-
-    // Generate yyyy-mm-dd date string
-    const formattedDate = year + '-' + month + '-' + day;
-    this.dateForCalendar = formattedDate;
-    console.log(formattedDate); // Prints: 2022-05-04
-  }
-
-  calendarTest(event: Event) {
-    console.log(event);
-  }
 
   // dateLeft: number
   // dateRight: number
