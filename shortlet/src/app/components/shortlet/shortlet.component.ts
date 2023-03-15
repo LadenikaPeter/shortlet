@@ -12,6 +12,7 @@ import { differenceInDays} from 'date-fns';
 })
 export class ShortletComponent implements OnInit {
   shortletData: any= []
+  shortletPictures: any = [];
   showAmenities: boolean = false;
 
   // dataStorage: any;
@@ -37,6 +38,8 @@ export class ShortletComponent implements OnInit {
       (response) => {
         // console.log(this.shortletData = response)
         this.shortletData = response;
+        this.shortletPictures = response.pictures;
+
       },
       (error) => console.log(error)
     );
@@ -64,7 +67,4 @@ export class ShortletComponent implements OnInit {
   }
   
   // date14: Date;
-
-
-
 }
