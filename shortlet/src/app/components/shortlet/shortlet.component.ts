@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Shortlet } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 
 @Component({
@@ -11,12 +12,10 @@ export class ShortletComponent implements OnInit {
   checkinDate: Date;
   checkoutDate: Date;
   numberOfNights: number;
-  shortletData: any = [];
+  shortletData: Partial<Shortlet> = {};
   shortletPictures: any = [];
   shortletPrice: any;
   showAmenities: boolean = false;
-
-  // dataStorage: any;
 
   constructor(
     private dataStorage: DataStorageService,
@@ -35,17 +34,15 @@ export class ShortletComponent implements OnInit {
     newCheckoutDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
 
     this.fetchDateSelected();
-    this.bill();
   }
 
   //to diplay hortlet
   displayShortlet(id: number) {
     this.dataStorage.displayShortlet(id).subscribe(
       (response) => {
-        // console.log(this.shortletData = response)
-        this.shortletData = response; //details of shortlet from API
-        this.shortletPrice = response.price;
-        console.log(this.shortletPrice);
+        console.log((this.shortletData = response));
+        this.shortletData = response;
+        this.calculateBill(); //details of shortlet from API
         // console.log(this.shortletPrice = response.price)
         this.shortletPictures = response.pictures; //pictures of shortlet from API
       },
@@ -66,23 +63,17 @@ export class ShortletComponent implements OnInit {
 
     // console.log(typeof(this.numberOfNights)
 
-    this.bill();
+    this.calculateBill();
   }
 
   //reservation bill
   calculateNumberOfNights: number;
   total: number;
 
-  bill() {
-    // console.log(this.numberOfNights)
-    // console.log(this.calculateNumberOfNights)
-
+  calculateBill() {
     // console.log(this.shortletPrice)
-    console.log(this.shortletPrice);
-    console.log(this.numberOfNights);
 
     this.calculateNumberOfNights = this.shortletPrice * this.numberOfNights;
-    // console.log(this.calculateNumberOfNights);
 
     this.total = this.calculateNumberOfNights + 107 + 231;
   }
