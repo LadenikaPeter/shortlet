@@ -2,15 +2,22 @@ package com.example.shortletBackend.bootStrap;
 
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Pictures;
+import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.HomeState;
 import com.example.shortletBackend.repositories.ApartmentRepo;
 import com.example.shortletBackend.repositories.PicturesRepository;
+import com.example.shortletBackend.repositories.ReservationRepo;
 import com.example.shortletBackend.repositories.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 @AllArgsConstructor
@@ -19,6 +26,8 @@ public class bootStrap implements CommandLineRunner {
     private final ApartmentRepo apartmentRepo;
     private final PicturesRepository picturesRepository;
     private final UserRepo userRepo;
+    private final ReservationRepo reservationRepo;
+
     @Override
     public void run(String... args) throws Exception {
         Users Admin= new Users();
@@ -375,13 +384,23 @@ public class bootStrap implements CommandLineRunner {
         Admin.getApartmentsSet().addAll(new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse,House2,House3,House4,House5
                 ,House6,House7,House8,House9,House10,House11,House12})));
 
+        Reservation reservation = new Reservation();
+        reservation.setCheckInDate(new Date());//today's date(checkIn date)
+        reservation.setCheckOutDate(new Date(2023-1900,2,18));//check out date
+
+        reservation.setUsers(Admin);
+        reservation.setApartment(firstHouse);
+
+
         picturesRepository.saveAll(picturesCollection);
         userRepo.save(Admin);
         apartmentRepo.saveAll(houseCollection);
-
+        reservationRepo.save(reservation);
 
         System.out.println("house..........."+House2);
         System.out.println("user ......."+Admin);
+        System.out.println("reservation........"+reservation);
+
 //        System.out.println(House3);
 
 //        picturesRepository.saveAll(Collection);

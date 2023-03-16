@@ -43,7 +43,7 @@ public class ApartmentController {
     public ResponseEntity getHotel(@RequestParam("house_id") long id ){
         Optional<Apartments> apartments = apartmentRepo.findById(id);
         if (apartments.isPresent()){
-            return ResponseEntity.ok(mapper.map(apartments.get(), ApartmentsDTO.class) );
+            return ResponseEntity.ok(apartments.get());
         }else {
             return (ResponseEntity) ResponseEntity.noContent();
         }
