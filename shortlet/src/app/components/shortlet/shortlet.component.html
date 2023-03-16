@@ -173,7 +173,7 @@
             type="date"
             name=""
             id=""
-            min="2023-03-15"
+            [min]="dateForCalendar"
             [(ngModel)]="checkinDate"
             (change)="fetchDateSelected()"
           />
@@ -183,7 +183,7 @@
             name=""
             id=""
             [(ngModel)]="checkoutDate"
-            min="2023-03-17"
+            [min]="dateForCalendar2"
             (change)="fetchDateSelected()"
           />
         </div>
