@@ -57,9 +57,6 @@ export class ShortletComponent implements OnInit {
   fetchDateSelected() {
     let timeDiff = Math.abs(new Date(this.checkoutDate).getTime() - new Date(this.checkinDate).getTime())
     this.numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-    // console.log(typeof(this.numberOfNights)
-
     this.calculateBill();
   }
 
@@ -67,14 +64,8 @@ export class ShortletComponent implements OnInit {
   calculateNumberOfNights: number
   total: number
 
-  calculateBill() {
-
-
-    // console.log(this.shortletData.price)
-    
-    this.calculateNumberOfNights = this.shortletData.price *  this.numberOfNights
-    
-    
+  calculateBill() {    
+    this.calculateNumberOfNights = this.shortletData.price *  this.numberOfNights    
     this.total = this.calculateNumberOfNights + 107 + 231;
   }
 }
