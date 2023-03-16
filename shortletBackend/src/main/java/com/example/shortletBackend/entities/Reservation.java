@@ -30,10 +30,10 @@ public class Reservation {
     @ManyToOne
     private Apartments apartment;
 
-    public Reservation() {
-        this.checkedIn=false;
-        this.checkedOut=false;
-    }
+//    public Reservation() {
+//        this.checkedIn=false;
+//        this.checkedOut=false;
+//    }
 
 
 }

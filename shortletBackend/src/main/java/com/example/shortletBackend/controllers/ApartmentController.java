@@ -32,7 +32,7 @@ public class ApartmentController {
     @GetMapping("/verified_homes")
     public ResponseEntity<ArrayList> getAllVerifiedHomes(){
         ArrayList<ApartmentsDTO> hotelList = new ArrayList<>();
-        for (Apartments hotel:apartmentRepo.findAllByStateIs(HomeState.VERIFIED)
+        for (Apartments hotel:apartmentRepo.findAllByHomeStateIs(HomeState.VERIFIED)
         ) {
             hotelList.add(mapper.map(hotel, ApartmentsDTO.class));
         }
