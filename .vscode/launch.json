@@ -1,4 +1,19 @@
 {
+<<<<<<< HEAD
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-ShortletBackendApplication<shortletBackend>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.example.shortletBackend.ShortletBackendApplication",
+      "projectName": "shortletBackend",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
+=======
     "configurations": [
         {
             "type": "java",
@@ -12,3 +27,4 @@
         }
     ]
 }
+>>>>>>> 966e8a9d4258b6f865e041010adbd49101b497e8

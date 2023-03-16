@@ -1,0 +1,17 @@
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 13px 20px;
+  background-color: white;
+  border-top: 1px solid #e6eaee;
+}
+
+p {
+  margin: 0;
+}
+
+.span_1 {
+  margin-left: 20px;
+}
