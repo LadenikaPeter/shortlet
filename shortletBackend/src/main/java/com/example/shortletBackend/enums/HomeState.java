@@ -1,5 +1,5 @@
 package com.example.shortletBackend.enums;
 
-public enum State {
+public enum HomeState {
     VERIFIED,PENDING,UNVERIFIED
 }

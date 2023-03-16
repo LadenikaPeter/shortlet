@@ -1,8 +1,8 @@
 package com.example.shortletBackend.controllers;
 
-import com.example.shortletBackend.dto.HomeDTO;
+import com.example.shortletBackend.dto.ApartmentsDTO;
 import com.example.shortletBackend.entities.Apartments;
-import com.example.shortletBackend.enums.State;
+import com.example.shortletBackend.enums.HomeState;
 import com.example.shortletBackend.repositories.ApartmentRepo;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,18 +22,19 @@ public class ApartmentController {
     private final ApartmentRepo apartmentRepo;
     private final ModelMapper mapper;
 
-    //get all hotels
+    //get all homes
     @GetMapping("/homes")
     public ResponseEntity getAllHomes(){
         return ResponseEntity.ok(apartmentRepo.findAll());
     }
 
+    //get all verified homes
     @GetMapping("/verified_homes")
     public ResponseEntity<ArrayList> getAllVerifiedHomes(){
-        ArrayList<HomeDTO> hotelList = new ArrayList<>();
-        for (Apartments hotel:apartmentRepo.findAllByStateIs(State.VERIFIED)
+        ArrayList<ApartmentsDTO> hotelList = new ArrayList<>();
+        for (Apartments hotel:apartmentRepo.findAllByStateIs(HomeState.VERIFIED)
         ) {
-            hotelList.add(mapper.map(hotel, HomeDTO.class));
+            hotelList.add(mapper.map(hotel, ApartmentsDTO.class));
         }
         return ResponseEntity.ok(hotelList);
     }
@@ -42,11 +43,12 @@ public class ApartmentController {
     public ResponseEntity getHotel(@RequestParam("house_id") long id ){
         Optional<Apartments> apartments = apartmentRepo.findById(id);
         if (apartments.isPresent()){
-            return ResponseEntity.ok(mapper.map(apartments.get(), HomeDTO.class) );
+            return ResponseEntity.ok(mapper.map(apartments.get(), ApartmentsDTO.class) );
         }else {
             return (ResponseEntity) ResponseEntity.noContent();
         }
 
     }
+
 
 }

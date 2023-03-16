@@ -13,9 +13,9 @@ import java.util.Date;
 public class ReservationDTO {
 
     private int id;
-    private Date checkIn;
-    private Date checkOut;
+    private Date checkInDate;
+    private Date checkOutDate;
     private int price;
 
-    private ReservationHomeDTO apartments;
+    private ApartmentsDTO apartment;
 }

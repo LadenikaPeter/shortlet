@@ -6,7 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-import com.example.shortletBackend.enums.State;
+import com.example.shortletBackend.enums.HomeState;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +22,7 @@ public class Apartments {
     private String name;
     private String address;
     private String houseRefCode;
-    private State state;
+    private HomeState homeState;
     private int price;
     private double rating;
     private int maxNoOfGuests;

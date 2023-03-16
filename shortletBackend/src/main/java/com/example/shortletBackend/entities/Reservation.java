@@ -12,18 +12,28 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 public class Reservation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date checkIn;
-    private Date checkOut;
+    private Date checkInDate;
+    private Date checkOutDate;
     private int price;
+
+    private boolean checkedIn ;
+    private boolean checkedOut ;
 
     @ManyToOne
     private Users users;
 
     @ManyToOne
     private Apartments apartment;
+
+    public Reservation() {
+        this.checkedIn=false;
+        this.checkedOut=false;
+    }
+
 
 }

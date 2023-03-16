@@ -3,7 +3,7 @@ package com.example.shortletBackend.bootStrap;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Pictures;
 import com.example.shortletBackend.entities.Users;
-import com.example.shortletBackend.enums.State;
+import com.example.shortletBackend.enums.HomeState;
 import com.example.shortletBackend.repositories.ApartmentRepo;
 import com.example.shortletBackend.repositories.PicturesRepository;
 import com.example.shortletBackend.repositories.UserRepo;
@@ -32,7 +32,7 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setHouseRefCode(firstHouse.getAddress().substring(0, 3),1);
         firstHouse.setPrice(533);
         firstHouse.setRating(4.7);
-        firstHouse.setState(State.VERIFIED);
+        firstHouse.setHomeState(HomeState.VERIFIED);
         firstHouse.setMaxNoOfGuests(5);
 
         Pictures picture1 = new Pictures();
@@ -61,7 +61,7 @@ public class bootStrap implements CommandLineRunner {
         House2.setHouseRefCode(House2.getAddress().substring(0,3),2);
         House2.setPrice(1371);
         House2.setRating(3.9);
-        House2.setState(State.VERIFIED);
+        House2.setHomeState(HomeState.VERIFIED);
         House2.setMaxNoOfGuests(8);
 
         Pictures picture6 = new Pictures();
@@ -93,7 +93,7 @@ public class bootStrap implements CommandLineRunner {
         House3.setHouseRefCode(House3.getAddress().substring(0,5),3);
         House3.setPrice(838);
         House3.setRating(5.0);
-        House3.setState(State.VERIFIED);
+        House3.setHomeState(HomeState.VERIFIED);
         House3.setMaxNoOfGuests(3);
 
         Pictures picture11 = new Pictures();
@@ -121,7 +121,7 @@ public class bootStrap implements CommandLineRunner {
         House4.setHouseRefCode(House4.getAddress().substring(0,3),4);
         House4.setPrice(734);
         House4.setRating(4.5);
-        House4.setState(State.VERIFIED);
+        House4.setHomeState(HomeState.VERIFIED);
         House4.setMaxNoOfGuests(2);
         House4.setUsers(Admin);
 
@@ -151,7 +151,7 @@ public class bootStrap implements CommandLineRunner {
         House5.setPrice(1265);
         House5.setRating(4.7);
         House5.setMaxNoOfGuests(3);
-        House5.setState(State.VERIFIED);
+        House5.setHomeState(HomeState.VERIFIED);
         House5.setUsers(Admin);
 
         Pictures picture21 = new Pictures();
@@ -178,7 +178,7 @@ public class bootStrap implements CommandLineRunner {
         House6.setHouseRefCode(House6.getAddress().substring(0,3),6);
         House6.setPrice(923);
         House6.setRating(5.0);
-        House6.setState(State.VERIFIED);
+        House6.setHomeState(HomeState.VERIFIED);
         House6.setMaxNoOfGuests(4);
         House6.setUsers(Admin);
 
@@ -205,7 +205,7 @@ public class bootStrap implements CommandLineRunner {
         House7.setHouseRefCode(House7.getAddress().substring(0,3),7);
         House7.setPrice(182);
         House7.setRating(4.9);
-        House7.setState(State.VERIFIED);
+        House7.setHomeState(HomeState.VERIFIED);
         House7.setMaxNoOfGuests(2);
         House7.setUsers(Admin);
 
@@ -232,7 +232,7 @@ public class bootStrap implements CommandLineRunner {
         House8.setHouseRefCode(House8.getAddress().substring(0,3),8);
         House8.setPrice(374);
         House8.setRating(5.0);
-        House8.setState(State.VERIFIED);
+        House8.setHomeState(HomeState.VERIFIED);
         House8.setMaxNoOfGuests(8);
         House8.setUsers(Admin);
 
@@ -259,7 +259,7 @@ public class bootStrap implements CommandLineRunner {
         House9.setHouseRefCode(House9.getAddress().substring(0,3),9);
         House9.setPrice(380);
         House9.setRating(5.0);
-        House9.setState(State.VERIFIED);
+        House9.setHomeState(HomeState.VERIFIED);
         House9.setMaxNoOfGuests(6);
         House9.setUsers(Admin);
 
@@ -285,7 +285,7 @@ public class bootStrap implements CommandLineRunner {
         House10.setHouseRefCode(House10.getAddress().substring(0,5),10);
         House10.setPrice(120);
         House10.setRating(3.9);
-        House10.setState(State.VERIFIED);
+        House10.setHomeState(HomeState.VERIFIED);
         House10.setMaxNoOfGuests(5);
         House10.setUsers(Admin);
 
@@ -309,7 +309,7 @@ public class bootStrap implements CommandLineRunner {
         House11.setHouseRefCode(House11.getAddress().substring(0,3),11);
         House11.setPrice(445);
         House11.setRating(3.9);
-        House11.setState(State.VERIFIED);
+        House11.setHomeState(HomeState.VERIFIED);
         House11.setMaxNoOfGuests(4);
         House11.setUsers(Admin);
 
@@ -336,7 +336,7 @@ public class bootStrap implements CommandLineRunner {
         House12.setHouseRefCode(House12.getAddress().substring(0,3),12);
         House12.setPrice(962);
         House12.setRating(5.0);
-        House12.setState(State.VERIFIED);
+        House12.setHomeState(HomeState.VERIFIED);
         House12.setMaxNoOfGuests(10);
         House12.setUsers(Admin);
 
