@@ -147,7 +147,7 @@
                         <h5 >{{numberOfNights}} nights in {{shortletData.address}} </h5>
 
                         <p>{{ checkinDate | date}} - {{ checkoutDate | date}}</p>
-                        Check in: <input type="date" name="" id=""  min="2023-03-15" [(ngModel)]="checkinDate" (change)="fetchDateSelected()">
+                        Check in: <input type="date" name="" id="" min="2023-03-16" [(ngModel)]="checkinDate" (change)="fetchDateSelected()">
                         Check out: <input type="date" name="" id="" [(ngModel)]="checkoutDate" min="2023-03-17" (change)="fetchDateSelected()">
                     </div>
                     
@@ -160,7 +160,7 @@
         <div class="reservation">
             <div   style="display: flex; justify-content: space-between; ">
                 <!-- <p ><span style="font-size: 1.3rem; font-weight: bold;">$509</span> night</p> -->
-                <p >${{shortletData.price}} per night</p>
+                <p >₦{{shortletData.price}} per night</p>
                 <div  style="display: flex; gap: 0.1rem;">
                     <p>★ {{shortletData.rating}}</p> 
                     <p>· 148 reviews</p>
@@ -169,27 +169,27 @@
             <!-- check in and out picker -->
             
             <div class="reserve-btn">
-                <button>Reserve</button>
+                <button routerLink="booking">Reserve</button>
                 <p class="small">You won't be charged yet</p>
             </div>
             <!-- if check in date and checkout dates are picked, display this -->
             <div class="bill">
-                <p>${{ shortletData.price}} x {{ numberOfNights }} nights</p>
+                <p>₦{{ shortletData.price}} x {{ numberOfNights }} nights</p>
                 <!-- <p>${{ shortletData.price * numberOfNights }}</p> -->
-                <p>${{ calculateNumberOfNights }}</p>
+                <p>₦{{ calculateNumberOfNights }}</p>
             </div>
             <div class="bill">
                 <p>Cleaning fee</p>
-                <p>$107</p>
+                <p>₦107</p>
             </div>
             <div class="bill">
                 <p>Airbnb service fee</p>
-                <p>$231</p>
+                <p>₦231</p>
             </div>
             <hr>
             <div class="bill">
                 <p>Total before taxes</p>
-                <p>${{total}}</p>
+                <p>₦ {{total}}</p>
             </div>
         </div>
     </div>

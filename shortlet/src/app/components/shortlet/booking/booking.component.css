@@ -1,0 +1,72 @@
+.container {
+    /* padding-top: 4rem; */
+}
+
+h2 {
+    font-size: 2.5rem;
+    padding: 2rem 0rem;
+}
+.rare {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    /* gap: 10rem; */
+    width: 600px;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+.trip-details h3 {
+    padding: 1rem 0rem;
+}
+
+.trip {
+    padding-bottom: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.trip > p {
+    text-decoration: underline;
+}
+
+.booking-review {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rating{
+    display: flex;
+    gap: 1rem;
+}
+
+.bill-section {
+    /* position: sticky;
+  top: 70px; */
+  min-width: 350px; 
+  border: 1px solid red;
+  padding: 1.2rem ;
+  max-height: 500px;
+  border-radius:10px;
+  margin-left: 4rem;
+  /* sticky */
+  position: sticky;
+  top: 70px;
+}
+
+.bill {
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 2px solid black;
+    border-radius: 10px;
+}

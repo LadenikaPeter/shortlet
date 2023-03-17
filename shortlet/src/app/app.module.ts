@@ -18,7 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ShortletComponent } from './components/shortlet/shortlet.component';
 import { CommonModule } from '@angular/common';
 import {CalendarModule} from 'primeng/calendar';
-import { BookingComponent } from './shortlet/booking/booking.component';
+import { BookingComponent } from './components/shortlet/booking/booking.component';
 
 
 @NgModule({

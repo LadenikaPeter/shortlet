@@ -68,4 +68,11 @@ export class ShortletComponent implements OnInit {
     this.calculateNumberOfNights = this.shortletData.price *  this.numberOfNights    
     this.total = this.calculateNumberOfNights + 107 + 231;
   }
+
+
+
+  today:Date
+  mindate(){
+    this.today = new Date()
+  }
 }
