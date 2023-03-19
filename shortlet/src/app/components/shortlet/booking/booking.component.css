@@ -40,14 +40,16 @@ h2 {
 
 .rating{
     display: flex;
-    gap: 1rem;
+    justify-content: last baseline;
+    gap:0.5rem;
+    font-size: 12px;
 }
 
 .bill-section {
     /* position: sticky;
   top: 70px; */
   min-width: 350px; 
-  border: 1px solid red;
+  border: 1px solid grey;
   padding: 1.2rem ;
   max-height: 500px;
   border-radius:10px;
@@ -55,6 +57,10 @@ h2 {
   /* sticky */
   position: sticky;
   top: 70px;
+}
+img {
+    max-width: 30%;
+    max-height: auto;
 }
 
 .bill {

@@ -75,4 +75,7 @@ export class ShortletComponent implements OnInit {
   mindate(){
     this.today = new Date()
   }
+
+  public name = "John"
+
 }

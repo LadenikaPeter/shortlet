@@ -8,7 +8,7 @@
             <div class="rare">
                 <div>
                     <h5>This is a rare find.</h5>
-                    <p>Galia's place is usually booked.</p>
+                    <p>{{shortletData.name}}'s place is usually booked.</p>
                 </div>
                 <p>icon</p>
             </div>
@@ -36,7 +36,7 @@
                     <p>Pay the total now and you're all set.</p>
                     </div>
                     <div>
-                        <p>$968.21</p>
+                        <p>₦{{shortletData.price}}</p>
                         <!-- checkbox here -->
                     </div>
                 </div>
@@ -50,26 +50,28 @@
         </div>
         <!-- bill-section -->
         <div class="bill-section">
-            <div>
-                <img src="" alt="">
-                <div>
-                    <p>Entire rental unit</p>
-                    <p>Canteras Luxury seafront Penthouse</p>
-                <div class="rating">
-                    <p>rating</p>
-                    <p>reviews</p>
-                    <p>Superhost</p>
-                </div>
+            <div style="display:flex;">
+                <img src="{{shortletPictures[0].url}}" alt="">
+                <div style="height: 1px; padding-left: 0.5rem;">
+                    <div style="line-height: 0.25rem;">
+                        <p style="font-size: 12px;">Entire rental unit</p>
+                        <p style="font-size: 14px;">Canteras Luxury seafront Penthouse</p>
+
+                    </div>
+                    <div class="rating">
+                        <p>★ 4.92</p>
+                        <p>(136 reviews)</p>
+                        <p>· Superhost</p>
+                    </div>
                 </div>
             </div>
             <hr>
-            <p>Your booking is protected by aircover</p>
+            <p style="padding: 0.5rem 0rem;">Your booking is protected by aircover</p>
             <hr>
             <div>
                 <h4>Price details</h4>
                 <div class="bill">
-                    <p>$159.08 x 5 nights
-                        </p>
+                    <p>₦{{shortletData.price}} x 5 nights</p>
                     <p>₦795.40</p>
                 </div>
                 <div class="bill">
