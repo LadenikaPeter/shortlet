@@ -126,6 +126,7 @@ export class AuthService {
         clearTimeout(this.expirationTimer);
       }
       this.expirationTimer = null;
+      this.notif.successMessage('Successfully logged out');
     });
   }
 
