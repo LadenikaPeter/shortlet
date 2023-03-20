@@ -17,16 +17,14 @@
                 <div class="trip">
                     <div>
                         <h5>Dates</h5>
-                        <p>apr 2-3</p>
+                        <p>{{checkin | date}} - {{checkout | date}}</p>
                     </div>
-                    <p>Edit</p>
                 </div>
                 <div class="trip">
                     <div>
                         <h5>Guests</h5>
                         <p>1 guest</p>
                     </div>
-                    <p>Edit</p>
                 </div>
                 <hr>
                 <h3>Choose how to pay</h3>
@@ -36,7 +34,7 @@
                     <p>Pay the total now and you're all set.</p>
                     </div>
                     <div>
-                        <p>₦{{shortletData.price}}</p>
+                        <p>₦{{ total }}</p>
                         <!-- checkbox here -->
                     </div>
                 </div>
@@ -59,20 +57,20 @@
 
                     </div>
                     <div class="rating">
-                        <p>★ 4.92</p>
+                        <p>★ {{shortletData.rating}}</p>
                         <p>(136 reviews)</p>
                         <p>· Superhost</p>
                     </div>
                 </div>
             </div>
             <hr>
-            <p style="padding: 0.5rem 0rem;">Your booking is protected by aircover</p>
+            <p style="padding: 0.5rem 0rem;">Your booking is protected by HMCover</p>
             <hr>
             <div>
                 <h4>Price details</h4>
                 <div class="bill">
-                    <p>₦{{shortletData.price}} x 5 nights</p>
-                    <p>₦795.40</p>
+                    <p>₦{{shortletData.price}} x {{ nights }} nights</p>
+                    <p>₦{{ calculateNumberOfNights }}</p>
                 </div>
                 <div class="bill">
                     <p>Cleaning fee</p>
@@ -85,7 +83,7 @@
                 <hr>
                 <div class="bill">
                     <p>Total(NGN)</p>
-                    <p>₦1254</p>
+                    <p>₦{{ total }}</p>
                 </div>
             </div>
 

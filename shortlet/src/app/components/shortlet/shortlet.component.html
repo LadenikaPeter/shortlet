@@ -169,7 +169,10 @@
             <!-- check in and out picker -->
             
             <div class="reserve-btn">
-                <button routerLink="booking">Reserve</button>
+                <button 
+                routerLink="booking"
+                [queryParams]="{checkin: checkinDate, checkout: checkoutDate, nights: numberOfNights}"
+                >Reserve</button>
                 <p class="small">You won't be charged yet</p>
             </div>
             <!-- if check in date and checkout dates are picked, display this -->
