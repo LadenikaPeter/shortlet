@@ -32,9 +32,9 @@ public class Apartments {
     @ManyToOne
     private Users users;
 
-    @OneToMany(mappedBy = "apartment",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "apartment")//,cascade = CascadeType.ALL)
     private Set<Reservation> reservations = new HashSet<>();
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany//(cascade = CascadeType.ALL)
     private Set<Pictures> pictures= new HashSet<>();
 
 
