@@ -22,4 +22,7 @@ export class AppComponent implements OnInit {
     // console.log('i was clicked');
     this.closeTab.closeTabOfProfile.next(null);
   }
+
+
+  
 }
