@@ -5,6 +5,7 @@ import com.example.shortletBackend.entities.Pictures;
 import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.HomeState;
+import com.example.shortletBackend.enums.ReservationState;
 import com.example.shortletBackend.repositories.ApartmentRepo;
 import com.example.shortletBackend.repositories.PicturesRepository;
 import com.example.shortletBackend.repositories.ReservationRepo;
@@ -40,6 +41,7 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setPrice(533);
         firstHouse.setRating(4.7);
         firstHouse.setHomeState(HomeState.VERIFIED);
+
         firstHouse.setMaxNoOfGuests(5);
 
         Pictures picture1 = new Pictures();
@@ -380,7 +382,8 @@ public class bootStrap implements CommandLineRunner {
 
         Reservation reservation = new Reservation();
         reservation.setCheckInDate(new Date());//today's date(checkIn date)
-        reservation.setCheckOutDate(new Date(2023 - 1900, Calendar.MARCH, 18));//check out date
+        reservation.setCheckOutDate(new Date(2023 - 1900, Calendar.MARCH, 22));//check out date
+        reservation.setReservationState(ReservationState.PENDING);
 
         reservation.setUsers(Admin);
         reservation.setApartment(firstHouse);

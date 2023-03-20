@@ -1,5 +1,6 @@
 package com.example.shortletBackend.entities;
 
+import com.example.shortletBackend.enums.ReservationState;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,8 +26,7 @@ public class Reservation {
     private Date checkOutDate;
     private int price;
 
-    private boolean checkedIn ;
-    private boolean checkedOut ;
+    private ReservationState reservationState;
 
     @ManyToOne
     private Users users;
@@ -34,10 +34,6 @@ public class Reservation {
     @ManyToOne
     private Apartments apartment;
 
-//    public Reservation() {
-//        this.checkedIn=false;
-//        this.checkedOut=false;
-//    }
 
 
 }

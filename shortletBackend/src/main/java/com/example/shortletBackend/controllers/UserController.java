@@ -3,6 +3,7 @@ package com.example.shortletBackend.controllers;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
+import com.example.shortletBackend.enums.ReservationState;
 import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.repositories.ApartmentRepo;
 import com.example.shortletBackend.repositories.ReservationRepo;
@@ -74,8 +75,10 @@ public class UserController {
 
                 reservation.setUsers(user.get());
                 reservation.setApartment(apartments.get());
+                reservation.setReservationState(ReservationState.PENDING);
                 user.get().getReservationSet().add(reservation);
                 apartments.get().getReservations().add(reservation);
+
                 apartmentRepo.save(apartments.get());
                 reservationRepo.save(reservation);
                 userRepo.save(user.get());
@@ -97,5 +100,7 @@ public class UserController {
 //        }
         return ResponseEntity.ok(reservationRepo.findAllByUsers(userRepo.findUsersByEmail(email).get()));
     }
+
+
 
 }
