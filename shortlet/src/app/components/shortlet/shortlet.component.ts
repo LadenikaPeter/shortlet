@@ -16,6 +16,8 @@ export class ShortletComponent implements OnInit {
   shortletPictures: any = [];
   shortletPrice: any  
   showAmenities: boolean = false;
+  dateForCalendar: string;
+  dateForCalendar2: string;
   
   constructor(
     private dataStorage: DataStorageService,
@@ -29,10 +31,13 @@ export class ShortletComponent implements OnInit {
     });
 
     this.checkinDate = new Date()
+    this.noSelectFromPast();
+    this.noSelectLessThan2();
     
     let newCheckoutDate = this.checkoutDate = new Date()
     newCheckoutDate.setDate(new Date().getDate() + 2) // 2 days to the default checkin and out date
 
+    
     this.fetchDateSelected();
   }
 
@@ -75,7 +80,46 @@ export class ShortletComponent implements OnInit {
   mindate(){
     this.today = new Date()
   }
+  
 
-  public name = "John"
+  noSelectFromPast() {
+
+    const date = new Date();
+
+    const year = date.toLocaleString('default', { year: 'numeric' });
+
+    const month = date.toLocaleString('default', { month: '2-digit' });
+
+    const day = date.toLocaleString('default', { day: '2-digit' });
+
+    const formattedDate = year + '-' + month + '-' + day;
+
+    this.dateForCalendar = formattedDate;
+
+    // console.log(formattedDate); // Prints: 2022-05-04
+
+  }
+
+
+
+  noSelectLessThan2() {
+
+    let newDate = new Date();
+
+    newDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
+
+    const year = newDate.toLocaleString('default', { year: 'numeric' });
+
+    const month = newDate.toLocaleString('default', { month: '2-digit' });
+
+    const day = newDate.toLocaleString('default', { day: '2-digit' });
+
+    const formattedDate = year + '-' + month + '-' + day;
+
+    this.dateForCalendar2 = formattedDate;
+
+    console.log(formattedDate);
+
+  }
 
 }

@@ -76,3 +76,6 @@ img {
     border: 2px solid black;
     border-radius: 10px;
 }
+.payment-options:hover {
+    cursor: pointer;
+}

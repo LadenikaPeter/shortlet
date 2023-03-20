@@ -147,8 +147,8 @@
                         <h5 >{{numberOfNights}} nights in {{shortletData.address}} </h5>
 
                         <p>{{ checkinDate | date}} - {{ checkoutDate | date}}</p>
-                        Check in: <input type="date" name="" id="" min="2023-03-16" [(ngModel)]="checkinDate" (change)="fetchDateSelected()">
-                        Check out: <input type="date" name="" id="" [(ngModel)]="checkoutDate" min="2023-03-17" (change)="fetchDateSelected()">
+                        Check in: <input type="date" name="" id="" [min]="dateForCalendar" [(ngModel)]="checkinDate" (change)="fetchDateSelected()">
+                        Check out: <input type="date" name="" id="" [(ngModel)]="checkoutDate" [min]="dateForCalendar2" (change)="fetchDateSelected()">
                     </div>
                     
                     
