@@ -1,12 +1,13 @@
 package com.example.shortletBackend.entities;
 
+import com.example.shortletBackend.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
 
-import com.example.shortletBackend.enums.State;
+import com.example.shortletBackend.enums.HomeState;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +23,8 @@ public class Apartments {
     private String name;
     private String address;
     private String houseRefCode;
-    private State state;
+    private HomeState homeState;
+    private Status status;
     private int price;
     private double rating;
     private int maxNoOfGuests;
@@ -30,9 +32,9 @@ public class Apartments {
     @ManyToOne
     private Users users;
 
-    @OneToMany(mappedBy = "apartment")
+    @OneToMany(mappedBy = "apartment",cascade = CascadeType.ALL)
     private Set<Reservation> reservations = new HashSet<>();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Pictures> pictures= new HashSet<>();
 
 
