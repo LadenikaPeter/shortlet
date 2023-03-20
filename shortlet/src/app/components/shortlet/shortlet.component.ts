@@ -37,6 +37,7 @@ export class ShortletComponent implements OnInit {
     let newCheckoutDate = (this.checkoutDate = new Date());
     newCheckoutDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
 
+    console.log(this.checkinDate);
     this.fetchDateSelected();
   }
 
@@ -64,6 +65,7 @@ export class ShortletComponent implements OnInit {
         new Date(this.checkinDate).getTime()
     );
     this.numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    console.log(this.checkinDate);
     this.calculateBill();
   }
 
