@@ -2,16 +2,22 @@ package com.example.shortletBackend.bootStrap;
 
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Pictures;
+import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
-import com.example.shortletBackend.enums.State;
+import com.example.shortletBackend.enums.HomeState;
+import com.example.shortletBackend.enums.ReservationState;
 import com.example.shortletBackend.repositories.ApartmentRepo;
 import com.example.shortletBackend.repositories.PicturesRepository;
+import com.example.shortletBackend.repositories.ReservationRepo;
 import com.example.shortletBackend.repositories.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 @AllArgsConstructor
 @Component
@@ -19,20 +25,23 @@ public class bootStrap implements CommandLineRunner {
     private final ApartmentRepo apartmentRepo;
     private final PicturesRepository picturesRepository;
     private final UserRepo userRepo;
+    private final ReservationRepo reservationRepo;
+
     @Override
     public void run(String... args) throws Exception {
-        Users Admin= new Users();
+        Users Admin = new Users();
         Admin.setName("Peter");
         Admin.setEmail("peter@gmail.com");
         userRepo.save(Admin);
 
-        Apartments firstHouse= new Apartments();
+        Apartments firstHouse = new Apartments();
         firstHouse.setAddress("Provincia di Leece, Italy ");
         firstHouse.setName("Kristi J. Walters");
-        firstHouse.setHouseRefCode(firstHouse.getAddress().substring(0, 3),1);
+        firstHouse.setHouseRefCode(firstHouse.getAddress().substring(0, 3), 1);
         firstHouse.setPrice(533);
         firstHouse.setRating(4.7);
-        firstHouse.setState(State.VERIFIED);
+        firstHouse.setHomeState(HomeState.VERIFIED);
+
         firstHouse.setMaxNoOfGuests(5);
 
         Pictures picture1 = new Pictures();
@@ -50,18 +59,18 @@ public class bootStrap implements CommandLineRunner {
         Pictures picture5 = new Pictures();
         picture5.setUrl("https://a0.muscache.com/im/pictures/b2fa90f6-1cac-4013-a40b-7653cf4872dd.jpg?im_w=720");
 
-//        firstHouse.getPictures().add(picture5);
-        firstHouse.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture1,picture2,picture3,picture4,picture5})));
+
+        firstHouse.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture1, picture2, picture3, picture4, picture5})));
         firstHouse.setUsers(Admin);
 
         //2nd
-        Apartments House2= new Apartments();
+        Apartments House2 = new Apartments();
         House2.setAddress("Route de IOurika, Morocco");
         House2.setName("Kathleen Kammer");
-        House2.setHouseRefCode(House2.getAddress().substring(0,3),2);
+        House2.setHouseRefCode(House2.getAddress().substring(0, 3), 2);
         House2.setPrice(1371);
         House2.setRating(3.9);
-        House2.setState(State.VERIFIED);
+        House2.setHomeState(HomeState.VERIFIED);
         House2.setMaxNoOfGuests(8);
 
         Pictures picture6 = new Pictures();
@@ -81,21 +90,20 @@ public class bootStrap implements CommandLineRunner {
         Pictures picture10 = new Pictures();
         picture10.setUrl("https://a0.muscache.com/im/pictures/2a3f591a-a8b3-4ef9-b1bf-d988b2c3bff5.jpg?im_w=1200 ");
 
-        House2.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture6,picture7,picture8,
-        picture9,picture10})));
+        House2.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture6, picture7, picture8,
+                picture9, picture10})));
         House2.setUsers(Admin);
-//        System.out.println(House2);
 
 
 
         //3rd
-        Apartments House3= new Apartments();
+        Apartments House3 = new Apartments();
         House3.setAddress("Santi Ferriol, Spain");
         House3.setName("Samuel Altieri");
-        House3.setHouseRefCode(House3.getAddress().substring(0,5),3);
+        House3.setHouseRefCode(House3.getAddress().substring(0, 5), 3);
         House3.setPrice(838);
         House3.setRating(5.0);
-        House3.setState(State.VERIFIED);
+        House3.setHomeState(HomeState.VERIFIED);
         House3.setMaxNoOfGuests(3);
 
         Pictures picture11 = new Pictures();
@@ -113,17 +121,17 @@ public class bootStrap implements CommandLineRunner {
         Pictures picture15 = new Pictures();
         picture15.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-48307356/original/7fd97148-3723-48d8-b2ca-b37dfe275ffd.jpeg?im_w=720 ");
 
-        House3.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture11,picture12,picture13,picture14,picture15})));
+        House3.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture11, picture12, picture13, picture14, picture15})));
         House3.setUsers(Admin);
 
         //4
-        Apartments House4= new Apartments();
+        Apartments House4 = new Apartments();
         House4.setAddress("AlHaouz, Morocco");
         House4.setName("Melissa Marino");
-        House4.setHouseRefCode(House4.getAddress().substring(0,3),4);
+        House4.setHouseRefCode(House4.getAddress().substring(0, 3), 4);
         House4.setPrice(734);
         House4.setRating(4.5);
-        House4.setState(State.VERIFIED);
+        House4.setHomeState(HomeState.VERIFIED);
         House4.setMaxNoOfGuests(2);
         House4.setUsers(Admin);
 
@@ -142,18 +150,17 @@ public class bootStrap implements CommandLineRunner {
         Pictures picture20 = new Pictures();
         picture20.setUrl("https://a0.muscache.com/im/pictures/890deadc-040e-43b7-ad5a-2391ab90e314.jpg?im_w=720 ");
 
-        House4.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture16,picture17,picture18,picture19,picture20})));
+        House4.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture16, picture17, picture18, picture19, picture20})));
 
 
-
-        Apartments House5= new Apartments();
+        Apartments House5 = new Apartments();
         House5.setAddress("Naxos, Greece");
         House5.setName("Emily Hannah");
-        House5.setHouseRefCode(House5.getAddress().substring(0,3),5);
+        House5.setHouseRefCode(House5.getAddress().substring(0, 3), 5);
         House5.setPrice(1265);
         House5.setRating(4.7);
         House5.setMaxNoOfGuests(3);
-        House5.setState(State.VERIFIED);
+        House5.setHomeState(HomeState.VERIFIED);
         House5.setUsers(Admin);
 
         Pictures picture21 = new Pictures();
@@ -171,16 +178,16 @@ public class bootStrap implements CommandLineRunner {
         Pictures pictures25 = new Pictures();
         pictures25.setUrl("https://a0.muscache.com/im/pictures/658f0839-9f2a-4bd5-a878-b25b5ef284fc.jpg?im_w=720 ");
 
-        House5.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture21,pictures22,pictures23,pictures24,pictures25})));
+        House5.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture21, pictures22, pictures23, pictures24, pictures25})));
 
 
-        Apartments House6= new Apartments();
+        Apartments House6 = new Apartments();
         House6.setAddress("Chania, Greece");
         House6.setName("Maik Beyer");
-        House6.setHouseRefCode(House6.getAddress().substring(0,3),6);
+        House6.setHouseRefCode(House6.getAddress().substring(0, 3), 6);
         House6.setPrice(923);
         House6.setRating(5.0);
-        House6.setState(State.VERIFIED);
+        House6.setHomeState(HomeState.VERIFIED);
         House6.setMaxNoOfGuests(4);
         House6.setUsers(Admin);
 
@@ -199,15 +206,15 @@ public class bootStrap implements CommandLineRunner {
         Pictures pictures30 = new Pictures();
         pictures30.setUrl("https://a0.muscache.com/im/pictures/prohost-api/Hosting-2631155/original/c19722b5-e048-4778-b4d3-4576c62e0b70.jpeg?im_w=720 ");
 
-        House6.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures26,pictures27,pictures28,pictures29,pictures30})));
+        House6.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures26, pictures27, pictures28, pictures29, pictures30})));
 
-        Apartments House7= new Apartments();
+        Apartments House7 = new Apartments();
         House7.setAddress("Lajita, Spain");
         House7.setName("Satordi Aubé");
-        House7.setHouseRefCode(House7.getAddress().substring(0,3),7);
+        House7.setHouseRefCode(House7.getAddress().substring(0, 3), 7);
         House7.setPrice(182);
         House7.setRating(4.9);
-        House7.setState(State.VERIFIED);
+        House7.setHomeState(HomeState.VERIFIED);
         House7.setMaxNoOfGuests(2);
         House7.setUsers(Admin);
 
@@ -226,15 +233,15 @@ public class bootStrap implements CommandLineRunner {
         Pictures pictures35 = new Pictures();
         pictures35.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-50058763/original/105f5096-1885-498e-88e3-5c7805700227.jpeg?im_w=720 ");
 
-        House7.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures31,pictures32,pictures33,pictures35,pictures34})));
+        House7.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures31, pictures32, pictures33, pictures35, pictures34})));
 
-        Apartments House8= new Apartments();
+        Apartments House8 = new Apartments();
         House8.setAddress("Mogan, Spain");
         House8.setName("Arnaude Barteaux");
-        House8.setHouseRefCode(House8.getAddress().substring(0,3),8);
+        House8.setHouseRefCode(House8.getAddress().substring(0, 3), 8);
         House8.setPrice(374);
         House8.setRating(5.0);
-        House8.setState(State.VERIFIED);
+        House8.setHomeState(HomeState.VERIFIED);
         House8.setMaxNoOfGuests(8);
         House8.setUsers(Admin);
 
@@ -253,15 +260,15 @@ public class bootStrap implements CommandLineRunner {
         Pictures pictures40 = new Pictures();
         pictures40.setUrl("https://a0.muscache.com/im/pictures/05f93fe3-da99-485d-aada-f8224d714d97.jpg?im_w=720 ");
 
-        House8.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures36,pictures37,pictures38,pictures39,pictures40})));
+        House8.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures36, pictures37, pictures38, pictures39, pictures40})));
 
-        Apartments House9= new Apartments();
+        Apartments House9 = new Apartments();
         House9.setAddress("Lekki, Nigeria");
         House9.setName("Oluchukwu Chiwetelu");
-        House9.setHouseRefCode(House9.getAddress().substring(0,3),9);
+        House9.setHouseRefCode(House9.getAddress().substring(0, 3), 9);
         House9.setPrice(380);
         House9.setRating(5.0);
-        House9.setState(State.VERIFIED);
+        House9.setHomeState(HomeState.VERIFIED);
         House9.setMaxNoOfGuests(6);
         House9.setUsers(Admin);
 
@@ -278,16 +285,16 @@ public class bootStrap implements CommandLineRunner {
 
         Pictures pictures45 = new Pictures("https://a0.muscache.com/im/pictures/miso/Hosting-51327545/original/430eaa3d-9a8a-45f9-b652-bb110ec0dd0b.jpeg?im_w=720 ");
 
-        House9.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures41,pictures42,pictures43,pictures44,pictures45})));
+        House9.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures41, pictures42, pictures43, pictures44, pictures45})));
 
 
-        Apartments House10= new Apartments();
+        Apartments House10 = new Apartments();
         House10.setAddress("Ikoyi, Nigeria");
         House10.setName("Chiabuotu Chinomso");
-        House10.setHouseRefCode(House10.getAddress().substring(0,5),10);
+        House10.setHouseRefCode(House10.getAddress().substring(0, 5), 10);
         House10.setPrice(120);
         House10.setRating(3.9);
-        House10.setState(State.VERIFIED);
+        House10.setHomeState(HomeState.VERIFIED);
         House10.setMaxNoOfGuests(5);
         House10.setUsers(Admin);
 
@@ -303,15 +310,15 @@ public class bootStrap implements CommandLineRunner {
 
         Pictures pictures50 = new Pictures("https://a0.muscache.com/im/pictures/f0e93743-59be-4a53-b4de-118103b44ff5.jpg?im_w=720 ");
 
-        House10.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures46,pictures47,pictures48,pictures49,pictures50})));
+        House10.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures46, pictures47, pictures48, pictures49, pictures50})));
 
-        Apartments House11= new Apartments();
+        Apartments House11 = new Apartments();
         House11.setAddress("Avendia Juan carlos , Spain ");
         House11.setName("Oscar Olsen");
-        House11.setHouseRefCode(House11.getAddress().substring(0,3),11);
+        House11.setHouseRefCode(House11.getAddress().substring(0, 3), 11);
         House11.setPrice(445);
         House11.setRating(3.9);
-        House11.setState(State.VERIFIED);
+        House11.setHomeState(HomeState.VERIFIED);
         House11.setMaxNoOfGuests(4);
         House11.setUsers(Admin);
 
@@ -329,16 +336,16 @@ public class bootStrap implements CommandLineRunner {
         Pictures pictures55 = new Pictures("https://a0.muscache.com/im/pictures/80da7330-2992-48c5-b6c6-dd3cf6797a8c.jpg?im_w=720 ");
 
 
-        House11.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures51,pictures52,pictures53,pictures54,pictures55})));
+        House11.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures51, pictures52, pictures53, pictures54, pictures55})));
 
 
-        Apartments House12= new Apartments();
+        Apartments House12 = new Apartments();
         House12.setAddress("Milopotas, Greece");
         House12.setName("Isak Lennert");
-        House12.setHouseRefCode(House12.getAddress().substring(0,3),12);
+        House12.setHouseRefCode(House12.getAddress().substring(0, 3), 12);
         House12.setPrice(962);
         House12.setRating(5.0);
-        House12.setState(State.VERIFIED);
+        House12.setHomeState(HomeState.VERIFIED);
         House12.setMaxNoOfGuests(10);
         House12.setUsers(Admin);
 
@@ -356,38 +363,41 @@ public class bootStrap implements CommandLineRunner {
 
         Pictures pictures60 = new Pictures("https://a0.muscache.com/im/pictures/db09b862-4a15-4f3b-94a9-814eadb1492f.jpg?im_w=720 ");
 
-        House12.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures56,pictures57,pictures58,pictures59,pictures60})));
+        House12.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures56, pictures57, pictures58, pictures59, pictures60})));
 
 
-        ArrayList<Apartments> houseCollection = new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse,House2,
-        House3,House4,House5,House6,House7,House8,House9,House10,House11,House12})) ;
+        ArrayList<Apartments> houseCollection = new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse, House2,
+                House3, House4, House5, House6, House7, House8, House9, House10, House11, House12}));
         ArrayList<Pictures> picturesCollection = new ArrayList<>(Arrays.asList(new Pictures[]{picture1, picture2, picture3, picture4,
-                picture5,picture6,picture7,picture8,picture9,picture10,picture11,picture12,picture13,picture14,picture15,
-        picture16,picture17,picture18,picture19,picture20,picture21,pictures22,pictures23,pictures24,pictures25,pictures26,
-        pictures27,pictures28,pictures29,pictures30,pictures31,pictures32,pictures33,pictures34,pictures35,pictures36,pictures37,
-        pictures38,pictures39,pictures40,pictures41,pictures42,pictures43,pictures44,pictures45,pictures46,pictures47,pictures48,
-        pictures49,pictures50,pictures51,pictures52,pictures53,pictures54,pictures55,pictures56,pictures57,pictures58,pictures59,
-        pictures60})) ;
+                picture5, picture6, picture7, picture8, picture9, picture10, picture11, picture12, picture13, picture14, picture15,
+                picture16, picture17, picture18, picture19, picture20, picture21, pictures22, pictures23, pictures24, pictures25, pictures26,
+                pictures27, pictures28, pictures29, pictures30, pictures31, pictures32, pictures33, pictures34, pictures35, pictures36, pictures37,
+                pictures38, pictures39, pictures40, pictures41, pictures42, pictures43, pictures44, pictures45, pictures46, pictures47, pictures48,
+                pictures49, pictures50, pictures51, pictures52, pictures53, pictures54, pictures55, pictures56, pictures57, pictures58, pictures59,
+                pictures60}));
 
-//        System.out.println(Admin);
-//        System.out.println(House2);
 
-        Admin.getApartmentsSet().addAll(new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse,House2,House3,House4,House5
-                ,House6,House7,House8,House9,House10,House11,House12})));
+        Admin.getApartmentsSet().addAll(new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse, House2, House3, House4, House5
+                , House6, House7, House8, House9, House10, House11, House12})));
+
+        Reservation reservation = new Reservation();
+        reservation.setCheckInDate(new Date());//today's date(checkIn date)
+        reservation.setCheckOutDate(new Date(2023 - 1900, Calendar.MARCH, 22));//check out date
+        reservation.setReservationState(ReservationState.PENDING);
+
+        reservation.setUsers(Admin);
+        reservation.setApartment(firstHouse);
+
 
         picturesRepository.saveAll(picturesCollection);
         userRepo.save(Admin);
         apartmentRepo.saveAll(houseCollection);
+        reservationRepo.save(reservation);
+
+        System.out.println("house..........." + House2);
+        System.out.println("user ......." + Admin);
+        System.out.println("reservation........" + reservation);
 
 
-        System.out.println("house..........."+House2);
-        System.out.println("user ......."+Admin);
-//        System.out.println(House3);
-
-//        picturesRepository.saveAll(Collection);
-//        house.getPictures().add(pictures);
-//        picturesRepository.save(pictures);
-//
-//        apartmentRepo.save(house);
     }
 }

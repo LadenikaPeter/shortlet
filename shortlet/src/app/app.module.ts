@@ -9,7 +9,6 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { CalendarModule } from 'primeng/calendar';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -18,6 +17,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { ShortletComponent } from './components/shortlet/shortlet.component';
 import { CommonModule } from '@angular/common';
+import { CalendarModule } from 'primeng/calendar';
+import { BookingComponent } from './components/shortlet/booking/booking.component';
+import { Angular4PaystackModule } from 'angular4-paystack';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     ShortletComponent,
     FooterComponent,
+    BookingComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +42,9 @@ import { CommonModule } from '@angular/common';
     CalendarModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    Angular4PaystackModule.forRoot(
+      'pk_test_132ebd9d8b822325a146ed8d3c55c6d3c7e77821'
+    ),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
