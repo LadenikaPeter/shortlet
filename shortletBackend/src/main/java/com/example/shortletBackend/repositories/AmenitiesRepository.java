@@ -1,4 +1,8 @@
 package com.example.shortletBackend.repositories;
 
-public interface AmenitiesRepository extends org.springframework.data.jpa.repository.JpaRepository<com.example.shortletBackend.entities.Amenities, java.lang.Long> {
+import com.example.shortletBackend.entities.Amenities;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AmenitiesRepository extends JpaRepository<Amenities, Long> {
+
 }

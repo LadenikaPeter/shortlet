@@ -1,15 +1,8 @@
 package com.example.shortletBackend.bootStrap;
 
-import com.example.shortletBackend.entities.Apartments;
-import com.example.shortletBackend.entities.Pictures;
-import com.example.shortletBackend.entities.Reservation;
-import com.example.shortletBackend.entities.Users;
-import com.example.shortletBackend.enums.HomeState;
-import com.example.shortletBackend.enums.ReservationState;
-import com.example.shortletBackend.repositories.ApartmentRepo;
-import com.example.shortletBackend.repositories.PicturesRepository;
-import com.example.shortletBackend.repositories.ReservationRepo;
-import com.example.shortletBackend.repositories.UserRepo;
+import com.example.shortletBackend.entities.*;
+import com.example.shortletBackend.enums.*;
+import com.example.shortletBackend.repositories.*;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -26,13 +19,21 @@ public class bootStrap implements CommandLineRunner {
     private final PicturesRepository picturesRepository;
     private final UserRepo userRepo;
     private final ReservationRepo reservationRepo;
+    private final AmenitiesRepository amenitiesRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        Users Admin = new Users();
-        Admin.setName("Peter");
-        Admin.setEmail("peter@gmail.com");
-        userRepo.save(Admin);
+        Users Admin = new Users("Peter","peter@gmail.com",Role.ADMIN);
+        Users walter = new Users("Kristi J. Walters","walter@gmail.com",Role.USER);
+        Users kathy = new Users("Kathleen Kammer","kathy@gmail.com",Role.USER);
+        Users samy= new Users("Samuel Altieri","sami@gmail.com",Role.USER);
+        Users melisa = new Users("Melissa Marino","mari@gmail.com",Role.USER);
+        Users emily = new Users("Emily Hannah","emily@gmail.com",Role.USER);
+        Users olu = new Users("Oluchukwu Chiwetelu","olu@gmail.com",Role.USER);
+        Users chi = new Users("Chiabuotu Chinomso","chi@gmail.com",Role.USER);
+        Users isak = new Users("Isak Lennert","isak@gmail.com",Role.USER);
+
+        userRepo.saveAll(new ArrayList<>(Arrays.asList(walter,Admin,kathy,samy,melisa,emily,olu,chi,isak)));
 
         Apartments firstHouse = new Apartments();
         firstHouse.setAddress("Provincia di Leece, Italy ");
@@ -41,6 +42,13 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setPrice(533);
         firstHouse.setRating(4.7);
         firstHouse.setHomeState(HomeState.VERIFIED);
+        firstHouse.setNoOfBeds(3);
+        firstHouse.setNoOfBathrooms(2);
+        firstHouse.setNoOfBedrooms(3);
+        firstHouse.setDescription("");
+        firstHouse.setHouseType(HouseType.WHOLE_HOUSE);
+        firstHouse.setPropertyTypes(PropertyType.APARTMENT);
+
 
         firstHouse.setMaxNoOfGuests(5);
 
@@ -61,7 +69,13 @@ public class bootStrap implements CommandLineRunner {
 
 
         firstHouse.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture1, picture2, picture3, picture4, picture5})));
-        firstHouse.setUsers(Admin);
+        Amenities A = new Amenities();
+        A.setAirCondition(true);
+        A.setFireplace(false);
+        A.setBbqGrill(true);
+        firstHouse.setAmenities(A);
+
+        firstHouse.setUsers(walter);
 
         //2nd
         Apartments House2 = new Apartments();
@@ -72,6 +86,13 @@ public class bootStrap implements CommandLineRunner {
         House2.setRating(3.9);
         House2.setHomeState(HomeState.VERIFIED);
         House2.setMaxNoOfGuests(8);
+        House2.setDescription("");
+        House2.setNoOfBeds(4);
+        House2.setNoOfBathrooms(3);
+        House2.setNoOfBedrooms(4);
+        House2.setHouseType(HouseType.PRIVATE_ROOM);
+        House2.setPropertyTypes(PropertyType.GUESTHOUSE);
+
 
         Pictures picture6 = new Pictures();
 
@@ -93,8 +114,13 @@ public class bootStrap implements CommandLineRunner {
         House2.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture6, picture7, picture8,
                 picture9, picture10})));
         House2.setUsers(Admin);
+        Amenities h2 = new Amenities();
+        h2.setWifi(true);
+        h2.setTv(true);
+        h2.setKitchen(true);
+        h2.setAirCondition(true);
 
-
+        House2.setAmenities(h2);
 
         //3rd
         Apartments House3 = new Apartments();
@@ -105,6 +131,12 @@ public class bootStrap implements CommandLineRunner {
         House3.setRating(5.0);
         House3.setHomeState(HomeState.VERIFIED);
         House3.setMaxNoOfGuests(3);
+        House3.setDescription("");
+        House3.setNoOfBeds(1);
+        House3.setNoOfBathrooms(2);
+        House3.setNoOfBedrooms(1);
+        House3.setHouseType(HouseType.PRIVATE_ROOM);
+        House3.setPropertyTypes(PropertyType.BED_AND_BREAKFAST);
 
         Pictures picture11 = new Pictures();
         picture11.setUrl("https://a0.muscache.com/im/pictures/6e75f583-5c1f-41e8-b705-511dbffe92b5.jpg?im_w=1200 ");
@@ -122,7 +154,14 @@ public class bootStrap implements CommandLineRunner {
         picture15.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-48307356/original/7fd97148-3723-48d8-b2ca-b37dfe275ffd.jpeg?im_w=720 ");
 
         House3.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture11, picture12, picture13, picture14, picture15})));
-        House3.setUsers(Admin);
+        House3.setUsers(samy);
+        Amenities h3=new Amenities();
+        h3.setPaidParking(true);
+        h3.setWasher(true);
+        h3.setWifi(true);
+        h3.setTv(true);
+        h3.setKitchen(true);
+        House3.setAmenities(h3);
 
         //4
         Apartments House4 = new Apartments();
@@ -133,7 +172,14 @@ public class bootStrap implements CommandLineRunner {
         House4.setRating(4.5);
         House4.setHomeState(HomeState.VERIFIED);
         House4.setMaxNoOfGuests(2);
-        House4.setUsers(Admin);
+        House4.setUsers(melisa);
+        House4.setDescription("");
+        House4.setNoOfBeds(2);
+        House4.setNoOfBathrooms(1);
+        House4.setNoOfBedrooms(1);
+        House4.setHouseType(HouseType.PRIVATE_ROOM);
+        House4.setPropertyTypes(PropertyType.BED_AND_BREAKFAST);
+
 
         Pictures picture16 = new Pictures();
         picture16.setUrl("https://a0.muscache.com/im/pictures/11755737/cbefb5d6_original.jpg?im_w=1200 ");
@@ -151,7 +197,14 @@ public class bootStrap implements CommandLineRunner {
         picture20.setUrl("https://a0.muscache.com/im/pictures/890deadc-040e-43b7-ad5a-2391ab90e314.jpg?im_w=720 ");
 
         House4.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture16, picture17, picture18, picture19, picture20})));
-
+        Amenities h4=new Amenities();
+        h4.setBbqGrill(true);
+        h4.setOutdoorDining(true);
+        h4.setLakeAccess(true);
+        h4.setSmokeAlarm(true);
+        h4.setFirstAidKit(true);
+        h4.setFireExtinguisher(true);
+        House4.setAmenities(h4);
 
         Apartments House5 = new Apartments();
         House5.setAddress("Naxos, Greece");
@@ -161,7 +214,14 @@ public class bootStrap implements CommandLineRunner {
         House5.setRating(4.7);
         House5.setMaxNoOfGuests(3);
         House5.setHomeState(HomeState.VERIFIED);
-        House5.setUsers(Admin);
+        House5.setUsers(emily);
+        House5.setNoOfBeds(2);
+        House5.setDescription("");
+        House5.setNoOfBathrooms(2);
+        House5.setNoOfBedrooms(2);
+        House5.setHouseType(HouseType.PRIVATE_ROOM);
+        House5.setPropertyTypes(PropertyType.TREEHOUSE);
+
 
         Pictures picture21 = new Pictures();
         picture21.setUrl("https://a0.muscache.com/im/pictures/32233013/785da15f_original.jpg?im_w=1200 ");
@@ -180,6 +240,13 @@ public class bootStrap implements CommandLineRunner {
 
         House5.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture21, pictures22, pictures23, pictures24, pictures25})));
 
+        Amenities h5= new Amenities();
+        h5.setPool(true);
+        h5.setTv(true);
+        h5.setPool(true);
+        h5.setAirCondition(true);
+        h5.setWasher(true);
+        House5.setAmenities(h5);
 
         Apartments House6 = new Apartments();
         House6.setAddress("Chania, Greece");
@@ -189,7 +256,15 @@ public class bootStrap implements CommandLineRunner {
         House6.setRating(5.0);
         House6.setHomeState(HomeState.VERIFIED);
         House6.setMaxNoOfGuests(4);
-        House6.setUsers(Admin);
+        House6.setUsers(melisa);
+        House6.setDescription("");
+        House6.setNoOfBeds(4);
+        House6.setNoOfBathrooms(2);
+        House6.setNoOfBedrooms(3);
+        House6.setHouseType(HouseType.WHOLE_HOUSE);
+        House6.setPropertyTypes(PropertyType.APARTMENT);
+//
+
 
         Pictures pictures26 = new Pictures();
         pictures26.setUrl("https://a0.muscache.com/im/pictures/prohost-api/Hosting-2631155/original/e5f83d80-6e85-4cdc-99b4-ae9cc89e7020.jpeg?im_w=1200 ");
@@ -208,6 +283,13 @@ public class bootStrap implements CommandLineRunner {
 
         House6.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures26, pictures27, pictures28, pictures29, pictures30})));
 
+        Amenities h6=new Amenities();
+        h6.setFreeParking(true);
+        h6.setWifi(true);
+        h6.setFirstAidKit(true);
+        h6.setFireExtinguisher(true);
+        House6.setAmenities(h6);
+
         Apartments House7 = new Apartments();
         House7.setAddress("Lajita, Spain");
         House7.setName("Satordi Aubé");
@@ -216,7 +298,14 @@ public class bootStrap implements CommandLineRunner {
         House7.setRating(4.9);
         House7.setHomeState(HomeState.VERIFIED);
         House7.setMaxNoOfGuests(2);
-        House7.setUsers(Admin);
+        House7.setUsers(isak);
+        House7.setDescription("");
+        House7.setNoOfBeds(1);
+        House7.setNoOfBathrooms(1);
+        House7.setNoOfBedrooms(1);
+        House7.setHouseType(HouseType.WHOLE_HOUSE);
+        House7.setPropertyTypes(PropertyType.TINY_HOME);
+
 
         Pictures pictures33 = new Pictures();
         pictures33.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-49937547/original/0109bbe0-90ca-4645-8112-99b4544a372b.jpeg?im_w=1200 ");
@@ -235,6 +324,15 @@ public class bootStrap implements CommandLineRunner {
 
         House7.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures31, pictures32, pictures33, pictures35, pictures34})));
 
+        Amenities h7 =new Amenities();
+        h7.setFireExtinguisher(true);
+        h7.setSmokeAlarm(true);
+        h7.setWifi(true);
+        h7.setLakeAccess(true);
+        h7.setFreeParking(true);
+        h7.setWorkSpace(true);
+        House7.setAmenities(h7);
+
         Apartments House8 = new Apartments();
         House8.setAddress("Mogan, Spain");
         House8.setName("Arnaude Barteaux");
@@ -244,6 +342,13 @@ public class bootStrap implements CommandLineRunner {
         House8.setHomeState(HomeState.VERIFIED);
         House8.setMaxNoOfGuests(8);
         House8.setUsers(Admin);
+        House8.setDescription("");
+        House8.setNoOfBeds(7);
+        House8.setNoOfBathrooms(6);
+        House8.setNoOfBedrooms(6);
+        House8.setHouseType(HouseType.WHOLE_HOUSE);
+        House8.setPropertyTypes(PropertyType.CASTLE);
+
 
         Pictures pictures36 = new Pictures();
         pictures36.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-842511498702667444/original/ca793819-9385-412e-87ec-a0562b674f42.jpeg?im_w=720");
@@ -262,6 +367,14 @@ public class bootStrap implements CommandLineRunner {
 
         House8.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures36, pictures37, pictures38, pictures39, pictures40})));
 
+        Amenities h8=new Amenities();
+        h8.setFireExtinguisher(true);
+        h8.setWorkSpace(true);
+        h8.setBeachAccess(true);
+        h8.setOutdoorDining(true);
+        h8.setWorkSpace(true);
+        House8.setAmenities(h8);
+
         Apartments House9 = new Apartments();
         House9.setAddress("Lekki, Nigeria");
         House9.setName("Oluchukwu Chiwetelu");
@@ -270,7 +383,14 @@ public class bootStrap implements CommandLineRunner {
         House9.setRating(5.0);
         House9.setHomeState(HomeState.VERIFIED);
         House9.setMaxNoOfGuests(6);
-        House9.setUsers(Admin);
+        House9.setUsers(olu);
+        House9.setDescription("");
+        House9.setNoOfBeds(6);
+        House9.setNoOfBathrooms(4);
+        House9.setNoOfBedrooms(6);
+        House9.setHouseType(HouseType.WHOLE_HOUSE);
+        House9.setPropertyTypes(PropertyType.HOTEL);
+
 
         Pictures pictures41 = new Pictures();
         pictures41.setUrl("https://a0.muscache.com/im/pictures/miso/Hosting-822280454813797636/original/28910836-2cbf-4793-ad56-9068d8414ebb.jpeg?im_w=720");
@@ -287,6 +407,16 @@ public class bootStrap implements CommandLineRunner {
 
         House9.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures41, pictures42, pictures43, pictures44, pictures45})));
 
+        Amenities h9 = new Amenities();
+        h9.setFireExtinguisher(true);
+        h9.setPool(true);
+        h9.setWifi(true);
+        h9.setPaidParking(true);
+        h9.setSmokeAlarm(true);
+        h9.setWasher(true);
+        h9.setPoolTable(true);
+        h9.setWasher(true);
+        House9.setAmenities(h9);
 
         Apartments House10 = new Apartments();
         House10.setAddress("Ikoyi, Nigeria");
@@ -296,7 +426,14 @@ public class bootStrap implements CommandLineRunner {
         House10.setRating(3.9);
         House10.setHomeState(HomeState.VERIFIED);
         House10.setMaxNoOfGuests(5);
-        House10.setUsers(Admin);
+        House10.setUsers(chi);
+        House10.setDescription("");
+        House10.setNoOfBeds(5);
+        House10.setNoOfBathrooms(5);
+        House10.setNoOfBedrooms(5);
+        House10.setHouseType(HouseType.WHOLE_HOUSE);
+        House10.setPropertyTypes(PropertyType.BED_AND_BREAKFAST);
+
 
         Pictures pictures46 = new Pictures("https://a0.muscache.com/im/pictures/3e327003-1cb2-4113-89eb-dfc83de633a9.jpg?im_w=1200 ");
 
@@ -312,6 +449,21 @@ public class bootStrap implements CommandLineRunner {
 
         House10.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures46, pictures47, pictures48, pictures49, pictures50})));
 
+        Amenities h10 = new Amenities();
+        h10.setFireExtinguisher(true);
+        h10.setFireplace(true);
+        h10.setFirstAidKit(true);
+        h10.setPoolTable(true);
+        h10.setBbqGrill(true);
+        h10.setFreeParking(true);
+        h10.setWasher(true);
+        h10.setWorkSpace(true);
+        h10.setPatio(true);
+        h10.setAirCondition(true);
+        h10.setTv(true);
+        House10.setAmenities(h10);
+
+
         Apartments House11 = new Apartments();
         House11.setAddress("Avendia Juan carlos , Spain ");
         House11.setName("Oscar Olsen");
@@ -320,7 +472,14 @@ public class bootStrap implements CommandLineRunner {
         House11.setRating(3.9);
         House11.setHomeState(HomeState.VERIFIED);
         House11.setMaxNoOfGuests(4);
-        House11.setUsers(Admin);
+        House11.setUsers(samy);
+        House11.setNoOfBeds(4);
+        House11.setDescription("");
+        House11.setNoOfBathrooms(2);
+        House11.setNoOfBedrooms(2);
+        House11.setHouseType(HouseType.SHARED_ROOM);
+        House11.setPropertyTypes(PropertyType.TENT);
+
 
         Pictures pictures51 = new Pictures("https://a0.muscache.com/im/pictures/ba8d2e6f-968a-4fde-a21b-c56bdd60556c.jpg?im_w=1200 ");
 
@@ -338,6 +497,13 @@ public class bootStrap implements CommandLineRunner {
 
         House11.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures51, pictures52, pictures53, pictures54, pictures55})));
 
+        Amenities h11 = new Amenities();
+        h11.setOutdoorShower(true);
+        h11.setFireplace(true);
+        h11.setBeachAccess(true);
+        h11.setFirstAidKit(true);
+        h11.setFireExtinguisher(true);
+        House11.setAmenities(h11);
 
         Apartments House12 = new Apartments();
         House12.setAddress("Milopotas, Greece");
@@ -347,7 +513,14 @@ public class bootStrap implements CommandLineRunner {
         House12.setRating(5.0);
         House12.setHomeState(HomeState.VERIFIED);
         House12.setMaxNoOfGuests(10);
-        House12.setUsers(Admin);
+        House12.setUsers(emily);
+        House12.setDescription("");
+        House12.setNoOfBeds(10);
+        House12.setNoOfBathrooms(11);
+        House12.setNoOfBedrooms(10);
+        House12.setHouseType(HouseType.WHOLE_HOUSE);
+        House12.setPropertyTypes(PropertyType.CASTLE);
+
 
         Pictures pictures56 = new Pictures("https://a0.muscache.com/im/pictures/74192cff-0e84-43fc-ac8c-1c5a98039ca8.jpg?im_w=1200");
 
@@ -365,6 +538,19 @@ public class bootStrap implements CommandLineRunner {
 
         House12.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures56, pictures57, pictures58, pictures59, pictures60})));
 
+        Amenities h12 = new Amenities();
+        h12.setFireExtinguisher(true);
+        h12.setPool(true);
+        h12.setFireplace(true);
+        h12.setKitchen(true);
+        h12.setFirstAidKit(true);
+        h12.setPoolTable(true);
+        h12.setBbqGrill(true);
+        h12.setFreeParking(true);
+        h12.setWasher(true);
+        h12.setWorkSpace(true);
+        h12.setPatio(true);
+        House12.setAmenities(h12);
 
         ArrayList<Apartments> houseCollection = new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse, House2,
                 House3, House4, House5, House6, House7, House8, House9, House10, House11, House12}));
@@ -377,8 +563,8 @@ public class bootStrap implements CommandLineRunner {
                 pictures60}));
 
 
-        Admin.getApartmentsSet().addAll(new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse, House2, House3, House4, House5
-                , House6, House7, House8, House9, House10, House11, House12})));
+//        Admin.getApartmentsSet().addAll(new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse, House2, House3, House4, House5
+//                , House6, House7, House8, House9, House10, House11, House12})));
 
         Reservation reservation = new Reservation();
         reservation.setCheckInDate(new Date());//today's date(checkIn date)
@@ -388,7 +574,8 @@ public class bootStrap implements CommandLineRunner {
         reservation.setUsers(Admin);
         reservation.setApartment(firstHouse);
 
-
+        amenitiesRepository.saveAll(new ArrayList<>(Arrays.asList(A,h2,h3,h4,h5,h6,h7,h8,h9,h10
+        ,h11,h12)));
         picturesRepository.saveAll(picturesCollection);
         userRepo.save(Admin);
         apartmentRepo.saveAll(houseCollection);

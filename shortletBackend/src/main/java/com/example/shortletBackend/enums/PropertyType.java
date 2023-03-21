@@ -1,6 +1,6 @@
 package com.example.shortletBackend.enums;
 
-public enum HouseType {
+public enum PropertyType {
     HOUSE,APARTMENT,BARN,BED_AND_BREAKFAST,
     BOAT,CABIN,CAMPER,CASTLE,CAVE,CONTAINER,
     EARTH_HOME,FARM,GUESTHOUSE,HOTEL,HOUSEBOAT,

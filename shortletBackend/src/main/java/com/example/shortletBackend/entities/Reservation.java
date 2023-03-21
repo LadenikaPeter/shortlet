@@ -26,6 +26,7 @@ public class Reservation {
     private Date checkOutDate;
     private int price;
 
+    @Enumerated(EnumType.STRING)
     private ReservationState reservationState;
 
     @ManyToOne
