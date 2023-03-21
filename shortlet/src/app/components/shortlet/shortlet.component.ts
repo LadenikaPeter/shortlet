@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Shortlet } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
-
-import { differenceInDays} from 'date-fns';
-// import {  } from '@date-fns';
 
 @Component({
   selector: 'app-shortlet',
@@ -11,11 +9,15 @@ import { differenceInDays} from 'date-fns';
   styleUrls: ['./shortlet.component.css'],
 })
 export class ShortletComponent implements OnInit {
-  shortletData: any= []
+  checkinDate: Date;
+  checkoutDate: Date;
+  dateForCalendar: string;
+  dateForCalendar2: string;
+  numberOfNights: number;
+  shortletData: Partial<Shortlet> = {};
   shortletPictures: any = [];
+  shortletPrice: any;
   showAmenities: boolean = false;
-
-  // dataStorage: any;
 
   constructor(
     private dataStorage: DataStorageService,
@@ -25,52 +27,94 @@ export class ShortletComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((data) => {
       let id: number = data['id'];
-
-      console.log(id);
       this.displayShortlet(id);
     });
 
-    // console.log('e dey work');
-    
+    this.checkinDate = new Date();
+    this.noSelectFromPast();
+    this.noSelectLessThan2();
+
+    let newCheckoutDate = (this.checkoutDate = new Date());
+    newCheckoutDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
+
+    console.log(this.checkinDate);
+    this.fetchDateSelected();
   }
 
+  //to diplay hortlet
   displayShortlet(id: number) {
     this.dataStorage.displayShortlet(id).subscribe(
       (response) => {
-        // console.log(this.shortletData = response)
+        console.log((this.shortletData = response));
         this.shortletData = response;
-        this.shortletPictures = response.pictures;
-
+        this.calculateBill(); //details of shortlet from API
+        // console.log(this.shortletPrice = response.price)
+        this.shortletPictures = response.pictures; //pictures of shortlet from API
       },
       (error) => console.log(error)
     );
   }
 
-  toggleAmenities(){
-    this.showAmenities != this.showAmenities; 
+  toggleAmenities() {
+    this.showAmenities != this.showAmenities;
   }
-
-  // dateSelected: any
-  checkinDate: Date
-  checkoutDate: Date
-
-  // dateLeft: number
-  // dateRight: number
 
   fetchDateSelected() {
-    console.log("the check in date: " + this.checkinDate);
-    console.log("the check out date: " + this.checkoutDate);
-    console.log()
-    // console.log()
-    this.showNight();
+    let timeDiff = Math.abs(
+      new Date(this.checkoutDate).getTime() -
+        new Date(this.checkinDate).getTime()
+    );
+    this.numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    console.log(this.checkinDate);
+    this.calculateBill();
   }
 
-  showNight(){
-    let timeDiff = Math.abs(new Date(this.checkoutDate).getTime() - new Date(this.checkinDate).getTime())
-    // let timeDiff = Math.abs(1200);
-    let numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    console.log(numberOfNights + " nights");
+  //reservation bill
+  calculateNumberOfNights: number;
+  total: number;
+
+  calculateBill() {
+    this.calculateNumberOfNights =
+      this.shortletData.price * this.numberOfNights;
+    this.total = this.calculateNumberOfNights + 107 + 231;
   }
-  
-  // date14: Date;
+
+  today: Date;
+  mindate() {
+    this.today = new Date();
+  }
+
+  noSelectFromPast() {
+    const date = new Date();
+
+    const year = date.toLocaleString('default', { year: 'numeric' });
+
+    const month = date.toLocaleString('default', { month: '2-digit' });
+
+    const day = date.toLocaleString('default', { day: '2-digit' });
+
+    const formattedDate = year + '-' + month + '-' + day;
+
+    this.dateForCalendar = formattedDate;
+
+    // console.log(formattedDate); // Prints: 2022-05-04
+  }
+
+  noSelectLessThan2() {
+    let newDate = new Date();
+
+    newDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
+
+    const year = newDate.toLocaleString('default', { year: 'numeric' });
+
+    const month = newDate.toLocaleString('default', { month: '2-digit' });
+
+    const day = newDate.toLocaleString('default', { day: '2-digit' });
+
+    const formattedDate = year + '-' + month + '-' + day;
+
+    this.dateForCalendar2 = formattedDate;
+
+    console.log(formattedDate);
+  }
 }

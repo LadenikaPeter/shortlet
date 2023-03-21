@@ -28,10 +28,10 @@ public class Users {
     private String picture;
     private Role role;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users")//,cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<Apartments> apartmentsSet = new HashSet<>();
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users")//,cascade = CascadeType.ALL)
     private Set<Reservation> reservationSet=new HashSet<>();
 }

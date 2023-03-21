@@ -1,0 +1,110 @@
+@media only screen and (max-width: 767px) {
+  .removemine {
+    display: none;
+  }
+}
+
+.container {
+  margin-top: 30px;
+}
+
+h3 {
+  margin: 15px 0;
+}
+h4 {
+  font-size: 32px;
+  color: #484848;
+  font-weight: 600;
+}
+
+h5 {
+  color: #484848;
+}
+
+.home_link {
+  color: #484848;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.home_link:hover {
+  text-decoration: underline;
+}
+
+#pointing_character {
+  color: rgb(118, 118, 118);
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 20px 0 20px;
+}
+
+#account {
+  color: #484848;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* input[type="text"] {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #484848;
+} */
+.input {
+  padding: 14px 0;
+}
+
+input[type="text"],
+input[type="number"] {
+  border-color: #484848;
+}
+
+input[type="text"]:focus {
+  box-shadow: none;
+}
+
+input[type="number"]:focus {
+  box-shadow: none;
+}
+/* for removinng scroll bars from input type 'number' */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.action_button {
+  padding: 14px 0;
+}
+
+.action_button > button {
+  margin-left: 15px;
+  padding: 7px 20px;
+  border-radius: 5px;
+}
+
+.save {
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.discard {
+  background-color: #e31c5f;
+  color: white;
+  border: 0;
+}
+
+.feature_container {
+  border: 1px solid #e6eaee;
+  border-radius: 10px;
+
+  padding: 30px;
+}
+
+.col-md-4 {
+  /* margin-left: 70px; */
+  width: 40%;
+  margin: auto;
+}
