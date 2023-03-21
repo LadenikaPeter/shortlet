@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { NewShortlet } from 'src/app/interface/shortlet';
 
 @Component({
   selector: 'app-register-shortlet',
@@ -7,8 +9,14 @@ import { Component } from '@angular/core';
 })
 export class RegisterShortletComponent {
 
-  ngOnInit() {
-    console.log("Add new home!")
-  }
+  constructor(){}
 
+  userEmail
+  form: NewShortlet
+
+  onSubmit(form: NgForm){
+    this.form = form.value
+    console.log(form.value)
+  }
+  
 }

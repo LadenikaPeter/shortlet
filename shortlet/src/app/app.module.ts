@@ -21,6 +21,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { BookingComponent } from './components/shortlet/booking/booking.component';
 import { Angular4PaystackModule } from 'angular4-paystack';
 import { NewShortletComponent } from './components/new-shortlet/new-shortlet.component';
+import { RegisterShortletComponent } from './components/new-shortlet/register-shortlet/register-shortlet.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { NewShortletComponent } from './components/new-shortlet/new-shortlet.com
     FooterComponent,
     BookingComponent,
     NewShortletComponent,
+    RegisterShortletComponent,
   ],
   imports: [
     CommonModule,
