@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PutMapping("/update_user/")
-    public ResponseEntity updateUser(@RequestParam("user_email")String email,
+    public ResponseEntity updateUser(@RequestHeader("user_email") String email,
          @RequestBody Users users){
         Optional<Users> oldInfo= userRepo.findUsersByEmail(email);
         if (oldInfo.isPresent()){

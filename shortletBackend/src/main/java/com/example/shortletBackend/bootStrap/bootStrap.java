@@ -382,7 +382,7 @@ public class bootStrap implements CommandLineRunner {
 
         Reservation reservation = new Reservation();
         reservation.setCheckInDate(new Date());//today's date(checkIn date)
-        reservation.setCheckOutDate(new Date(2023 - 1900, Calendar.MARCH, 22));//check out date
+        reservation.setCheckOutDate(new Date(2023 - 1900, Calendar.MARCH, 23));//check out date
         reservation.setReservationState(ReservationState.PENDING);
 
         reservation.setUsers(Admin);

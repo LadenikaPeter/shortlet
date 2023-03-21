@@ -57,7 +57,7 @@ public class ApartmentController {
 
     //user creating a new home
     @PostMapping("/addHome/")
-    public ResponseEntity addHome(@RequestParam("user_email") String email, @RequestBody Apartments apartments){
+    public ResponseEntity addHome(@RequestHeader("user_email") String email, @RequestBody Apartments apartments){
         Optional<Users> users= userRepo.findUsersByEmail(email);
         if (users.isPresent()) {
             if (apartments.getPictures() != null) {
