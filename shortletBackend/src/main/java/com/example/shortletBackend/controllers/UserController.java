@@ -1,10 +1,9 @@
 package com.example.shortletBackend.controllers;
 
-import com.example.shortletBackend.dto.ReservationDTO;
-import com.example.shortletBackend.dto.UserDTO;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
+import com.example.shortletBackend.enums.ReservationState;
 import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.repositories.ApartmentRepo;
 import com.example.shortletBackend.repositories.ReservationRepo;
@@ -71,15 +70,37 @@ public class UserController {
         Optional<Users> user = userRepo.findUsersByEmail(email);
         Optional<Apartments> apartments= apartmentRepo.findById(home_id);
 
-        user.get().getReservationSet().add(reservation);
-        apartments.get().getReservations().add(reservation);
-        reservation.setUsers(user.get());
-        reservation.setApartment(apartments.get());
+        if(user.isPresent()){
+            if(apartments.isPresent()){
 
-        apartmentRepo.save(apartments.get());
-        reservationRepo.save(reservation);
-        userRepo.save(user.get());
-        return ResponseEntity.ok(mapper.map(reservation, ReservationDTO.class));
+                reservation.setUsers(user.get());
+                reservation.setApartment(apartments.get());
+                reservation.setReservationState(ReservationState.PENDING);
+                user.get().getReservationSet().add(reservation);
+                apartments.get().getReservations().add(reservation);
+
+                apartmentRepo.save(apartments.get());
+                reservationRepo.save(reservation);
+                userRepo.save(user.get());
+                return ResponseEntity.ok("Successfully reserved");
+            }else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The house can not be found");
+            }
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The user can not be found");
+        }
 
     }
+
+    @GetMapping("/reservation/")
+    public ResponseEntity getAllUserReservation(@RequestParam("email")String email){
+//        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
+//        for (Reservation reservation: ){
+//            reservationDTOS.add(mapper.map(reservation, ReservationDTO.class));
+//        }
+        return ResponseEntity.ok(reservationRepo.findAllByUsers(userRepo.findUsersByEmail(email).get()));
+    }
+
+
+
 }

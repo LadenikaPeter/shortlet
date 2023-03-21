@@ -1,5 +1,7 @@
 package com.example.shortletBackend.entities;
 
+import com.example.shortletBackend.enums.ReservationState;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,17 +14,26 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 public class Reservation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date checkIn;
-    private Date checkOut;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    private Date checkInDate;
+
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    private Date checkOutDate;
+    private int price;
+
+    private ReservationState reservationState;
 
     @ManyToOne
     private Users users;
 
     @ManyToOne
     private Apartments apartment;
+
+
 
 }

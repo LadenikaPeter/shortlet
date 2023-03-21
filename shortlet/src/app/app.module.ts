@@ -17,9 +17,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { ShortletComponent } from './components/shortlet/shortlet.component';
 import { CommonModule } from '@angular/common';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule } from 'primeng/calendar';
 import { BookingComponent } from './components/shortlet/booking/booking.component';
-
+import { Angular4PaystackModule } from 'angular4-paystack';
+import { NewShortletComponent } from './components/new-shortlet/new-shortlet.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { BookingComponent } from './components/shortlet/booking/booking.componen
     ShortletComponent,
     FooterComponent,
     BookingComponent,
+    NewShortletComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,9 @@ import { BookingComponent } from './components/shortlet/booking/booking.componen
     CalendarModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    Angular4PaystackModule.forRoot(
+      'pk_test_132ebd9d8b822325a146ed8d3c55c6d3c7e77821'
+    ),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),

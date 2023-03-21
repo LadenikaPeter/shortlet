@@ -3,7 +3,6 @@ package com.example.shortletBackend.dto;
 import com.example.shortletBackend.entities.Pictures;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
@@ -11,7 +10,7 @@ import java.util.Set;
 
 @AllArgsConstructor @NoArgsConstructor
 @Data
-public class HomeDTO {
+public class ApartmentsDTO {
     private int id;
     private String name;
     private String address;
@@ -20,6 +19,6 @@ public class HomeDTO {
 
     private String houseRefCode;
     private int maxNoOfGuests;
-    private UserDTO users;
+    private UsersDTO users;
     private Set<Pictures> pictures = new HashSet<>();
 }

@@ -4,6 +4,9 @@
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
+  /* i added this two below */
+  /* max-width: 1120px;
+  margin: auto; */
 }
 
 .div1 {
@@ -47,7 +50,7 @@
   border-radius: 0 0 20px 0;
 }
 
-.modal-button{
+.modal-button {
   background-color: #fff;
   color: black;
   border: 1px solid black;
@@ -69,15 +72,15 @@
   justify-content: space-between;
 }
 
-.small{
+.small {
   /* font-size: 1.1rem; */
 }
 .reservation {
-  min-width: 350px; 
+  min-width: 350px;
   /* border: 1px solid red; */
-  padding: 1.2rem ;
+  padding: 1.2rem;
   max-height: 450px;
-  border-radius:10px;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin-left: 4rem;
   /* sticky */
@@ -87,13 +90,13 @@
 
 .reserve-btn {
   margin: auto;
-/* width: 70%; */
-padding: 10px;
-text-align: center;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  /* width: 70%; */
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .reserve-btn button {
   background-color: #ff0066;
@@ -103,9 +106,9 @@ align-items: center;
   justify-content: center;
   align-items: center;
   margin-bottom: 0.5rem;
-/* width: 320px; */
-text-align: center;
-padding: 10px 70px;
-  
+  /* width: 320px; */
+  text-align: center;
+  padding: 10px 70px;
+
   border: none;
 }

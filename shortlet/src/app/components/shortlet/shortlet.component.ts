@@ -9,16 +9,16 @@ import { DataStorageService } from 'src/app/services/data-storage.service';
   styleUrls: ['./shortlet.component.css'],
 })
 export class ShortletComponent implements OnInit {
-  checkinDate: Date
-  checkoutDate: Date 
-  numberOfNights: number
-  shortletData: Partial<Shortlet> = {} 
-  shortletPictures: any = [];
-  shortletPrice: any  
-  showAmenities: boolean = false;
+  checkinDate: Date;
+  checkoutDate: Date;
   dateForCalendar: string;
   dateForCalendar2: string;
-  
+  numberOfNights: number;
+  shortletData: Partial<Shortlet> = {};
+  shortletPictures: any = [];
+  shortletPrice: any;
+  showAmenities: boolean = false;
+
   constructor(
     private dataStorage: DataStorageService,
     private activatedRoute: ActivatedRoute
@@ -30,12 +30,12 @@ export class ShortletComponent implements OnInit {
       this.displayShortlet(id);
     });
 
-    this.checkinDate = new Date()
+    this.checkinDate = new Date();
     this.noSelectFromPast();
     this.noSelectLessThan2();
-    
-    let newCheckoutDate = this.checkoutDate = new Date()
-    newCheckoutDate.setDate(new Date().getDate() + 2) // 2 days to the default checkin and out date
+
+    let newCheckoutDate = (this.checkoutDate = new Date());
+    newCheckoutDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
 
     console.log(this.checkinDate);
     this.fetchDateSelected();
@@ -45,7 +45,7 @@ export class ShortletComponent implements OnInit {
   displayShortlet(id: number) {
     this.dataStorage.displayShortlet(id).subscribe(
       (response) => {
-        console.log(this.shortletData = response)
+        console.log((this.shortletData = response));
         this.shortletData = response;
         this.calculateBill(); //details of shortlet from API
         // console.log(this.shortletPrice = response.price)
@@ -55,37 +55,36 @@ export class ShortletComponent implements OnInit {
     );
   }
 
-  toggleAmenities(){
-    this.showAmenities != this.showAmenities; 
+  toggleAmenities() {
+    this.showAmenities != this.showAmenities;
   }
 
   fetchDateSelected() {
-    
-    let timeDiff = Math.abs(new Date(this.checkoutDate).getTime() - new Date(this.checkinDate).getTime())
+    let timeDiff = Math.abs(
+      new Date(this.checkoutDate).getTime() -
+        new Date(this.checkinDate).getTime()
+    );
     this.numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
     console.log(this.checkinDate);
     this.calculateBill();
   }
 
   //reservation bill
-  calculateNumberOfNights: number
-  total: number
+  calculateNumberOfNights: number;
+  total: number;
 
-  calculateBill() {    
-    this.calculateNumberOfNights = this.shortletData.price *  this.numberOfNights    
+  calculateBill() {
+    this.calculateNumberOfNights =
+      this.shortletData.price * this.numberOfNights;
     this.total = this.calculateNumberOfNights + 107 + 231;
   }
 
-
-
-  today:Date
-  mindate(){
-    this.today = new Date()
+  today: Date;
+  mindate() {
+    this.today = new Date();
   }
-  
 
   noSelectFromPast() {
-
     const date = new Date();
 
     const year = date.toLocaleString('default', { year: 'numeric' });
@@ -99,13 +98,9 @@ export class ShortletComponent implements OnInit {
     this.dateForCalendar = formattedDate;
 
     // console.log(formattedDate); // Prints: 2022-05-04
-
   }
 
-
-
   noSelectLessThan2() {
-
     let newDate = new Date();
 
     newDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
@@ -121,7 +116,5 @@ export class ShortletComponent implements OnInit {
     this.dateForCalendar2 = formattedDate;
 
     console.log(formattedDate);
-
   }
-
 }
