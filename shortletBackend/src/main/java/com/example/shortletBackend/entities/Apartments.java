@@ -24,6 +24,7 @@ public class Apartments {
     @EqualsAndHashCode.Include
     private Long id;
     private String name;
+    @Lob
     private String description;
     private String address;
     private String houseRefCode;
@@ -39,7 +40,7 @@ public class Apartments {
     private int noOfBathrooms;
 
     @Enumerated(EnumType.STRING)
-    private PropertyType propertyTypes;
+    private PropertyType propertyType;
     @Enumerated(EnumType.STRING)
     private HouseType houseType;
 
