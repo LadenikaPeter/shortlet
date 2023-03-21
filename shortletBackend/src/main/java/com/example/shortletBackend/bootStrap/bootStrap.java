@@ -45,7 +45,15 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setNoOfBeds(3);
         firstHouse.setNoOfBathrooms(2);
         firstHouse.setNoOfBedrooms(3);
-        firstHouse.setDescription("");
+        firstHouse.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis bibendum interdum." +
+                " Pellentesque quis odio condimentum, cursus nisi at, dignissim mi. Mauris mauris neque, commodo vitae nisi quis," +
+                " placerat scelerisque mauris. Aenean mauris nibh, convallis nec blandit sed, viverra a orci. Etiam a diam lectus. " +
+                "Donec libero diam, fringilla ut ex in, pellentesque vestibulum eros. Fusce molestie tortor vitae felis accumsan auctor. " +
+                "Duis ligula nisl, interdum eu facilisis ac, iaculis vel massa. Ut eget volutpat libero. Aenean egestas ante bibendum posuere " +
+                "commodo. In semper, metus nec euismod facilisis, eros nulla pulvinar lacus, ac sagittis lectus risus sit amet lectus. Donec lacinia rhoncus tellus," +
+                " et posuere erat venenatis et. Curabitur fermentum velit leo, sed elementum ipsum vulputate vitae. Etiam dui justo, feugiat sit amet augue sit amet," +
+                " malesuada rhoncus velit. In bibendum, lectus nec feugiat tempor, erat sapien dapibus diam, at tempus mi ante et enim. Integer ullamcorper lacus a urna" +
+                " auctor imperdiet. ");
         firstHouse.setHouseType(HouseType.WHOLE_HOUSE);
         firstHouse.setPropertyTypes(PropertyType.APARTMENT);
 
@@ -86,7 +94,9 @@ public class bootStrap implements CommandLineRunner {
         House2.setRating(3.9);
         House2.setHomeState(HomeState.VERIFIED);
         House2.setMaxNoOfGuests(8);
-        House2.setDescription("");
+        House2.setDescription("Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. " +
+                "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris bibendum vel nunc sed porttitor." +
+                " Nulla facilisi. Mauris dictum laoreet erat in feugiat. Donec eleifend purus at maximus egestas. Proin in odio ut leo. ");
         House2.setNoOfBeds(4);
         House2.setNoOfBathrooms(3);
         House2.setNoOfBedrooms(4);
@@ -131,7 +141,7 @@ public class bootStrap implements CommandLineRunner {
         House3.setRating(5.0);
         House3.setHomeState(HomeState.VERIFIED);
         House3.setMaxNoOfGuests(3);
-        House3.setDescription("");
+        House3.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
         House3.setNoOfBeds(1);
         House3.setNoOfBathrooms(2);
         House3.setNoOfBedrooms(1);
@@ -173,7 +183,7 @@ public class bootStrap implements CommandLineRunner {
         House4.setHomeState(HomeState.VERIFIED);
         House4.setMaxNoOfGuests(2);
         House4.setUsers(melisa);
-        House4.setDescription("");
+        House4.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
         House4.setNoOfBeds(2);
         House4.setNoOfBathrooms(1);
         House4.setNoOfBedrooms(1);
@@ -216,7 +226,7 @@ public class bootStrap implements CommandLineRunner {
         House5.setHomeState(HomeState.VERIFIED);
         House5.setUsers(emily);
         House5.setNoOfBeds(2);
-        House5.setDescription("");
+        House5.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
         House5.setNoOfBathrooms(2);
         House5.setNoOfBedrooms(2);
         House5.setHouseType(HouseType.PRIVATE_ROOM);
@@ -257,7 +267,7 @@ public class bootStrap implements CommandLineRunner {
         House6.setHomeState(HomeState.VERIFIED);
         House6.setMaxNoOfGuests(4);
         House6.setUsers(melisa);
-        House6.setDescription("");
+        House6.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
         House6.setNoOfBeds(4);
         House6.setNoOfBathrooms(2);
         House6.setNoOfBedrooms(3);
@@ -299,7 +309,7 @@ public class bootStrap implements CommandLineRunner {
         House7.setHomeState(HomeState.VERIFIED);
         House7.setMaxNoOfGuests(2);
         House7.setUsers(isak);
-        House7.setDescription("");
+        House7.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
         House7.setNoOfBeds(1);
         House7.setNoOfBathrooms(1);
         House7.setNoOfBedrooms(1);
@@ -342,7 +352,7 @@ public class bootStrap implements CommandLineRunner {
         House8.setHomeState(HomeState.VERIFIED);
         House8.setMaxNoOfGuests(8);
         House8.setUsers(Admin);
-        House8.setDescription("");
+        House8.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
         House8.setNoOfBeds(7);
         House8.setNoOfBathrooms(6);
         House8.setNoOfBedrooms(6);
@@ -384,7 +394,7 @@ public class bootStrap implements CommandLineRunner {
         House9.setHomeState(HomeState.VERIFIED);
         House9.setMaxNoOfGuests(6);
         House9.setUsers(olu);
-        House9.setDescription("");
+        House9.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
         House9.setNoOfBeds(6);
         House9.setNoOfBathrooms(4);
         House9.setNoOfBedrooms(6);
@@ -427,7 +437,7 @@ public class bootStrap implements CommandLineRunner {
         House10.setHomeState(HomeState.VERIFIED);
         House10.setMaxNoOfGuests(5);
         House10.setUsers(chi);
-        House10.setDescription("");
+        House10.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
         House10.setNoOfBeds(5);
         House10.setNoOfBathrooms(5);
         House10.setNoOfBedrooms(5);
@@ -474,7 +484,7 @@ public class bootStrap implements CommandLineRunner {
         House11.setMaxNoOfGuests(4);
         House11.setUsers(samy);
         House11.setNoOfBeds(4);
-        House11.setDescription("");
+        House11.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
         House11.setNoOfBathrooms(2);
         House11.setNoOfBedrooms(2);
         House11.setHouseType(HouseType.SHARED_ROOM);
@@ -514,7 +524,7 @@ public class bootStrap implements CommandLineRunner {
         House12.setHomeState(HomeState.VERIFIED);
         House12.setMaxNoOfGuests(10);
         House12.setUsers(emily);
-        House12.setDescription("");
+        House12.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
         House12.setNoOfBeds(10);
         House12.setNoOfBathrooms(11);
         House12.setNoOfBedrooms(10);
