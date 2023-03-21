@@ -26,8 +26,8 @@ public class UserController {
     private final ModelMapper mapper;
 
 
-    @GetMapping("/{user_email}")
-    public ResponseEntity getUser(@PathVariable("user_email")String email){
+    @GetMapping("/")
+    public ResponseEntity getUser(@RequestHeader("user_email")String email){
         return ResponseEntity.of(userRepo.findUsersByEmail(email));
     }
 
