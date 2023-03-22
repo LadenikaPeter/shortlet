@@ -1,0 +1,31 @@
+<div class="bar">
+  <div class="location">
+    <p>Location</p>
+    <input type="text" placeholder="Where are you going?" />
+  </div>
+  <div class="check-in">
+    <p>Check in</p>
+    <input type="text" placeholder="Add dates" [readOnly]="true" />
+  </div>
+  <div class="check-out">
+    <p>Check out</p>
+    <input type="text" placeholder="Add dates" [readOnly]="true" />
+  </div>
+  <div class="guests">
+    <p>Guests</p>
+    <input type="text" placeholder="Add guests" [readOnly]="true" />
+    <span
+      ><img
+        style="width: 18px; height: 18px"
+        src="../../../assets/svg/search.svg"
+        alt=""
+    /></span>
+  </div>
+</div>
+
+<div class="search_content" *ngIf="true">
+  <div class="region">
+    <h5>Search by region</h5>
+    <div class="regions"></div>
+  </div>
+</div>
