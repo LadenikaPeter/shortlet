@@ -19,7 +19,13 @@ p {
 .navbar {
   padding: 1.3rem 0;
   border-bottom: 1px solid #e6eaee;
-  
+
+}
+
+.search > input{
+  border-radius: 5rem;
+  padding: 0.8rem 3rem;
+  /* text-align: start; */
 }
 
 .navbar-brand {
