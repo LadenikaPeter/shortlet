@@ -1,11 +1,11 @@
 <div class="container">
-  <h2 style="padding-top: 1rem">{{shortletData.name}}</h2>
+  <h2 style="padding-top: 1rem">{{ shortletData.name }}</h2>
   <div style="display: flex; justify-content: space-between">
     <div style="display: flex; gap: 0.5rem">
-      <p>★ {{shortletData.rating}}</p>
+      <p>★ {{ shortletData.rating }}</p>
       <p>· 148 reviews</p>
       <p>· Superhost</p>
-      <p>· {{shortletData.address}}</p>
+      <p>· {{ shortletData.address }}</p>
     </div>
     <div style="display: flex; gap: 1rem">
       <p>Share</p>
@@ -15,19 +15,19 @@
 
   <div class="parent">
     <div class="div1">
-      <img src="{{shortletPictures[0].url}}" alt="apartment-pic" />
+      <img src="{{ shortletPictures[0].url }}" alt="apartment-pic" />
     </div>
     <div class="div2">
-      <img src="{{shortletPictures[1].url}}" alt="apartment-pic" />
+      <img src="{{ shortletPictures[1].url }}" alt="apartment-pic" />
     </div>
     <div class="div3">
-      <img src="{{shortletPictures[2].url}}" alt="apartment-pic" />
+      <img src="{{ shortletPictures[2].url }}" alt="apartment-pic" />
     </div>
     <div class="div4">
-      <img src="{{shortletPictures[3].url}}" alt="apartment-pic" />
+      <img src="{{ shortletPictures[3].url }}" alt="apartment-pic" />
     </div>
     <div class="div5">
-      <img src="{{shortletPictures[4].url}}" alt="apartment-pic" />
+      <img src="{{ shortletPictures[4].url }}" alt="apartment-pic" />
     </div>
   </div>
   <!-- flex -->
@@ -35,9 +35,9 @@
   <div style="display: flex; padding-top: 2rem">
     <div>
       <div>
-        <h2>Entire home hosted by {{shortletData.name}}</h2>
+        <h2>Entire home hosted by {{ shortletData.name }}</h2>
         <div style="display: flex; gap: 0.5rem">
-          <p>{{shortletData.maxNoOfGuests}} guests</p>
+          <p>{{ shortletData.maxNoOfGuests }} guests</p>
           <p>4 bedrooms</p>
           <p>5 beds</p>
           <p>3 baths</p>
@@ -167,82 +167,78 @@
                         <p>Minimum of 5 nights</p> -->
           <h5>{{numberOfNights}} nights in {{shortletData.address}}</h5>
 
-                        <p>{{ checkinDate | date}} - {{ checkoutDate | date}}</p>
-                        Check in: <input type="date" name="" id="" [min]="dateForCalendar" [(ngModel)]="checkinDate" (change)="fetchDateSelected()">
-                        Check out: <input type="date" name="" id="" [(ngModel)]="checkoutDate" [min]="dateForCalendar2" (change)="fetchDateSelected()">
-                    </div>
-
-
-                </div>
+          <p>{{ checkinDate | date}} - {{ checkoutDate | date}}</p>
+          Check in:
+          <input
+            type="date"
+            name=""
+            id=""
+            [min]="dateForCalendar"
+            [(ngModel)]="checkinDate"
+            (change)="fetchDateSelected()"
+          />
+          Check out:
+          <input
+            type="date"
+            name=""
+            id=""
+            [(ngModel)]="checkoutDate"
+            [min]="dateForCalendar2"
+            (change)="fetchDateSelected()"
+          />
         </div>
+      </div>
+    </div>
 
-        <!-- here -->
-        <!-- reservation -->
-        <div class="reservation">
-            <div   style="display: flex; justify-content: space-between; ">
-                <!-- <p ><span style="font-size: 1.3rem; font-weight: bold;">$509</span> night</p> -->
-                <p >₦{{shortletData.price}} per night</p>
-                <div  style="display: flex; gap: 0.1rem;">
-                    <p>★ {{shortletData.rating}}</p>
-                    <p>· 148 reviews</p>
-                </div>
-            </div>
-            <!-- check in and out picker -->
-
-            <div class="reserve-btn">
-                <button routerLink="booking">Reserve</button>
-                <p class="small">You won't be charged yet</p>
-            </div>
-            <!-- if check in date and checkout dates are picked, display this -->
-            <div class="bill">
-                <p>₦{{ shortletData.price}} x {{ numberOfNights }} nights</p>
-                <!-- <p>${{ shortletData.price * numberOfNights }}</p> -->
-                <p>₦{{ calculateNumberOfNights }}</p>
-            </div>
-            <div class="bill">
-                <p>Cleaning fee</p>
-                <p>₦107</p>
-            </div>
-            <div class="bill">
-                <p>Airbnb service fee</p>
-                <p>₦231</p>
-            </div>
-            <hr>
-            <div class="bill">
-                <p>Total before taxes</p>
-                <p>₦ {{total}}</p>
-            </div>
+    <!-- here -->
+    <!-- reservation -->
+    <div class="reservation">
+      <div style="display: flex; justify-content: space-between">
+        <!-- <p ><span style="font-size: 1.3rem; font-weight: bold;">$509</span> night</p> -->
+        <p>₦{{shortletData.price}} per night</p>
+        <div style="display: flex; gap: 0.1rem">
+          <p>★ {{shortletData.rating}}</p>
+          <p>· 148 reviews</p>
         </div>
       </div>
       <!-- check in and out picker -->
 
       <div class="reserve-btn">
-        <button>Reserve</button>
+        <button
+          routerLink="booking"
+          [queryParams]="{
+            checkin: checkinDate,
+            checkout: checkoutDate,
+            nights: numberOfNights
+          }"
+        >
+          Reserve
+        </button>
         <p class="small">You won't be charged yet</p>
       </div>
       <!-- if check in date and checkout dates are picked, display this -->
       <div class="bill">
-        <p>${{ shortletData.price}} x {{ numberOfNights }} nights</p>
+        <p>₦{{ shortletData.price}} x {{ numberOfNights }} nights</p>
         <!-- <p>${{ shortletData.price * numberOfNights }}</p> -->
-        <p>${{ calculateNumberOfNights }}</p>
+        <p>₦{{ calculateNumberOfNights }}</p>
       </div>
       <div class="bill">
         <p>Cleaning fee</p>
-        <p>$107</p>
+        <p>₦107</p>
       </div>
       <div class="bill">
-        <p>Airbnb service fee</p>
-        <p>$231</p>
+        <p>HMS Service fee</p>
+        <p>₦231</p>
       </div>
       <hr />
       <div class="bill">
         <p>Total before taxes</p>
-        <p>${{total}}</p>
+        <p>₦ {{total}}</p>
       </div>
     </div>
-<!--  </div>-->
+  </div>
 
   <hr />
 
   <!-- end -->
-<!--</div>-->
+</div>
