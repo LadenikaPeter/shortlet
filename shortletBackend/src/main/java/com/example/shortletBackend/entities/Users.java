@@ -26,7 +26,14 @@ public class Users {
     private String email;
     @Lob
     private String picture;
+    @Enumerated(EnumType.STRING)
     private Role role;
+
+    public Users(String name, String email, Role role) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
+    }
 
     @OneToMany(mappedBy = "users")//,cascade = CascadeType.ALL)
     @ToString.Exclude

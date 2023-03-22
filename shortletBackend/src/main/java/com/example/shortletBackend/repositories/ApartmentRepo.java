@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public interface ApartmentRepo extends JpaRepository<Apartments, Long> {
     ArrayList<Apartments> findAllByHomeStateIs(HomeState homeState);
     ArrayList<Apartments> findAllByUsers(Users users);
+
 }
