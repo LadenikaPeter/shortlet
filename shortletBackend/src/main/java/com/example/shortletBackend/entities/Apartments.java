@@ -54,16 +54,15 @@ public class Apartments {
     @OneToMany(mappedBy = "apartment")//,cascade = CascadeType.ALL)
     private Set<Reservation> reservations = new HashSet<>();
     @OneToMany//(cascade = CascadeType.ALL)
-    private Set<Pictures> pictures= new HashSet<>();
+    private Set<Pictures> pictures = new HashSet<>();
 
 
-    public void setHouseRefCode(String name,int id) {
-//        String name1= name.substring(0,5);
-
+    public void setHouseRefCode(String name, int id) {
         this.houseRefCode = name + id;
     }
 
     public Apartments() {
-        this.status=Status.UNOCCUPIED;
+        this.status = Status.UNOCCUPIED;
     }
+
 }
