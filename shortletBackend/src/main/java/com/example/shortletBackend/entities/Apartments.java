@@ -27,6 +27,8 @@ public class Apartments {
     @Lob
     private String description;
     private String address;
+    private String country;
+    private String continent;
     private String houseRefCode;
     @Enumerated(EnumType.STRING)
     private HomeState homeState;

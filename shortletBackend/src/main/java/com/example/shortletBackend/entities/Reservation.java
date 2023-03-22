@@ -19,10 +19,12 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    @Temporal(TemporalType.DATE)
     private Date checkInDate;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-
+    @Temporal(TemporalType.DATE)
     private Date checkOutDate;
     private int price;
 
