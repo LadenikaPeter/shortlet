@@ -94,12 +94,30 @@ input[type="text"]:focus {
   margin-top: 13px;
   position: absolute;
   z-index: 9;
-  background-color: white;
+  background-color: #e6eaee;
   width: 650px;
-  height: 300px;
+  height: 430px;
   border-radius: 12px;
+  padding: 15px;
+  border: 1px solid #e6eaee;
 }
 
 .regions {
   display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.regions > div {
+  margin-bottom: 15px;
+}
+
+img {
+  border-radius: 12px;
+  height: 150px;
+  width: 180px;
+  cursor: pointer;
+}
+
+img:hover {
+  border: 1px solid black;
 }
