@@ -9,14 +9,14 @@ import { ShortletComponent } from './components/shortlet/shortlet.component';
 const routes: Routes = [
   // { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '', component: HomeComponent },
-  {path: 'shortlet/:id/booking', component:BookingComponent},
+  { path: 'shortlet/:id/booking', component: BookingComponent },
   {
     path: 'shortlet/:id',
     component: ShortletComponent,
     children: [
       // { path: '', redirectTo: 'overview', pathMatch: 'full' },
       // { path: 'shortlet/:id/booking', component: BookingComponent },
-    ]
+    ],
   },
   {
     path:'host/shortlets', 
@@ -31,6 +31,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
