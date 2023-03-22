@@ -55,7 +55,7 @@ public class bootStrap implements CommandLineRunner {
                 " malesuada rhoncus velit. In bibendum, lectus nec feugiat tempor, erat sapien dapibus diam, at tempus mi ante et enim. Integer ullamcorper lacus a urna" +
                 " auctor imperdiet. ");
         firstHouse.setHouseType(HouseType.WHOLE_HOUSE);
-        firstHouse.setPropertyTypes(PropertyType.APARTMENT);
+        firstHouse.setPropertyType(PropertyType.APARTMENT);
 
 
         firstHouse.setMaxNoOfGuests(5);
@@ -101,7 +101,7 @@ public class bootStrap implements CommandLineRunner {
         House2.setNoOfBathrooms(3);
         House2.setNoOfBedrooms(4);
         House2.setHouseType(HouseType.PRIVATE_ROOM);
-        House2.setPropertyTypes(PropertyType.GUESTHOUSE);
+        House2.setPropertyType(PropertyType.GUESTHOUSE);
 
 
         Pictures picture6 = new Pictures();
@@ -146,7 +146,7 @@ public class bootStrap implements CommandLineRunner {
         House3.setNoOfBathrooms(2);
         House3.setNoOfBedrooms(1);
         House3.setHouseType(HouseType.PRIVATE_ROOM);
-        House3.setPropertyTypes(PropertyType.BED_AND_BREAKFAST);
+        House3.setPropertyType(PropertyType.BED_AND_BREAKFAST);
 
         Pictures picture11 = new Pictures();
         picture11.setUrl("https://a0.muscache.com/im/pictures/6e75f583-5c1f-41e8-b705-511dbffe92b5.jpg?im_w=1200 ");
@@ -188,7 +188,7 @@ public class bootStrap implements CommandLineRunner {
         House4.setNoOfBathrooms(1);
         House4.setNoOfBedrooms(1);
         House4.setHouseType(HouseType.PRIVATE_ROOM);
-        House4.setPropertyTypes(PropertyType.BED_AND_BREAKFAST);
+        House4.setPropertyType(PropertyType.BED_AND_BREAKFAST);
 
 
         Pictures picture16 = new Pictures();
@@ -230,7 +230,7 @@ public class bootStrap implements CommandLineRunner {
         House5.setNoOfBathrooms(2);
         House5.setNoOfBedrooms(2);
         House5.setHouseType(HouseType.PRIVATE_ROOM);
-        House5.setPropertyTypes(PropertyType.TREEHOUSE);
+        House5.setPropertyType(PropertyType.TREEHOUSE);
 
 
         Pictures picture21 = new Pictures();
@@ -272,7 +272,7 @@ public class bootStrap implements CommandLineRunner {
         House6.setNoOfBathrooms(2);
         House6.setNoOfBedrooms(3);
         House6.setHouseType(HouseType.WHOLE_HOUSE);
-        House6.setPropertyTypes(PropertyType.APARTMENT);
+        House6.setPropertyType(PropertyType.APARTMENT);
 //
 
 
@@ -314,7 +314,7 @@ public class bootStrap implements CommandLineRunner {
         House7.setNoOfBathrooms(1);
         House7.setNoOfBedrooms(1);
         House7.setHouseType(HouseType.WHOLE_HOUSE);
-        House7.setPropertyTypes(PropertyType.TINY_HOME);
+        House7.setPropertyType(PropertyType.TINY_HOME);
 
 
         Pictures pictures33 = new Pictures();
@@ -357,7 +357,7 @@ public class bootStrap implements CommandLineRunner {
         House8.setNoOfBathrooms(6);
         House8.setNoOfBedrooms(6);
         House8.setHouseType(HouseType.WHOLE_HOUSE);
-        House8.setPropertyTypes(PropertyType.CASTLE);
+        House8.setPropertyType(PropertyType.CASTLE);
 
 
         Pictures pictures36 = new Pictures();
@@ -399,7 +399,7 @@ public class bootStrap implements CommandLineRunner {
         House9.setNoOfBathrooms(4);
         House9.setNoOfBedrooms(6);
         House9.setHouseType(HouseType.WHOLE_HOUSE);
-        House9.setPropertyTypes(PropertyType.HOTEL);
+        House9.setPropertyType(PropertyType.HOTEL);
 
 
         Pictures pictures41 = new Pictures();
@@ -442,7 +442,7 @@ public class bootStrap implements CommandLineRunner {
         House10.setNoOfBathrooms(5);
         House10.setNoOfBedrooms(5);
         House10.setHouseType(HouseType.WHOLE_HOUSE);
-        House10.setPropertyTypes(PropertyType.BED_AND_BREAKFAST);
+        House10.setPropertyType(PropertyType.BED_AND_BREAKFAST);
 
 
         Pictures pictures46 = new Pictures("https://a0.muscache.com/im/pictures/3e327003-1cb2-4113-89eb-dfc83de633a9.jpg?im_w=1200 ");
@@ -488,7 +488,7 @@ public class bootStrap implements CommandLineRunner {
         House11.setNoOfBathrooms(2);
         House11.setNoOfBedrooms(2);
         House11.setHouseType(HouseType.SHARED_ROOM);
-        House11.setPropertyTypes(PropertyType.TENT);
+        House11.setPropertyType(PropertyType.TENT);
 
 
         Pictures pictures51 = new Pictures("https://a0.muscache.com/im/pictures/ba8d2e6f-968a-4fde-a21b-c56bdd60556c.jpg?im_w=1200 ");
@@ -529,7 +529,7 @@ public class bootStrap implements CommandLineRunner {
         House12.setNoOfBathrooms(11);
         House12.setNoOfBedrooms(10);
         House12.setHouseType(HouseType.WHOLE_HOUSE);
-        House12.setPropertyTypes(PropertyType.CASTLE);
+        House12.setPropertyType(PropertyType.CASTLE);
 
 
         Pictures pictures56 = new Pictures("https://a0.muscache.com/im/pictures/74192cff-0e84-43fc-ac8c-1c5a98039ca8.jpg?im_w=1200");
