@@ -22,14 +22,3 @@ export interface Users {
     email: string,
     picture?: string
 }
-
-export interface NewShortlet {
-    name: string
-    phoneNo?: number, 
-    title: string,
-    price: number,
-    description: string,
-    address: string
-    guest: number
-    photos: File
-}

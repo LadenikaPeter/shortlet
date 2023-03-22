@@ -22,12 +22,6 @@ p {
   
 }
 
-.search > input{
-  border-radius: 5rem;
-  padding: 0.8rem 3rem;
-  /* text-align: start; */
-}
-
 .navbar-brand {
   padding-left: 108px;
 }
