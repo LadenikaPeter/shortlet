@@ -1,0 +1,77 @@
+<div class="container">
+  <p>
+    <span id="home"><a class="home_link" routerLink="">Home</a></span
+    ><span id="pointing_character">></span><span id="account">Account</span>
+  </p>
+  <h4>Personal info</h4>
+  <div class="form_details">
+    <div class="row">
+      <div class="col-md-6">
+        <form [formGroup]="profileForm">
+          <div class="input">
+            <h5>Name</h5>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              placeholder="e.g peter ladenika"
+            />
+          </div>
+          <div class="input">
+            <h5>Email</h5>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="email"
+              placeholder="@example.com"
+              readonly="true"
+            />
+          </div>
+          <div class="input">
+            <h5>Phone number</h5>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="phoneNumber"
+            />
+          </div>
+          <div class="action_button">
+            <button class="float-end discard">Discard</button>
+            <button class="float-end save">Save</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <div class="feature_container removemine">
+          <div class="feature">
+            <img
+              src="../../../assets/svg/eye.svg"
+              alt="padlock-svg"
+              style="width: 48px; height: 48px"
+            />
+            <h3>What info is shared with others?</h3>
+            <p>
+              HM Shortlets only releases contact information for Hosts and
+              guests after a reservation is confirmed.
+            </p>
+          </div>
+          <hr style="border: 1px solid #8b8b8b" />
+          <div class="feature">
+            <img
+              src="../../../assets/svg/padlock.svg"
+              alt="eye-svg"
+              style="width: 48px; height: 48px"
+            />
+            <h3>Which details can be edited?</h3>
+            <p>
+              Details HM Shortlets uses to verify your identity can’t be
+              changed. Contact info and some personal details can be edited, but
+              we may ask you verify your identity the next time you book or
+              create a listing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
