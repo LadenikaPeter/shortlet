@@ -118,6 +118,14 @@ img {
   cursor: pointer;
 }
 
-img:hover {
+/* img:hover {
   border: 1px solid black;
+} */
+
+.modal-dialog {
+  max-width: 350px;
+}
+
+.demo-inline-calendar-card {
+  width: 300px;
 }

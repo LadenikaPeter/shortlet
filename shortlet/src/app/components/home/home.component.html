@@ -1,4 +1,5 @@
 <div class="container shortlet_div">
+  <app-filter-bar></app-filter-bar>
   <div class="row">
     <div
       class="col-md-3"
@@ -88,20 +89,20 @@
           <p
             class="shortlet_name"
             style="font-weight: 600; cursor: pointer"
-            routerLink="shortlet/{{shortlet.id}}"
+            routerLink="shortlet/{{ shortlet.id }}"
           >
-            {{shortlet.address}}
+            {{ shortlet.address }}
           </p>
-          <p class="shortlet_rating float-end">★ {{shortlet.rating}}</p>
+          <p class="shortlet_rating float-end">★ {{ shortlet.rating }}</p>
         </div>
         <p style="margin: 0; font-weight: 300; color: #6c6f71">
-          {{shortlet.name}}
+          {{ shortlet.name }}
         </p>
         <p style="margin: 0; font-weight: 300; color: #6c6f71">
-          Allowed number of guests: {{shortlet.maxNoOfGuests}}
+          Allowed number of guests: {{ shortlet.maxNoOfGuests }}
         </p>
         <p style="margin-top: 5px; font-weight: 300">
-          <span style="font-weight: 600">₦{{shortlet.price}}</span> per night
+          <span style="font-weight: 600">₦{{ shortlet.price }}</span> per night
         </p>
       </div>
     </div>
