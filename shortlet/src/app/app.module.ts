@@ -28,6 +28,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 import { FilterBarComponent } from './components/header/filter-bar/filter-bar.component';
 
 @NgModule({
@@ -57,6 +58,7 @@ import { FilterBarComponent } from './components/header/filter-bar/filter-bar.co
     MatNativeDateModule,
     MatCardModule,
     MatFormFieldModule,
+    MatInputModule,
     ToastrModule.forRoot(),
     Angular4PaystackModule.forRoot(
       'pk_test_132ebd9d8b822325a146ed8d3c55c6d3c7e77821'

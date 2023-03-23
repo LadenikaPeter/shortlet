@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Shortlet } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-shortlet',
@@ -117,4 +118,34 @@ export class ShortletComponent implements OnInit {
 
     console.log(formattedDate);
   }
+
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
+
+  // myDateFilter = (d: Date | null): boolean => {
+  //   const day = (d || new Date()).getDay();
+  //   return day !== 0 && day !== 6;
+  // };
+
+  myHolidayDates = [
+    // new Date('12/1/2020'),
+    // new Date('12/20/2020'),
+    // new Date('12/17/2020'),
+    // new Date('12/25/2020'),
+    // new Date('12/4/2020'),
+    // new Date('12/7/2020'),
+    // new Date('12/12/2020'),
+    // new Date('12/11/2020'),
+    // new Date('12/26/2020'),
+    // new Date('12/25/2020'),
+    new Date('03-23-2023'),
+    new Date('03-24-2023'),
+  ];
+
+  myHolidayFilter = (d: Date): boolean => {
+    const time = d.getTime();
+    return !this.myHolidayDates.find((x) => x.getTime() == time);
+  };
 }
