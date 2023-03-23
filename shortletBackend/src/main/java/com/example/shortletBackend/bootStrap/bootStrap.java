@@ -48,11 +48,6 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis bibendum interdum." +
                 " Pellentesque quis odio condimentum, cursus nisi at, dignissim mi. Mauris mauris neque, commodo vitae nisi quis," +
                 " placerat scelerisque mauris. Aenean mauris nibh, convallis nec blandit sed, viverra a orci. Etiam a diam lectus. " +
-                "Donec libero diam, fringilla ut ex in, pellentesque vestibulum eros. Fusce molestie tortor vitae felis accumsan auctor. " +
-                "Duis ligula nisl, interdum eu facilisis ac, iaculis vel massa. Ut eget volutpat libero. Aenean egestas ante bibendum posuere " +
-                "commodo. In semper, metus nec euismod facilisis, eros nulla pulvinar lacus, ac sagittis lectus risus sit amet lectus. Donec lacinia rhoncus tellus," +
-                " et posuere erat venenatis et. Curabitur fermentum velit leo, sed elementum ipsum vulputate vitae. Etiam dui justo, feugiat sit amet augue sit amet," +
-                " malesuada rhoncus velit. In bibendum, lectus nec feugiat tempor, erat sapien dapibus diam, at tempus mi ante et enim. Integer ullamcorper lacus a urna" +
                 " auctor imperdiet. ");
         firstHouse.setHouseType(HouseType.WHOLE_HOUSE);
         firstHouse.setPropertyType(PropertyType.APARTMENT);
@@ -578,7 +573,7 @@ public class bootStrap implements CommandLineRunner {
 
         Reservation reservation = new Reservation();
         reservation.setCheckInDate(new Date());//today's date(checkIn date)
-        reservation.setCheckOutDate(new Date(2023 - 1900, Calendar.MARCH, 23));//check out date
+        reservation.setCheckOutDate(new Date(2023 - 1900, Calendar.MARCH, 25));//check out date
         reservation.setReservationState(ReservationState.PENDING);
 
         reservation.setUsers(Admin);
