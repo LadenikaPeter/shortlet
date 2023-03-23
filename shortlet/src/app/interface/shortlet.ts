@@ -4,10 +4,10 @@ export interface Shortlet {
     id: number,
     maxNoOfGuests: number,
     name: string,
-    pictures: Pictures[], 
+    pictures: Pictures[],
     price: number,
     rating:number,
-    users:  Users 
+    users:  Users
 }
 
 export interface Pictures {
@@ -17,15 +17,15 @@ export interface Pictures {
 
 export interface Users {
     id: number,
-    name: string, 
-    phoneNo?: number, 
+    name: string,
+    phoneNo?: number,
     email: string,
     picture?: string
 }
 
 export interface NewShortlet {
     name: string
-    phoneNo?: number, 
+    phoneNo?: number,
     title: string,
     price: number,
     description: string,

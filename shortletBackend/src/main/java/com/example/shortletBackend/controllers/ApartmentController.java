@@ -1,11 +1,13 @@
 package com.example.shortletBackend.controllers;
 
 import com.example.shortletBackend.dto.ApartmentsDTO;
+import com.example.shortletBackend.entities.Amenities;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Pictures;
 import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.HomeState;
 import com.example.shortletBackend.enums.Status;
+import com.example.shortletBackend.repositories.AmenitiesRepository;
 import com.example.shortletBackend.repositories.ApartmentRepo;
 import com.example.shortletBackend.repositories.PicturesRepository;
 import com.example.shortletBackend.repositories.UserRepo;
@@ -25,6 +27,7 @@ public class ApartmentController {
     private final ApartmentRepo apartmentRepo;
     private final PicturesRepository picRepo;
     private final UserRepo userRepo;
+    private final AmenitiesRepository amenitiesRepo;
     private final ModelMapper mapper;
 
     //get all homes
@@ -57,7 +60,7 @@ public class ApartmentController {
 
     //user creating a new home
     @PostMapping("/addHome/")
-    public ResponseEntity addHome(@RequestParam("user_email") String email, @RequestBody Apartments apartments){
+    public ResponseEntity addHome(@RequestHeader("user_email") String email, @RequestBody Apartments apartments){
         Optional<Users> users= userRepo.findUsersByEmail(email);
         if (users.isPresent()) {
             if (apartments.getPictures() != null) {
@@ -67,7 +70,9 @@ public class ApartmentController {
                 }
 
             }
-
+            if (apartments.getAmenities() != null) {
+                amenitiesRepo.save(apartments.getAmenities());
+            }
             apartments.setStatus(Status.UNOCCUPIED);
             apartments.setHomeState(HomeState.UNVERIFIED);
             apartments.setHouseRefCode(apartments.getAddress().substring(0,2),apartmentRepo.findAll().size());

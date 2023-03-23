@@ -45,6 +45,10 @@ public class ReservationController {
 
     }
 
+    public ResponseEntity<Boolean> checkAvailability(){
+        return ResponseEntity.ok(true);
+    }
+
     @PutMapping("/reservation/state/")
     public ResponseEntity changeReservationState(@RequestParam("reservation_id")long id,@RequestBody Reservation reservation){
         Optional<Reservation> oldReservation = reservationRepo.findById(id);

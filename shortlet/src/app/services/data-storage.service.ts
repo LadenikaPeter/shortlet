@@ -10,7 +10,7 @@ export class DataStorageService {
   constructor(private http: HttpClient) {}
 
   getShortlets() {
-    return this.http.get<Shortlet>('http://localhost:8080/verified_homes');    
+    return this.http.get<Shortlet>('http://localhost:8080/verified_homes');
   }
   displayShortlet(id:number): Observable<Shortlet>{
     return this.http.get<Shortlet>(`http://localhost:8080/home/?house_id=${id}`);
