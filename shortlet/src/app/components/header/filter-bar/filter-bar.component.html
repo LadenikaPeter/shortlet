@@ -1,1 +1,8 @@
-<p>filter-bar works!</p>
+<div class="filter-bar">
+  <div class="property" *ngFor="let property of filterbar; let i = index">
+    <div class="test">
+      <img [src]="property.image" [alt]="property.name" />
+      <p style="text-align: center">{{property.name | lowercase}}</p>
+    </div>
+  </div>
+</div>
