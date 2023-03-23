@@ -186,59 +186,73 @@
             [min]="dateForCalendar2"
             (change)="fetchDateSelected()"
           />
-        </div>
-      </div>
-
-      <!-- here -->
-      <!-- reservation -->
-      <div class="reservation">
-        <div style="display: flex; justify-content: space-between">
-          <!-- <p ><span style="font-size: 1.3rem; font-weight: bold;">$509</span> night</p> -->
-          <p>₦{{shortletData.price}} per night</p>
-          <div style="display: flex; gap: 0.1rem">
-            <p>★ {{shortletData.rating}}</p>
-            <p>· 148 reviews</p>
-          </div>
-        </div>
-        <!-- check in and out picker -->
-
-        <div class="reserve-btn">
-          <button
-            routerLink="booking"
-            [queryParams]="{
-              checkin: checkinDate,
-              checkout: checkoutDate,
-              nights: numberOfNights
-            }"
-          >
-            Reserve
-          </button>
-          <p class="small">You won't be charged yet</p>
-        </div>
-        <!-- if check in date and checkout dates are picked, display this -->
-        <div class="bill">
-          <p>₦{{ shortletData.price}} x {{ numberOfNights }} nights</p>
-          <!-- <p>${{ shortletData.price * numberOfNights }}</p> -->
-          <p>₦{{ calculateNumberOfNights }}</p>
-        </div>
-        <div class="bill">
-          <p>Cleaning fee</p>
-          <p>₦107</p>
-        </div>
-        <div class="bill">
-          <p>HMS Service fee</p>
-          <p>₦231</p>
-        </div>
-        <hr />
-        <div class="bill">
-          <p>Total before taxes</p>
-          <p>₦ {{total}}</p>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [matDatepickerFilter]="myHolidayFilter"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         </div>
       </div>
     </div>
 
-    <hr />
+    <!-- here -->
+    <!-- reservation -->
+    <div class="reservation">
+      <div style="display: flex; justify-content: space-between">
+        <!-- <p ><span style="font-size: 1.3rem; font-weight: bold;">$509</span> night</p> -->
+        <p>₦{{shortletData.price}} per night</p>
+        <div style="display: flex; gap: 0.1rem">
+          <p>★ {{shortletData.rating}}</p>
+          <p>· 148 reviews</p>
+        </div>
+      </div>
+      <!-- check in and out picker -->
 
-    <!-- end -->
+      <div class="reserve-btn">
+        <button
+          routerLink="booking"
+          [queryParams]="{
+            checkin: checkinDate,
+            checkout: checkoutDate,
+            nights: numberOfNights
+          }"
+        >
+          Reserve
+        </button>
+        <p class="small">You won't be charged yet</p>
+      </div>
+      <!-- if check in date and checkout dates are picked, display this -->
+      <div class="bill">
+        <p>₦{{ shortletData.price}} x {{ numberOfNights }} nights</p>
+        <!-- <p>${{ shortletData.price * numberOfNights }}</p> -->
+        <p>₦{{ calculateNumberOfNights }}</p>
+      </div>
+      <div class="bill">
+        <p>Cleaning fee</p>
+        <p>₦107</p>
+      </div>
+      <div class="bill">
+        <p>HMS Service fee</p>
+        <p>₦231</p>
+      </div>
+      <hr />
+      <div class="bill">
+        <p>Total before taxes</p>
+        <p>₦ {{total}}</p>
+      </div>
+    </div>
   </div>
+
+  <hr />
+
+  <!-- end -->
 </div>
