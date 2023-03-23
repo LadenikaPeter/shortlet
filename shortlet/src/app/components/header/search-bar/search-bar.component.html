@@ -3,14 +3,24 @@
     <p>Location</p>
     <input type="text" placeholder="Where are you going?" />
   </div>
-  <div class="check-in">
+  <!-- <div class="check-in" data-bs-toggle="modal" data-bs-target="#exampleModal">
     <p>Check in</p>
-    <input type="text" placeholder="Add dates" [readOnly]="true" />
+    <input
+      type="text"
+      placeholder="Add dates"
+      [readOnly]="true"
+      value="{{selected | date}}"
+    />
   </div>
-  <div class="check-out">
+  <div class="check-out" data-bs-toggle="modal" data-bs-target="#exampleModal1">
     <p>Check out</p>
-    <input type="text" placeholder="Add dates" [readOnly]="true" />
-  </div>
+    <input
+      type="text"
+      placeholder="Add dates"
+      [readOnly]="true"
+      value="{{selected1 | date}}"
+    />
+  </div> -->
   <div class="guests">
     <p>Guests</p>
     <input type="text" placeholder="Add guests" [readOnly]="true" />
@@ -23,8 +33,8 @@
   </div>
 </div>
 
-<div class="search_content" *ngIf="true">
-  <div class="region">
+<div class="search_content" *ngIf="false">
+  <div class="region" *ngIf="false">
     <h5>Search by region</h5>
     <div class="regions">
       <div>
@@ -59,4 +69,100 @@
       </div>
     </div>
   </div>
+  <div class="calendar" *ngIf="true">
+    <!-- <input type="date" /> -->
+  </div>
 </div>
+
+<!-- check in date modal beginning -->
+<!-- Button trigger modal -->
+<!-- <button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Check in date</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="margin: auto">
+        <mat-card class="demo-inline-calendar-card">
+          <mat-calendar [(selected)]="selected"></mat-calendar>
+        </mat-card>
+        <!-- <p>Selected date: {{selected | date}}</p> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- check in date modal end -->
+
+<!-- check out date modal beginning -->
+<!-- Button trigger modal -->
+<!-- <button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal1"
+>
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal1"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Check out date</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <mat-card class="demo-inline-calendar-card">
+          <mat-calendar [(selected)]="selected1"></mat-calendar>
+        </mat-card>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- check out date modal end -->
