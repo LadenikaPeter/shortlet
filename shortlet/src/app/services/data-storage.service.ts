@@ -16,7 +16,7 @@ export class DataStorageService {
     return this.http.get<Shortlet>(`http://localhost:8080/home/?house_id=${id}`);
   }
 
-  registerNewShortlet(){
-    // return this.http.post<Shortlet>(`http://localhost:8080/addhome/`, data)
+  registerNewShortlet(data){
+    return this.http.post<Shortlet>(`http://localhost:8080/addhome/`, data)
   }
 }
