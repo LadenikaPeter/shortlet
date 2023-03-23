@@ -33,11 +33,15 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity signUp(@RequestBody Users users){
-        if (!userRepo.findUsersByEmail(users.getEmail()).isPresent()) {
+        Optional<Users> oldUser = userRepo.findUsersByEmail(users.getEmail());
+        if (!oldUser.isPresent()) {//if the user does not exist it creates a new user
             users.setRole(Role.USER);
             userRepo.save(users);
+            return ResponseEntity.ok(users);
+        }else {// if it does exist, the user is then returned
+            return ResponseEntity.ok(oldUser);
         }
-        return ResponseEntity.ok(users);
+
     }
 
     @PutMapping("/update_user/")

@@ -6,6 +6,7 @@ import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Pictures;
 import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.HomeState;
+import com.example.shortletBackend.enums.PropertyType;
 import com.example.shortletBackend.enums.Status;
 import com.example.shortletBackend.repositories.AmenitiesRepository;
 import com.example.shortletBackend.repositories.ApartmentRepo;
@@ -47,6 +48,16 @@ public class ApartmentController {
         return ResponseEntity.ok(hotelList);
     }
 
+    //get all verified homes of a specified property type
+    @GetMapping("/verified_homes/")
+    public ResponseEntity getAllVerifiedHomesWithPropertyType(@RequestParam("property_type")PropertyType propertyType){
+        ArrayList<ApartmentsDTO> hotelList = new ArrayList<>();
+        for (Apartments hotel:apartmentRepo.findAllByPropertyTypeIsAndHomeState(propertyType,HomeState.VERIFIED)
+        ) {
+            hotelList.add(mapper.map(hotel, ApartmentsDTO.class));
+        }
+        return ResponseEntity.ok(hotelList);
+    }
     @GetMapping("/home/")
     public ResponseEntity getHotel(@RequestParam("house_id") long id ){
         Optional<Apartments> apartments = apartmentRepo.findById(id);
