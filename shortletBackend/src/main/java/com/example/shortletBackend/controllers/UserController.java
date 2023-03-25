@@ -96,7 +96,7 @@ public class UserController {
     }
 
     @GetMapping("/reservation/")
-    public ResponseEntity getAllUserReservation(@RequestParam("email")String email){
+    public ResponseEntity getAllUserReservation(@RequestHeader("user_email")String email){
 //        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
 //        for (Reservation reservation: ){
 //            reservationDTOS.add(mapper.map(reservation, ReservationDTO.class));
