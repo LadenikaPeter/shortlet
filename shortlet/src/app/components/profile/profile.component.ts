@@ -60,6 +60,8 @@ export class ProfileComponent implements OnInit {
           .updateUserInfo(updateUser, this.profileForm.value['email'])
           .subscribe((res) => {
             console.log(res);
+            this.router.navigate(['/']);
+            this.notif.successMessage('profile successfully updated');
             //add nvaigation code here and success message
           });
       }
@@ -69,6 +71,8 @@ export class ProfileComponent implements OnInit {
         .updateUserInfo(updateUser, this.profileForm.value['email'])
         .subscribe((res) => {
           console.log(res);
+          this.router.navigate(['/']);
+          this.notif.successMessage('profile successfully updated');
         });
     }
   }
