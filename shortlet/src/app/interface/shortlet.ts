@@ -1,6 +1,7 @@
 export interface Shortlet {
     address: string,
     houseRefCode: number,
+    description: string,
     id: number,
     maxNoOfGuests: number,
     name: string,
@@ -30,6 +31,11 @@ export interface NewShortlet {
     price: number,
     description: string,
     address: string
-    guest: number
-    photos: File
+    maxNoOfGuests: number,
+    noOfBathrooms:  number,
+    noOfBedrooms:  number,
+    propertyType: string,
+    houseType: string,
+    amenities?: any
+    // photos: File
 }
