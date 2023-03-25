@@ -55,6 +55,16 @@ public class ApartmentController {
         }
         return ResponseEntity.ok(hotelList);
     }
+
+    @GetMapping("/verified_homes/search")
+    public ResponseEntity getAllVerifiedHomesWithNumberOfGuest(@RequestParam("number_of_guests")int number){
+        ArrayList<ApartmentsDTO> hotelList = new ArrayList<>();
+        for (Apartments hotel:apartmentRepo.findAllByMaxNoOfGuestsGreaterThanEqualAndHomeState(number,HomeState.VERIFIED)
+        ) {
+            hotelList.add(mapper.map(hotel, ApartmentsDTO.class));
+        }
+        return ResponseEntity.ok(hotelList);
+    }
     @GetMapping("/home/")
     public ResponseEntity getHotel(@RequestParam("house_id") long id ){
         Optional<Apartments> apartments = apartmentRepo.findById(id);
@@ -96,6 +106,8 @@ public class ApartmentController {
         }
 
     }
+
+
 
     @PutMapping("/home/picture/delete")
     public ResponseEntity deleteHousePictures(@RequestParam("picture_id")long picture_id){
