@@ -49,9 +49,7 @@ public class UserController {
          @RequestBody Users users){
         Optional<Users> oldInfo= userRepo.findUsersByEmail(email);
         if (oldInfo.isPresent()){
-            if (users.getPicture() != null) {
-                oldInfo.get().setPicture(users.getPicture());
-            }
+
             if (users.getPhoneNo() != null) {
                 oldInfo.get().setPhoneNo(users.getPhoneNo());
             }

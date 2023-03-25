@@ -24,9 +24,9 @@ public class Apartments {
     @EqualsAndHashCode.Include
     private Long id;
     private String name;
-    @Lob
-    private String description;
+
     private String address;
+    private String state;
     private String country;
     private String continent;
     private String houseRefCode;
@@ -52,6 +52,8 @@ public class Apartments {
 
     @ManyToOne
     private Users users;
+    @Lob
+    private String description;
 
     @OneToMany(mappedBy = "apartment")//,cascade = CascadeType.ALL)
     private Set<Reservation> reservations = new HashSet<>();

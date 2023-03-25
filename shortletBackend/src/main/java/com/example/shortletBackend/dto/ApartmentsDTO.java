@@ -17,6 +17,8 @@ public class ApartmentsDTO {
     private int id;
     private String name;
     private String address;
+    private String state;
+    private String country;
     @Lob
     private String description;
     private int price;
@@ -27,12 +29,12 @@ public class ApartmentsDTO {
     private int noOfBedrooms;
     private int noOfBeds;
     private int noOfBathrooms;
-
-    private String country;
+    
     private String continent;
     private UsersDTO users;
 
     private Amenities amenities;
-    private ArrayList reservedDates = new ArrayList<>();
+    private Set<ReservationNoApartmentDTO> reservations;
+//    private ArrayList reservedDates = new ArrayList<>();ArrayList
     private Set<Pictures> pictures = new HashSet<>();
 }
