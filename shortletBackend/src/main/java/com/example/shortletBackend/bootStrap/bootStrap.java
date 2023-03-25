@@ -308,7 +308,9 @@ public class bootStrap implements CommandLineRunner {
         House6.setHomeState(HomeState.VERIFIED);
         House6.setMaxNoOfGuests(4);
         House6.setUsers(melisa);
-        House6.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House6.setDescription("The house has very bright spaces, lots of natural light, the decoration is very fresh and fun with some antique elements that give it a special touch.\n" +
+                "The space\n" +
+                "The sound of the waves of the sea floods every corner of the house. It's a unique place to disconnect from the outside world and connect with nature. Ideal for surfers due to location.");
         House6.setNoOfBeds(4);
         House6.setNoOfBathrooms(2);
         House6.setNoOfBedrooms(3);
