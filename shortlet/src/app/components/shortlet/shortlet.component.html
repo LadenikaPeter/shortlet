@@ -167,8 +167,8 @@
                         <p>Minimum of 5 nights</p> -->
           <h5>{{numberOfNights}} nights in {{shortletData.address}}</h5>
 
-          <p>{{ checkinDate | date}} - {{ checkoutDate | date}}</p>
-          Check in:
+          <p>{{ checkinDate | date}} - {{ minDateForCheckOut | date}}</p>
+          <!-- Check in:
           <input
             type="date"
             name=""
@@ -185,21 +185,40 @@
             [(ngModel)]="checkoutDate"
             [min]="dateForCalendar2"
             (change)="fetchDateSelected()"
-          />
-          <mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
+          /> -->
+
+          <mat-form-field appearance="fill" style="margin-right: 15px">
+            <mat-label>Check in date</mat-label>
             <input
               matInput
-              min="3-25-2023"
+              [min]="minDate"
+              [(ngModel)]="checkinDate"
               [matDatepicker]="picker"
               [matDatepickerFilter]="myHolidayFilter"
+              (change)="fetchDateSelected()"
             />
-            <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle
               matIconSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Check out date</mat-label>
+            <input
+              matInput
+              [min]="checkoutDate"
+              [(ngModel)]="minDateForCheckOut"
+              [matDatepicker]="picker2"
+              [matDatepickerFilter]="myHolidayFilter"
+              (change)="fetchDateSelected()"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker2"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
         </div>
       </div>
