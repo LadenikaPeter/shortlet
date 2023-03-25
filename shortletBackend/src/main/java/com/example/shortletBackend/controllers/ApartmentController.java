@@ -59,13 +59,13 @@ public class ApartmentController {
     public ResponseEntity getHotel(@RequestParam("house_id") long id ){
         Optional<Apartments> apartments = apartmentRepo.findById(id);
         if (apartments.isPresent()){
-            ApartmentsDTO newHouse = mapper.map(apartments.get(),ApartmentsDTO.class);
-            for (Reservation reservation: apartments.get().getReservations()
-                 ) {
-                newHouse.getReservedDates().add(reservation.getCheckInDate());
-                newHouse.getReservedDates().add(reservation.getCheckOutDate());
-            }
-            return ResponseEntity.ok().body(newHouse);
+            // ApartmentsDTO newHouse = mapper.map(apartments.get(),ApartmentsDTO.class);
+            // for (Reservation reservation: apartments.get().getReservations()
+            //      ) {
+            //     newHouse.getReservedDates().add(reservation.getCheckInDate());
+            //     newHouse.getReservedDates().add(reservation.getCheckOutDate());
+            // }
+            return ResponseEntity.ok().body(apartments.get());
         }else {
             return (ResponseEntity) ResponseEntity.noContent();
         }

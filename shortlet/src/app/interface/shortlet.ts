@@ -1,35 +1,36 @@
 export interface Shortlet {
-    address: string,
-    houseRefCode: number,
-    id: number,
-    maxNoOfGuests: number,
-    name: string,
-    pictures: Pictures[],
-    price: number,
-    rating:number,
-    users:  Users
+  address: string;
+  houseRefCode: number;
+  id: number;
+  maxNoOfGuests: number;
+  name: string;
+  pictures: Pictures[];
+  price: number;
+  rating: number;
+  users: Users;
+  reservations: [];
 }
 
 export interface Pictures {
-    id: number,
-    url: string
+  id: number;
+  url: string;
 }
 
 export interface Users {
-    id: number,
-    name: string,
-    phoneNo?: number,
-    email: string,
-    picture?: string
+  id: number;
+  name: string;
+  phoneNo?: number;
+  email: string;
+  picture?: string;
 }
 
 export interface NewShortlet {
-    name: string
-    phoneNo?: number,
-    title: string,
-    price: number,
-    description: string,
-    address: string
-    guest: number
-    photos: File
+  name: string;
+  phoneNo?: number;
+  title: string;
+  price: number;
+  description: string;
+  address: string;
+  guest: number;
+  photos: File;
 }
