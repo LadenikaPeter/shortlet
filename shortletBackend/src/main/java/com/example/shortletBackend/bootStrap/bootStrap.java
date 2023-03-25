@@ -15,10 +15,10 @@ import java.util.Date;
 @AllArgsConstructor
 @Component
 public class bootStrap implements CommandLineRunner {
-    private final ApartmentRepo apartmentRepo;
+    private final ApartmentRepository apartmentRepo;
     private final PicturesRepository picturesRepository;
-    private final UserRepo userRepo;
-    private final ReservationRepo reservationRepo;
+    private final UserRepository userRepository;
+    private final ReservationRepository reservationRepo;
     private final AmenitiesRepository amenitiesRepository;
 
     @Override
@@ -33,7 +33,7 @@ public class bootStrap implements CommandLineRunner {
         Users chi = new Users("Chiabuotu Chinomso","chi@gmail.com",Role.USER);
         Users isak = new Users("Isak Lennert","isak@gmail.com",Role.USER);
 
-        userRepo.saveAll(new ArrayList<>(Arrays.asList(walter,Admin,kathy,samy,melisa,emily,olu,chi,isak)));
+        userRepository.saveAll(new ArrayList<>(Arrays.asList(walter,Admin,kathy,samy,melisa,emily,olu,chi,isak)));
 
         Apartments firstHouse = new Apartments();
         firstHouse.setAddress("Leece");
@@ -728,7 +728,7 @@ public class bootStrap implements CommandLineRunner {
         amenitiesRepository.saveAll(new ArrayList<>(Arrays.asList(A,h2,h3,h4,h5,h6,h7,h8,h9,h10
         ,h11,h12)));
         picturesRepository.saveAll(picturesCollection);
-        userRepo.save(Admin);
+        userRepository.save(Admin);
         apartmentRepo.saveAll(houseCollection);
         reservationRepo.save(reservation);
 

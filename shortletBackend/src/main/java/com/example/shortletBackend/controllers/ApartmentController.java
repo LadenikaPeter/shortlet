@@ -6,9 +6,9 @@ import com.example.shortletBackend.enums.HomeState;
 import com.example.shortletBackend.enums.PropertyType;
 import com.example.shortletBackend.enums.Status;
 import com.example.shortletBackend.repositories.AmenitiesRepository;
-import com.example.shortletBackend.repositories.ApartmentRepo;
+import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.PicturesRepository;
-import com.example.shortletBackend.repositories.UserRepo;
+import com.example.shortletBackend.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -22,9 +22,9 @@ import java.util.Optional;
 @CrossOrigin
 @AllArgsConstructor
 public class ApartmentController {
-    private final ApartmentRepo apartmentRepo;
+    private final ApartmentRepository apartmentRepo;
     private final PicturesRepository picRepo;
-    private final UserRepo userRepo;
+    private final UserRepository userRepository;
     private final AmenitiesRepository amenitiesRepo;
     private final ModelMapper mapper;
 
@@ -70,7 +70,7 @@ public class ApartmentController {
     //user creating a new home
     @PostMapping("/addHome/")
     public ResponseEntity addHome(@RequestHeader("user_email") String email, @RequestBody Apartments apartments){
-        Optional<Users> users= userRepo.findUsersByEmail(email);
+        Optional<Users> users= userRepository.findUsersByEmail(email);
         if (users.isPresent()) {
             if (apartments.getPictures() != null) {
                 for (Pictures picture: apartments.getPictures()
@@ -87,7 +87,7 @@ public class ApartmentController {
             apartments.setHouseRefCode(apartments.getAddress().substring(0,2),apartmentRepo.findAll().size());
             users.get().getApartmentsSet().add(apartments);
             apartments.setUsers(users.get());
-            userRepo.save(users.get());
+            userRepository.save(users.get());
             apartmentRepo.save(apartments);
             return ResponseEntity.ok(apartments+" this is added");
         }else {

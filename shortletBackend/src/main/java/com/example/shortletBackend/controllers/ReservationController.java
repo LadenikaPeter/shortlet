@@ -6,9 +6,9 @@ import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.ReservationState;
 import com.example.shortletBackend.enums.Status;
-import com.example.shortletBackend.repositories.ApartmentRepo;
-import com.example.shortletBackend.repositories.ReservationRepo;
-import com.example.shortletBackend.repositories.UserRepo;
+import com.example.shortletBackend.repositories.ApartmentRepository;
+import com.example.shortletBackend.repositories.ReservationRepository;
+import com.example.shortletBackend.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Optional;
 
 @RestController
@@ -25,9 +24,9 @@ import java.util.Optional;
 @AllArgsConstructor
 @Slf4j
 public class ReservationController {
-    private final ReservationRepo reservationRepo;
-    private final ApartmentRepo apartmentRepo;
-    private final UserRepo userRepo;
+    private final ReservationRepository reservationRepo;
+    private final ApartmentRepository apartmentRepo;
+    private final UserRepository userRepository;
     private final ModelMapper mapper;
 
     @GetMapping("/reservation")
@@ -82,7 +81,7 @@ public class ReservationController {
     //both the reserver and the host can cancel a reservation
     @PutMapping("/reservation/state/cancel")
     public ResponseEntity cancelReservation(@RequestParam("reservation_id") long reservation_id, @RequestParam("email") String email) {
-        Optional<Users> user = userRepo.findUsersByEmail(email);
+        Optional<Users> user = userRepository.findUsersByEmail(email);
         Optional<Reservation> reservation = reservationRepo.findById(reservation_id);
         Apartments apartments = reservation.get().getApartment();
         //this checks if it's the reserver
@@ -102,7 +101,7 @@ public class ReservationController {
     //when you check in to the house
     @PutMapping("/reservation/state/start")
     public ResponseEntity startTrip(@RequestParam("reservation_id") long reservation_id, @RequestParam("email") String email) {
-        Optional<Users> users = userRepo.findUsersByEmail(email);
+        Optional<Users> users = userRepository.findUsersByEmail(email);
         Optional<Reservation> reservation = reservationRepo.findById(reservation_id);
         Apartments apartments = reservation.get().getApartment();
 
@@ -120,7 +119,7 @@ public class ReservationController {
     //when the user is checking out of the house
     @PutMapping("/reservation/state/end")
     public ResponseEntity endTrip(@RequestParam("reservation_id") long reservation_id, @RequestParam("email") String email) {
-        Optional<Users> users = userRepo.findUsersByEmail(email);
+        Optional<Users> users = userRepository.findUsersByEmail(email);
         Optional<Reservation> reservation = reservationRepo.findById(reservation_id);
         Apartments apartments = reservation.get().getApartment();
 
