@@ -19,6 +19,11 @@ export class ShortletComponent implements OnInit {
   shortletPictures: any = [];
   shortletPrice: any;
   showAmenities: boolean = false;
+  // reservedDates: any = []
+
+  testArray = [{ checkin: '2023-03-23', checkout: '2023-03-25' }];
+  mynewArray = [];
+  overallArray = [];
 
   constructor(
     private dataStorage: DataStorageService,
@@ -40,6 +45,9 @@ export class ShortletComponent implements OnInit {
 
     console.log(this.checkinDate);
     this.fetchDateSelected();
+    // this.mytest();
+    // this.logicToDisableDate();
+    // this.checkdateInbetween();
   }
 
   //to diplay hortlet
@@ -48,6 +56,12 @@ export class ShortletComponent implements OnInit {
       (response) => {
         console.log((this.shortletData = response));
         this.shortletData = response;
+        this.overallArray = response.reservations;
+        // console.log(this.overallArray);
+        for (let reserve of this.overallArray) {
+          this.checkdateInbetween(reserve.checkInDate, reserve.checkOutDate);
+        }
+
         this.calculateBill(); //details of shortlet from API
         // console.log(this.shortletPrice = response.price)
         this.shortletPictures = response.pictures; //pictures of shortlet from API
@@ -129,6 +143,64 @@ export class ShortletComponent implements OnInit {
   //   return day !== 0 && day !== 6;
   // };
 
+  dateConverter() {
+    const date = new Date('2023-03-23');
+
+    const year = date.toLocaleString('default', { year: 'numeric' });
+
+    const month = date.toLocaleString('default', { month: '2-digit' });
+
+    const day = date.toLocaleString('default', { day: '2-digit' });
+
+    const formattedDate = month + '-' + day + '-' + year;
+
+    // this.dateForCalendar = formattedDate;
+
+    console.log(formattedDate);
+
+    // console.log(formattedDate); // Prints: 2022-05-04
+  }
+
+  checkdateInbetween(checkInDate, checkOutDate) {
+    // console.log(new Date('2023-03-20'));
+    // let testCheck1 = new Date('2023-03-20');
+    // let testCheck2 = new Date('2023-03-22');
+
+    let testCheck1 = new Date(checkInDate);
+    let testCheck2 = new Date(checkOutDate);
+
+    const date = new Date(testCheck1.getTime());
+
+    const dates = [];
+
+    while (date <= testCheck2) {
+      dates.push(new Date(date).toLocaleDateString());
+      date.setDate(date.getDate() + 1);
+    }
+
+    console.log(dates);
+
+    for (let date1 of dates) {
+      this.myHolidayDates.push(new Date(date1));
+    }
+
+    console.log(this.myHolidayDates);
+
+    // if (testCheck1.getTime() === testCheck2.getTime()) {
+    //   console.log('true');
+    // } else {
+    //   console.log('false');
+    // }
+    // console.log(dates);
+
+    // for (let date1 of dates) {
+    //   // console.log(date1);
+    //   if (new Date(date1).getTime() === testCheck2.getTime()) {
+    //     console.log('not available');
+    //   }
+    // }
+  }
+
   myHolidayDates = [
     // new Date('12/1/2020'),
     // new Date('12/20/2020'),
@@ -140,12 +212,20 @@ export class ShortletComponent implements OnInit {
     // new Date('12/11/2020'),
     // new Date('12/26/2020'),
     // new Date('12/25/2020'),
-    new Date('03-23-2023'),
-    new Date('03-24-2023'),
+    // new Date('03-23-2023'),
+    // new Date('03-25-2023'),
   ];
 
   myHolidayFilter = (d: Date): boolean => {
     const time = d.getTime();
     return !this.myHolidayDates.find((x) => x.getTime() == time);
   };
+
+  logicToDisableDate() {
+    for (let reserve of this.testArray) {
+      // this.mynewArray.push(reserve.checkin, reserve.checkout);
+      // this.checkdateInbetween(reserve.checkin, reserve.checkout);
+    }
+    console.log('from my new array' + this.mynewArray);
+  }
 }
