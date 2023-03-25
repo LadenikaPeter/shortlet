@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { NotificationService } from 'src/app/services/notifications.service';
 
@@ -11,7 +12,8 @@ import { NotificationService } from 'src/app/services/notifications.service';
 export class ProfileComponent implements OnInit {
   constructor(
     private dataS: DataStorageService,
-    private notif: NotificationService
+    private notif: NotificationService,
+    private router: Router
   ) {}
   profileForm: FormGroup;
 
@@ -58,6 +60,7 @@ export class ProfileComponent implements OnInit {
           .updateUserInfo(updateUser, this.profileForm.value['email'])
           .subscribe((res) => {
             console.log(res);
+            //add nvaigation code here and success message
           });
       }
     } else {
