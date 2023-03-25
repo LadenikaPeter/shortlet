@@ -36,8 +36,10 @@ public class bootStrap implements CommandLineRunner {
         userRepo.saveAll(new ArrayList<>(Arrays.asList(walter,Admin,kathy,samy,melisa,emily,olu,chi,isak)));
 
         Apartments firstHouse = new Apartments();
-        firstHouse.setAddress("Provincia di Leece, Italy ");
-        firstHouse.setName("Kristi J. Walters");
+        firstHouse.setAddress("Leece");
+        firstHouse.setState("Puglia");
+        firstHouse.setCountry("Italy");
+        firstHouse.setName("Saponea 13 Flat Design");
         firstHouse.setHouseRefCode(firstHouse.getAddress().substring(0, 3), 1);
         firstHouse.setPrice(533);
         firstHouse.setRating(4.7);
@@ -45,10 +47,7 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setNoOfBeds(3);
         firstHouse.setNoOfBathrooms(2);
         firstHouse.setNoOfBedrooms(3);
-        firstHouse.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis bibendum interdum." +
-                " Pellentesque quis odio condimentum, cursus nisi at, dignissim mi. Mauris mauris neque, commodo vitae nisi quis," +
-                " placerat scelerisque mauris. Aenean mauris nibh, convallis nec blandit sed, viverra a orci. Etiam a diam lectus. " +
-                " auctor imperdiet. ");
+        firstHouse.setDescription("My place is close to Apuan Park. We're 12 km from Castelnuovo di Garfagnana. You'll love my place because of its location and atmosphere. My place is good for couples, lonely adventurers, families (with kids), furry friends (pets), and groups of friends");
         firstHouse.setHouseType(HouseType.WHOLE_HOUSE);
         firstHouse.setPropertyType(PropertyType.APARTMENT);
 
@@ -82,16 +81,19 @@ public class bootStrap implements CommandLineRunner {
 
         //2nd
         Apartments House2 = new Apartments();
-        House2.setAddress("Route de IOurika, Morocco");
-        House2.setName("Kathleen Kammer");
+        House2.setAddress("Route de I'Ourika");
+        House2.setState("Marrakesh");
+        House2.setCountry("Morocco");
+        House2.setName("Room with a sunset view in the Ourika Valley");
         House2.setHouseRefCode(House2.getAddress().substring(0, 3), 2);
         House2.setPrice(1371);
         House2.setRating(3.9);
         House2.setHomeState(HomeState.VERIFIED);
         House2.setMaxNoOfGuests(8);
-        House2.setDescription("Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. " +
-                "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris bibendum vel nunc sed porttitor." +
-                " Nulla facilisi. Mauris dictum laoreet erat in feugiat. Donec eleifend purus at maximus egestas. Proin in odio ut leo. ");
+        House2.setDescription("The space\n" +
+                "The sunset room is furnished with a double bed and a separate sitting area with a sofa bed which can be made into a single bed. There is a storage space for luggage and clothing. The bathroom is equipped with a shower, a toilet and a washbasin. The room has a private terrace facing west with a table and chairs overlooking the mountains and river.\n" +
+                "Guest access\n" +
+                "The guesthouse offers a dining room with airco and heating as well as a large lounge area where drinks and meals can be enjoyed. There are also numerous terraces offering seating areas and great views of the valley.");
         House2.setNoOfBeds(4);
         House2.setNoOfBathrooms(3);
         House2.setNoOfBedrooms(4);
@@ -129,14 +131,29 @@ public class bootStrap implements CommandLineRunner {
 
         //3rd
         Apartments House3 = new Apartments();
-        House3.setAddress("Santi Ferriol, Spain");
-        House3.setName("Samuel Altieri");
+        House3.setAddress("Sant Ferriol");
+        House3.setState("La Garrotxa");
+        House3.setCountry("Spain");
+        House3.setName("Village house with charm in Garrotxa (Girona)");
         House3.setHouseRefCode(House3.getAddress().substring(0, 5), 3);
         House3.setPrice(838);
         House3.setRating(5.0);
         House3.setHomeState(HomeState.VERIFIED);
         House3.setMaxNoOfGuests(3);
-        House3.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House3.setDescription("A stone village house. We live upstairs.\n" +
+                "Guest rooms are on the ground floor and are independent (except for the entrance, which we also use). The living room has a small kitchen (induction, two fires), with microwave, boiler, toaster, fridge, coffee maker, spade, etc.\n" +
+                "The room has seats, books, maps. It has a single bed (with a nest below).\n" +
+                "We have a small garden for the guests. The sink is independent and new. Guest spaces are hygienically safe.\n" +
+                "The space\n" +
+                "The double bed measures 1'50 cm. You don't have to go upstairs. There is only one (new) sink for guests. There is a separate entrance (for the room, with a single small grain), but if not, there is also a general entrance to share with us. We have a wired internet connection and also wifi. Our kitchen is small (a stove), also has microwaves and a small refrigerator. There are dishes, silverware, drops, roaster, kettle, coffee maker and everything you need.\n" +
+                "Guest access\n" +
+                "The ground floor for guests is separate. It's just share the main entrance to the house. Guests can enter through a second separate entrance if they wish.\n" +
+                "Other things to note\n" +
+                "We're a quiet family. We also thank our guests for their peace of mind. Avoid noisy holidays and respect the neighborhood.\n" +
+                "\n" +
+                "No smoking in our house. Guest pets are also not allowed.\n" +
+                "License number\n" +
+                "HUTG-046620");
         House3.setNoOfBeds(1);
         House3.setNoOfBathrooms(2);
         House3.setNoOfBedrooms(1);
@@ -170,15 +187,38 @@ public class bootStrap implements CommandLineRunner {
 
         //4
         Apartments House4 = new Apartments();
-        House4.setAddress("AlHaouz, Morocco");
-        House4.setName("Melissa Marino");
+        House4.setAddress("Al Haouz");
+        House4.setState("Marrakesh-Safi");
+        House4.setCountry("Morocco");
+        House4.setName("Ideal for a romantic getaway !");
         House4.setHouseRefCode(House4.getAddress().substring(0, 3), 4);
         House4.setPrice(734);
         House4.setRating(4.5);
         House4.setHomeState(HomeState.VERIFIED);
         House4.setMaxNoOfGuests(2);
         House4.setUsers(melisa);
-        House4.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House4.setDescription("Our moroccan Manager, Moutaa, will make you live an unforgettable experience : feel like at home in Marrakech ! Airport transfer, table d'hote, musical evening, guided tour, massages and treatments on-site, as many services at your disposal. Our delicious breakfasts are included ! Welcome to your home !\n" +
+                "The space\n" +
+                "Riad Chamali is a guest house with pool, in the medina of Marrakech, ideal for romantic or family holiday.\n" +
+                "\n" +
+                "We are located 15 minutes walk from the famous Jemaa El Fna square, in the quiet and traditional neighborhood of Berrima (Badii Palace, the old Jewish quarter, tinsmiths' square, the Bahia Palace ...) near the door “Bab Hmar”, which gives quick access to the Golf Courses.\n" +
+                "\n" +
+                "Our Riad offers a perfect combination of traditional lifestyle and modern high standard facilities. The riad decoration is sleek, warm and feels natural with paintings and rugs made from local craftmen. The architecture is from the original house called \"Zelliges\" which gives the place a friendly, peaceful and out of time atmosphere.\n" +
+                "\n" +
+                "A stay with us will give you the opportunity to experiment the traditional moroccan lifestyle with a touch of luxury, at an affordable price.\n" +
+                "\n" +
+                "Our 15 rooms are all unique and overlooking the patio with our charming green-tiled swimming pool (not heated) and orange trees. They all are air-conditionned, and have ensuite bathrooms with toilettes, a shower and toiletry products. Breakfast are included.\n" +
+                "\n" +
+                "Besides, our manager Moutaa and our staff will take care of you and make sure you have everything you need.\n" +
+                "\n" +
+                "We can also arrange a wide range of services to make sure your stay is perfect : from airport transfer, massages and spa day to cooking classes and desert adventures...\n" +
+                "Guest access\n" +
+                "except the kitchen and the porter's lodge, you will have access to all the riad\n" +
+                "Other things to note\n" +
+                "The advertised rate applies to a double room for 2 people, including breakfasts.\n" +
+                "To add : the tourist taxes (+ 2.50 euros / pers / day)\n" +
+                "\n" +
+                "Airport transfers are offered at €15 per day, and €20 from 8 p.m. per trip (up to 3 people, if more people the price varies according to the number).");
         House4.setNoOfBeds(2);
         House4.setNoOfBathrooms(1);
         House4.setNoOfBedrooms(1);
@@ -212,8 +252,10 @@ public class bootStrap implements CommandLineRunner {
         House4.setAmenities(h4);
 
         Apartments House5 = new Apartments();
-        House5.setAddress("Naxos, Greece");
-        House5.setName("Emily Hannah");
+        House5.setAddress("Osaka");
+        House5.setState("Honshu");
+        House5.setCountry("Japan");
+        House5.setName("Calm Home");
         House5.setHouseRefCode(House5.getAddress().substring(0, 3), 5);
         House5.setPrice(1265);
         House5.setRating(4.7);
@@ -221,7 +263,9 @@ public class bootStrap implements CommandLineRunner {
         House5.setHomeState(HomeState.VERIFIED);
         House5.setUsers(emily);
         House5.setNoOfBeds(2);
-        House5.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House5.setDescription("A beautiful and centrally-located place with superior view of the sea, the Portara and the magical sunset colours. It has two bedrooms (one with double bed and one with single bed), fully equipped kitchen and it can accommodate up to 4 guests. Relax and enjoy your stay within walking distance from Naxos Town port and all the resort amenities. Parking available.\n" +
+                "License number\n" +
+                "00001306417");
         House5.setNoOfBathrooms(2);
         House5.setNoOfBedrooms(2);
         House5.setHouseType(HouseType.PRIVATE_ROOM);
@@ -254,7 +298,9 @@ public class bootStrap implements CommandLineRunner {
         House5.setAmenities(h5);
 
         Apartments House6 = new Apartments();
-        House6.setAddress("Chania, Greece");
+        House6.setAddress("Chania");
+        House6.setState("Crete");
+        House6.setCountry("Greece");
         House6.setName("Maik Beyer");
         House6.setHouseRefCode(House6.getAddress().substring(0, 3), 6);
         House6.setPrice(923);
@@ -296,15 +342,20 @@ public class bootStrap implements CommandLineRunner {
         House6.setAmenities(h6);
 
         Apartments House7 = new Apartments();
-        House7.setAddress("Lajita, Spain");
-        House7.setName("Satordi Aubé");
+        House7.setAddress("La Lajita");
+        House7.setState("Canary Islands");
+        House7.setCountry("Spain");
+        House7.setName("La Lajita Barca Beach Sunset");
         House7.setHouseRefCode(House7.getAddress().substring(0, 3), 7);
         House7.setPrice(182);
         House7.setRating(4.9);
         House7.setHomeState(HomeState.VERIFIED);
         House7.setMaxNoOfGuests(2);
         House7.setUsers(isak);
-        House7.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House7.setDescription("Enjoy the best views of Fuerteventura with an incredible location, with the sea and a serene climate where you can enjoy an ideal stay.\n" +
+                "\n" +
+                "It is an outdoor vacation apartment located a few meters from the beach in a typical fishing village, where you can taste the fish of the day.\n" +
+                "It consists of two bedrooms, a living room with sofa bed and kitchenette, a bathroom and a balcony with spectacular ocean views.");
         House7.setNoOfBeds(1);
         House7.setNoOfBathrooms(1);
         House7.setNoOfBedrooms(1);
@@ -339,15 +390,28 @@ public class bootStrap implements CommandLineRunner {
         House7.setAmenities(h7);
 
         Apartments House8 = new Apartments();
-        House8.setAddress("Mogan, Spain");
-        House8.setName("Arnaude Barteaux");
+        House8.setAddress("Mogan");
+        House8.setState("Gran Canaria");
+        House8.setCountry("Spain");
+        House8.setName("10th century medieval Castle");
         House8.setHouseRefCode(House8.getAddress().substring(0, 3), 8);
         House8.setPrice(374);
         House8.setRating(5.0);
         House8.setHomeState(HomeState.VERIFIED);
         House8.setMaxNoOfGuests(8);
         House8.setUsers(Admin);
-        House8.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House8.setDescription("In the Ripollès region, between rivers, valleys and mountains, the ancient Castle of Llaés (10th century) stands splendidly. A unique place, of exceptional beauty, where absolute tranquility reigns in the middle of an exuberant nature.\n" +
+                "The Castle has been fully renovated for the comfort required by the facilities for rural tourism, with 8 rooms, 5 with a double bed, and 3 with two single beds. It has a living room, dining room, kitchen, 4 bathrooms, garden and terrace.\n" +
+                "The space\n" +
+                "The Llaés Castle is a project of reform and maintenance of this national cultural asset that, by force of spirit and the guests from all over the world who come to visit us, can continue its journey.\n" +
+                "Guest access\n" +
+                "Currently the fortification retains the physiognomy of a castle, the homage tower, the parade ground, and the religious enclosure with a garden area, the small cemetery, and the church of San Bartolomé, in a marked Romanesque style.\n" +
+                "Other things to note\n" +
+                "Access to the castle is not prepared for people with reduced mobility since the last 50m are on an ascending ramp and only accessible on foot.\n" +
+                "\n" +
+                "Events and parties are not allowed without an application, budget request and express authorization are required.\n" +
+                "License number\n" +
+                "PG000900");
         House8.setNoOfBeds(7);
         House8.setNoOfBathrooms(6);
         House8.setNoOfBedrooms(6);
@@ -381,19 +445,21 @@ public class bootStrap implements CommandLineRunner {
         House8.setAmenities(h8);
 
         Apartments House9 = new Apartments();
-        House9.setAddress("Lekki, Nigeria");
-        House9.setName("Oluchukwu Chiwetelu");
+        House9.setAddress("Lekki ");
+        House9.setState("Lagos");
+        House9.setCountry("Nigeria");
+        House9.setName("Jacuzzi and heated floor in orchid road");
         House9.setHouseRefCode(House9.getAddress().substring(0, 3), 9);
         House9.setPrice(380);
         House9.setRating(5.0);
         House9.setHomeState(HomeState.VERIFIED);
         House9.setMaxNoOfGuests(6);
         House9.setUsers(olu);
-        House9.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House9.setDescription("Take it easy at this unique and tranquil getaway.");
         House9.setNoOfBeds(6);
         House9.setNoOfBathrooms(4);
         House9.setNoOfBedrooms(6);
-        House9.setHouseType(HouseType.WHOLE_HOUSE);
+        House9.setHouseType(HouseType.PRIVATE_ROOM);
         House9.setPropertyType(PropertyType.HOTEL);
 
 
@@ -424,15 +490,73 @@ public class bootStrap implements CommandLineRunner {
         House9.setAmenities(h9);
 
         Apartments House10 = new Apartments();
-        House10.setAddress("Ikoyi, Nigeria");
-        House10.setName("Chiabuotu Chinomso");
+        House10.setAddress("Ikoyi");
+        House10.setState("Lagos State");
+        House10.setCountry("Nigeria");
+        House10.setName("Mediterranean Island Beach-House Oasis 2br in Vi");
         House10.setHouseRefCode(House10.getAddress().substring(0, 5), 10);
         House10.setPrice(120);
         House10.setRating(3.9);
         House10.setHomeState(HomeState.VERIFIED);
         House10.setMaxNoOfGuests(5);
         House10.setUsers(chi);
-        House10.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House10.setDescription("Relax, unwind and enjoy this stunning Mediterranean-inspired Duplex getaway on Victoria Island, spectacular lagoon view from all the large azure windows. It is fully equipped for short or long-term stays. The beach house is situated on the 12th Floor in an unbeatable touristic and business location, near beaches, the coolest clubs, shops, bars, and restaurants.\n" +
+                "\n" +
+                "There is space for walking, jogging and playing tennis. Suitable for families, couples, individuals & business travelers.\n" +
+                "The space\n" +
+                "A beach house in the city? That’s exactly the unique combination you get from this beautifully presented 12th floor Mediterranean-inspired duplex apartment on Victoria Island, Lagos.\n" +
+                "\n" +
+                "As soon as you step inside, you’re sure to appreciate how much time and effort your host has spent in making this relaxing and inspiring getaway just right. Every piece of furniture in the property has been meticulously designed and crafted by your host, demonstrating their passion for interior design, and desire to make everyone who stays here feel special and welcome.\n" +
+                "\n" +
+                "This home-from-home is ideal for friends or family looking for a short to long-term stay in Lagos for pleasure, or corporate travelers looking for easy access to the business district.\n" +
+                "\n" +
+                "The large azure windows give every guest majestic views of the island lagoon on which the property is located. There are incredible views to be enjoyed from sunrise to sunset. And why not try to find the seashells and other beach treasures the owner’s young daughter has hidden around the property?\n" +
+                "\n" +
+                "1ST FLOOR:\n" +
+                "Lounge & Dining Area\n" +
+                "This bright and open area continues the white and blue theme of the interior, all designed and made by your host, remember! Take time to relax on the comfortable seating in the lounge area, maybe to watch the smart TV with DSTV cable channels available, plus access to the Netflix account.\n" +
+                "\n" +
+                "If you’re visiting on business, the work desk and chair are sure to come in handy, so to the 30MBPS unlimited data fiber-optic WiFi. The dining table can also be used as a workspace, or to host any special occasion meals you might have planned to celebrate an important milestone for a friend or family member. Last but not least, there’s a wooden bar area, great for relaxing at, perhaps with a drink at the end of a busy day.\n" +
+                "\n" +
+                "Kitchen\n" +
+                "You’ll discover quality European-style appliances in here, including a kettle, toaster, sandwich toaster, blender, and Nespresso coffee machine, plus everything you need to prepare delicious meals and snacks. For your convenience, a serving hatch connects the kitchen to the dining area in the main lounge area.\n" +
+                "\n" +
+                "Restroom / Toilet\n" +
+                "The first floor has a convenient WC with a washbasin\n" +
+                "\n" +
+                "2ND FLOOR\n" +
+                "2 Bedrooms\n" +
+                "Both of the bedrooms are located on the upper floor. The first bedroom features a King size bed with luxury Egyptian cotton linen, as well as a brand-new gloriously comfortable mattress that guarantees perfect rest throughout your visit, day or night.\n" +
+                "\n" +
+                "The second bedroom has a king-size bed that can be split into two single beds based on your needs. Please let your host know how you’d like these beds arranged before your stay.\n" +
+                "\n" +
+                "Main Bathroom\n" +
+                "You can’t fail to feel reinvigorated and ready for whatever the new day has in store after freshening up under the rainfall shower. Your host will supply towels and a range of bathroom amenities, including soap, shampoo, conditioner, and body wash.\n" +
+                "\n" +
+                "Small sitting room\n" +
+                "There’s another break-out area up here with two host-made pallet couches, great for relaxing on. Maybe you’ll want to use this space to read one of the many books you’ll find in the apartment. As a special gift, your host invites you to take home any book you like as a souvenir of your stay.\n" +
+                "\n" +
+                "Laundry\n" +
+                "Handy if you’re planning a long-term stay, the washer and portable clothesline are sure to come in useful, and many nearby laundries are ready to pick up ur cloth.\n" +
+                "\n" +
+                "OUTSIDE SPACE\n" +
+                "Stay here, and you will have your own balcony with space to sit outside and enjoy the view, perhaps with a drink. There is also a dedicated parking space you can use, and lots of free parking in the local area.\n" +
+                "Guest access\n" +
+                "Your host is delighted to make this apartment exclusively and entirely available to you for however long you make your reservation. The apartment is treasured by your host who has handmade the furniture inside. Ensuring you enjoy a relaxing time here is the top priority, so expect your host to react quickly and professionally to any questions you might have, ensuring your stay is hassle-free.\n" +
+                "Other things to note\n" +
+                "-Airport transfers directly to apartments are available for a small fee. Please contact us to arrange it.\n" +
+                "\n" +
+                "-Your host is nearby, so if you have questions or require assistance during your stay, you can expect quick and professional service from the team to help ensure your stay is hassle-free from start to finish.\n" +
+                "\n" +
+                "Please be aware that not all pets are allowed, so please contact your host to discuss how to accommodate your pet.\n" +
+                "\n" +
+                "Cleaning service during your time in this Beach house is available for an extra charge. Please request this and your host will be happy to make the arrangements.\n" +
+                "\n" +
+                "PS: the apartment is not toddler-proof.\n" +
+                "\n" +
+                "If a baby cot is needed, please request it before the check-in.\n" +
+                "\n" +
+                "To ensure this property operates sustainably, and because of the recent rises in the price of diesel, power consumption in the property is limited to 40 kWh per day. This should be more than enough to supply all the power you need, the extra consumption will be paid by the guest at the same rate the host is paying to the estate.\n" );
         House10.setNoOfBeds(5);
         House10.setNoOfBathrooms(5);
         House10.setNoOfBedrooms(5);
@@ -470,8 +594,10 @@ public class bootStrap implements CommandLineRunner {
 
 
         Apartments House11 = new Apartments();
-        House11.setAddress("Avendia Juan carlos , Spain ");
-        House11.setName("Oscar Olsen");
+        House11.setAddress("Granadilla de Abona");
+        House11.setState("Canarias");
+        House11.setCountry("Spain");
+        House11.setName("Wood & Forest ");
         House11.setHouseRefCode(House11.getAddress().substring(0, 3), 11);
         House11.setPrice(445);
         House11.setRating(3.9);
@@ -479,7 +605,19 @@ public class bootStrap implements CommandLineRunner {
         House11.setMaxNoOfGuests(4);
         House11.setUsers(samy);
         House11.setNoOfBeds(4);
-        House11.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House11.setDescription("Wake up in nature with the animals of the farm, you will be on the 1000m. high and just 15 minutes from Adeje and the coast. Enjoy nature (visiting ancestral Guanches routes, Trails, Galleries). A different sunset every day with views of La Gomera, La Palma, El Hierro and the mountains. Fresh eggs every morning from the chickens on our farm. An authentic experience of relaxation and tranquility away from the masses, the mobile coverage and the hustle and bustle of the city.\n" +
+                "The space\n" +
+                "A charming little wooden house. Equipped for everything you might need for a few days of relaxation.\n" +
+                "Climbing, hiking or paragliding are just some of the things that are waiting for you.\n" +
+                "Guest access\n" +
+                "Due to the Covid-19 situation we have taken a number of exceptional measures for everyone's safety. Upon arrival, all our guests will be offered a small gift set with disinfectant products as well as instructions during their stay.\n" +
+                "Guests have a cabin for their entire enjoyment as well as the entire delimited land.\n" +
+                "A living room with TV/DVD for media use as there is no TV signal. Board games, books, and movies. Fully equipped bathroom and kitchen.\n" +
+                "Wake up every morning with the rooster, collect fresh eggs for breakfast in the gardens surrounded by royal paths and trails that will be delightful of those who like tranquility and nature.\n" +
+                "Enough WIFI to be connected although we remind our guests that it is a slow connection.\n" +
+                "We wish you an unbeatable stay with our best wishes.\n" +
+                "Other things to note\n" +
+                "The cabin is located a few meters from two points of paragliding jumping, several trails and you can do many outdoor activities. The house offers everything you need to disconnect for a few days from the hustle and bustle of the city in complete relaxation.");
         House11.setNoOfBathrooms(2);
         House11.setNoOfBedrooms(2);
         House11.setHouseType(HouseType.SHARED_ROOM);
@@ -511,15 +649,23 @@ public class bootStrap implements CommandLineRunner {
         House11.setAmenities(h11);
 
         Apartments House12 = new Apartments();
-        House12.setAddress("Milopotas, Greece");
-        House12.setName("Isak Lennert");
+        House12.setAddress("Sombrun");
+        House12.setState("Occitanie");
+        House12.setCountry("France");
+        House12.setName("Independent accommodation in the park of the castle");
         House12.setHouseRefCode(House12.getAddress().substring(0, 3), 12);
         House12.setPrice(962);
         House12.setRating(5.0);
         House12.setHomeState(HomeState.VERIFIED);
         House12.setMaxNoOfGuests(10);
         House12.setUsers(emily);
-        House12.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House12.setDescription("The castle of Sombrun ( XVII th) near Marciac is surrounded by a park of 6ha\n" +
+                "The fully independent rented apartment,with a surface of 140 m2, is located in the main courtyard of the castle and is divided into living/dining room Kitchenette equipped , 2 bedrooms, 1 children's room, 2 bathrooms, 2 separate toilets.The horse riders can possibly come with their horses.Possibility to accommodate 4 horses in boxes or paddocks ,for walks in the forest starting from the castle\n" +
+                "The space\n" +
+                "The castle is located 12 kms from Marciac where the famous International Jazz Festival takes place every year.\n" +
+                "Guests can enjoy a 15mx5m swimming pool and for riders leave the castle for magnificent walks accompanied or not by the owner .\n" +
+                "Guest access\n" +
+                "The home in the main courtyard is completely independent and fully reserved for our guests");
         House12.setNoOfBeds(10);
         House12.setNoOfBathrooms(11);
         House12.setNoOfBedrooms(10);
