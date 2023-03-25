@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataS.getUser().subscribe((res: { email: string; name: string }) => {
-      // console.log(res);
+      console.log(res);
       this.profileForm.patchValue({
         name: res.name,
         email: res.email,
