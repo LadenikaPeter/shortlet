@@ -35,7 +35,6 @@ export class ShortletComponent implements OnInit {
       let id: number = data['id'];
       this.displayShortlet(id);
     });
-
     this.checkinDate = new Date();
     this.noSelectFromPast();
     this.noSelectLessThan2();
@@ -75,6 +74,7 @@ export class ShortletComponent implements OnInit {
   }
 
   fetchDateSelected() {
+    // console.log('here');
     let timeDiff = Math.abs(
       new Date(this.checkoutDate).getTime() -
         new Date(this.checkinDate).getTime()
@@ -228,4 +228,9 @@ export class ShortletComponent implements OnInit {
     }
     console.log('from my new array' + this.mynewArray);
   }
+
+  minDate = new Date();
+  trial = new Date();
+  twodayAhead = this.trial.setDate(this.trial.getDate() + 2);
+  minDateForCheckOut = new Date(this.twodayAhead);
 }

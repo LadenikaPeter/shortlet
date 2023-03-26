@@ -10,16 +10,18 @@ import { DataStorageService } from 'src/app/services/data-storage.service';
 export class HomeComponent implements OnInit {
   availableShortlets: any = [];
 
-
   constructor(private dataStorage: DataStorageService) {}
   ngOnInit(): void {
     this.dataStorage.getShortlets().subscribe((shortlet) => {
       this.availableShortlets = shortlet;
       console.log(this.availableShortlets);
     });
-    console.log("WORKING!")
+
+    this.dataStorage.propertyType.subscribe((selectedProperty) => {
+      if (selectedProperty) {
+        this.availableShortlets = selectedProperty;
+      }
+    });
+    console.log('WORKING!');
   }
-
-  
-
 }

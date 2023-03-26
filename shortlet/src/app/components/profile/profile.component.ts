@@ -18,13 +18,16 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
 
   ngOnInit(): void {
-    this.dataS.getUser().subscribe((res: { email: string; name: string }) => {
-      // console.log(res);
-      this.profileForm.patchValue({
-        name: res.name,
-        email: res.email,
+    this.dataS
+      .getUser()
+      .subscribe((res: { email: string; name: string; phoneNo: any }) => {
+        console.log(res);
+        this.profileForm.patchValue({
+          name: res.name,
+          email: res.email,
+          phoneNumber: res.phoneNo,
+        });
       });
-    });
     this.profileForm = new FormGroup({
       name: new FormControl(null, Validators.required),
       phoneNumber: new FormControl(null, Validators.max(11)),
