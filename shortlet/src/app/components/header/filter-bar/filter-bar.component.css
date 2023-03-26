@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-around;
   padding: 0 0 25px 0;
+  height: 85px;
 }
 
 img {
@@ -22,6 +23,11 @@ img {
 }
 p {
   margin-bottom: 0;
+}
+
+.ifSelected {
+  opacity: 1;
+  border-bottom: 2px solid black;
 }
 
 /* p:hover {

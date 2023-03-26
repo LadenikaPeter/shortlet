@@ -1,11 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Shortlet } from '../interface/shortlet';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
   // baseURL: string = "http://localhost:8080/";
+
+  propertyType = new BehaviorSubject(null);
+
   constructor(private http: HttpClient) {}
 
   getShortlets() {
@@ -33,5 +36,17 @@ export class DataStorageService {
       headers: new HttpHeaders({ user_email: email }),
     });
     // console.log(userDetails);
+  }
+
+  getSelectedApartment(property_type: string) {
+    this.http
+      .get(
+        'http://localhost:8080/verified_homes/search/?property_type=' +
+          property_type
+      )
+      .subscribe((res) => {
+        console.log(res);
+        this.propertyType.next(res);
+      });
   }
 }

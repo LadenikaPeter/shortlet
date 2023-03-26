@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 
 @Component({
   selector: 'app-filter-bar',
@@ -6,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./filter-bar.component.css'],
 })
 export class FilterBarComponent {
+  constructor(private dataS: DataStorageService) {}
+  toggleActiveApartment: string;
+
   filterbar: { name: string; image: string }[] = [
     {
       name: 'APARTMENT',
@@ -40,4 +44,11 @@ export class FilterBarComponent {
       image: '../../../../assets/property/tree-house.jpg',
     },
   ];
+
+  getProperty(apartment: string) {
+    this.toggleActiveApartment = apartment;
+    // this.searchS.propertyType.next(apartment)
+    this.dataS.getSelectedApartment(apartment);
+    // console.log(apartment);
+  }
 }
