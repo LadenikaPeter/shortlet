@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+// general apartment dto
 @AllArgsConstructor @NoArgsConstructor
 @Data
 public class ApartmentsDTO {
@@ -34,6 +35,7 @@ public class ApartmentsDTO {
     private UsersDTO users;
 
     private Amenities amenities;
+    private Set<CommentsDTO> comments;
     private Set<ReservationNoApartmentDTO> reservations;
 //    private ArrayList reservedDates = new ArrayList<>();ArrayList
     private Set<Pictures> pictures = new HashSet<>();
