@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+//general reservation dto
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

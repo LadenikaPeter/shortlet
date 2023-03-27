@@ -60,6 +60,12 @@ public class Apartments {
     @OneToMany//(cascade = CascadeType.ALL)
     private Set<Pictures> pictures = new HashSet<>();
 
+    @OneToMany(mappedBy = "apartments")
+    private Set<Review> reviews = new HashSet<>();
+
+    @OneToMany(mappedBy = "apartments")
+    private Set<Comments> comments = new HashSet<>();
+
 
     public void setHouseRefCode(String name, int id) {
         this.houseRefCode = name + id;

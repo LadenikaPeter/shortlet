@@ -42,7 +42,7 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setName("Saponea 13 Flat Design");
         firstHouse.setHouseRefCode(firstHouse.getAddress().substring(0, 3), 1);
         firstHouse.setPrice(533);
-        firstHouse.setRating(4.7);
+//        firstHouse.setRating();
         firstHouse.setHomeState(HomeState.VERIFIED);
         firstHouse.setNoOfBeds(3);
         firstHouse.setNoOfBathrooms(2);
@@ -722,7 +722,7 @@ public class bootStrap implements CommandLineRunner {
         Reservation reservation = new Reservation();
         reservation.setCheckInDate(new Date());//today's date(checkIn date)
         reservation.setCheckOutDate(new Date(2023 - 1900, Calendar.MARCH, 25));//check out date
-        reservation.setReservationState(ReservationState.PENDING);
+        reservation.setReservationState(ReservationState.COMPLETED);
 
         reservation.setUsers(Admin);
         reservation.setApartment(firstHouse);
