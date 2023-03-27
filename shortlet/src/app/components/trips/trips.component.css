@@ -1,0 +1,33 @@
+.container {
+  margin-top: 30px;
+}
+
+h4 {
+  font-size: 32px;
+  color: #484848;
+  font-weight: 600;
+}
+
+.home_link {
+  color: #484848;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.home_link:hover {
+  text-decoration: underline;
+}
+
+#pointing_character {
+  color: rgb(118, 118, 118);
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 20px 0 20px;
+}
+
+#account {
+  color: #484848;
+  font-size: 18px;
+  font-weight: 500;
+}

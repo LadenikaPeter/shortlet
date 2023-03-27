@@ -188,36 +188,9 @@ export class ShortletComponent implements OnInit {
     }
 
     console.log(this.myHolidayDates);
-
-    // if (testCheck1.getTime() === testCheck2.getTime()) {
-    //   console.log('true');
-    // } else {
-    //   console.log('false');
-    // }
-    // console.log(dates);
-
-    // for (let date1 of dates) {
-    //   // console.log(date1);
-    //   if (new Date(date1).getTime() === testCheck2.getTime()) {
-    //     console.log('not available');
-    //   }
-    // }
   }
 
-  myHolidayDates = [
-    // new Date('12/1/2020'),
-    // new Date('12/20/2020'),
-    // new Date('12/17/2020'),
-    // new Date('12/25/2020'),
-    // new Date('12/4/2020'),
-    // new Date('12/7/2020'),
-    // new Date('12/12/2020'),
-    // new Date('12/11/2020'),
-    // new Date('12/26/2020'),
-    // new Date('12/25/2020'),
-    // new Date('03-23-2023'),
-    // new Date('03-25-2023'),
-  ];
+  myHolidayDates = [];
 
   myHolidayFilter = (d: Date): boolean => {
     const time = d.getTime();
