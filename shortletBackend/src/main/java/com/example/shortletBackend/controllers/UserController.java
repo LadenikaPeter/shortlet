@@ -1,5 +1,6 @@
 package com.example.shortletBackend.controllers;
 
+import com.example.shortletBackend.dto.ReservationDTO;
 import com.example.shortletBackend.dto.UsersDTO;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -97,11 +99,11 @@ public class UserController {
 
     @GetMapping("/reservation/")
     public ResponseEntity getAllUserReservation(@RequestHeader("user_email")String email){
-//        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
-//        for (Reservation reservation: ){
-//            reservationDTOS.add(mapper.map(reservation, ReservationDTO.class));
-//        }
-        return ResponseEntity.ok(reservationRepo.findAllByUsers(userRepository.findUsersByEmail(email).get()));
+        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
+        for (Reservation reservation: reservationRepo.findAllByUsers(userRepository.findUsersByEmail(email).get())){
+            reservationDTOS.add(mapper.map(reservation, ReservationDTO.class));
+        }
+        return ResponseEntity.ok(reservationDTOS);
     }
 
 

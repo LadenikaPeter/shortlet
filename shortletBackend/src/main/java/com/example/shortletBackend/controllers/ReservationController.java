@@ -9,6 +9,7 @@ import com.example.shortletBackend.enums.Status;
 import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.ReservationRepository;
 import com.example.shortletBackend.repositories.UserRepository;
+import com.sun.xml.bind.v2.TODO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -35,7 +36,8 @@ public class ReservationController {
     }
 
     @GetMapping("/home/reservation/")
-    public ResponseEntity getReservationByHomes(@RequestParam("email") String email, @RequestParam("apartment_id") long id) {
+    public ResponseEntity getReservationByHomes(@RequestHeader("email") String email, @RequestParam("apartment_id") long id) {
+//        TODO check if the user is the owner of the room #issue1
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
         ArrayList<Reservation> reservations = new ArrayList<>(reservationRepo.findAllByApartment(apartmentRepo.findById(id).get()));
         for (Reservation reserve : reservations
