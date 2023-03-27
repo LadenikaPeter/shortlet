@@ -3,7 +3,7 @@
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="input-wrapper">
                 <label for="">Title</label>
-                <input type="text" ngModel name="title"  />
+                <input type="text" ngModel name="name"  />
             </div>
 
             <div class="input-wrapper">
@@ -16,24 +16,30 @@
                 <input type="text" ngModel name="address"  />
             </div>
 
-            <div class="input-wrapper">
+            <!-- <div class="input-wrapper">
                 <label for="">Email</label>
-                <input type="email" ngModel name="email"  />
-            </div>
+                <input type="email" placeholder="sami@gmail.com" ngModel name="user_email"  />
+            </div> -->
         
-            <div class="input-wrapper">
+            <!-- <div class="input-wrapper">
                 <label for="">First Name</label>
                 <input type="text" ngModel name="firstName"  />
-            </div>
+            </div> -->
         
             <div class="input-wrapper">
-                <label for="">Last Name</label>
-                <input type="text" ngModel name="lastName"  />
+                <label for="">No Of Bedrooms</label>
+                <input type="number" ngModel name="noOfBedrooms"  />
             </div>
-        
+       
+            <div class="input-wrapper">
+                <label for="">No Of Bathrooms</label>
+                <input type="number" ngModel name="noOfBathrooms"  />
+            </div>
+            
+
             <div class="input-wrapper">
                 <label for="">Max No of Guest</label>
-                <input type="number" ngModel name="guest"  />
+                <input type="number" ngModel name="maxNoOfGuests"  />
             </div>
         
             <div class="input-wrapper">
@@ -41,14 +47,36 @@
                 <input type="number" ngModel name="price"  />
             </div>
 
+            <div class="input-wrapper">
+                <label for="">propertyType</label>
+                <input type="text" ngModel name="propertyType"  />
+            </div>
 
             <!-- <div class="input-wrapper">
-                <label for="file">Select image</label>
-                <input id="file" type="file" multiple ngModel name="photos"/>
+                <label for="">House Type</label>
+                <input type="text" ngModel name="houseType"  />
             </div> -->
-
-
             
+            <div class="input-wrapper">
+                <select name="cars" id="cars" ngModel name="propertyType">
+                    <option value="APARTMENT">Apartment</option>
+                    <option value="HOTEL">Hotel</option>
+                  </select>
+            </div>
+
+            <div class="input-wrapper">
+                <select name="propertyType" id="property-type" ngModel name="houseType">
+                    <option value="PRIVATE_ROOM">Private Room</option>
+                </select>
+            </div>
+            <!-- <form >
+
+                <select name="cars" id="cars" ngModel name="houseType">
+                    <option value="APARTMENTsss">Apartment</option>
+                    <option value="HOTEL">Hotel</option>
+                  </select>
+
+            </form> -->            
 
             <div class="submit"> 
                 <!-- <button type="submit">Upload Pictures</button> -->
@@ -57,6 +85,6 @@
         </form>
     </div>
 
-    <h1>{{form.description}}</h1>
-    <h1>{{form.title}}</h1>
+    <!-- <h1>{{form.description}}</h1>
+    <h1>{{form.title}}</h1> -->
 </div>

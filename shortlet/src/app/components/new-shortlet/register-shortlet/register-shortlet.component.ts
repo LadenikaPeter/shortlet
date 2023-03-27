@@ -19,19 +19,24 @@ export class RegisterShortletComponent {
 
   onSubmit(form: NgForm){
     this.form = form.value
-    console.log(form.value)
-    this.addNewShortlet();
-  }
+    let formData = form.value
+    console.log(formData)
+    // this.addNewShortlet(formData);
 
 
-  addNewShortlet(){
-    this.dataStorage.registerNewShortlet().subscribe(
+
+    this.dataStorage.registerNewShortlet(formData).subscribe(
       (response) => {
         console.log((this.newShortlet = response));
       },
       (error) => console.log(error)
     );
   }
+
+
+  // addNewShortlet(formData){
+    
+  // }
   
   
 }

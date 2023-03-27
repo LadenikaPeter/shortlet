@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Shortlet } from '../interface/shortlet';
+import { NewShortlet, Shortlet } from '../interface/shortlet';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -20,7 +20,7 @@ export class DataStorageService {
     return this.http.get<Shortlet>(`http://localhost:8080/home/?house_id=${id}`);
   }
 
-  registerNewShortlet(){
+  registerNewShortlet(formData){
     // const email = '';
     
     const options = {
@@ -29,16 +29,24 @@ export class DataStorageService {
       }
     };
 
+    // const formData = {
+    //   name: 'John Doe',
+    //   description: 'a townhall different from balablu',
+    //   address :"Lagos,Nigeria",
+    //   price:2000,
+    //   rating:4.3,
+    //   maxNoOfGuests:50,
+    //   noOfBedrooms:80,
+    //   noOfBathrooms:40,
+    //   propertyType:"HOTEL",
+    //   houseType:"PRIVATE_ROOM",
+    //   pictures:["leaf village","naruto","bleach"],
+    //   // amenities:{
+    //   //     wifi:"true"
+    //   // }
+    // };
 
 
-
-    const formData = {
-      name: 'John Doe',
-      email: 'sami@gmail.com',
-      description: 'Hello world!'
-    };
-
-
-    return this.http.post<Shortlet>(`http://localhost:8080/addHome/`, formData, options)
+    return this.http.post<NewShortlet>(`http://localhost:8080/addHome/`, formData, options)
   }
 }
