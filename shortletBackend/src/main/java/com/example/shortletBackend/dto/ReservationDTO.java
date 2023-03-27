@@ -18,5 +18,5 @@ public class ReservationDTO {
     private Date checkOutDate;
     private int price;
 
-    private ApartmentsDTO apartment;
+    private ApartmentForReservation apartment;
 }
