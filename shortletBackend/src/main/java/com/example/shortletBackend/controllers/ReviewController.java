@@ -7,15 +7,21 @@ import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.ReservationState;
 import com.example.shortletBackend.repositories.*;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import static java.lang.Math.log;
+
 @AllArgsConstructor
 @RestController
+@Slf4j
 public class ReviewController {
     private final ReviewRepository reviewRepository;
     private final CommentRepository commentRepository;
@@ -72,8 +78,11 @@ public class ReviewController {
                 ) {
                     rating += (ratingScore.getReview()/5);
                 }
+                double ratingPercentage = ((rating) / ratingList.size()) * 5.0;
 
-                apartments.get().setRating((((rating)/ratingList.size())*5));
+                BigDecimal newRating=new BigDecimal(ratingPercentage).setScale(2, RoundingMode.HALF_UP);
+
+                apartments.get().setRating(newRating.doubleValue());
                 apartmentRepository.save(apartments.get());
                 return ResponseEntity.ok(apartments.get());
             }else {
