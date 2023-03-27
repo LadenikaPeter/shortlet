@@ -89,7 +89,7 @@ public class ApartmentController {
             apartments.setUsers(users.get());
             userRepo.save(users.get());
             apartmentRepo.save(apartments);
-            return ResponseEntity.ok(apartments+" this is added");
+            return ResponseEntity.ok(apartments);
         }else {
             return new ResponseEntity<>("You should really signup or login else you won't" +
             " be able to do this ",HttpStatus.FORBIDDEN);
