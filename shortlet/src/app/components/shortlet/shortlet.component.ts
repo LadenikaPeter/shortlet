@@ -19,6 +19,8 @@ export class ShortletComponent implements OnInit {
   shortletPictures: any = [];
   shortletPrice: any;
   showAmenities: boolean = false;
+  maxNoOfGuests: number;
+  counter: number = 1;
   // reservedDates: any = []
 
   testArray = [{ checkin: '2023-03-23', checkout: '2023-03-25' }];
@@ -56,6 +58,7 @@ export class ShortletComponent implements OnInit {
         console.log((this.shortletData = response));
         this.shortletData = response;
         this.overallArray = response.reservations;
+        this.maxNoOfGuests = response.maxNoOfGuests;
         // console.log(this.overallArray);
         for (let reserve of this.overallArray) {
           this.checkdateInbetween(reserve.checkInDate, reserve.checkOutDate);
@@ -233,4 +236,17 @@ export class ShortletComponent implements OnInit {
   trial = new Date();
   twodayAhead = this.trial.setDate(this.trial.getDate() + 2);
   minDateForCheckOut = new Date(this.twodayAhead);
+
+  increment() {
+    if (this.counter < this.maxNoOfGuests) {
+      this.counter = this.counter + 1;
+    }
+    return false;
+  }
+
+  decrement() {
+    if (this.counter > 1) {
+      this.counter = this.counter - 1;
+    }
+  }
 }
