@@ -11,6 +11,7 @@ import { NewShortletComponent } from './components/new-shortlet/new-shortlet.com
 import { RegisterShortletComponent } from './components/new-shortlet/register-shortlet/register-shortlet.component';
 import { BookingComponent } from './components/shortlet/booking/booking.component';
 import { ShortletComponent } from './components/shortlet/shortlet.component';
+import { TripsComponent } from './components/trips/trips.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'host/shortlets/new',
     component: RegisterShortletComponent,
+  },
+  {
+    path: 'trips',
+    component: TripsComponent,
   },
 ];
 
