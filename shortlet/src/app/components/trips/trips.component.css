@@ -31,3 +31,39 @@ h4 {
   font-size: 18px;
   font-weight: 500;
 }
+
+/* trips container */
+.row {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  justify-content: space-around;
+}
+.col-xs-12 {
+  width: 65%;
+  height: 170px;
+  border: 1px solid #484848;
+  border-radius: 12px;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.image_container {
+  display: inline-block;
+  height: 170px;
+  width: 30%;
+}
+.apartment_container {
+  color: #484848;
+  padding: 6px 0 15px 20px;
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  width: 70%;
+}
+
+img {
+  border-radius: 12px;
+  display: inline;
+  width: 100%;
+  height: 100%;
+}

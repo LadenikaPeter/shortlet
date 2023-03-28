@@ -3,6 +3,10 @@ export interface Shortlet {
   houseRefCode: number;
   id: number;
   maxNoOfGuests: number;
+  noOfBedrooms: number;
+  noOfBathrooms: number;
+  noOfBeds: number;
+  description: string;
   name: string;
   pictures: Pictures[];
   price: number;

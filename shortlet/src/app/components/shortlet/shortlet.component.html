@@ -3,14 +3,13 @@
   <div style="display: flex; justify-content: space-between">
     <div style="display: flex; gap: 0.5rem">
       <p>★ {{ shortletData.rating }}</p>
-      <p>· 148 reviews</p>
-      <p>· Superhost</p>
+      <p>· {{ shortletData.users.name }}</p>
       <p>· {{ shortletData.address }}</p>
     </div>
-    <div style="display: flex; gap: 1rem">
+    <!-- <div style="display: flex; gap: 1rem">
       <p>Share</p>
       <p>Save</p>
-    </div>
+    </div> -->
   </div>
 
   <div class="parent">
@@ -35,53 +34,54 @@
   <div style="display: flex; padding-top: 2rem">
     <div>
       <div>
-        <h2>Entire home hosted by {{ shortletData.name }}</h2>
+        <h2>Entire home hosted by {{ shortletData.users.name }}</h2>
         <div style="display: flex; gap: 0.5rem">
           <p>{{ shortletData.maxNoOfGuests }} guests</p>
-          <p>4 bedrooms</p>
-          <p>5 beds</p>
-          <p>3 baths</p>
+          <p>{{ shortletData.noOfBedrooms }} bedrooms</p>
+          <p>{{ shortletData.noOfBeds }} beds</p>
+          <p>{{ shortletData.noOfBathrooms }} baths</p>
         </div>
         <hr />
 
-        <div style="display: flex; gap: 0.5rem">
+        <!-- <div style="display: flex; gap: 0.5rem">
           <i class="pi-calendar"></i>
           <div>
             <h5>Designed by</h5>
             <p>Cadaval & Solà-Morales</p>
           </div>
-        </div>
+        </div> -->
 
-        <div style="display: flex; gap: 0.5rem">
+        <!-- <div style="display: flex; gap: 0.5rem">
           <p>icon</p>
           <div>
             <h5>Featured in</h5>
             <p>The New York Times, January 2014<br />Wallpaper*, May 2015</p>
           </div>
-        </div>
+        </div> -->
 
         <div style="display: flex; gap: 0.5rem">
-          <p>icon</p>
+          <img
+            style="width: 24px; width: 24px"
+            src="../../../assets/svg/clock.svg"
+            alt="clock-img"
+          />
           <div>
-            <h5>Free cancellation for 48 hours.</h5>
+            <h5 style="margin: 0">Free cancellation for 48 hours.</h5>
           </div>
         </div>
       </div>
       <hr />
 
       <p>
-        Beautiful 4 bedroom architecturally designed villa, with infinity pool
-        and floor to ceiling views in almost every room of the sea and Cap de
-        Creus national park, in beautiful working fishing village in Northern
-        Spain.
+        {{ shortletData.description }}
       </p>
-      <h5>The space</h5>
+      <!-- <h5>The space</h5>
       <p>The house has been featured in the New York Times and in Wallpaper.</p>
-      <h5>Show more</h5>
+      <h5>Show more</h5> -->
 
-      <hr />
+      <!-- <hr />
       <h4>Where you'll sleep</h4>
-      <p>carousel</p>
+      <p>carousel</p> -->
       <hr />
       <h4>What this place offers</h4>
       <!-- amenities -->
@@ -101,7 +101,7 @@
       </div>
       <div>
         <!-- Button trigger modal -->
-        <button
+        <!-- <button
           type="button"
           class="btn btn-primary modal-button"
           data-bs-toggle="modal"
@@ -109,7 +109,7 @@
           (click)="toggleAmenities()"
         >
           Show all 49 amenities
-        </button>
+        </button> -->
 
         <!-- Modal -->
         <div
@@ -350,12 +350,13 @@
         >
           {{ buttonDisable ? "Not Available" : "Reserve" }}
         </button>
-        <p class="small">You won't be charged yet</p>
+        <p *ngIf="!buttonDisable" class="small">You won't be charged yet</p>
       </div>
     </div>
   </div>
 
   <hr />
+  <h3>Comments</h3>
 
   <!-- end -->
 </div>
