@@ -4,6 +4,10 @@ export interface Shortlet {
   id: number;
   description: string
   maxNoOfGuests: number;
+  noOfBedrooms: number;
+  noOfBathrooms: number;
+  noOfBeds: number;
+  description: string;
   name: string;
   pictures: Pictures[];
   price: number;

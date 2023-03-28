@@ -24,7 +24,7 @@ export class ShortletComponent implements OnInit {
 
   buttonDisable: boolean;
 
-  // testArray = [{ checkin: '2023-03-23', checkout: '2023-03-25' }];
+  myHolidayDates = [];
   mynewArray = [];
   overallArray = [];
 
@@ -41,18 +41,9 @@ export class ShortletComponent implements OnInit {
     this.checkinDate = new Date();
     this.noSelectFromPast();
     this.noSelectLessThan2();
-
     let newCheckoutDate = (this.checkoutDate = new Date());
     newCheckoutDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
-
-    console.log(this.checkinDate);
     this.fetchDateSelected();
-    console.log(this.myHolidayDates);
-    this.myHolidayDates;
-
-    // this.mytest();
-    // this.logicToDisableDate();
-    // this.checkdateInbetween();
   }
   
 
@@ -113,15 +104,10 @@ export class ShortletComponent implements OnInit {
 
   noSelectFromPast() {
     const date = new Date();
-
     const year = date.toLocaleString('default', { year: 'numeric' });
-
     const month = date.toLocaleString('default', { month: '2-digit' });
-
     const day = date.toLocaleString('default', { day: '2-digit' });
-
     const formattedDate = year + '-' + month + '-' + day;
-
     this.dateForCalendar = formattedDate;
 
     // console.log(formattedDate); // Prints: 2022-05-04
@@ -129,48 +115,22 @@ export class ShortletComponent implements OnInit {
 
   noSelectLessThan2() {
     let newDate = new Date();
-
     newDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
-
     const year = newDate.toLocaleString('default', { year: 'numeric' });
-
     const month = newDate.toLocaleString('default', { month: '2-digit' });
-
     const day = newDate.toLocaleString('default', { day: '2-digit' });
-
     const formattedDate = year + '-' + month + '-' + day;
-
     this.dateForCalendar2 = formattedDate;
-
     console.log(formattedDate);
   }
 
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
-
-  // myDateFilter = (d: Date | null): boolean => {
-  //   const day = (d || new Date()).getDay();
-  //   return day !== 0 && day !== 6;
-  // };
-
   dateConverter(dateOBJ: Date) {
     const date = new Date(dateOBJ);
-
     const year = date.toLocaleString('default', { year: 'numeric' });
-
     const month = date.toLocaleString('default', { month: '2-digit' });
-
     const day = date.toLocaleString('default', { day: '2-digit' });
-
     const formattedDate = month + '/' + day + '/' + year;
-
     return formattedDate;
-    // this.dateForCalendar = formattedDate;
-
-    // console.log(formattedDate);
-
     // console.log(formattedDate); // Prints: 2022-05-04
   }
 
@@ -183,31 +143,17 @@ export class ShortletComponent implements OnInit {
     let testCheck2 = new Date(checkOutDate);
 
     const date = new Date(testCheck1.getTime());
-
     const dates = [];
-
     while (date <= testCheck2) {
       dates.push(new Date(date).toLocaleDateString());
       date.setDate(date.getDate() + 1);
     }
-
     console.log(dates);
-
     for (let date1 of dates) {
       this.myHolidayDates.push(new Date(date1));
       this.mynewArray.push(new Date(date1));
-      // this.myHolidayDates.push(new Date(this.dateConverter(date1)));
     }
-
-    console.log(this.myHolidayDates);
-    console.log(this.mynewArray);
   }
-
-  myHolidayDates = [
-    // new Date('3/28/2023'),
-    // new Date('3/29/2023'),
-    // new Date('3/30/2023'),
-  ];
 
   disableReserveDate() {
     //this will disable reserve date if both the current day and two days ahead are already reserved
