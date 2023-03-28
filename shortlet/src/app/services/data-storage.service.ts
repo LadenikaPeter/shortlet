@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NewShortlet, Shortlet } from '../interface/shortlet';
+import { Shortlet } from '../interface/shortlet';
+import { NotificationService } from './notifications.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -12,7 +13,11 @@ export class DataStorageService {
   checkInDateforDB: any;
   checkOutDateforDB: any;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private notif: NotificationService
+  ) {}
 
   // const headers = new HttpHeaders()
   // .set('Authorization', 'Bearer your-access-token')
@@ -104,6 +109,7 @@ export class DataStorageService {
       )
       .subscribe((res) => {
         console.log(res);
+        this.notif.successMessage('Reservation Successful');
         this.router.navigate(['/trips']);
       });
   }
