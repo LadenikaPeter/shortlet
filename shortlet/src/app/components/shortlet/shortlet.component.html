@@ -197,7 +197,7 @@
               [(ngModel)]="checkinDate"
               [matDatepicker]="picker"
               [matDatepickerFilter]="myHolidayFilter"
-              (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix

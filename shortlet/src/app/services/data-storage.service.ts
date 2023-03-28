@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Shortlet } from '../interface/shortlet';
+import { NewShortlet, Shortlet } from '../interface/shortlet';
 import { NotificationService } from './notifications.service';
 
 @Injectable({ providedIn: 'root' })
@@ -40,23 +40,6 @@ export class DataStorageService {
         'user_email': 'sami@gmail.com'
       }
     };
-
-    // const formData = {
-    //   name: 'John Doe',
-    //   description: 'a townhall different from balablu',
-    //   address :"Lagos,Nigeria",
-    //   price:2000,
-    //   rating:4.3,
-    //   maxNoOfGuests:50,
-    //   noOfBedrooms:80,
-    //   noOfBathrooms:40,
-    //   propertyType:"HOTEL",
-    //   houseType:"PRIVATE_ROOM",
-    //   pictures:["leaf village","naruto","bleach"],
-    //   // amenities:{
-    //   //     wifi:"true"
-    //   // }
-    // };
 
 
     return this.http.post<NewShortlet>(`http://localhost:8080/addHome/`, formData, options)

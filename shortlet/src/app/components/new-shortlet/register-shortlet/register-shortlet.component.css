@@ -17,20 +17,29 @@
     padding-left: 0.5rem;
   }
   
-  /* label {
+  label {
     position: absolute;
     top: 0.2ex;
     z-index: 1;
     left: 1em;
     background-color: white;
     padding: 0 5px;
-  } */
+  }
 
   button {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
     border: none;
-    border-radius: 13px;
+
+    border-radius: 0.5rem;
     padding: 0.5rem 3.5rem;
-    background-color: blue;
+    background-color: #ff0066;
     color: #ffffff;
     /* margin: 0rem 5rem; */
+  }
+
+
+  .amenities {
+    /* width: 20px; */
   }
