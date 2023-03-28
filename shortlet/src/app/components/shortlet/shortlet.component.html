@@ -196,6 +196,7 @@
               [matDatepicker]="picker"
               [matDatepickerFilter]="myHolidayFilter"
               (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix
@@ -213,6 +214,7 @@
               [matDatepicker]="picker2"
               [matDatepickerFilter]="myHolidayFilter"
               (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix

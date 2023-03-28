@@ -209,6 +209,8 @@ export class ShortletComponent implements OnInit {
   trial = new Date();
   twodayAhead = this.trial.setDate(this.trial.getDate() + 2);
   minDateForCheckOut = new Date(this.twodayAhead);
+  // selectedChecKinDate;
+  // selectedCheckoutDate;
 
   increment() {
     if (this.counter < this.maxNoOfGuests) {
@@ -221,5 +223,9 @@ export class ShortletComponent implements OnInit {
     if (this.counter > 1) {
       this.counter = this.counter - 1;
     }
+  }
+
+  trialM(e) {
+    console.log('works');
   }
 }
