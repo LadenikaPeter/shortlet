@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 import static java.lang.Math.log;
@@ -35,9 +36,10 @@ public class ReviewController {
             , @RequestHeader("user_email")String email){
         Optional<Users> users = userRepository.findUsersByEmail(email);
         if ( users.isPresent()) {
-            if (reservationRepository.existsReservationsByReservationStateAndApartment_IdAndUsers_Email(ReservationState.COMPLETED,id,email)){
+//            if (reservationRepository.existsReservationsByReservationStateAndApartment_IdAndUsers_Email(ReservationState.COMPLETED,id,email)){
                 
                 Optional<Apartments> apartments=apartmentRepository.findById(id);
+                comments.setCommentDate(new Date());
                 comments.setUsers(users.get());
                 comments.setApartments(apartments.get());
 
@@ -46,10 +48,10 @@ public class ReviewController {
                 commentRepository.save(comments);//save a comment
                 userRepository.save(users.get());
                 return ResponseEntity.ok(apartments.get());
-            }else {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("this user hasn't completed a stayed at the house" +
-                        " as such can't comment ");
-            }
+//            }else {
+//                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("this user hasn't completed a stayed at the house" +
+//                        " as such can't comment ");
+//            }
 
 
         }else {

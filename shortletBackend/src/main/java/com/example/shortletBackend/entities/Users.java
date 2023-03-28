@@ -42,9 +42,9 @@ public class Users {
     @OneToMany(mappedBy = "users")//,cascade = CascadeType.ALL)
     private Set<Reservation> reservationSet=new HashSet<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "users")
     private Set<Review> reviewSet= new HashSet<>();
-    @OneToMany
+    @OneToMany(mappedBy = "users")
     private Set<Comments> comments = new HashSet<>();
 
 }
