@@ -21,9 +21,10 @@ export class ShortletComponent implements OnInit {
   showAmenities: boolean = false;
   maxNoOfGuests: number;
   counter: number = 1;
-  // reservedDates: any = []
 
-  testArray = [{ checkin: '2023-03-23', checkout: '2023-03-25' }];
+  buttonDisable: boolean;
+
+  // testArray = [{ checkin: '2023-03-23', checkout: '2023-03-25' }];
   mynewArray = [];
   overallArray = [];
 
@@ -46,6 +47,9 @@ export class ShortletComponent implements OnInit {
 
     console.log(this.checkinDate);
     this.fetchDateSelected();
+    console.log(this.myHolidayDates);
+    this.myHolidayDates;
+
     // this.mytest();
     // this.logicToDisableDate();
     // this.checkdateInbetween();
@@ -68,6 +72,7 @@ export class ShortletComponent implements OnInit {
         this.calculateBill(); //details of shortlet from API
         // console.log(this.shortletPrice = response.price)
         this.shortletPictures = response.pictures; //pictures of shortlet from API
+        this.disableReserveDate();
       },
       (error) => console.log(error)
     );
@@ -150,8 +155,8 @@ export class ShortletComponent implements OnInit {
   //   return day !== 0 && day !== 6;
   // };
 
-  dateConverter() {
-    const date = new Date('2023-03-23');
+  dateConverter(dateOBJ: Date) {
+    const date = new Date(dateOBJ);
 
     const year = date.toLocaleString('default', { year: 'numeric' });
 
@@ -159,11 +164,12 @@ export class ShortletComponent implements OnInit {
 
     const day = date.toLocaleString('default', { day: '2-digit' });
 
-    const formattedDate = month + '-' + day + '-' + year;
+    const formattedDate = month + '/' + day + '/' + year;
 
+    return formattedDate;
     // this.dateForCalendar = formattedDate;
 
-    console.log(formattedDate);
+    // console.log(formattedDate);
 
     // console.log(formattedDate); // Prints: 2022-05-04
   }
@@ -189,52 +195,48 @@ export class ShortletComponent implements OnInit {
 
     for (let date1 of dates) {
       this.myHolidayDates.push(new Date(date1));
+      this.mynewArray.push(new Date(date1));
+      // this.myHolidayDates.push(new Date(this.dateConverter(date1)));
     }
 
     console.log(this.myHolidayDates);
-
-    // if (testCheck1.getTime() === testCheck2.getTime()) {
-    //   console.log('true');
-    // } else {
-    //   console.log('false');
-    // }
-    // console.log(dates);
-
-    // for (let date1 of dates) {
-    //   // console.log(date1);
-    //   if (new Date(date1).getTime() === testCheck2.getTime()) {
-    //     console.log('not available');
-    //   }
-    // }
+    console.log(this.mynewArray);
   }
 
   myHolidayDates = [
-    // new Date('12/1/2020'),
-    // new Date('12/20/2020'),
-    // new Date('12/17/2020'),
-    // new Date('12/25/2020'),
-    // new Date('12/4/2020'),
-    // new Date('12/7/2020'),
-    // new Date('12/12/2020'),
-    // new Date('12/11/2020'),
-    // new Date('12/26/2020'),
-    // new Date('12/25/2020'),
-    // new Date('03-23-2023'),
-    // new Date('03-25-2023'),
+    // new Date('3/28/2023'),
+    // new Date('3/29/2023'),
+    // new Date('3/30/2023'),
   ];
+
+  disableReserveDate() {
+    //this will disable reserve date if both the current day and two days ahead are already reserved
+    const checkIn = this.dateConverter(this.checkinDate);
+    const checkOut = this.dateConverter(this.minDateForCheckOut);
+    console.log(checkIn);
+    console.log(checkOut);
+    console.log(this.myHolidayDates);
+    // const testArray: Array<Date> = [...this.myHolidayDates];
+
+    for (let date of this.mynewArray) {
+      const newDate = this.dateConverter(date);
+      console.log(newDate);
+      if (
+        new Date(newDate).getTime() === new Date(checkIn).getTime() ||
+        new Date(newDate).getTime() === new Date(checkOut).getTime()
+      ) {
+        console.log(true);
+        this.buttonDisable = true;
+      } else {
+        console.log(false);
+      }
+    }
+  }
 
   myHolidayFilter = (d: Date): boolean => {
     const time = d.getTime();
     return !this.myHolidayDates.find((x) => x.getTime() == time);
   };
-
-  logicToDisableDate() {
-    for (let reserve of this.testArray) {
-      // this.mynewArray.push(reserve.checkin, reserve.checkout);
-      // this.checkdateInbetween(reserve.checkin, reserve.checkout);
-    }
-    console.log('from my new array' + this.mynewArray);
-  }
 
   minDate = new Date();
   trial = new Date();

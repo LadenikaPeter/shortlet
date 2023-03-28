@@ -197,7 +197,7 @@
               [(ngModel)]="checkinDate"
               [matDatepicker]="picker"
               [matDatepickerFilter]="myHolidayFilter"
-              (dateChange)="trialM($event)"
+              (change)="fetchDateSelected()"
             />
             <mat-datepicker-toggle
               matIconSuffix
@@ -214,7 +214,7 @@
               [(ngModel)]="minDateForCheckOut"
               [matDatepicker]="picker2"
               [matDatepickerFilter]="myHolidayFilter"
-              (dateChange)="trialM($event)"
+              (change)="fetchDateSelected()"
             />
             <mat-datepicker-toggle
               matIconSuffix
@@ -344,6 +344,7 @@
       <div class="reserve-btn">
         <button
           routerLink="booking"
+          [disabled]="buttonDisable"
           [queryParams]="{
             checkin: checkinDate,
             checkout: minDateForCheckOut,
@@ -351,7 +352,7 @@
             guests: counter
           }"
         >
-          Reserve
+          {{ buttonDisable ? "Not Available" : "Reserve" }}
         </button>
         <p class="small">You won't be charged yet</p>
       </div>
