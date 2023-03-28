@@ -196,6 +196,7 @@
               [matDatepicker]="picker"
               [matDatepickerFilter]="myHolidayFilter"
               (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix
@@ -213,6 +214,7 @@
               [matDatepicker]="picker2"
               [matDatepickerFilter]="myHolidayFilter"
               (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix
@@ -340,6 +342,7 @@
       <div class="reserve-btn">
         <button
           routerLink="booking"
+          [disabled]="buttonDisable"
           [queryParams]="{
             checkin: checkinDate,
             checkout: minDateForCheckOut,
@@ -347,7 +350,7 @@
             guests: counter
           }"
         >
-          Reserve
+          {{ buttonDisable ? "Not Available" : "Reserve" }}
         </button>
         <p class="small">You won't be charged yet</p>
       </div>
