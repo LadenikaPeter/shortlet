@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+
+// reservation dto without apartment details
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

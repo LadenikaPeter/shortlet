@@ -24,6 +24,7 @@ export class BookingComponent implements OnDestroy, OnInit {
   totalForPaystack: number;
   title: string;
   reference;
+  guests: number;
 
   constructor(
     private dataStorage: DataStorageService,
@@ -49,6 +50,7 @@ export class BookingComponent implements OnDestroy, OnInit {
     this.checkin = this.activatedRoute.snapshot.queryParams['checkin'];
     this.checkout = this.activatedRoute.snapshot.queryParams['checkout'];
     this.nights = this.activatedRoute.snapshot.queryParams['nights'];
+    this.guests = this.activatedRoute.snapshot.queryParams['guests'];
 
     this.calculateBill();
     this.reference = `${Math.ceil(Math.random() * 10e10)}`;

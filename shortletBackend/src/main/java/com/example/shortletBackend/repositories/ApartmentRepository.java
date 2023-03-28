@@ -8,9 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;
 
-public interface ApartmentRepo extends JpaRepository<Apartments, Long> {
+public interface ApartmentRepository extends JpaRepository<Apartments, Long> {
     ArrayList<Apartments> findAllByHomeStateIs(HomeState homeState);
     ArrayList<Apartments> findAllByUsers(Users users);
+    ArrayList<Apartments> findAllByMaxNoOfGuestsGreaterThanEqualAndHomeState(int numOfGuest, HomeState verified);
 
     ArrayList<Apartments> findAllByPropertyTypeIsAndHomeState(PropertyType propertyType,HomeState homeState);
 

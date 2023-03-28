@@ -105,6 +105,14 @@ export class AuthService {
     userToken: string,
     expiresIn: number
   ) {
+    this.http
+      .post('http://localhost:8080/signup', {
+        name: displayName,
+        email: email,
+      })
+      .subscribe((res) => {
+        console.log(res);
+      });
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(
       email,

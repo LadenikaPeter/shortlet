@@ -15,10 +15,10 @@ import java.util.Date;
 @AllArgsConstructor
 @Component
 public class bootStrap implements CommandLineRunner {
-    private final ApartmentRepo apartmentRepo;
+    private final ApartmentRepository apartmentRepo;
     private final PicturesRepository picturesRepository;
-    private final UserRepo userRepo;
-    private final ReservationRepo reservationRepo;
+    private final UserRepository userRepository;
+    private final ReservationRepository reservationRepo;
     private final AmenitiesRepository amenitiesRepository;
 
     @Override
@@ -33,7 +33,7 @@ public class bootStrap implements CommandLineRunner {
         Users chi = new Users("Chiabuotu Chinomso","chi@gmail.com",Role.USER);
         Users isak = new Users("Isak Lennert","isak@gmail.com",Role.USER);
 
-        userRepo.saveAll(new ArrayList<>(Arrays.asList(walter,Admin,kathy,samy,melisa,emily,olu,chi,isak)));
+        userRepository.saveAll(new ArrayList<>(Arrays.asList(walter,Admin,kathy,samy,melisa,emily,olu,chi,isak)));
 
         Apartments firstHouse = new Apartments();
         firstHouse.setAddress("Leece");
@@ -42,7 +42,7 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setName("Saponea 13 Flat Design");
         firstHouse.setHouseRefCode(firstHouse.getAddress().substring(0, 3), 1);
         firstHouse.setPrice(533);
-        firstHouse.setRating(4.7);
+//        firstHouse.setRating();
         firstHouse.setHomeState(HomeState.VERIFIED);
         firstHouse.setNoOfBeds(3);
         firstHouse.setNoOfBathrooms(2);
@@ -308,7 +308,9 @@ public class bootStrap implements CommandLineRunner {
         House6.setHomeState(HomeState.VERIFIED);
         House6.setMaxNoOfGuests(4);
         House6.setUsers(melisa);
-        House6.setDescription("Proin consectetur risus arcu, tempus lobortis elit ornare in. Ut finibus tellus nulla, vitae sollicitudin orci ultrices id. Phasellus facilisis risus eget ultricies venenatis. Duis sed eros neque. Maecenas consequat orci a eleifend gravida. Etiam ullamcorper dui quam, eget ultricies. ");
+        House6.setDescription("The house has very bright spaces, lots of natural light, the decoration is very fresh and fun with some antique elements that give it a special touch.\n" +
+                "The space\n" +
+                "The sound of the waves of the sea floods every corner of the house. It's a unique place to disconnect from the outside world and connect with nature. Ideal for surfers due to location.");
         House6.setNoOfBeds(4);
         House6.setNoOfBathrooms(2);
         House6.setNoOfBedrooms(3);
@@ -720,7 +722,7 @@ public class bootStrap implements CommandLineRunner {
         Reservation reservation = new Reservation();
         reservation.setCheckInDate(new Date());//today's date(checkIn date)
         reservation.setCheckOutDate(new Date(2023 - 1900, Calendar.MARCH, 25));//check out date
-        reservation.setReservationState(ReservationState.PENDING);
+        reservation.setReservationState(ReservationState.COMPLETED);
 
         reservation.setUsers(Admin);
         reservation.setApartment(firstHouse);
@@ -728,7 +730,7 @@ public class bootStrap implements CommandLineRunner {
         amenitiesRepository.saveAll(new ArrayList<>(Arrays.asList(A,h2,h3,h4,h5,h6,h7,h8,h9,h10
         ,h11,h12)));
         picturesRepository.saveAll(picturesCollection);
-        userRepo.save(Admin);
+        userRepository.save(Admin);
         apartmentRepo.saveAll(houseCollection);
         reservationRepo.save(reservation);
 

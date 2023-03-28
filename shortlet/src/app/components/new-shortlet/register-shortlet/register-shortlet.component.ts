@@ -17,6 +17,10 @@ export class RegisterShortletComponent {
 
   newShortlet: Partial<NewShortlet> = {};
 
+  // newShortlet: Partial<NewShortlet> = {
+  //   amenities: []
+  // };
+
   onSubmit(form: NgForm){
     this.form = form.value
     let formData = form.value
@@ -31,7 +35,24 @@ export class RegisterShortletComponent {
       },
       (error) => console.log(error)
     );
+
+    // formData.amenities = this.newShortlet.amenities;
+    // console.log(formData);
+
+
+
   }
+
+  // Define the nested form model
+  amenities: {
+    wifi: boolean;
+    pool: boolean;
+    gym: boolean;
+  } = {
+    wifi: false,
+    pool: false,
+    gym: false,
+  };
 
 
   // addNewShortlet(formData){

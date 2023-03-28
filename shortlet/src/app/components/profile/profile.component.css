@@ -60,13 +60,22 @@ input[type="number"] {
   border-color: #484848;
 }
 
+.phoneN {
+  border-color: #484848;
+}
+
+.phoneN:focus {
+  box-shadow: none;
+}
+
 input[type="text"]:focus {
   box-shadow: none;
 }
 
-input[type="number"]:focus {
+/* input[type="number"]:focus {
   box-shadow: none;
-}
+} */
+
 /* for removinng scroll bars from input type 'number' */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
