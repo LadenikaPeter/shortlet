@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
+import * as fromenvironment from 'src/environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
@@ -31,6 +32,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { FilterBarComponent } from './components/header/filter-bar/filter-bar.component';
 import { AuthServiceInterceptor } from './auth/auth.interceptor.service';
+import { TripsComponent } from './components/trips/trips.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { AuthServiceInterceptor } from './auth/auth.interceptor.service';
     RegisterShortletComponent,
     SearchBarComponent,
     FilterBarComponent,
+    TripsComponent,
   ],
   imports: [
     CommonModule,
@@ -61,9 +64,7 @@ import { AuthServiceInterceptor } from './auth/auth.interceptor.service';
     MatFormFieldModule,
     MatInputModule,
     ToastrModule.forRoot(),
-    Angular4PaystackModule.forRoot(
-      'pk_test_132ebd9d8b822325a146ed8d3c55c6d3c7e77821'
-    ),
+    Angular4PaystackModule.forRoot(fromenvironment.environment.paystack_key),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),

@@ -25,6 +25,7 @@ export class BookingComponent implements OnDestroy, OnInit {
   title: string;
   reference;
   guests: number;
+  id: number;
 
   constructor(
     private dataStorage: DataStorageService,
@@ -36,6 +37,7 @@ export class BookingComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((data) => {
       console.log(data);
+      this.id = data['id'];
       let id: number = data['id'];
       this.displayShortlet(id);
     });
@@ -96,11 +98,11 @@ export class BookingComponent implements OnDestroy, OnInit {
   //   }
   // }
 
-  private getEmailFromLocalStorage() {
-    const user = JSON.parse(localStorage.getItem('shortletUserData'));
-    console.log(user);
-    this.emailForPayment = user.email;
-  }
+  // private getEmailFromLocalStorage() {
+  //   const user = JSON.parse(localStorage.getItem('shortletUserData'));
+  //   console.log(user);
+  //   this.emailForPayment = user.email;
+  // }
 
   paymentInit() {
     console.log('Payment initialized');
@@ -109,6 +111,18 @@ export class BookingComponent implements OnDestroy, OnInit {
   paymentDone(ref: any) {
     this.title = 'Payment successfull';
     console.log(this.title, ref);
+    if (ref.status === 'success') {
+      console.log('payment was successful');
+      this.dataStorage.addReservation(
+        this.id,
+        this.emailForPayment,
+        this.checkin,
+        this.checkout,
+        this.total
+      );
+    } else {
+      console.log('payment was not successfull');
+    }
   }
 
   paymentCancel() {

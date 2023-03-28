@@ -87,7 +87,7 @@ public class UserController {
                 apartmentRepo.save(apartments.get());
                 reservationRepo.save(reservation);
                 userRepository.save(user.get());
-                return ResponseEntity.ok("Successfully reserved");
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(reservation);
             }else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The house can not be found");
             }
@@ -104,6 +104,7 @@ public class UserController {
             reservationDTOS.add(mapper.map(reservation, ReservationDTO.class));
         }
         return ResponseEntity.ok(reservationDTOS);
+
     }
 
 
