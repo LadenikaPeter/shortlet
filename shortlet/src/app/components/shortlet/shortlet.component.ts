@@ -45,6 +45,7 @@ export class ShortletComponent implements OnInit {
     newCheckoutDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
     this.fetchDateSelected();
   }
+  
 
   //to diplay hortlet
   displayShortlet(id: number) {
@@ -72,14 +73,17 @@ export class ShortletComponent implements OnInit {
     this.showAmenities != this.showAmenities;
   }
 
+
+  trialM(e){
+    this.fetchDateSelected();
+  }
+
   fetchDateSelected() {
-    // console.log('here');
-    let timeDiff = Math.abs(
-      new Date(this.checkoutDate).getTime() -
-        new Date(this.checkinDate).getTime()
-    );
+
+    console.log("enter")
+    let timeDiff = Math.abs(this.minDateForCheckOut.getTime() - this.checkinDate.getTime());
     this.numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    console.log(this.checkinDate);
+    console.log(this.numberOfNights);
     this.calculateBill();
   }
 

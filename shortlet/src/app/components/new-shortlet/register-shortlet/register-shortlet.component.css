@@ -17,14 +17,14 @@
     padding-left: 0.5rem;
   }
   
-  label {
+  /* label {
     position: absolute;
     top: 0.2ex;
     z-index: 1;
     left: 1em;
     background-color: white;
     padding: 0 5px;
-  }
+  } */
 
   button {
     border: none;

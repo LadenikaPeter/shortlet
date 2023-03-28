@@ -20,6 +20,7 @@ public class bootStrap implements CommandLineRunner {
     private final UserRepository userRepository;
     private final ReservationRepository reservationRepo;
     private final AmenitiesRepository amenitiesRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -42,7 +43,7 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setName("Saponea 13 Flat Design");
         firstHouse.setHouseRefCode(firstHouse.getAddress().substring(0, 3), 1);
         firstHouse.setPrice(533);
-//        firstHouse.setRating();
+        firstHouse.setRating(4.7);
         firstHouse.setHomeState(HomeState.VERIFIED);
         firstHouse.setNoOfBeds(3);
         firstHouse.setNoOfBathrooms(2);
@@ -76,8 +77,15 @@ public class bootStrap implements CommandLineRunner {
         A.setFireplace(false);
         A.setBbqGrill(true);
         firstHouse.setAmenities(A);
-
         firstHouse.setUsers(walter);
+
+        Comments comment1= new Comments("We were fortunate to get a late check out on the last day which made a huge differnce to us. Good communication from the host.\n" +
+                "Would definitely recommend and is on my list for a return visit",new Date(2023 - 1900, Calendar.FEBRUARY, 25));
+        comment1.setUsers(kathy);
+        comment1.setApartments(firstHouse);
+        Comments comment2= new Comments("We had an amazing holiday . The villa was faultless . Location , size ,cleanliness . I will definitely be back again soon.",new Date(2023 - 1900, Calendar.MARCH, 05),emily,firstHouse);
+
+
 
         //2nd
         Apartments House2 = new Apartments();
@@ -120,6 +128,11 @@ public class bootStrap implements CommandLineRunner {
 
         House2.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture6, picture7, picture8,
                 picture9, picture10})));
+
+        Comments comment3= new Comments(" Very spacious, very clean fantastic location host was always prompt in a response if you had any questions. ",new Date(2023 - 1900, Calendar.MARCH, 25),olu,House2);
+        Comments comment4= new Comments("Great apartment - good size, great location, close to all the bars and restaurants, but set back enough so it isn’t noisy at all",new Date(2023 - 1900, Calendar.MARCH, 05),samy,House2);
+        Comments comment5= new Comments("Great villa brilliant location and fabulous pool,will definitely be back again ",new Date(2023 - 1900, Calendar.MARCH, 15),melisa,House2);
+
         House2.setUsers(Admin);
         Amenities h2 = new Amenities();
         h2.setWifi(true);
@@ -128,6 +141,7 @@ public class bootStrap implements CommandLineRunner {
         h2.setAirCondition(true);
 
         House2.setAmenities(h2);
+
 
         //3rd
         Apartments House3 = new Apartments();
@@ -184,6 +198,12 @@ public class bootStrap implements CommandLineRunner {
         h3.setTv(true);
         h3.setKitchen(true);
         House3.setAmenities(h3);
+
+        Comments comment6= new Comments(" All facilities in the villa are excellent, full kitchen, WiFi, TV with Netflix etc. and washing machine too.",new Date(2022 - 1900, Calendar.DECEMBER, 25),chi,House3);
+        Comments comment7= new Comments("Thank you so much for letting us stay in this beautiful location",new Date(2023 - 1900, Calendar.JANUARY, 25),Admin,House3);
+        Comments comment8= new Comments("We found a home far away from home. Cosy apartment with a breathtaking view!",new Date(2023 - 1900, Calendar.MARCH, 25),walter,House3);
+
+
 
         //4
         Apartments House4 = new Apartments();
@@ -251,6 +271,11 @@ public class bootStrap implements CommandLineRunner {
         h4.setFireExtinguisher(true);
         House4.setAmenities(h4);
 
+        Comments comment9= new Comments("Very nice stay! Very cozy and amazing view of the ocean!\n" +
+                "Too bad we couldn't stay longer",new Date(2023 - 1900, Calendar.FEBRUARY, 25),kathy,House4);
+        Comments comment10= new Comments("We loved it",new Date(2023 - 1900, Calendar.MARCH, 5),isak,House4);
+
+
         Apartments House5 = new Apartments();
         House5.setAddress("Osaka");
         House5.setState("Honshu");
@@ -297,6 +322,11 @@ public class bootStrap implements CommandLineRunner {
         h5.setWasher(true);
         House5.setAmenities(h5);
 
+        Comments comment11= new Comments("100% TOP experience",new Date(2023 - 1900, Calendar.MARCH, 2),melisa,House5);
+        Comments comment12= new Comments("We had a wonderful time and would love to come back. Thanks!",new Date(2023 - 1900, Calendar.MARCH, 4),chi,House5);
+
+
+
         Apartments House6 = new Apartments();
         House6.setAddress("Chania");
         House6.setState("Crete");
@@ -342,6 +372,11 @@ public class bootStrap implements CommandLineRunner {
         h6.setFirstAidKit(true);
         h6.setFireExtinguisher(true);
         House6.setAmenities(h6);
+
+        Comments comment13= new Comments("A house with extraordinary views! We had a great time at this very well decorated and comfortably furnished house",new Date(2023 - 1900, Calendar.MARCH, 20),isak,House6);
+        Comments comment14= new Comments("The apartment is spacious and equipped with every comfort. The view over the ocean is amazing!",new Date(2023 - 1900, Calendar.MARCH, 15),Admin,House6);
+
+
 
         Apartments House7 = new Apartments();
         House7.setAddress("La Lajita");
@@ -390,6 +425,11 @@ public class bootStrap implements CommandLineRunner {
         h7.setFreeParking(true);
         h7.setWorkSpace(true);
         House7.setAmenities(h7);
+
+        Comments comment15= new Comments(" The view is unforgettable.",new Date(2023 - 1900, Calendar.JANUARY, 15),kathy,House7);
+        Comments comment16= new Comments("Just unique and amazing place to stay. ",new Date(2023 - 1900, Calendar.JANUARY, 20),walter,House7);
+
+        House7.getComments().addAll(new ArrayList<>(Arrays.asList(comment15,comment16)));
 
         Apartments House8 = new Apartments();
         House8.setAddress("Mogan");
@@ -446,6 +486,11 @@ public class bootStrap implements CommandLineRunner {
         h8.setWorkSpace(true);
         House8.setAmenities(h8);
 
+        Comments comment17= new Comments("This is perfect for you if you wish to get away from the tourist crowds",new Date(2023 - 1900, Calendar.MARCH, 25),samy,House8);
+        Comments comment18= new Comments("We had a spectacular time, 100% recommended, excellent service and attention, I'm still in love",new Date(2022 - 1900, Calendar.NOVEMBER, 25),melisa,House8);
+
+
+
         Apartments House9 = new Apartments();
         House9.setAddress("Lekki ");
         House9.setState("Lagos");
@@ -490,6 +535,11 @@ public class bootStrap implements CommandLineRunner {
         h9.setPoolTable(true);
         h9.setWasher(true);
         House9.setAmenities(h9);
+
+        Comments comment19= new Comments("Incredible accommodation.",new Date(2022 - 1900, Calendar.DECEMBER, 25),olu,House9);
+        Comments comment20= new Comments("This house is absolutely amazing! An unforgettable view:)",new Date(2022 - 1900, Calendar.DECEMBER, 20),kathy,House9);
+
+
 
         Apartments House10 = new Apartments();
         House10.setAddress("Ikoyi");
@@ -594,6 +644,10 @@ public class bootStrap implements CommandLineRunner {
         h10.setTv(true);
         House10.setAmenities(h10);
 
+        Comments comment21= new Comments("A magical location, incredible ocean views, friendly welcome",new Date(2023 - 1900, Calendar.MARCH, 25),walter,House10);
+        Comments comment22= new Comments("We had an amazing holiday . The villa was faultless . Location , size ,cleanliness . ",new Date(2023 - 1900, Calendar.MARCH, 25),olu,House10);
+
+
 
         Apartments House11 = new Apartments();
         House11.setAddress("Granadilla de Abona");
@@ -650,6 +704,11 @@ public class bootStrap implements CommandLineRunner {
         h11.setFireExtinguisher(true);
         House11.setAmenities(h11);
 
+        Comments comment23= new Comments("Amazing villa, really clean and spacious",new Date(2023 - 1900, Calendar.MARCH, 25),isak,House11);
+        Comments comment24= new Comments("Top class holiday in excellent accommodation.",new Date(2023 - 1900, Calendar.MARCH, 25),Admin,House11);
+
+
+
         Apartments House12 = new Apartments();
         House12.setAddress("Sombrun");
         House12.setState("Occitanie");
@@ -705,6 +764,12 @@ public class bootStrap implements CommandLineRunner {
         h12.setPatio(true);
         House12.setAmenities(h12);
 
+        Comments comment25= new Comments("We had a problem with wi fi and it was sorted very promptly. Would highly recommend this property",new Date(2022 - 1900, Calendar.DECEMBER, 15),melisa,House12);
+        Comments comment26= new Comments("The pool and patio area with BBQ are great for spending time outdoors in the lovely weather.",new Date(2022 - 1900, Calendar.DECEMBER, 25),emily,House12);
+
+//        House12.setComments(comment26);
+//        House12.getComments().addAll();
+
         ArrayList<Apartments> houseCollection = new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse, House2,
                 House3, House4, House5, House6, House7, House8, House9, House10, House11, House12}));
         ArrayList<Pictures> picturesCollection = new ArrayList<>(Arrays.asList(new Pictures[]{picture1, picture2, picture3, picture4,
@@ -727,12 +792,19 @@ public class bootStrap implements CommandLineRunner {
         reservation.setUsers(Admin);
         reservation.setApartment(firstHouse);
 
+
         amenitiesRepository.saveAll(new ArrayList<>(Arrays.asList(A,h2,h3,h4,h5,h6,h7,h8,h9,h10
         ,h11,h12)));
         picturesRepository.saveAll(picturesCollection);
-        userRepository.save(Admin);
+        userRepository.saveAll(new ArrayList<>(Arrays.asList(walter,Admin,kathy,samy,melisa,emily,olu,chi,isak)));
         apartmentRepo.saveAll(houseCollection);
+        commentRepository.saveAll(new ArrayList<>(Arrays.asList(comment1,comment2,comment3,comment4
+                ,comment5,comment6,comment7,comment8,comment9,comment10,comment11,comment12,comment13,comment14
+                ,comment15,comment16,comment17,comment18,comment19,comment20,comment21,comment22,comment23,comment24
+                ,comment25,comment26)));
         reservationRepo.save(reservation);
+
+
 
         System.out.println("house..........." + House2);
         System.out.println("user ......." + Admin);

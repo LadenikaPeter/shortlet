@@ -201,7 +201,7 @@
               matIconSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker #picker (dateChange)="fetchDateSelected()"></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
@@ -251,7 +251,7 @@
               [(ngModel)]="checkinDate"
               [matDatepicker]="picker3"
               [matDatepickerFilter]="myHolidayFilter"
-              (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix
@@ -269,7 +269,7 @@
               [(ngModel)]="minDateForCheckOut"
               [matDatepicker]="picker4"
               [matDatepickerFilter]="myHolidayFilter"
-              (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix
@@ -278,7 +278,9 @@
             <mat-datepicker #picker4></mat-datepicker>
           </mat-form-field>
         </div>
+        
       </div>
+
 
       <div class="guest_counter">
         <p class="guests_label">Guests</p>
