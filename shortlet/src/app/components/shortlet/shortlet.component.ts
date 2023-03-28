@@ -22,6 +22,7 @@ export class ShortletComponent implements OnInit {
   maxNoOfGuests: number;
   counter: number = 1;
   // reservedDates: any = []
+  buttonDisable: boolean;
 
   testArray = [{ checkin: '2023-03-23', checkout: '2023-03-25' }];
   mynewArray = [];
@@ -46,6 +47,7 @@ export class ShortletComponent implements OnInit {
 
     console.log(this.checkinDate);
     this.fetchDateSelected();
+    this.disableReserveDate();
     // this.mytest();
     // this.logicToDisableDate();
     // this.checkdateInbetween();
@@ -146,8 +148,8 @@ export class ShortletComponent implements OnInit {
   //   return day !== 0 && day !== 6;
   // };
 
-  dateConverter() {
-    const date = new Date('2023-03-23');
+  dateConverter(dateOBJ: Date) {
+    const date = new Date(dateOBJ);
 
     const year = date.toLocaleString('default', { year: 'numeric' });
 
@@ -155,11 +157,12 @@ export class ShortletComponent implements OnInit {
 
     const day = date.toLocaleString('default', { day: '2-digit' });
 
-    const formattedDate = month + '-' + day + '-' + year;
+    const formattedDate = month + '/' + day + '/' + year;
 
+    return formattedDate;
     // this.dateForCalendar = formattedDate;
 
-    console.log(formattedDate);
+    // console.log(formattedDate);
 
     // console.log(formattedDate); // Prints: 2022-05-04
   }
@@ -190,7 +193,39 @@ export class ShortletComponent implements OnInit {
     console.log(this.myHolidayDates);
   }
 
-  myHolidayDates = [];
+  myHolidayDates = [
+    new Date('3/28/2023'),
+    new Date('3/29/2023'),
+    new Date('3/30/2023'),
+  ];
+
+  disableReserveDate() {
+    //this will disable reserve date if both the current day and two days ahead are already reserved
+    const checkIn = this.dateConverter(this.checkinDate);
+    const checkOut = this.dateConverter(this.minDateForCheckOut);
+    console.log(checkIn);
+    console.log(checkOut);
+
+    for (let date of this.myHolidayDates) {
+      const newDate = this.dateConverter(date);
+      if (
+        new Date(newDate).getTime() === new Date(checkIn).getTime() ||
+        new Date(newDate).getTime() === new Date(checkOut).getTime()
+      ) {
+        console.log(true);
+        this.buttonDisable = true;
+      }
+    }
+
+    // if (
+    //   new Date('3/28/2023').getTime() === new Date(checkIn).getTime() &&
+    //   new Date('3/30/2023').getTime() === new Date(checkOut).getTime()
+    // ) {
+    //   console.log(true);
+    // } else {
+    //   console.log(false);
+    // }
+  }
 
   myHolidayFilter = (d: Date): boolean => {
     const time = d.getTime();
