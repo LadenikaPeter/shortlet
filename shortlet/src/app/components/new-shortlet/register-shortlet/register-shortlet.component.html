@@ -3,47 +3,105 @@
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div class="input-wrapper">
                 <label for="">Title</label>
-                <input type="text" ngModel name="title"  />
+                <input type="text" ngModel name="name" />
             </div>
-        
-            <div class="input-wrapper">
-                <label for="">First Name</label>
-                <input type="text" ngModel name="firstName"  />
-            </div>
-        
-            <div class="input-wrapper">
-                <label for="">Last Name</label>
-                <input type="text" ngModel name="lastName"  />
-            </div>
-        
-            <div class="input-wrapper">
-                <label for="">Max No of Guest</label>
-                <input type="number" ngModel name="guest"  />
-            </div>
-        
-            <div class="input-wrapper">
-                <label for="">Price per night</label>
-                <input type="number" ngModel name="price"  />
-            </div>
-        
+
             <div class="input-wrapper">
                 <label for="">Description</label>
-                <input type="text" ngModel name="description"  />
+                <input type="text" ngModel name="description"  required/>
             </div>
         
             <div class="input-wrapper">
                 <label for="">Address</label>
-                <input type="text" ngModel name="address"  />
+                <input type="text" ngModel name="address"   required/>
             </div>
 
+            <!-- <div class="input-wrapper">
+                <label for="">Email</label>
+                <input type="email" placeholder="sami@gmail.com" ngModel name="user_email"  />
+            </div> -->
+        
+            <!-- <div class="input-wrapper">
+                <label for="">First Name</label>
+                <input type="text" ngModel name="firstName"  />
+            </div> -->
+        
+            <div class="input-wrapper">
+                <label for="">No Of Bedrooms</label>
+                <input type="number" ngModel name="noOfBedrooms"   required/>
+            </div>
+       
+            <div class="input-wrapper">
+                <label for="">No Of Bathrooms</label>
+                <input type="number" ngModel name="noOfBathrooms"   required/>
+            </div>
+            
+
+            <div class="input-wrapper">
+                <label for="">Max No of Guest</label>
+                <input type="number" ngModel name="maxNoOfGuests"   required/>
+            </div>
+        
+            <div class="input-wrapper">
+                <label for="">Price per night</label>
+                <input type="number" ngModel name="price"   required/>
+            </div>
+
+            <div class="input-wrapper">
+                <label for="">propertyType</label>
+                <input type="text" ngModel name="propertyType"   required/>
+            </div>
 
             <!-- <div class="input-wrapper">
-                <label for="file">Select image</label>
-                <input id="file" type="file" multiple ngModel name="photos"/>
+                <label for="">House Type</label>
+                <input type="text" ngModel name="houseType"  />
             </div> -->
-
-
             
+            <div class="input-wrapper">
+                <select name="cars" id="cars" ngModel name="propertyType" required>
+                    <option value="APARTMENT">Apartment</option>
+                    <option value="HOTEL">Hotel</option>
+                  </select>
+            </div>
+
+            <div class="input-wrapper">
+                <select name="propertyType" id="property-type" ngModel name="houseType" required>
+                    <option value="PRIVATE_ROOM">Private Room</option>
+                </select>
+            </div>
+
+            <div class="input-wrapper" >
+                <label for="">Amenities:</label>
+                <div>
+                  <input type="checkbox" name="wifi" [(ngModel)]="amenities.wifi">
+                  <label for="wifi">Wifi</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="pool" [(ngModel)]="amenities.pool">
+                  <label for="pool">Pool</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="amenities.gym" [(ngModel)]="amenities.gym">
+                  <label for="gym">Gym</label>
+                </div>
+              </div>
+
+              <hr>
+              <div class="input-wrapper">
+                <label for="">Amenities</label>
+                <div *ngFor="let amenity of newShortlet.amenities; let i = index">
+                  <input type="text" [(ngModel)]="amenity.name" name="amenities[{{i}}].name" placeholder="Amenity name" />
+                  <input type="number" [(ngModel)]="amenity.quantity" name="amenities[{{i}}].quantity" placeholder="Quantity" />
+                </div>
+              </div>
+            <!-- <form >
+
+                <select name="cars" id="cars" ngModel name="houseType">
+                    <option value="APARTMENTsss">Apartment</option>
+                    <option value="HOTEL">Hotel</option>
+                  </select>
+
+            </form> -->            
 
             <div class="submit"> 
                 <!-- <button type="submit">Upload Pictures</button> -->
@@ -52,8 +110,6 @@
         </form>
     </div>
 
-    <h1>{{form.description}}</h1>
-    <h1>{{form.title}}</h1>
-    <!-- <h1>{{form.firstName + " " +firstname}}</h1> -->
-    <h1># {{form.photos}}</h1>
+    <!-- <h1>{{form.description}}</h1>
+    <h1>{{form.title}}</h1> -->
 </div>

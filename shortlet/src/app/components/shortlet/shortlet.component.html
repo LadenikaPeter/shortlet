@@ -8,8 +8,8 @@
       <p>· {{ shortletData.address }}</p>
     </div>
     <div style="display: flex; gap: 1rem">
-      <p>Share</p>
-      <p>Save</p>
+      <p>.</p>
+      <p>.</p>
     </div>
   </div>
 
@@ -70,11 +70,13 @@
       <hr />
 
       <p>
-        Beautiful 4 bedroom architecturally designed villa, with infinity pool
+        <!-- Beautiful 4 bedroom architecturally designed villa, with infinity pool
         and floor to ceiling views in almost every room of the sea and Cap de
         Creus national park, in beautiful working fishing village in Northern
         Spain.
-      </p>
+      </p> -->
+
+      <p>{{ shortletData.description }}</p>
       <h5>The space</h5>
       <p>The house has been featured in the New York Times and in Wallpaper.</p>
       <h5>Show more</h5>
@@ -201,7 +203,7 @@
               matIconSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker #picker (dateChange)="fetchDateSelected()"></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
@@ -251,7 +253,7 @@
               [(ngModel)]="checkinDate"
               [matDatepicker]="picker3"
               [matDatepickerFilter]="myHolidayFilter"
-              (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix
@@ -269,7 +271,7 @@
               [(ngModel)]="minDateForCheckOut"
               [matDatepicker]="picker4"
               [matDatepickerFilter]="myHolidayFilter"
-              (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NewShortlet } from 'src/app/interface/shortlet';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 
 @Component({
   selector: 'app-register-shortlet',
@@ -9,14 +10,54 @@ import { NewShortlet } from 'src/app/interface/shortlet';
 })
 export class RegisterShortletComponent {
 
-  constructor(){}
+  constructor(private dataStorage: DataStorageService,){}
 
   userEmail
   form: NewShortlet
 
+  newShortlet: Partial<NewShortlet> = {};
+
+  // newShortlet: Partial<NewShortlet> = {
+  //   amenities: []
+  // };
+
   onSubmit(form: NgForm){
     this.form = form.value
-    console.log(form.value)
+    let formData = form.value
+    console.log(formData)
+    // this.addNewShortlet(formData);
+
+
+
+    this.dataStorage.registerNewShortlet(formData).subscribe(
+      (response) => {
+        console.log((this.newShortlet = response));
+      },
+      (error) => console.log(error)
+    );
+
+    // formData.amenities = this.newShortlet.amenities;
+    // console.log(formData);
+
+
+
   }
+
+  // Define the nested form model
+  amenities: {
+    wifi: boolean;
+    pool: boolean;
+    gym: boolean;
+  } = {
+    wifi: false,
+    pool: false,
+    gym: false,
+  };
+
+
+  // addNewShortlet(formData){
+    
+  // }
+  
   
 }
