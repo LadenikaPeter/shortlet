@@ -23,6 +23,8 @@ public class ApartmentsDTO {
     @Lob
     private String description;
     private int price;
+    private int cleaningFee;
+    private int serviceFee;
     private double rating;
 
     private String houseRefCode;

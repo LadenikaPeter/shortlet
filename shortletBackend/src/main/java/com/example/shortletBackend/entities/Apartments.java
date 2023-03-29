@@ -35,7 +35,10 @@ public class Apartments {
     @Enumerated(EnumType.STRING)
     private Status status;
     private int price;
+    private int cleaningFee;
+    private int serviceFee;
     private double rating;
+
     private int maxNoOfGuests;
     private int noOfBedrooms;
     private int noOfBeds;
