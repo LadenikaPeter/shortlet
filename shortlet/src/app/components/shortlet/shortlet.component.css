@@ -76,9 +76,6 @@
   justify-content: space-between;
 }
 
-.small {
-  /* font-size: 1.1rem; */
-}
 .reservation {
   min-width: 350px;
   /* border: 1px solid red; */
