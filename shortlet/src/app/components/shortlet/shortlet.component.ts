@@ -3,6 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Shortlet } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/Model/user.model';
+import { user } from '@angular/fire/auth';
+import { NotificationService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-shortlet',
@@ -10,6 +14,9 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./shortlet.component.css'],
 })
 export class ShortletComponent implements OnInit {
+  username: string;
+  user_email: string;
+  apartmentID: number;
   checkinDate: Date;
   checkoutDate: Date;
   dateForCalendar: string;
@@ -19,34 +26,45 @@ export class ShortletComponent implements OnInit {
   shortletPictures: any = [];
   shortletPrice: any;
   showAmenities: boolean = false;
-  // reservedDates: any = []
+  maxNoOfGuests: number;
+  comments: any = [];
+  counter: number = 1;
 
-  testArray = [{ checkin: '2023-03-23', checkout: '2023-03-25' }];
+  buttonDisable: boolean;
+
+  myHolidayDates = [];
   mynewArray = [];
   overallArray = [];
 
+  UserComment: string = '';
+
   constructor(
     private dataStorage: DataStorageService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authS: AuthService,
+    private notif: NotificationService
   ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((data) => {
       let id: number = data['id'];
+      this.apartmentID = data['id'];
       this.displayShortlet(id);
     });
     this.checkinDate = new Date();
     this.noSelectFromPast();
     this.noSelectLessThan2();
-
     let newCheckoutDate = (this.checkoutDate = new Date());
     newCheckoutDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
-
-    console.log(this.checkinDate);
     this.fetchDateSelected();
-    // this.mytest();
-    // this.logicToDisableDate();
-    // this.checkdateInbetween();
+
+    this.authS.user.subscribe((user: User) => {
+      if (user) {
+        this.username = user.displayName;
+        this.user_email = user.email;
+        // console.log(this.username);
+      }
+    });
   }
 
   //to diplay hortlet
@@ -56,6 +74,10 @@ export class ShortletComponent implements OnInit {
         console.log((this.shortletData = response));
         this.shortletData = response;
         this.overallArray = response.reservations;
+        this.maxNoOfGuests = response.maxNoOfGuests;
+        this.comments = response.comments;
+        console.log(this.comments);
+
         // console.log(this.overallArray);
         for (let reserve of this.overallArray) {
           this.checkdateInbetween(reserve.checkInDate, reserve.checkOutDate);
@@ -64,6 +86,7 @@ export class ShortletComponent implements OnInit {
         this.calculateBill(); //details of shortlet from API
         // console.log(this.shortletPrice = response.price)
         this.shortletPictures = response.pictures; //pictures of shortlet from API
+        this.disableReserveDate();
       },
       (error) => console.log(error)
     );
@@ -73,14 +96,17 @@ export class ShortletComponent implements OnInit {
     this.showAmenities != this.showAmenities;
   }
 
+  trialM(e) {
+    this.fetchDateSelected();
+  }
+
   fetchDateSelected() {
-    // console.log('here');
+    console.log('enter');
     let timeDiff = Math.abs(
-      new Date(this.checkoutDate).getTime() -
-        new Date(this.checkinDate).getTime()
+      this.minDateForCheckOut.getTime() - this.checkinDate.getTime()
     );
     this.numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    console.log(this.checkinDate);
+    console.log(this.numberOfNights);
     this.calculateBill();
   }
 
@@ -101,15 +127,10 @@ export class ShortletComponent implements OnInit {
 
   noSelectFromPast() {
     const date = new Date();
-
     const year = date.toLocaleString('default', { year: 'numeric' });
-
     const month = date.toLocaleString('default', { month: '2-digit' });
-
     const day = date.toLocaleString('default', { day: '2-digit' });
-
     const formattedDate = year + '-' + month + '-' + day;
-
     this.dateForCalendar = formattedDate;
 
     // console.log(formattedDate); // Prints: 2022-05-04
@@ -117,47 +138,22 @@ export class ShortletComponent implements OnInit {
 
   noSelectLessThan2() {
     let newDate = new Date();
-
     newDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
-
     const year = newDate.toLocaleString('default', { year: 'numeric' });
-
     const month = newDate.toLocaleString('default', { month: '2-digit' });
-
     const day = newDate.toLocaleString('default', { day: '2-digit' });
-
     const formattedDate = year + '-' + month + '-' + day;
-
     this.dateForCalendar2 = formattedDate;
-
     console.log(formattedDate);
   }
 
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
-
-  // myDateFilter = (d: Date | null): boolean => {
-  //   const day = (d || new Date()).getDay();
-  //   return day !== 0 && day !== 6;
-  // };
-
-  dateConverter() {
-    const date = new Date('2023-03-23');
-
+  dateConverter(dateOBJ: Date) {
+    const date = new Date(dateOBJ);
     const year = date.toLocaleString('default', { year: 'numeric' });
-
     const month = date.toLocaleString('default', { month: '2-digit' });
-
     const day = date.toLocaleString('default', { day: '2-digit' });
-
-    const formattedDate = month + '-' + day + '-' + year;
-
-    // this.dateForCalendar = formattedDate;
-
-    console.log(formattedDate);
-
+    const formattedDate = month + '/' + day + '/' + year;
+    return formattedDate;
     // console.log(formattedDate); // Prints: 2022-05-04
   }
 
@@ -170,67 +166,82 @@ export class ShortletComponent implements OnInit {
     let testCheck2 = new Date(checkOutDate);
 
     const date = new Date(testCheck1.getTime());
-
     const dates = [];
-
     while (date <= testCheck2) {
       dates.push(new Date(date).toLocaleDateString());
       date.setDate(date.getDate() + 1);
     }
-
     console.log(dates);
-
     for (let date1 of dates) {
       this.myHolidayDates.push(new Date(date1));
+      this.mynewArray.push(new Date(date1));
     }
-
-    console.log(this.myHolidayDates);
-
-    // if (testCheck1.getTime() === testCheck2.getTime()) {
-    //   console.log('true');
-    // } else {
-    //   console.log('false');
-    // }
-    // console.log(dates);
-
-    // for (let date1 of dates) {
-    //   // console.log(date1);
-    //   if (new Date(date1).getTime() === testCheck2.getTime()) {
-    //     console.log('not available');
-    //   }
-    // }
   }
 
-  myHolidayDates = [
-    // new Date('12/1/2020'),
-    // new Date('12/20/2020'),
-    // new Date('12/17/2020'),
-    // new Date('12/25/2020'),
-    // new Date('12/4/2020'),
-    // new Date('12/7/2020'),
-    // new Date('12/12/2020'),
-    // new Date('12/11/2020'),
-    // new Date('12/26/2020'),
-    // new Date('12/25/2020'),
-    // new Date('03-23-2023'),
-    // new Date('03-25-2023'),
-  ];
+  disableReserveDate() {
+    //this will disable reserve date if both the current day and two days ahead are already reserved
+    const checkIn = this.dateConverter(this.checkinDate);
+    const checkOut = this.dateConverter(this.minDateForCheckOut);
+    console.log(checkIn);
+    console.log(checkOut);
+    console.log(this.myHolidayDates);
+    // const testArray: Array<Date> = [...this.myHolidayDates];
+
+    for (let date of this.mynewArray) {
+      const newDate = this.dateConverter(date);
+      console.log(newDate);
+      if (
+        new Date(newDate).getTime() === new Date(checkIn).getTime() ||
+        new Date(newDate).getTime() === new Date(checkOut).getTime()
+      ) {
+        console.log(true);
+        this.buttonDisable = true;
+      } else {
+        console.log(false);
+      }
+    }
+  }
 
   myHolidayFilter = (d: Date): boolean => {
     const time = d.getTime();
     return !this.myHolidayDates.find((x) => x.getTime() == time);
   };
 
-  logicToDisableDate() {
-    for (let reserve of this.testArray) {
-      // this.mynewArray.push(reserve.checkin, reserve.checkout);
-      // this.checkdateInbetween(reserve.checkin, reserve.checkout);
-    }
-    console.log('from my new array' + this.mynewArray);
-  }
-
   minDate = new Date();
   trial = new Date();
   twodayAhead = this.trial.setDate(this.trial.getDate() + 2);
   minDateForCheckOut = new Date(this.twodayAhead);
+
+  increment() {
+    if (this.counter < this.maxNoOfGuests) {
+      this.counter = this.counter + 1;
+    }
+    return false;
+  }
+
+  decrement() {
+    if (this.counter > 1) {
+      this.counter = this.counter - 1;
+    }
+  }
+
+  onSendComment() {
+    if (this.UserComment === '') {
+      return;
+    } else {
+      const userComment = {
+        comment: this.UserComment,
+      };
+
+      // console.log(userComment);
+      this.dataStorage
+        .sendComment(userComment, +this.apartmentID, this.user_email)
+        .subscribe((res) => {
+          console.log(res);
+          this.UserComment = '';
+          // this.notif.successMessage('Comment added!');
+          window.location.reload();
+        });
+    }
+  }
 }

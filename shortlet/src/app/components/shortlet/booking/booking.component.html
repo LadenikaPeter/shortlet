@@ -8,22 +8,26 @@
       <div class="rare">
         <div>
           <h5>This is a rare find.</h5>
-          <p>{{shortletData.name}}'s place is usually booked.</p>
+          <p>{{ shortletData.name }}'s place is usually booked.</p>
         </div>
-        <p>icon</p>
+        <img
+          style="width: 24px; height: 24px"
+          src="../../../../assets/svg/diamond.svg"
+          alt=""
+        />
       </div>
       <div class="trip-details">
         <h3>Your trip</h3>
         <div class="trip">
           <div>
             <h5>Dates</h5>
-            <p>{{checkin | date}} - {{checkout | date}}</p>
+            <p>{{ checkin | date }} - {{ checkout | date }}</p>
           </div>
         </div>
         <div class="trip">
           <div>
             <h5>Guests</h5>
-            <p>1 guest</p>
+            <p>{{ guests }} {{ guests == 1 ? "guest" : "guests" }}</p>
           </div>
         </div>
         <hr *ngIf="isAuthenticated" />
@@ -66,26 +70,31 @@
     <!-- bill-section -->
     <div class="bill-section">
       <div style="display: flex">
-        <img src="{{shortletPictures[0].url}}" alt="" />
+        <img src="{{ shortletPictures[0].url }}" alt="" />
         <div style="height: 1px; padding-left: 0.5rem">
           <div style="line-height: 0.25rem">
             <p style="font-size: 12px">Entire rental unit</p>
-            <p style="font-size: 14px">Canteras Luxury seafront Penthouse</p>
+            <p style="font-size: 14px">{{ shortletData.name }}</p>
           </div>
           <div class="rating">
-            <p>★ {{shortletData.rating}}</p>
-            <p>(136 reviews)</p>
-            <p>· Superhost</p>
+            <p>★ {{ shortletData.rating }}</p>
+            <!-- <p>(136 reviews)</p>
+            <p>· Superhost</p> -->
           </div>
         </div>
       </div>
       <hr />
-      <p style="padding: 0.5rem 0rem">Your booking is protected by HMCover</p>
+      <p style="padding: 0.5rem 0rem">
+        Your booking is protected by
+        <span style="font-weight: 900">
+          HM<span class="hmcover_name">Cover</span></span
+        >
+      </p>
       <hr />
       <div>
         <h4>Price details</h4>
         <div class="bill">
-          <p>₦{{shortletData.price}} x {{ nights }} nights</p>
+          <p>₦{{ shortletData.price }} x {{ nights }} nights</p>
           <p>₦{{ calculateNumberOfNights }}</p>
         </div>
         <div class="bill">

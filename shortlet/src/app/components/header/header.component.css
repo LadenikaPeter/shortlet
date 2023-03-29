@@ -10,6 +10,9 @@
     display: none;
   }
 }
+.logo_color {
+  color: #ea4335;
+}
 
 p {
   display: inline;

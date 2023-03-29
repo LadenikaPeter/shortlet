@@ -1,0 +1,31 @@
+<div class="container">
+  <p>
+    <span id="home"><a class="home_link" routerLink="">Home</a></span
+    ><span id="pointing_character">></span><span id="account">Trips</span>
+  </p>
+  <h4>Trips</h4>
+
+  <div class="trips_container">
+    <div class="row">
+      <div *ngFor="let trip of reservations" class="col-xs-12">
+        <div class="image_container">
+          <img
+            src="{{ trip.apartment.pictures[0].url }}"
+            alt="apartment-image"
+          />
+        </div>
+        <div class="apartment_container">
+          <h5 style="margin-bottom: 0">{{ trip.apartment.name }}</h5>
+          <p>{{ trip.apartment.state }}, {{ trip.apartment.country }}</p>
+
+          <div class="reservation dates">
+            <h5>Check in date: {{ trip.checkInDate }}</h5>
+            <h5>Check out date: {{ trip.checkOutDate }}</h5>
+          </div>
+
+          <h5>Amount Paid: ₦{{ trip.price }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
