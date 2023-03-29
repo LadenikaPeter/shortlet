@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+
 import { NewShortlet } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 
@@ -10,11 +12,14 @@ import { DataStorageService } from 'src/app/services/data-storage.service';
 })
 export class RegisterShortletComponent {
   newShortlet: NewShortlet;
+  imagePreview: any;
 
-  constructor(private dataStorage: DataStorageService,){}
+  constructor(private sanitizer: DomSanitizer,  private dataStorage: DataStorageService){}
 
 
   myForm: FormGroup;
+  // base64Images: Array<UploadedData> = [];
+  pictures: File
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -33,7 +38,8 @@ export class RegisterShortletComponent {
         wifi: new FormControl(false),
         patio: new FormControl(false),
         washer: new FormControl(false),
-      })
+      }),
+      pictures: new FormArray([])
   }); 
   }
 
@@ -41,9 +47,12 @@ export class RegisterShortletComponent {
     console.log('Valid?', form.valid); // true or false
     console.log(form.value)
 
+    
+
 
     // this.form = form.value
     let formData = form.value
+    // formData.append('image', this.pictures);
     console.log(formData)
     // this.addNewShortlet(formData);
 
@@ -58,6 +67,23 @@ export class RegisterShortletComponent {
 
     // formData.amenities = this.newShortlet.amenities;
     // console.log(formData);
+  }
+
+
+  onImageUpload(event: any) {
+    this.pictures = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      this.imagePreview = base64;
+      const picturesArray = this.myForm.get('pictures') as FormArray;
+      picturesArray.push(new FormControl(base64));
+    };
+    reader.readAsDataURL(this.pictures);
+  }
+
+  getSafeUrl(url: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
   
 

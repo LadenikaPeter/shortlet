@@ -20,7 +20,7 @@
 
             <div class="input-wrapper">
                 <label>Price(NGN)</label>
-                <input formControlName="price" type="number">
+                <input formControlName="price" type="number" placeholder="Per Night">
             </div>
 
 
@@ -77,9 +77,25 @@
                     <input type="checkbox" formControlName="pool">
                 </div>                
             </div>
+
+            <div formArrayName="images">
+                <input
+                type="file"
+                accept=".png, .jpg, .jpeg"
+                (change)="onImageUpload($event)"
+              />
+
+            </div>
+                
         
             
-            <button type="submit">Request to Add Home</button>
+            <button
+            [disabled]="!myForm.valid"
+            type="submit">Request to Add Home</button>
           </form>
     </div>
+
+    <!-- <div>
+        <img *ngIf="imagePreview" [src]="getSafeUrl(imagePreview)" width="100" height="100">
+      </div> -->
 </div>
