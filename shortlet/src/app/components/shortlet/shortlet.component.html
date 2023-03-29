@@ -195,13 +195,13 @@
               [(ngModel)]="checkinDate"
               [matDatepicker]="picker"
               [matDatepickerFilter]="myHolidayFilter"
-              (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix
               [for]="picker"
             ></mat-datepicker-toggle>
-            <mat-datepicker #picker (dateChange)="fetchDateSelected()"></mat-datepicker>
+            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
@@ -212,7 +212,7 @@
               [(ngModel)]="minDateForCheckOut"
               [matDatepicker]="picker2"
               [matDatepickerFilter]="myHolidayFilter"
-              (change)="fetchDateSelected()"
+              (dateChange)="trialM($event)"
             />
             <mat-datepicker-toggle
               matIconSuffix
@@ -278,9 +278,7 @@
             <mat-datepicker #picker4></mat-datepicker>
           </mat-form-field>
         </div>
-        
       </div>
-
 
       <div class="guest_counter">
         <p class="guests_label">Guests</p>
@@ -359,6 +357,40 @@
 
   <hr />
   <h3>Comments</h3>
-
+  <div class="row">
+    <div *ngFor="let comment of comments" class="col-md-5">
+      <div class="user_info">
+        <div class="user-img">
+          <img
+            style="
+              width: 43px;
+              height: 43px;
+              vertical-align: top;
+              margin-right: 10px;
+            "
+            src="../../../assets/svg/profile.svg"
+            alt=""
+          />
+          <div style="display: inline-block; vertical-align: bottom">
+            <h5 style="margin: 0">{{ comment.users.name }}</h5>
+            <p style="margin: 0; color: #4a4a4a">{{ comment.commentDate }}</p>
+          </div>
+        </div>
+        <p style="padding-top: 6px">{{ comment.comment }}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="username" class="signedIn_user">
+    <h5>{{ username }}</h5>
+    <input
+      class="form-control w-100"
+      type="text"
+      placeholder="Comment..."
+      [(ngModel)]="UserComment"
+    />
+    <button class="send_comment float-end" (click)="onSendComment()">
+      Send
+    </button>
+  </div>
   <!-- end -->
 </div>
