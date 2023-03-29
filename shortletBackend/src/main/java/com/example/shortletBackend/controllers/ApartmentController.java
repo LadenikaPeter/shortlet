@@ -79,7 +79,7 @@ public class ApartmentController {
             Map<String, Object> map= new ObjectMapper().convertValue(apartments.get().getAmenities(),Map.class);
             for (String key:map.keySet()) {
                 if (map.get(key) == (Object) true) {
-                    apartmentsDTO.getAmenities().add(key.substring(0,1).toUpperCase());
+                    apartmentsDTO.getAmenities().add(key);
                 }
             }
 

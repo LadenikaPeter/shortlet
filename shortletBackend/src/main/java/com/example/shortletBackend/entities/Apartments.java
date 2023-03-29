@@ -80,10 +80,4 @@ public class Apartments {
         this.status = Status.UNOCCUPIED;
     }
 
-    public void getAllAmenities() throws IllegalAccessException {
-        for (Field field: getAmenities().getClass().getDeclaredFields()){
-
-            System.out.println(field.get(getAmenities()));
-        }
-    }
 }
