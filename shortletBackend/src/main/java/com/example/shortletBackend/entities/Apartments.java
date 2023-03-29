@@ -11,6 +11,8 @@ import javax.persistence.*;
 
 import com.example.shortletBackend.enums.HomeState;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
@@ -78,4 +80,10 @@ public class Apartments {
         this.status = Status.UNOCCUPIED;
     }
 
+    public void getAllAmenities() throws IllegalAccessException {
+        for (Field field: getAmenities().getClass().getDeclaredFields()){
+
+            System.out.println(field.get(getAmenities()));
+        }
+    }
 }

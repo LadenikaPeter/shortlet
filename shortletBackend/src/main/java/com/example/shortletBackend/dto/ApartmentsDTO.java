@@ -36,7 +36,7 @@ public class ApartmentsDTO {
     private String continent;
     private UsersDTO users;
 
-    private Amenities amenities;
+    private ArrayList amenities = new ArrayList<>();
     private Set<CommentsDTO> comments;
     private Set<ReservationNoApartmentDTO> reservations;
 //    private ArrayList reservedDates = new ArrayList<>();ArrayList

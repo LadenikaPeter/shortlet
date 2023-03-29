@@ -9,13 +9,17 @@ import com.example.shortletBackend.repositories.AmenitiesRepository;
 import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.PicturesRepository;
 import com.example.shortletBackend.repositories.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -66,11 +70,20 @@ public class ApartmentController {
         return ResponseEntity.ok(hotelList);
     }
     @GetMapping("/home/")
-    public ResponseEntity getHotel(@RequestParam("house_id") long id ){
+    public ResponseEntity getHotel(@RequestParam("house_id") long id ) throws IllegalAccessException, NoSuchFieldException {
         Optional<Apartments> apartments = apartmentRepo.findById(id);
         if (apartments.isPresent()){
+            // return only amenities that have true as a reply
+            ApartmentsDTO apartmentsDTO = mapper.map(apartments.get(),ApartmentsDTO.class);
 
-            return ResponseEntity.ok().body(mapper.map(apartments.get(),ApartmentsDTO.class));
+            Map<String, Object> map= new ObjectMapper().convertValue(apartments.get().getAmenities(),Map.class);
+            for (String key:map.keySet()) {
+                if (map.get(key) == (Object) true) {
+                    apartmentsDTO.getAmenities().add(key.substring(0,1).toUpperCase());
+                }
+            }
+
+            return ResponseEntity.ok().body(apartmentsDTO);
         }else {
             return (ResponseEntity) ResponseEntity.noContent();
         }
