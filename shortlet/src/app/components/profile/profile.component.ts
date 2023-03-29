@@ -16,12 +16,18 @@ export class ProfileComponent implements OnInit {
     private router: Router
   ) {}
   profileForm: FormGroup;
+  username: string;
+  phoneNumber: any;
 
   ngOnInit(): void {
     this.dataS
       .getUser()
       .subscribe((res: { email: string; name: string; phoneNo: any }) => {
         console.log(res);
+        this.username = res.name;
+
+        this.phoneNumber = res.phoneNo;
+
         this.profileForm.patchValue({
           name: res.name,
           email: res.email,
@@ -52,11 +58,26 @@ export class ProfileComponent implements OnInit {
       phoneNo: phoneNo,
     };
 
-    if (name === '') {
-      this.notif.warningMessage('please provide a name');
-    } else if (phoneNo !== null && phoneNo !== '') {
-      if (Object.values(phoneNo).join('').length <= 10) {
-        this.notif.warningMessage('please provide 11 digits');
+    if (this.username === name && this.phoneNumber === phoneNo) {
+      this.notif.warningMessage('No change was made');
+      this.router.navigate(['/']);
+    } else {
+      if (name === '') {
+        this.notif.warningMessage('please provide a name');
+      } else if (phoneNo !== null && phoneNo !== '') {
+        if (Object.values(phoneNo).join('').length <= 10) {
+          this.notif.warningMessage('please provide 11 digits');
+        } else {
+          // console.log(this.profileForm.value);
+          this.dataS
+            .updateUserInfo(updateUser, this.profileForm.value['email'])
+            .subscribe((res) => {
+              console.log(res);
+              this.router.navigate(['/']);
+              this.notif.successMessage('profile successfully updated');
+              //add nvaigation code here and success message
+            });
+        }
       } else {
         // console.log(this.profileForm.value);
         this.dataS
@@ -65,18 +86,8 @@ export class ProfileComponent implements OnInit {
             console.log(res);
             this.router.navigate(['/']);
             this.notif.successMessage('profile successfully updated');
-            //add nvaigation code here and success message
           });
       }
-    } else {
-      // console.log(this.profileForm.value);
-      this.dataS
-        .updateUserInfo(updateUser, this.profileForm.value['email'])
-        .subscribe((res) => {
-          console.log(res);
-          this.router.navigate(['/']);
-          this.notif.successMessage('profile successfully updated');
-        });
     }
   }
 }
