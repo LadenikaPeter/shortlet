@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Shortlet } from '../interface/shortlet';
+import { NewShortlet, Shortlet } from '../interface/shortlet';
 import { NotificationService } from './notifications.service';
 
 @Injectable({ providedIn: 'root' })
@@ -32,13 +32,13 @@ export class DataStorageService {
     );
   }
 
-  registerNewShortlet(formData){
+  registerNewShortlet(formData) {
     // const email = '';
-    
+
     const options = {
       headers: {
-        'user_email': 'sami@gmail.com'
-      }
+        user_email: 'sami@gmail.com',
+      },
     };
 
     // const formData = {
@@ -58,8 +58,11 @@ export class DataStorageService {
     //   // }
     // };
 
-
-    return this.http.post<NewShortlet>(`http://localhost:8080/addHome/`, formData, options)
+    return this.http.post<NewShortlet>(
+      `http://localhost:8080/addHome/`,
+      formData,
+      options
+    );
   }
 
   getUser() {
@@ -116,6 +119,17 @@ export class DataStorageService {
 
   getAllReservations() {
     return this.http.get('http://localhost:8080/reservation/');
+  }
+
+  sendComment(userComment: { comment: string }, id: number, email: string) {
+    console.log(userComment, id, email);
+    return this.http.post(
+      `http://localhost:8080/apartment/comment/add/?apartment_id=${id}`,
+      userComment,
+      {
+        headers: new HttpHeaders({ user_email: email }),
+      }
+    );
   }
 
   private dateConverterforCheckIn(reserveDate: Date) {

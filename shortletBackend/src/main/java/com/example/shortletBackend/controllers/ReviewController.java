@@ -23,6 +23,7 @@ import static java.lang.Math.log;
 @AllArgsConstructor
 @RestController
 @Slf4j
+@CrossOrigin
 public class ReviewController {
     private final ReviewRepository reviewRepository;
     private final CommentRepository commentRepository;

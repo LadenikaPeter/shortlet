@@ -1,3 +1,7 @@
+.container {
+  padding-bottom: 30px;
+}
+
 .parent {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -172,4 +176,34 @@ mat-label {
 ::ng-deep .mat-mdc-form-field-subscript-wrapper,
 .mat-mdc-form-field-bottom-align::before {
   height: 0;
+}
+
+/* comments */
+
+/* .row {
+  padding-top: 32px;
+} */
+
+.col-md-5 {
+  margin: 10px 25px;
+}
+
+.signedIn_user {
+  width: 70%;
+  margin: 20px 25px;
+  padding-bottom: 50px;
+}
+
+.form-control {
+  border: 1px sold #4a4a4a;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #4a4a4a;
+}
+
+.send_comment {
+  margin-top: 10px;
+  width: 20%;
 }
