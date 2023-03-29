@@ -51,6 +51,9 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setDescription("My place is close to Apuan Park. We're 12 km from Castelnuovo di Garfagnana. You'll love my place because of its location and atmosphere. My place is good for couples, lonely adventurers, families (with kids), furry friends (pets), and groups of friends");
         firstHouse.setHouseType(HouseType.WHOLE_HOUSE);
         firstHouse.setPropertyType(PropertyType.APARTMENT);
+        firstHouse.setCleaningFee(15);
+        firstHouse.setServiceFee(20);
+
 
 
         firstHouse.setMaxNoOfGuests(5);
@@ -107,6 +110,9 @@ public class bootStrap implements CommandLineRunner {
         House2.setNoOfBedrooms(4);
         House2.setHouseType(HouseType.PRIVATE_ROOM);
         House2.setPropertyType(PropertyType.GUESTHOUSE);
+        House2.setCleaningFee(23);
+        House2.setServiceFee(15);
+
 
 
         Pictures picture6 = new Pictures();
@@ -173,6 +179,9 @@ public class bootStrap implements CommandLineRunner {
         House3.setNoOfBedrooms(1);
         House3.setHouseType(HouseType.PRIVATE_ROOM);
         House3.setPropertyType(PropertyType.BED_AND_BREAKFAST);
+        House3.setCleaningFee(65);
+        House3.setServiceFee(23);
+
 
         Pictures picture11 = new Pictures();
         picture11.setUrl("https://a0.muscache.com/im/pictures/6e75f583-5c1f-41e8-b705-511dbffe92b5.jpg?im_w=1200 ");
@@ -244,6 +253,9 @@ public class bootStrap implements CommandLineRunner {
         House4.setNoOfBedrooms(1);
         House4.setHouseType(HouseType.PRIVATE_ROOM);
         House4.setPropertyType(PropertyType.BED_AND_BREAKFAST);
+        House4.setCleaningFee(45);
+        House4.setServiceFee(60);
+
 
 
         Pictures picture16 = new Pictures();
@@ -295,6 +307,9 @@ public class bootStrap implements CommandLineRunner {
         House5.setNoOfBedrooms(2);
         House5.setHouseType(HouseType.PRIVATE_ROOM);
         House5.setPropertyType(PropertyType.TREEHOUSE);
+        House5.setCleaningFee(10);
+        House5.setServiceFee(50);
+
 
 
         Pictures picture21 = new Pictures();
@@ -346,6 +361,9 @@ public class bootStrap implements CommandLineRunner {
         House6.setNoOfBedrooms(3);
         House6.setHouseType(HouseType.WHOLE_HOUSE);
         House6.setPropertyType(PropertyType.APARTMENT);
+        House6.setCleaningFee(90);
+        House6.setServiceFee(50);
+
 //
 
 
@@ -398,6 +416,8 @@ public class bootStrap implements CommandLineRunner {
         House7.setNoOfBedrooms(1);
         House7.setHouseType(HouseType.WHOLE_HOUSE);
         House7.setPropertyType(PropertyType.TINY_HOME);
+        House7.setCleaningFee(32);
+        House7.setServiceFee(15);
 
 
         Pictures pictures33 = new Pictures();
@@ -459,6 +479,8 @@ public class bootStrap implements CommandLineRunner {
         House8.setNoOfBedrooms(6);
         House8.setHouseType(HouseType.WHOLE_HOUSE);
         House8.setPropertyType(PropertyType.CASTLE);
+        House8.setCleaningFee(100);
+        House8.setServiceFee(50);
 
 
         Pictures pictures36 = new Pictures();
@@ -508,6 +530,8 @@ public class bootStrap implements CommandLineRunner {
         House9.setNoOfBedrooms(6);
         House9.setHouseType(HouseType.PRIVATE_ROOM);
         House9.setPropertyType(PropertyType.HOTEL);
+        House9.setCleaningFee(150);
+        House9.setServiceFee(500);
 
 
         Pictures pictures41 = new Pictures();
@@ -614,6 +638,8 @@ public class bootStrap implements CommandLineRunner {
         House10.setNoOfBedrooms(5);
         House10.setHouseType(HouseType.WHOLE_HOUSE);
         House10.setPropertyType(PropertyType.BED_AND_BREAKFAST);
+        House10.setCleaningFee(80);
+        House10.setServiceFee(100);
 
 
         Pictures pictures46 = new Pictures("https://a0.muscache.com/im/pictures/3e327003-1cb2-4113-89eb-dfc83de633a9.jpg?im_w=1200 ");
@@ -678,7 +704,8 @@ public class bootStrap implements CommandLineRunner {
         House11.setNoOfBedrooms(2);
         House11.setHouseType(HouseType.SHARED_ROOM);
         House11.setPropertyType(PropertyType.TENT);
-
+        House11.setCleaningFee(70);
+        House11.setServiceFee(90);
 
         Pictures pictures51 = new Pictures("https://a0.muscache.com/im/pictures/ba8d2e6f-968a-4fde-a21b-c56bdd60556c.jpg?im_w=1200 ");
 
@@ -732,6 +759,8 @@ public class bootStrap implements CommandLineRunner {
         House12.setNoOfBedrooms(10);
         House12.setHouseType(HouseType.WHOLE_HOUSE);
         House12.setPropertyType(PropertyType.CASTLE);
+        House12.setCleaningFee(50);
+        House12.setServiceFee(100);
 
 
         Pictures pictures56 = new Pictures("https://a0.muscache.com/im/pictures/74192cff-0e84-43fc-ac8c-1c5a98039ca8.jpg?im_w=1200");

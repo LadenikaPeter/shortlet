@@ -3,6 +3,7 @@ package com.example.shortletBackend.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.lang.reflect.Field;
 
 @Entity @Getter @Setter
 @ToString @AllArgsConstructor

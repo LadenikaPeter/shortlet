@@ -11,6 +11,8 @@ import javax.persistence.*;
 
 import com.example.shortletBackend.enums.HomeState;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,7 +37,10 @@ public class Apartments {
     @Enumerated(EnumType.STRING)
     private Status status;
     private int price;
+    private int cleaningFee;
+    private int serviceFee;
     private double rating;
+
     private int maxNoOfGuests;
     private int noOfBedrooms;
     private int noOfBeds;
