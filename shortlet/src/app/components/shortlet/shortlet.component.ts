@@ -19,16 +19,26 @@ export class ShortletComponent implements OnInit {
   apartmentID: number;
   checkinDate: Date;
   checkoutDate: Date;
-  dateForCalendar: string;
-  dateForCalendar2: string;
+
   numberOfNights: number;
   shortletData: Partial<Shortlet> = {};
   shortletPictures: any = [];
   shortletPrice: any;
   showAmenities: boolean = false;
   maxNoOfGuests: number;
+
+  today: Date;
+
+  calculateNumberOfNights: number;
+  total: number;
+
   comments: any = [];
   counter: number = 1;
+
+  minDate = new Date();
+  trial = new Date();
+  twodayAhead = this.trial.setDate(this.trial.getDate() + 2);
+  minDateForCheckOut = new Date(this.twodayAhead);
 
   buttonDisable: boolean;
 
@@ -52,8 +62,7 @@ export class ShortletComponent implements OnInit {
       this.displayShortlet(id);
     });
     this.checkinDate = new Date();
-    this.noSelectFromPast();
-    this.noSelectLessThan2();
+
     let newCheckoutDate = (this.checkoutDate = new Date());
     newCheckoutDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
     this.fetchDateSelected();
@@ -98,10 +107,11 @@ export class ShortletComponent implements OnInit {
 
   trialM(e) {
     this.fetchDateSelected();
+    this.disableReserveDate();
   }
 
   fetchDateSelected() {
-    console.log('enter');
+    // console.log('enter');
     let timeDiff = Math.abs(
       this.minDateForCheckOut.getTime() - this.checkinDate.getTime()
     );
@@ -110,41 +120,14 @@ export class ShortletComponent implements OnInit {
     this.calculateBill();
   }
 
-  //reservation bill
-  calculateNumberOfNights: number;
-  total: number;
-
   calculateBill() {
     this.calculateNumberOfNights =
       this.shortletData.price * this.numberOfNights;
     this.total = this.calculateNumberOfNights + 107 + 231;
   }
 
-  today: Date;
   mindate() {
     this.today = new Date();
-  }
-
-  noSelectFromPast() {
-    const date = new Date();
-    const year = date.toLocaleString('default', { year: 'numeric' });
-    const month = date.toLocaleString('default', { month: '2-digit' });
-    const day = date.toLocaleString('default', { day: '2-digit' });
-    const formattedDate = year + '-' + month + '-' + day;
-    this.dateForCalendar = formattedDate;
-
-    // console.log(formattedDate); // Prints: 2022-05-04
-  }
-
-  noSelectLessThan2() {
-    let newDate = new Date();
-    newDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
-    const year = newDate.toLocaleString('default', { year: 'numeric' });
-    const month = newDate.toLocaleString('default', { month: '2-digit' });
-    const day = newDate.toLocaleString('default', { day: '2-digit' });
-    const formattedDate = year + '-' + month + '-' + day;
-    this.dateForCalendar2 = formattedDate;
-    console.log(formattedDate);
   }
 
   dateConverter(dateOBJ: Date) {
@@ -206,11 +189,6 @@ export class ShortletComponent implements OnInit {
     const time = d.getTime();
     return !this.myHolidayDates.find((x) => x.getTime() == time);
   };
-
-  minDate = new Date();
-  trial = new Date();
-  twodayAhead = this.trial.setDate(this.trial.getDate() + 2);
-  minDateForCheckOut = new Date(this.twodayAhead);
 
   increment() {
     if (this.counter < this.maxNoOfGuests) {
