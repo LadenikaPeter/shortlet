@@ -12,6 +12,7 @@ import { RegisterShortletComponent } from './components/new-shortlet/register-sh
 import { BookingComponent } from './components/shortlet/booking/booking.component';
 import { ShortletComponent } from './components/shortlet/shortlet.component';
 import { TripsComponent } from './components/trips/trips.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
@@ -45,7 +46,11 @@ const routes: Routes = [
   {
     path: 'trips',
     component: TripsComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({

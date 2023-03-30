@@ -34,6 +34,7 @@ import { FilterBarComponent } from './components/header/filter-bar/filter-bar.co
 import { AuthServiceInterceptor } from './auth/auth.interceptor.service';
 import { TripsComponent } from './components/trips/trips.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     FilterBarComponent,
     TripsComponent,
     ClickOutsideDirective,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,

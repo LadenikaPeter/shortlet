@@ -31,9 +31,11 @@ export class ShortletComponent implements OnInit {
 
   calculateNumberOfNights: number;
   total: number;
-
+  amenities: any = [];
   comments: any = [];
   counter: number = 1;
+  serviceFee: number;
+  cleaningFee: number;
 
   minDate = new Date();
   trial = new Date();
@@ -85,6 +87,9 @@ export class ShortletComponent implements OnInit {
         this.overallArray = response.reservations;
         this.maxNoOfGuests = response.maxNoOfGuests;
         this.comments = response.comments;
+        this.amenities = response.amenities;
+        this.serviceFee = response.serviceFee;
+        this.cleaningFee = response.cleaningFee;
         console.log(this.comments);
 
         // console.log(this.overallArray);
@@ -123,7 +128,8 @@ export class ShortletComponent implements OnInit {
   calculateBill() {
     this.calculateNumberOfNights =
       this.shortletData.price * this.numberOfNights;
-    this.total = this.calculateNumberOfNights + 107 + 231;
+    this.total =
+      this.calculateNumberOfNights + this.serviceFee + this.cleaningFee;
   }
 
   mindate() {
@@ -165,9 +171,9 @@ export class ShortletComponent implements OnInit {
     //this will disable reserve date if both the current day and two days ahead are already reserved
     const checkIn = this.dateConverter(this.checkinDate);
     const checkOut = this.dateConverter(this.minDateForCheckOut);
-    console.log(checkIn);
-    console.log(checkOut);
-    console.log(this.myHolidayDates);
+    // console.log(checkIn);
+    // console.log(checkOut);
+    // console.log(this.myHolidayDates);
     // const testArray: Array<Date> = [...this.myHolidayDates];
 
     for (let date of this.mynewArray) {
@@ -181,6 +187,7 @@ export class ShortletComponent implements OnInit {
         this.buttonDisable = true;
       } else {
         console.log(false);
+        this.buttonDisable = false;
       }
     }
   }
