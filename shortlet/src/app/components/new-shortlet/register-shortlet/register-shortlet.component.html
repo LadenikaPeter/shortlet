@@ -15,27 +15,27 @@
 
             <div class="input-wrapper">
                 <label>Address</label>
-                <input formControlName="address">
+                <input formControlName="address" required>
             </div>
 
             <div class="input-wrapper">
                 <label>Price(NGN)</label>
-                <input formControlName="price" type="number" placeholder="Per Night">
+                <input formControlName="price" type="number" placeholder="Per Night" required>
             </div>
 
 
         
             <div class="input-wrapper">
                 <label>Guest Capacity</label>
-                <input formControlName="maxNoOfGuests" type="number">
+                <input formControlName="maxNoOfGuests" type="number" required>
             </div>
         
             <div class="input-wrapper">
                 <label>
-                    No of Bedrooms:
+                    No of Bedrooms
                     
                 </label>
-                <input formControlName="noOfBedrooms" type="number">
+                <input formControlName="noOfBedrooms" type="number" required>
             </div>
         
             <div class="input-wrapper">
@@ -47,7 +47,7 @@
             <div class="input-wrapper">
 
                 <label></label>
-                <select formControlName="houseType" class="form-control">
+                <select formControlName="houseType" class="form-control" required>
                     <option value="" disabled selected>Select your House Type</option>
                     <option value="PRIVATE_ROOM">Private Room</option>
                 </select>
@@ -57,7 +57,7 @@
 
             <div class="input-wrapper">
                   <label></label>
-                    <select formControlName="propertyType" class="form-control">
+                    <select formControlName="propertyType" class="form-control" required>
                         <option value="" disabled selected>Select your Property Type</option>
                         <option value="HOTEL">Hotel</option>
                     </select>
@@ -66,27 +66,49 @@
             <div formGroupName="amenities" >
                 <div class="amenities">
                     <div>
+                        <div>
                         
-                        <input id="gym" type="checkbox" formControlName="gym">
-                        <label for="gym">Gym</label>
-                    </div>
-
-                    
-                    <div>
+                            <input id="gym" type="checkbox" formControlName="gym">
+                            <label for="gym">Gym</label>
+                        </div>
+    
                         
-                        <input type="checkbox" formControlName="pool">
-                        <label for="pool">Pool</label>
+                        <div>
+                            
+                            <input type="checkbox" formControlName="pool">
+                            <label for="pool">Pool</label>
+                        </div>
+    
+                        <div>
+                            
+                            <input type="checkbox" formControlName="wifi">
+                            <label for="wifi">Free Wi-Fi</label>
+                        </div>
                     </div>
-
-                    <div>
+                    <!-- <div>
+                        <div>
                         
-                        <input type="checkbox" formControlName="wifi">
-                        <label for="wifi">Free Wi-Fi</label>
-                    </div>
+                            <input id="gym" type="checkbox" formControlName="gym">
+                            <label for="gym">Gym</label>
+                        </div>
+    
+                        
+                        <div>
+                            
+                            <input type="checkbox" formControlName="pool">
+                            <label for="pool">Pool</label>
+                        </div>
+    
+                        <div>
+                            
+                            <input type="checkbox" formControlName="wifi">
+                            <label for="wifi">Free Wi-Fi</label>
+                        </div>
+                    </div> -->
                 </div>                
             </div>
 
-            <div formArrayName="images">
+            <div formArrayName="images" >
                 <input
                 type="file"
                 accept=".png, .jpg, .jpeg"
@@ -104,6 +126,8 @@
             type="submit">Request to Add Home</button>
           </form>
     </div>
+
+    <h1>{{ user_email }}</h1>
 
    
 </div>

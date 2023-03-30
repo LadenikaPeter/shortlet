@@ -32,19 +32,16 @@ export class DataStorageService {
     );
   }
 
-  registerNewShortlet(formData) {
+  registerNewShortlet(formData, email) {
     // const email = '';
 
     const options = {
       headers: {
-        user_email: 'sami@gmail.com',
+        // user_email: 'sami@gmail.com',
+        user_email: email,
       },
     };
 
-<<<<<<< HEAD
-
-    return this.http.post<NewShortlet>(`http://localhost:8080/addHome/`, formData, options)
-=======
     // const formData = {
     //   name: 'John Doe',
     //   description: 'a townhall different from balablu',
@@ -67,7 +64,6 @@ export class DataStorageService {
       formData,
       options
     );
->>>>>>> 7565b8f887458d156849007f69c015a3d7736287
   }
 
   getUser() {
