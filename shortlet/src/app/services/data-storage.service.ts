@@ -32,17 +32,42 @@ export class DataStorageService {
     );
   }
 
-  registerNewShortlet(formData){
+  registerNewShortlet(formData) {
     // const email = '';
-    
+
     const options = {
       headers: {
-        'user_email': 'sami@gmail.com'
-      }
+        user_email: 'sami@gmail.com',
+      },
     };
 
+<<<<<<< HEAD
 
     return this.http.post<NewShortlet>(`http://localhost:8080/addHome/`, formData, options)
+=======
+    // const formData = {
+    //   name: 'John Doe',
+    //   description: 'a townhall different from balablu',
+    //   address :"Lagos,Nigeria",
+    //   price:2000,
+    //   rating:4.3,
+    //   maxNoOfGuests:50,
+    //   noOfBedrooms:80,
+    //   noOfBathrooms:40,
+    //   propertyType:"HOTEL",
+    //   houseType:"PRIVATE_ROOM",
+    //   pictures:["leaf village","naruto","bleach"],
+    //   // amenities:{
+    //   //     wifi:"true"
+    //   // }
+    // };
+
+    return this.http.post<NewShortlet>(
+      `http://localhost:8080/addHome/`,
+      formData,
+      options
+    );
+>>>>>>> 7565b8f887458d156849007f69c015a3d7736287
   }
 
   getUser() {
@@ -99,6 +124,17 @@ export class DataStorageService {
 
   getAllReservations() {
     return this.http.get('http://localhost:8080/reservation/');
+  }
+
+  sendComment(userComment: { comment: string }, id: number, email: string) {
+    console.log(userComment, id, email);
+    return this.http.post(
+      `http://localhost:8080/apartment/comment/add/?apartment_id=${id}`,
+      userComment,
+      {
+        headers: new HttpHeaders({ user_email: email }),
+      }
+    );
   }
 
   private dateConverterforCheckIn(reserveDate: Date) {

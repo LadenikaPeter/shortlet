@@ -33,6 +33,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FilterBarComponent } from './components/header/filter-bar/filter-bar.component';
 import { AuthServiceInterceptor } from './auth/auth.interceptor.service';
 import { TripsComponent } from './components/trips/trips.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { TripsComponent } from './components/trips/trips.component';
     SearchBarComponent,
     FilterBarComponent,
     TripsComponent,
+    ClickOutsideDirective,
   ],
   imports: [
     CommonModule,

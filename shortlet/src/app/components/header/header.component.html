@@ -1,6 +1,14 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">HM Shortlets</a>
+    <a class="navbar-brand" routerLink="/"
+      ><span
+        ><img
+          style="width: 24px; height: 24px; margin-bottom: 10px"
+          src="../../../assets/svg/house.svg"
+          alt=""
+      /></span>
+      HM <span class="logo_color">Shortlets</span>
+    </a>
     <!-- <div class="search">
       <input type="text" placeholder="Start your search">
     </div> -->
@@ -25,7 +33,9 @@
       <div class="removeboot" *ngIf="!isAuthenticated">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" routerLink="/"
+              >Home</a
+            >
           </li>
 
           <li class="nav-item">
@@ -37,20 +47,18 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" routerLink="host/shortlets"
-              >Rent your home</a
-            >
+            <a class="nav-link" routerLink="host/shortlets">Rent your home</a>
           </li>
         </ul>
       </div>
 
       <div class="removeboot" *ngIf="isAuthenticated">
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item" routerLink="/trips">
             <a class="nav-link">Trips</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Account</a>
+          <li class="nav-item" routerLink="/profile">
+            <a class="nav-link">Account</a>
           </li>
 
           <li class="nav-item">
@@ -59,13 +67,18 @@
             >
           </li>
           <li class="nav-item" (click)="onLogOut()">
-            <a class="nav-link" style="color: red" href="#">Log out</a>
+            <a class="nav-link" style="color: red">Log out</a>
           </li>
         </ul>
       </div>
 
       <div class="float-end links removemine">
-        <div class="profile" (click)="toggleProfileDiv()">
+        <div
+          class="profile"
+          appClickOutside
+          (clickOutside)="OnClickOutside()"
+          (click)="toggleProfileDiv()"
+        >
           <button class="button_profile">
             <img
               src="../../../assets/svg/content.svg"

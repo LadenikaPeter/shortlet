@@ -71,6 +71,7 @@ export class BookingComponent implements OnDestroy, OnInit {
     this.dataStorage.displayShortlet(id).subscribe(
       (response) => {
         this.shortletData = response;
+        console.log(this.shortletData);
         this.calculateBill();
         this.shortletPictures = response.pictures;
         // this.shortletPictures = response.pictures; //pictures of shortlet from API

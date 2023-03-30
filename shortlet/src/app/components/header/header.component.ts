@@ -29,6 +29,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isProfileClicked = !this.isProfileClicked;
   }
 
+  OnClickOutside() {
+    this.isProfileClicked = false;
+  }
+
   authenticateWithGoogle() {
     this.authS.loginWithGoogle();
   }

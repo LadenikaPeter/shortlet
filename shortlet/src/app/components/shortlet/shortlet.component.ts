@@ -3,6 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Shortlet } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/Model/user.model';
+import { user } from '@angular/fire/auth';
+import { NotificationService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-shortlet',
@@ -10,51 +14,67 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./shortlet.component.css'],
 })
 export class ShortletComponent implements OnInit {
+  username: string;
+  user_email: string;
+  apartmentID: number;
   checkinDate: Date;
   checkoutDate: Date;
-  dateForCalendar: string;
-  dateForCalendar2: string;
+
   numberOfNights: number;
   shortletData: Partial<Shortlet> = {};
   shortletPictures: any = [];
   shortletPrice: any;
   showAmenities: boolean = false;
   maxNoOfGuests: number;
+
+  today: Date;
+
+  calculateNumberOfNights: number;
+  total: number;
+
+  comments: any = [];
   counter: number = 1;
+
+  minDate = new Date();
+  trial = new Date();
+  twodayAhead = this.trial.setDate(this.trial.getDate() + 2);
+  minDateForCheckOut = new Date(this.twodayAhead);
 
   buttonDisable: boolean;
 
-  // testArray = [{ checkin: '2023-03-23', checkout: '2023-03-25' }];
+  myHolidayDates = [];
   mynewArray = [];
   overallArray = [];
 
+  UserComment: string = '';
+
   constructor(
     private dataStorage: DataStorageService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authS: AuthService,
+    private notif: NotificationService
   ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((data) => {
       let id: number = data['id'];
+      this.apartmentID = data['id'];
       this.displayShortlet(id);
     });
     this.checkinDate = new Date();
-    this.noSelectFromPast();
-    this.noSelectLessThan2();
 
     let newCheckoutDate = (this.checkoutDate = new Date());
     newCheckoutDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
-
-    console.log(this.checkinDate);
     this.fetchDateSelected();
-    console.log(this.myHolidayDates);
-    this.myHolidayDates;
 
-    // this.mytest();
-    // this.logicToDisableDate();
-    // this.checkdateInbetween();
+    this.authS.user.subscribe((user: User) => {
+      if (user) {
+        this.username = user.displayName;
+        this.user_email = user.email;
+        // console.log(this.username);
+      }
+    });
   }
-  
 
   //to diplay hortlet
   displayShortlet(id: number) {
@@ -64,6 +84,9 @@ export class ShortletComponent implements OnInit {
         this.shortletData = response;
         this.overallArray = response.reservations;
         this.maxNoOfGuests = response.maxNoOfGuests;
+        this.comments = response.comments;
+        console.log(this.comments);
+
         // console.log(this.overallArray);
         for (let reserve of this.overallArray) {
           this.checkdateInbetween(reserve.checkInDate, reserve.checkOutDate);
@@ -82,23 +105,20 @@ export class ShortletComponent implements OnInit {
     this.showAmenities != this.showAmenities;
   }
 
-
-  trialM(e){
+  trialM(e) {
     this.fetchDateSelected();
+    this.disableReserveDate();
   }
 
   fetchDateSelected() {
-
-    console.log("enter")
-    let timeDiff = Math.abs(this.minDateForCheckOut.getTime() - this.checkinDate.getTime());
+    // console.log('enter');
+    let timeDiff = Math.abs(
+      this.minDateForCheckOut.getTime() - this.checkinDate.getTime()
+    );
     this.numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24));
     console.log(this.numberOfNights);
     this.calculateBill();
   }
-
-  //reservation bill
-  calculateNumberOfNights: number;
-  total: number;
 
   calculateBill() {
     this.calculateNumberOfNights =
@@ -106,71 +126,17 @@ export class ShortletComponent implements OnInit {
     this.total = this.calculateNumberOfNights + 107 + 231;
   }
 
-  today: Date;
   mindate() {
     this.today = new Date();
   }
 
-  noSelectFromPast() {
-    const date = new Date();
-
-    const year = date.toLocaleString('default', { year: 'numeric' });
-
-    const month = date.toLocaleString('default', { month: '2-digit' });
-
-    const day = date.toLocaleString('default', { day: '2-digit' });
-
-    const formattedDate = year + '-' + month + '-' + day;
-
-    this.dateForCalendar = formattedDate;
-
-    // console.log(formattedDate); // Prints: 2022-05-04
-  }
-
-  noSelectLessThan2() {
-    let newDate = new Date();
-
-    newDate.setDate(new Date().getDate() + 2); // 2 days to the default checkin and out date
-
-    const year = newDate.toLocaleString('default', { year: 'numeric' });
-
-    const month = newDate.toLocaleString('default', { month: '2-digit' });
-
-    const day = newDate.toLocaleString('default', { day: '2-digit' });
-
-    const formattedDate = year + '-' + month + '-' + day;
-
-    this.dateForCalendar2 = formattedDate;
-
-    console.log(formattedDate);
-  }
-
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
-
-  // myDateFilter = (d: Date | null): boolean => {
-  //   const day = (d || new Date()).getDay();
-  //   return day !== 0 && day !== 6;
-  // };
-
   dateConverter(dateOBJ: Date) {
     const date = new Date(dateOBJ);
-
     const year = date.toLocaleString('default', { year: 'numeric' });
-
     const month = date.toLocaleString('default', { month: '2-digit' });
-
     const day = date.toLocaleString('default', { day: '2-digit' });
-
     const formattedDate = month + '/' + day + '/' + year;
-
     return formattedDate;
-    // this.dateForCalendar = formattedDate;
-
-    // console.log(formattedDate);
-
     // console.log(formattedDate); // Prints: 2022-05-04
   }
 
@@ -183,31 +149,17 @@ export class ShortletComponent implements OnInit {
     let testCheck2 = new Date(checkOutDate);
 
     const date = new Date(testCheck1.getTime());
-
     const dates = [];
-
     while (date <= testCheck2) {
       dates.push(new Date(date).toLocaleDateString());
       date.setDate(date.getDate() + 1);
     }
-
     console.log(dates);
-
     for (let date1 of dates) {
       this.myHolidayDates.push(new Date(date1));
       this.mynewArray.push(new Date(date1));
-      // this.myHolidayDates.push(new Date(this.dateConverter(date1)));
     }
-
-    console.log(this.myHolidayDates);
-    console.log(this.mynewArray);
   }
-
-  myHolidayDates = [
-    // new Date('3/28/2023'),
-    // new Date('3/29/2023'),
-    // new Date('3/30/2023'),
-  ];
 
   disableReserveDate() {
     //this will disable reserve date if both the current day and two days ahead are already reserved
@@ -238,11 +190,6 @@ export class ShortletComponent implements OnInit {
     return !this.myHolidayDates.find((x) => x.getTime() == time);
   };
 
-  minDate = new Date();
-  trial = new Date();
-  twodayAhead = this.trial.setDate(this.trial.getDate() + 2);
-  minDateForCheckOut = new Date(this.twodayAhead);
-
   increment() {
     if (this.counter < this.maxNoOfGuests) {
       this.counter = this.counter + 1;
@@ -253,6 +200,26 @@ export class ShortletComponent implements OnInit {
   decrement() {
     if (this.counter > 1) {
       this.counter = this.counter - 1;
+    }
+  }
+
+  onSendComment() {
+    if (this.UserComment === '') {
+      return;
+    } else {
+      const userComment = {
+        comment: this.UserComment,
+      };
+
+      // console.log(userComment);
+      this.dataStorage
+        .sendComment(userComment, +this.apartmentID, this.user_email)
+        .subscribe((res) => {
+          console.log(res);
+          this.UserComment = '';
+          // this.notif.successMessage('Comment added!');
+          window.location.reload();
+        });
     }
   }
 }

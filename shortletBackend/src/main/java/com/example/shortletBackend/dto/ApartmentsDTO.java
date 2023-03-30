@@ -23,6 +23,8 @@ public class ApartmentsDTO {
     @Lob
     private String description;
     private int price;
+    private int cleaningFee;
+    private int serviceFee;
     private double rating;
 
     private String houseRefCode;
@@ -34,7 +36,7 @@ public class ApartmentsDTO {
     private String continent;
     private UsersDTO users;
 
-    private Amenities amenities;
+    private ArrayList amenities = new ArrayList<>();
     private Set<CommentsDTO> comments;
     private Set<ReservationNoApartmentDTO> reservations;
 //    private ArrayList reservedDates = new ArrayList<>();ArrayList

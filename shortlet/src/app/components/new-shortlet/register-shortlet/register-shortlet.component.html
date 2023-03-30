@@ -2,15 +2,15 @@
     <div class="form">
         <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
             <div class="input-wrapper">
-              <label>
-                Title:</label>
+              <label>Title</label>
                 <input formControlName="name" type="text" required >
             </div>
 
 
             <div class="input-wrapper">
                 <label>Description</label>
-                <input formControlName="description">
+                <input formControlName="description" type="text" required >
+                <!-- <textarea formControlName="description"></textarea> -->
             </div>
 
             <div class="input-wrapper">
@@ -26,10 +26,7 @@
 
         
             <div class="input-wrapper">
-                <label>
-                  Guest Capacity:
-                  
-                </label>
+                <label>Guest Capacity</label>
                 <input formControlName="maxNoOfGuests" type="number">
             </div>
         
@@ -43,14 +40,14 @@
         
             <div class="input-wrapper">
                 <label>
-                    No of Bathrooms:
+                    No of Bathrooms
                 </label>
                 <input formControlName="noOfBathrooms" type="number">
             </div>
             <div class="input-wrapper">
 
                 <label></label>
-                <select formControlName="houseType">
+                <select formControlName="houseType" class="form-control">
                     <option value="" disabled selected>Select your House Type</option>
                     <option value="PRIVATE_ROOM">Private Room</option>
                 </select>
@@ -60,7 +57,7 @@
 
             <div class="input-wrapper">
                   <label></label>
-                    <select formControlName="propertyType">
+                    <select formControlName="propertyType" class="form-control">
                         <option value="" disabled selected>Select your Property Type</option>
                         <option value="HOTEL">Hotel</option>
                     </select>
@@ -69,12 +66,23 @@
             <div formGroupName="amenities" >
                 <div class="amenities">
                     <div>
-                        <!-- <label for="gym">GYM</label> -->
-                    <input id="gym" type="checkbox" formControlName="gym">
+                        
+                        <input id="gym" type="checkbox" formControlName="gym">
+                        <label for="gym">Gym</label>
                     </div>
 
                     
-                    <input type="checkbox" formControlName="pool">
+                    <div>
+                        
+                        <input type="checkbox" formControlName="pool">
+                        <label for="pool">Pool</label>
+                    </div>
+
+                    <div>
+                        
+                        <input type="checkbox" formControlName="wifi">
+                        <label for="wifi">Free Wi-Fi</label>
+                    </div>
                 </div>                
             </div>
 
@@ -83,6 +91,8 @@
                 type="file"
                 accept=".png, .jpg, .jpeg"
                 (change)="onImageUpload($event)"
+                multiple
+                required
               />
 
             </div>
@@ -95,7 +105,6 @@
           </form>
     </div>
 
-    <!-- <div>
-        <img *ngIf="imagePreview" [src]="getSafeUrl(imagePreview)" width="100" height="100">
-      </div> -->
+   
 </div>
+  
