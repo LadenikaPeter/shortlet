@@ -14,6 +14,9 @@ export interface Shortlet {
   users: Users;
   reservations: [];
   comments: [];
+  amenities: [];
+  serviceFee: number;
+  cleaningFee: number;
 }
 
 export interface Pictures {

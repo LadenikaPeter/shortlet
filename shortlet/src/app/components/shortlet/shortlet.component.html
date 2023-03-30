@@ -85,19 +85,8 @@
       <hr />
       <h4>What this place offers</h4>
       <!-- amenities -->
-      <div class="amenities">
-        <div>
-          <p>Beach access</p>
-          <p>Bay view</p>
-          <p>Ocean View</p>
-          <p>Wifi</p>
-        </div>
-        <div>
-          <p>Park view</p>
-          <p>Sea view</p>
-          <p>Kitchen</p>
-          <p>Free parking on premises</p>
-        </div>
+      <div class="row">
+        <div class="col-md-6" *ngFor="let item of amenities">{{ item }}</div>
       </div>
       <div>
         <!-- Button trigger modal -->
@@ -214,7 +203,6 @@
         <p>₦{{ shortletData.price }} per night</p>
         <div style="display: flex; gap: 0.1rem">
           <p>★ {{ shortletData.rating }}</p>
-          <p>· 148 reviews</p>
         </div>
       </div>
       <!-- check in and out picker -->
@@ -308,11 +296,11 @@
       </div>
       <div class="bill">
         <p>Cleaning fee</p>
-        <p>₦107</p>
+        <p>₦{{ shortletData.cleaningFee }}</p>
       </div>
       <div class="bill">
         <p>HMS Service fee</p>
-        <p>₦231</p>
+        <p>₦{{ shortletData.serviceFee }}</p>
       </div>
       <hr />
       <div class="bill">
