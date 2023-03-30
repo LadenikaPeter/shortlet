@@ -33,6 +33,9 @@ public class bootStrap implements CommandLineRunner {
         Users olu = new Users("Oluchukwu Chiwetelu","olu@gmail.com",Role.USER);
         Users chi = new Users("Chiabuotu Chinomso","chi@gmail.com",Role.USER);
         Users isak = new Users("Isak Lennert","isak@gmail.com",Role.USER);
+        Users peter = new Users("Ladenika Peter","peterladenika@gmail.com",Role.ADMIN);
+        Users mogena = new Users("Mogena", "abdulai1398@student.babcock.edu.ng",Role.ADMIN);
+        
 
         userRepository.saveAll(new ArrayList<>(Arrays.asList(walter,Admin,kathy,samy,melisa,emily,olu,chi,isak)));
 
