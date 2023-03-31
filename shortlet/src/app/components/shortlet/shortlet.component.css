@@ -54,7 +54,7 @@
   border-radius: 0 0 20px 0;
 }
 
-.modal-button {
+/* .modal-button {
   background-color: #fff;
   color: black;
   border: 1px solid black;
@@ -64,7 +64,7 @@
   background-color: #f5f5f5;
   color: black;
   border: 1px solid black;
-}
+} */
 
 /* .amenities {
   display: flex;
@@ -81,16 +81,21 @@
 }
 
 .reservation {
-  min-width: 350px;
+  /* min-width: 350px; */
   /* border: 1px solid red; */
   padding: 1.2rem;
-  max-height: 480px;
+  /* max-height: 480px; */
   border-radius: 10px;
+
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   margin-left: 4rem;
   /* sticky */
-  position: sticky;
+  /* position: sticky; */
   top: 70px;
+}
+
+.shortlet_content {
+  margin-top: 2rem;
 }
 
 .reserve-btn {
@@ -119,7 +124,9 @@
 }
 
 .col {
-  width: 50%;
+  /* width: 50%; */
+  /* padding-left: 12px; */
+  padding-right: 0;
 }
 
 .reserve_datepicker {
@@ -128,8 +135,8 @@
 }
 
 .guest_counter {
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding-bottom: 10px;
   border: 1px solid #4a4a4a;
   border-radius: 10px;
@@ -137,6 +144,10 @@
 
 .guest_number {
   text-align: center;
+}
+
+.counter_number_div {
+  width: 68%;
 }
 
 .guests_label {
@@ -181,17 +192,13 @@ mat-label {
 
 /* comments */
 
-/* .row {
-  padding-top: 32px;
-} */
-
 .col-md-5 {
   margin: 10px 25px;
 }
 
 .signedIn_user {
-  width: 70%;
-  margin: 20px 25px;
+  /* width: 70%; */
+  /* margin: 20px 25px; */
   padding-bottom: 50px;
 }
 
@@ -207,4 +214,67 @@ mat-label {
 .send_comment {
   margin-top: 10px;
   width: 20%;
+  background-color: #ff0066;
+  border: 0;
+  color: white;
+  border-radius: 5px;
+  padding: 7px 0;
+}
+
+@media (min-width: 767px) and (max-width: 1025px) {
+  .reservation {
+    margin-left: 0;
+  }
+
+  .col {
+    padding: 0 12px;
+  }
+
+  .reserve_datepicker {
+    width: 100%;
+  }
+
+  .secondDatepicker {
+    margin-top: 10px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .counter_number_div {
+    width: 54%;
+  }
+
+  mat-form-field {
+    width: 48%;
+  }
+
+  .reserve-btn > button {
+    padding: 10px 60px;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .reservation {
+    margin-left: 0;
+    margin-top: 7px;
+  }
+
+  .removeOnScreen425 {
+    display: none;
+  }
+
+  .reserve_datepicker {
+    width: 97%;
+  }
+
+  .secondDatepicker {
+    margin-top: 10px;
+  }
+
+  .counter_number_div {
+    width: 73%;
+  }
+
+  .reserve-btn > button {
+    padding: 10px 80px;
+  }
 }
