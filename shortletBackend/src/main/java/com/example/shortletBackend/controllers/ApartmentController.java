@@ -70,7 +70,7 @@ public class ApartmentController {
         return ResponseEntity.ok(hotelList);
     }
     @GetMapping("/home/")
-    public ResponseEntity getHotel(@RequestParam("house_id") long id ) throws IllegalAccessException, NoSuchFieldException {
+    public ResponseEntity getHotel(@RequestParam("house_id") long id ) throws IllegalAccessException, NoSuchFieldException{
         Optional<Apartments> apartments = apartmentRepo.findById(id);
         if (apartments.isPresent()){
             // return only amenities that have true as a reply
@@ -79,7 +79,8 @@ public class ApartmentController {
             Map<String, Object> map= new ObjectMapper().convertValue(apartments.get().getAmenities(),Map.class);
             for (String key:map.keySet()) {
                 if (map.get(key) == (Object) true) {
-                    apartmentsDTO.getAmenities().add(key);
+                    String amenityName= key.replaceAll("_"," ");
+                    apartmentsDTO.getAmenities().add(amenityName.substring(0,1).toUpperCase()+amenityName.substring(1,amenityName.length()));
                 }
             }
 

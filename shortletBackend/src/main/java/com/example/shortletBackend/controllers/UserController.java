@@ -107,6 +107,15 @@ public class UserController {
 
     }
 
+    @GetMapping("/user/listings/")
+    public ResponseEntity getAllUserHouses(@RequestHeader("user_email") String email){
+        Optional<Users> users= userRepository.findUsersByEmail(email);
+        if (users == null) {
+            throw new RuntimeException("The user does not exist");
+        }
+        return ResponseEntity.ok(apartmentRepo.findAllByUsers(users.get())) ;
+    }
+
 
 
 }
