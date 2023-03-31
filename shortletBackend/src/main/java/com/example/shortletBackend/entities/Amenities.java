@@ -16,24 +16,24 @@ public class Amenities {
     private boolean tv;
     private boolean kitchen;
     private boolean washer;
-    private boolean freeParking;
-    private boolean paidParking;
+    private boolean free_parking;
+    private boolean paid_parking;
 
-    private boolean airCondition;
-    private boolean workSpace;
+    private boolean air_condition;
+    private boolean work_space;
     private boolean pool;
-    private boolean hotTub;
+    private boolean hot_tub;
     private boolean patio;
-    private boolean bbqGrill;
-    private boolean outdoorDining;
-    private boolean poolTable;
+    private boolean bbq_grill;
+    private boolean outdoor_dining;
+    private boolean pool_table;
     private boolean fireplace;
-    private boolean lakeAccess;
-    private boolean beachAccess;
-    private boolean outdoorShower;
-    private boolean smokeAlarm;
-    private boolean firstAidKit;
-    private boolean fireExtinguisher;
+    private boolean lake_access;
+    private boolean beach_access;
+    private boolean outdoor_shower;
+    private boolean smoke_alarm;
+    private boolean first_aid_kit;
+    private boolean fire_extinguisher;
 
 
 

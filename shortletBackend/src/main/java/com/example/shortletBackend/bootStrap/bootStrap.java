@@ -79,9 +79,9 @@ public class bootStrap implements CommandLineRunner {
 
         firstHouse.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture1, picture2, picture3, picture4, picture5})));
         Amenities A = new Amenities();
-        A.setAirCondition(true);
+        A.setAir_condition(true);
         A.setFireplace(false);
-        A.setBbqGrill(true);
+        A.setBbq_grill(true);
         firstHouse.setAmenities(A);
         firstHouse.setUsers(walter);
 
@@ -147,7 +147,7 @@ public class bootStrap implements CommandLineRunner {
         h2.setWifi(true);
         h2.setTv(true);
         h2.setKitchen(true);
-        h2.setAirCondition(true);
+        h2.setAir_condition(true);
 
         House2.setAmenities(h2);
 
@@ -204,7 +204,7 @@ public class bootStrap implements CommandLineRunner {
         House3.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture11, picture12, picture13, picture14, picture15})));
         House3.setUsers(samy);
         Amenities h3=new Amenities();
-        h3.setPaidParking(true);
+        h3.setPaid_parking(true);
         h3.setWasher(true);
         h3.setWifi(true);
         h3.setTv(true);
@@ -278,12 +278,12 @@ public class bootStrap implements CommandLineRunner {
 
         House4.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{picture16, picture17, picture18, picture19, picture20})));
         Amenities h4=new Amenities();
-        h4.setBbqGrill(true);
-        h4.setOutdoorDining(true);
-        h4.setLakeAccess(true);
-        h4.setSmokeAlarm(true);
-        h4.setFirstAidKit(true);
-        h4.setFireExtinguisher(true);
+        h4.setBbq_grill(true);
+        h4.setOutdoor_dining(true);
+        h4.setLake_access(true);
+        h4.setSmoke_alarm(true);
+        h4.setFirst_aid_kit(true);
+        h4.setFire_extinguisher(true);
         House4.setAmenities(h4);
 
         Comments comment9= new Comments("Very nice stay! Very cozy and amazing view of the ocean!\n" +
@@ -336,7 +336,7 @@ public class bootStrap implements CommandLineRunner {
         h5.setPool(true);
         h5.setTv(true);
         h5.setPool(true);
-        h5.setAirCondition(true);
+        h5.setAir_condition(true);
         h5.setWasher(true);
         House5.setAmenities(h5);
 
@@ -388,10 +388,10 @@ public class bootStrap implements CommandLineRunner {
         House6.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures26, pictures27, pictures28, pictures29, pictures30})));
 
         Amenities h6=new Amenities();
-        h6.setFreeParking(true);
+        h6.setFree_parking(true);
         h6.setWifi(true);
-        h6.setFirstAidKit(true);
-        h6.setFireExtinguisher(true);
+        h6.setFirst_aid_kit(true);
+        h6.setFire_extinguisher(true);
         House6.setAmenities(h6);
 
         Comments comment13= new Comments("A house with extraordinary views! We had a great time at this very well decorated and comfortably furnished house",new Date(2023 - 1900, Calendar.MARCH, 20),isak,House6);
@@ -441,12 +441,12 @@ public class bootStrap implements CommandLineRunner {
         House7.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures31, pictures32, pictures33, pictures35, pictures34})));
 
         Amenities h7 =new Amenities();
-        h7.setFireExtinguisher(true);
-        h7.setSmokeAlarm(true);
+        h7.setFire_extinguisher(true);
+        h7.setSmoke_alarm(true);
         h7.setWifi(true);
-        h7.setLakeAccess(true);
-        h7.setFreeParking(true);
-        h7.setWorkSpace(true);
+        h7.setLake_access(true);
+        h7.setFree_parking(true);
+        h7.setWork_space(true);
         House7.setAmenities(h7);
 
         Comments comment15= new Comments(" The view is unforgettable.",new Date(2023 - 1900, Calendar.JANUARY, 15),kathy,House7);
@@ -504,11 +504,11 @@ public class bootStrap implements CommandLineRunner {
         House8.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures36, pictures37, pictures38, pictures39, pictures40})));
 
         Amenities h8=new Amenities();
-        h8.setFireExtinguisher(true);
-        h8.setWorkSpace(true);
-        h8.setBeachAccess(true);
-        h8.setOutdoorDining(true);
-        h8.setWorkSpace(true);
+        h8.setFire_extinguisher(true);
+        h8.setWork_space(true);
+        h8.setBeach_access(true);
+        h8.setOutdoor_dining(true);
+        h8.setWork_space(true);
         House8.setAmenities(h8);
 
         Comments comment17= new Comments("This is perfect for you if you wish to get away from the tourist crowds",new Date(2023 - 1900, Calendar.MARCH, 25),samy,House8);
@@ -553,13 +553,13 @@ public class bootStrap implements CommandLineRunner {
         House9.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures41, pictures42, pictures43, pictures44, pictures45})));
 
         Amenities h9 = new Amenities();
-        h9.setFireExtinguisher(true);
+        h9.setFire_extinguisher(true);
         h9.setPool(true);
         h9.setWifi(true);
-        h9.setPaidParking(true);
-        h9.setSmokeAlarm(true);
+        h9.setPaid_parking(true);
+        h9.setSmoke_alarm(true);
         h9.setWasher(true);
-        h9.setPoolTable(true);
+        h9.setPool_table(true);
         h9.setWasher(true);
         House9.setAmenities(h9);
 
@@ -660,16 +660,16 @@ public class bootStrap implements CommandLineRunner {
         House10.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures46, pictures47, pictures48, pictures49, pictures50})));
 
         Amenities h10 = new Amenities();
-        h10.setFireExtinguisher(true);
+        h10.setFire_extinguisher(true);
         h10.setFireplace(true);
-        h10.setFirstAidKit(true);
-        h10.setPoolTable(true);
-        h10.setBbqGrill(true);
-        h10.setFreeParking(true);
+        h10.setFirst_aid_kit(true);
+        h10.setPool_table(true);
+        h10.setBbq_grill(true);
+        h10.setFree_parking(true);
         h10.setWasher(true);
-        h10.setWorkSpace(true);
+        h10.setWork_space(true);
         h10.setPatio(true);
-        h10.setAirCondition(true);
+        h10.setAir_condition(true);
         h10.setTv(true);
         House10.setAmenities(h10);
 
@@ -727,11 +727,11 @@ public class bootStrap implements CommandLineRunner {
         House11.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures51, pictures52, pictures53, pictures54, pictures55})));
 
         Amenities h11 = new Amenities();
-        h11.setOutdoorShower(true);
+        h11.setOutdoor_shower(true);
         h11.setFireplace(true);
-        h11.setBeachAccess(true);
-        h11.setFirstAidKit(true);
-        h11.setFireExtinguisher(true);
+        h11.setBeach_access(true);
+        h11.setFirst_aid_kit(true);
+        h11.setFire_extinguisher(true);
         House11.setAmenities(h11);
 
         Comments comment23= new Comments("Amazing villa, really clean and spacious",new Date(2023 - 1900, Calendar.MARCH, 25),isak,House11);
@@ -783,16 +783,16 @@ public class bootStrap implements CommandLineRunner {
         House12.getPictures().addAll(new ArrayList<>(Arrays.asList(new Pictures[]{pictures56, pictures57, pictures58, pictures59, pictures60})));
 
         Amenities h12 = new Amenities();
-        h12.setFireExtinguisher(true);
+        h12.setFireplace(true);
         h12.setPool(true);
         h12.setFireplace(true);
         h12.setKitchen(true);
-        h12.setFirstAidKit(true);
-        h12.setPoolTable(true);
-        h12.setBbqGrill(true);
-        h12.setFreeParking(true);
+        h12.setFirst_aid_kit(true);
+        h12.setPool_table(true);
+        h12.setBbq_grill(true);
+        h12.setFire_extinguisher(true);
         h12.setWasher(true);
-        h12.setWorkSpace(true);
+        h12.setWork_space(true);
         h12.setPatio(true);
         House12.setAmenities(h12);
 
