@@ -3,7 +3,9 @@
 }
 
 .row {
-  justify-content: space-around;
+  /* use gap instead of  */
+  /* justify-content: space-around; */
+  gap: 15px;
 }
 
 .col-md-3 {
@@ -45,4 +47,16 @@ img {
   border-radius: 50%;
   height: 7px;
   width: 7px;
+}
+
+@media only screen and (max-width: 426px) {
+  .row {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 767px) and (max-width: 1023px) {
+  .row {
+    margin-left: 30px;
+  }
 }

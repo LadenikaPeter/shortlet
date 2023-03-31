@@ -2,113 +2,135 @@
   <div>
     <h2><i class="fa-solid fa-angle-left"></i>Request to book</h2>
   </div>
-  <div class="booking-review">
-    <!-- login-section -->
-    <div class="login-section">
-      <div class="rare">
-        <div>
-          <h5>This is a rare find.</h5>
-          <p>{{ shortletData.name }}'s place is usually booked.</p>
-        </div>
-        <img
-          style="width: 24px; height: 24px"
-          src="../../../../assets/svg/diamond.svg"
-          alt=""
-        />
-      </div>
-      <div class="trip-details">
-        <h3>Your trip</h3>
-        <div class="trip">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="login-section">
+        <div class="rare">
           <div>
-            <h5>Dates</h5>
-            <p>{{ checkin | date }} - {{ checkout | date }}</p>
+            <h5>This is a rare find.</h5>
+            <p>{{ shortletData.name }}'s place is usually booked.</p>
           </div>
+          <img
+            style="width: 24px; height: 24px"
+            src="../../../../assets/svg/diamond.svg"
+            alt=""
+          />
         </div>
-        <div class="trip">
-          <div>
-            <h5>Guests</h5>
-            <p>{{ guests }} {{ guests == 1 ? "guest" : "guests" }}</p>
+        <div class="trip-details">
+          <h3>Your trip</h3>
+          <div class="trip">
+            <div>
+              <h5>Dates</h5>
+              <p>{{ checkin | date }} - {{ checkout | date }}</p>
+            </div>
           </div>
-        </div>
-        <hr *ngIf="isAuthenticated" />
-        <h3 *ngIf="isAuthenticated">Choose how to pay</h3>
-        <div
-          *ngIf="isAuthenticated"
-          class="payment-options"
-          angular4-paystack
-          [email]="emailForPayment"
-          [amount]="totalForPaystack"
-          [ref]="reference"
-          [class]="'btn btn-primary'"
-          (paymentInit)="paymentInit()"
-          (onClose)="paymentCancel()"
-          (callback)="paymentDone($event)"
-        >
-          <div>
-            <h5>Pay in full</h5>
-            <p>Pay the total now and you're all set.</p>
+          <div class="trip">
+            <div>
+              <h5>Guests</h5>
+              <p>{{ guests }} {{ guests == 1 ? "guest" : "guests" }}</p>
+            </div>
           </div>
-          <div>
-            <p>₦{{ total }}</p>
+          <!-- <hr *ngIf="isAuthenticated" /> -->
+          <!-- <h3 *ngIf="isAuthenticated">Choose how to pay</h3>
+          <div
+            *ngIf="isAuthenticated"
+            class="payment-options"
+            angular4-paystack
+            [email]="emailForPayment"
+            [amount]="totalForPaystack"
+            [ref]="reference"
+            [class]="'btn btn-primary'"
+            (paymentInit)="paymentInit()"
+            (onClose)="paymentCancel()"
+            (callback)="paymentDone($event)"
+          >
+            <div>
+              <h5>Pay in full</h5>
+              <p>Pay the total now and you're all set.</p>
+            </div>
+            <div>
+              <p>₦{{ total }}</p>
+            </div>
+          </div> -->
+          <hr />
+          <div *ngIf="!isAuthenticated">
+            <h5>Log in or sign up to book</h5>
+            <button class="social_button w-100" (click)="googleAuth()">
+              Continue with
+              <span>
+                <span id="g">G</span> <span id="o_first">o</span>
+                <span id="o_second">o</span> <span id="g_second">g</span>
+                <span id="l">l</span> <span id="e">e</span>
+              </span>
+            </button>
+            <!-- google logo -->
           </div>
-        </div>
-        <hr />
-        <div *ngIf="!isAuthenticated">
-          <h5>Log in or sign up to book</h5>
-          <button class="social_button w-100" (click)="googleAuth()">
-            Continue with
-            <span>
-              <span id="g">G</span> <span id="o_first">o</span>
-              <span id="o_second">o</span> <span id="g_second">g</span>
-              <span id="l">l</span> <span id="e">e</span>
-            </span>
-          </button>
-          <!-- google logo -->
         </div>
       </div>
     </div>
-    <!-- bill-section -->
-    <div class="bill-section">
-      <div style="display: flex">
-        <img src="{{ shortletPictures[0].url }}" alt="" />
-        <div style="height: 1px; padding-left: 0.5rem">
-          <div style="line-height: 0.25rem">
-            <p style="font-size: 12px">Entire rental unit</p>
-            <p style="font-size: 14px">{{ shortletData.name }}</p>
+    <div class="col-md-6">
+      <div class="booking-review">
+        <!-- login-section -->
+
+        <!-- bill-section -->
+        <div class="bill-section">
+          <div style="display: flex">
+            <img src="{{ shortletPictures[0].url }}" alt="" />
+            <div style="height: 1px; padding-left: 0.5rem">
+              <div style="line-height: 0.25rem">
+                <p style="font-size: 12px">Entire rental unit</p>
+                <p style="font-size: 14px">{{ shortletData.name }}</p>
+              </div>
+              <div class="rating">
+                <p>★ {{ shortletData.rating }}</p>
+                <!-- <p>(136 reviews)</p>
+                <p>· Superhost</p> -->
+              </div>
+            </div>
           </div>
-          <div class="rating">
-            <p>★ {{ shortletData.rating }}</p>
-            <!-- <p>(136 reviews)</p>
-            <p>· Superhost</p> -->
+          <hr />
+          <p style="padding: 0.5rem 0rem">
+            Your booking is protected by
+            <span style="font-weight: 900">
+              HM<span class="hmcover_name">Cover</span></span
+            >
+          </p>
+          <hr />
+          <div>
+            <h4>Price details</h4>
+            <div class="bill">
+              <p>₦{{ shortletData.price }} x {{ nights }} nights</p>
+              <p>₦{{ calculateNumberOfNights }}</p>
+            </div>
+            <div class="bill">
+              <p>Cleaning fee</p>
+              <p>₦107</p>
+            </div>
+            <div class="bill">
+              <p>HMS Service fee</p>
+              <p>₦237</p>
+            </div>
+            <hr />
+            <div class="bill">
+              <p>Total(NGN)</p>
+              <p>₦{{ total }}</p>
+            </div>
+            <button
+              *ngIf="isAuthenticated"
+              class="payment-options w-100"
+              angular4-paystack
+              [email]="emailForPayment"
+              [amount]="totalForPaystack"
+              [ref]="reference"
+              [class]="'btn btn-primary'"
+              (paymentInit)="paymentInit()"
+              (onClose)="paymentCancel()"
+              (callback)="paymentDone($event)"
+            >
+              Proceed to pay
+            </button>
           </div>
-        </div>
-      </div>
-      <hr />
-      <p style="padding: 0.5rem 0rem">
-        Your booking is protected by
-        <span style="font-weight: 900">
-          HM<span class="hmcover_name">Cover</span></span
-        >
-      </p>
-      <hr />
-      <div>
-        <h4>Price details</h4>
-        <div class="bill">
-          <p>₦{{ shortletData.price }} x {{ nights }} nights</p>
-          <p>₦{{ calculateNumberOfNights }}</p>
-        </div>
-        <div class="bill">
-          <p>Cleaning fee</p>
-          <p>₦107</p>
-        </div>
-        <div class="bill">
-          <p>HMS Service fee</p>
-          <p>₦237</p>
-        </div>
-        <hr />
-        <div class="bill">
-          <p>Total(NGN)</p>
-          <p>₦{{ total }}</p>
         </div>
       </div>
     </div>

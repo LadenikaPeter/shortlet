@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-around;
   padding: 0 0 25px 0;
-  height: 85px;
+  flex-wrap: wrap;
+  /* height: 85px; */
 }
 
 img {
@@ -13,7 +14,10 @@ img {
 }
 
 .property {
+  width: 100px;
+  display: inline;
   opacity: 0.6;
+  margin-top: 10px;
 }
 
 .property:hover {
@@ -34,3 +38,10 @@ p {
   padding-bottom: 5px;
   border-bottom: 2px solid black;
 } */
+
+@media (min-width: 426px) and (max-width: 768px) {
+  .property {
+    width: 170px;
+    height: 70px;
+  }
+}
