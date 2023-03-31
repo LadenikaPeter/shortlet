@@ -44,7 +44,7 @@ public class bootStrap implements CommandLineRunner {
         firstHouse.setState("Puglia");
         firstHouse.setCountry("Italy");
         firstHouse.setName("Saponea 13 Flat Design");
-        firstHouse.setHouseRefCode(firstHouse.getAddress().substring(0, 3), 1);
+        firstHouse.setHouseRefCode(firstHouse.getCountry().substring(0, 3), 1);
         firstHouse.setPrice(533);
         firstHouse.setRating(4.7);
         firstHouse.setHomeState(HomeState.VERIFIED);
@@ -99,7 +99,7 @@ public class bootStrap implements CommandLineRunner {
         House2.setState("Marrakesh");
         House2.setCountry("Morocco");
         House2.setName("Room with a sunset view in the Ourika Valley");
-        House2.setHouseRefCode(House2.getAddress().substring(0, 3), 2);
+        House2.setHouseRefCode(House2.getCountry().substring(0, 3), 2);
         House2.setPrice(1371);
         House2.setRating(3.9);
         House2.setHomeState(HomeState.VERIFIED);
@@ -158,7 +158,7 @@ public class bootStrap implements CommandLineRunner {
         House3.setState("La Garrotxa");
         House3.setCountry("Spain");
         House3.setName("Village house with charm in Garrotxa (Girona)");
-        House3.setHouseRefCode(House3.getAddress().substring(0, 5), 3);
+        House3.setHouseRefCode(House3.getCountry().substring(0, 5), 3);
         House3.setPrice(838);
         House3.setRating(5.0);
         House3.setHomeState(HomeState.VERIFIED);
@@ -223,7 +223,7 @@ public class bootStrap implements CommandLineRunner {
         House4.setState("Marrakesh-Safi");
         House4.setCountry("Morocco");
         House4.setName("Ideal for a romantic getaway !");
-        House4.setHouseRefCode(House4.getAddress().substring(0, 3), 4);
+        House4.setHouseRefCode(House4.getCountry().substring(0, 3), 4);
         House4.setPrice(734);
         House4.setRating(4.5);
         House4.setHomeState(HomeState.VERIFIED);
@@ -296,7 +296,7 @@ public class bootStrap implements CommandLineRunner {
         House5.setState("Honshu");
         House5.setCountry("Japan");
         House5.setName("Calm Home");
-        House5.setHouseRefCode(House5.getAddress().substring(0, 3), 5);
+        House5.setHouseRefCode(House5.getCountry().substring(0, 3), 5);
         House5.setPrice(1265);
         House5.setRating(4.7);
         House5.setMaxNoOfGuests(3);
@@ -350,7 +350,7 @@ public class bootStrap implements CommandLineRunner {
         House6.setState("Crete");
         House6.setCountry("Greece");
         House6.setName("Maik Beyer");
-        House6.setHouseRefCode(House6.getAddress().substring(0, 3), 6);
+        House6.setHouseRefCode(House6.getCountry().substring(0, 3), 6);
         House6.setPrice(923);
         House6.setRating(5.0);
         House6.setHomeState(HomeState.VERIFIED);
@@ -404,7 +404,7 @@ public class bootStrap implements CommandLineRunner {
         House7.setState("Canary Islands");
         House7.setCountry("Spain");
         House7.setName("La Lajita Barca Beach Sunset");
-        House7.setHouseRefCode(House7.getAddress().substring(0, 3), 7);
+        House7.setHouseRefCode(House7.getCountry().substring(0, 3), 7);
         House7.setPrice(182);
         House7.setRating(4.9);
         House7.setHomeState(HomeState.VERIFIED);
@@ -459,7 +459,7 @@ public class bootStrap implements CommandLineRunner {
         House8.setState("Gran Canaria");
         House8.setCountry("Spain");
         House8.setName("10th century medieval Castle");
-        House8.setHouseRefCode(House8.getAddress().substring(0, 3), 8);
+        House8.setHouseRefCode(House8.getCountry().substring(0, 3), 8);
         House8.setPrice(374);
         House8.setRating(5.0);
         House8.setHomeState(HomeState.VERIFIED);
@@ -521,7 +521,7 @@ public class bootStrap implements CommandLineRunner {
         House9.setState("Lagos");
         House9.setCountry("Nigeria");
         House9.setName("Jacuzzi and heated floor in orchid road");
-        House9.setHouseRefCode(House9.getAddress().substring(0, 3), 9);
+        House9.setHouseRefCode(House9.getCountry().substring(0, 3), 9);
         House9.setPrice(380);
         House9.setRating(5.0);
         House9.setHomeState(HomeState.VERIFIED);
@@ -573,7 +573,7 @@ public class bootStrap implements CommandLineRunner {
         House10.setState("Lagos State");
         House10.setCountry("Nigeria");
         House10.setName("Mediterranean Island Beach-House Oasis 2br in Vi");
-        House10.setHouseRefCode(House10.getAddress().substring(0, 5), 10);
+        House10.setHouseRefCode(House10.getCountry().substring(0, 5), 10);
         House10.setPrice(120);
         House10.setRating(3.9);
         House10.setHomeState(HomeState.VERIFIED);
@@ -683,7 +683,7 @@ public class bootStrap implements CommandLineRunner {
         House11.setState("Canarias");
         House11.setCountry("Spain");
         House11.setName("Wood & Forest ");
-        House11.setHouseRefCode(House11.getAddress().substring(0, 3), 11);
+        House11.setHouseRefCode(House11.getCountry().substring(0, 3), 11);
         House11.setPrice(445);
         House11.setRating(3.9);
         House11.setHomeState(HomeState.VERIFIED);
@@ -744,7 +744,7 @@ public class bootStrap implements CommandLineRunner {
         House12.setState("Occitanie");
         House12.setCountry("France");
         House12.setName("Independent accommodation in the park of the castle");
-        House12.setHouseRefCode(House12.getAddress().substring(0, 3), 12);
+        House12.setHouseRefCode(House12.getCountry().substring(0, 3), 12);
         House12.setPrice(962);
         House12.setRating(5.0);
         House12.setHomeState(HomeState.VERIFIED);
