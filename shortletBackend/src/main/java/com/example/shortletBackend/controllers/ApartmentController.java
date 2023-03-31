@@ -108,7 +108,7 @@ public class ApartmentController {
             }
             apartments.setStatus(Status.UNOCCUPIED);
             apartments.setHomeState(HomeState.UNVERIFIED);
-            apartments.setHouseRefCode(apartments.getAddress().substring(0,2),apartmentRepo.findAll().size());
+            apartments.setHouseRefCode(apartments.getCountry().substring(0,2),apartmentRepo.findAll().size());
             users.get().getApartmentsSet().add(apartments);
             apartments.setUsers(users.get());
             userRepository.save(users.get());
