@@ -1,4 +1,4 @@
-.input-wrapper {
+/* .input-wrapper {
     position: relative;
   }
   
@@ -24,7 +24,7 @@
 
  /* enter */
 
-
+/* 
 
  .container {
   display: flex;
@@ -123,4 +123,10 @@ button[type="submit"]:disabled {
     font-size: 14px;
   }
 }
+ */
 
+
+ .heading {
+  display: flex;
+  gap: 3rem;
+ }
