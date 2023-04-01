@@ -15,6 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./register-shortlet.component.css']
 })
 export class RegisterShortletComponent {
+  step: any = 1;
   newShortlet: NewShortlet;
   imagePreview: any;
 
@@ -68,12 +69,12 @@ export class RegisterShortletComponent {
 
   onSubmit(form: FormGroup) {
     console.log('Valid?', form.valid); // true or false
-    this.notification.successMessage("you have added home, support will verify you home in a few minutes");
+    // this.notification.successMessage("you have added home, support will verify you home in a few minutes");
 
     ///timeout function that redirects back to the /host/shortlets of the new homes after a user successfully submits the form
-    setTimeout(()=>{
-      this.router.navigate(['/host/shortlets']);
-    }, 3000)
+    // setTimeout(()=>{
+    //   this.router.navigate(['/host/shortlets']);
+    // }, 3000)
 
     let formData = form.value
     // formData.append('image', this.pictures);
@@ -86,6 +87,19 @@ export class RegisterShortletComponent {
       },
       (error) => console.log(error)
     )
+
+
+    
+
+    console.log(this.myForm.value)
+  }
+
+  next () {
+    this.step = this.step + 1;
+  }
+
+  previous() {
+    this.step = this.step - 1;
   }
 
   //function to handle image uploads and convert to base64
