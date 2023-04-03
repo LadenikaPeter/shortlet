@@ -1,3 +1,6 @@
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
+
+paystack:
+  secret_key: "sk_test_5979e6e7cb563c31f743171f14ad25abb6ea43a4"
