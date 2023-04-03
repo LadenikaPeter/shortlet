@@ -1,6 +1,7 @@
 package com.example.shortletBackend.controllers;
 
 import com.example.shortletBackend.dto.ReservationDTO;
+import com.example.shortletBackend.dto.ReservationTableDTO;
 import com.example.shortletBackend.dto.UsersDTO;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
@@ -99,11 +100,14 @@ public class UserController {
 
     @GetMapping("/reservation/")
     public ResponseEntity getAllUserReservation(@RequestHeader("user_email")String email){
-        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
+        ArrayList reservationDTOS = new ArrayList<>();
         for (Reservation reservation: reservationRepo.findAllByUsers(userRepository.findUsersByEmail(email).get())){
-            reservationDTOS.add(mapper.map(reservation, ReservationDTO.class));
+            ReservationTableDTO old= mapper.map(reservation, ReservationTableDTO.class);
+            old.setApartmentPicture(reservation.getApartment().getPictures().stream().findFirst().get().getUrl());
+            reservationDTOS.add(old);
         }
         return ResponseEntity.ok(reservationDTOS);
+
 
     }
 
