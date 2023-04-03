@@ -13,11 +13,14 @@ import {
 import { NotificationService } from '../services/notifications.service';
 import { User } from '../Model/user.model';
 import { BehaviorSubject } from 'rxjs';
+import { SignedinUser } from '../interface/shortlet';
+import { UserRole } from '../Model/user-role.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private expirationTimer: any;
   user = new BehaviorSubject<User>(null);
+  userRole = new BehaviorSubject<UserRole>(null);
   // provider = new FacebookAuthProvider();
 
   constructor(
@@ -59,6 +62,10 @@ export class AuthService {
       _tokenExpirationDate: Date;
     } = JSON.parse(localStorage.getItem('shortletUserData'));
 
+    const userRoleData: {
+      role: string;
+    } = JSON.parse(localStorage.getItem('ShotletUserRole'));
+
     if (!userData) {
       return;
     }
@@ -71,32 +78,21 @@ export class AuthService {
       new Date(userData._tokenExpirationDate)
     );
 
+    const loadedUserRole = new UserRole(userRoleData.role);
+
     // console.log('im here');
 
     //checking if the token is valid
     if (loadedUser.token) {
       // console.log(' works here');
       this.user.next(loadedUser);
+      this.userRole.next(loadedUserRole);
       const expirationDuration =
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
       this.autoLogOut(expirationDuration);
     }
   }
-
-  // loginWithFacebook() {
-  //   signInWithPopup(this.auth, new FacebookAuthProvider())
-  //     .then((authenticated_user) => {
-  //       console.log(authenticated_user);
-  //       this.notif.successMessage('Successfully logged in');
-  //     })
-  //     .catch((error) => {
-  //       // this.notif.errorMessage('sorry, Something went wrong')
-  //       if (error.code === 'auth/account-exists-with-different-credential') {
-  //         // console.log(error.credential);
-  //       }
-  //     });
-  // }
 
   private handleAuthentication(
     email: string,
@@ -110,8 +106,10 @@ export class AuthService {
         name: displayName,
         email: email,
       })
-      .subscribe((res) => {
-        console.log(res);
+      .subscribe((res: SignedinUser) => {
+        const userRole = new UserRole(res.role);
+        this.userRole.next(userRole);
+        localStorage.setItem('ShotletUserRole', JSON.stringify(userRole));
       });
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(
@@ -129,7 +127,9 @@ export class AuthService {
   logOut() {
     signOut(this.auth).then(() => {
       this.user.next(null);
+      this.userRole.next(null);
       localStorage.removeItem('shortletUserData');
+      localStorage.removeItem('ShotletUserRole');
       if (this.expirationTimer) {
         clearTimeout(this.expirationTimer);
       }
