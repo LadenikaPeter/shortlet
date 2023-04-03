@@ -18,11 +18,8 @@ export class AppComponent implements OnInit {
     this.authS.autoLogin();
   }
 
-  @HostListener('document: click', ['$event']) closetab(eventdata: Event) {
-    // console.log('i was clicked');
-    this.closeTab.closeTabOfProfile.next(null);
-  }
-
-
-  
+  // @HostListener('document: click', ['$event']) closetab(eventdata: Event) {
+  //   // console.log('i was clicked');
+  //   this.closeTab.closeTabOfProfile.next(null);
+  // }
 }

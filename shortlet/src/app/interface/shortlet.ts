@@ -19,6 +19,27 @@ export interface Shortlet {
   cleaningFee: number;
 }
 
+export interface SignedinUser {
+  role: string;
+}
+
+export interface ApartmentObj {
+  address: string;
+  country: string;
+  id: number;
+  name: string;
+  state: string;
+  pictures: Array<Pictures>;
+}
+
+export interface ReservationObj {
+  apartment: ApartmentObj;
+  checkInDate: string;
+  checkOutDate: string;
+  id: number;
+  price: number;
+}
+
 export interface Pictures {
   id: number;
   url: string;

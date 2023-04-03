@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NewShortlet, Shortlet } from '../interface/shortlet';
+import { NewShortlet, ReservationObj, Shortlet } from '../interface/shortlet';
 import { NotificationService } from './notifications.service';
 
 @Injectable({ providedIn: 'root' })
@@ -117,8 +117,8 @@ export class DataStorageService {
       });
   }
 
-  getAllReservations() {
-    return this.http.get('http://localhost:8080/reservation/');
+  getAllReservations(): Observable<ReservationObj> {
+    return this.http.get<ReservationObj>('http://localhost:8080/reservation/');
   }
 
   sendComment(userComment: { comment: string }, id: number, email: string) {

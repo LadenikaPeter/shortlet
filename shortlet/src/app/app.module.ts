@@ -35,6 +35,9 @@ import { AuthServiceInterceptor } from './auth/auth.interceptor.service';
 import { TripsComponent } from './components/trips/trips.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -67,6 +70,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     ToastrModule.forRoot(),
     Angular4PaystackModule.forRoot(fromenvironment.environment.paystack_key),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
