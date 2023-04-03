@@ -1,5 +1,6 @@
 package com.example.shortletBackend.controllers;
 
+import com.example.shortletBackend.dto.ApartmentForReservation;
 import com.example.shortletBackend.dto.ReservationDTO;
 import com.example.shortletBackend.dto.ReservationTableDTO;
 import com.example.shortletBackend.dto.UsersDTO;
@@ -115,9 +116,16 @@ public class UserController {
     public ResponseEntity getAllUserHouses(@RequestHeader("user_email") String email){
         Optional<Users> users= userRepository.findUsersByEmail(email);
         if (users == null) {
-            throw new RuntimeException("The user does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The user does not exist");
+        }else {
+            ArrayList apartmentDto= new ArrayList<>();
+            for (Apartments apartments:apartmentRepo.findAllByUsers(users.get()) ){
+                apartmentDto.add(mapper.map(apartments,ApartmentForReservation.class));
+            }
+            return ResponseEntity.ok(apartmentDto) ;
         }
-        return ResponseEntity.ok(apartmentRepo.findAllByUsers(users.get())) ;
+
+
     }
 
 
