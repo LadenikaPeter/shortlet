@@ -13,8 +13,11 @@ public class ReservationTableDTO {
     private String apartmentName;
     private long apartmentId;
     private String apartmentPicture;
+    private String apartmentState;
+    private String apartmentCountry;
     private Date checkInDate;
     private Date checkOutDate;
+
     private int price;
 
 }
