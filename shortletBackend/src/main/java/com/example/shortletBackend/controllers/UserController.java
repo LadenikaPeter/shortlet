@@ -9,6 +9,7 @@ import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.ReservationRepository;
 import com.example.shortletBackend.repositories.UserRepository;
+import com.example.shortletBackend.service.MailService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class UserController {
     private final UserRepository userRepository;
     private final ApartmentRepository apartmentRepo;
     private final ReservationRepository reservationRepo;
+    private final MailService mailService;
     private final ModelMapper mapper;
 
 
@@ -44,6 +46,7 @@ public class UserController {
         return ResponseEntity.ok(userList);
     }
 
+    //make a user an admin
     @PutMapping("/user/update/")
     public ResponseEntity createAnAdminUser(@RequestHeader("admin_email")String email
             , @RequestParam("user_id") long id){
@@ -53,6 +56,8 @@ public class UserController {
             if (admin_user.get().getRole() == Role.ADMIN){
                 users.get().setRole(Role.ADMIN);
                 userRepository.save(users.get());
+                mailService.sendSimpleMessage(users.get().getEmail(),"New admin"
+                        ,"You have been selected to be an admin");
                 return ResponseEntity.ok("User "+users.get().getName()+" has been made an admin");
             }else {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User does not have permission to do this");

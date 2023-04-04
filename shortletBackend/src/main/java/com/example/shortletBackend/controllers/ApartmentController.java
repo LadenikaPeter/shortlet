@@ -11,6 +11,7 @@ import com.example.shortletBackend.repositories.AmenitiesRepository;
 import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.PicturesRepository;
 import com.example.shortletBackend.repositories.UserRepository;
+import com.example.shortletBackend.service.MailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -33,6 +34,7 @@ public class ApartmentController {
     private final UserRepository userRepository;
     private final AmenitiesRepository amenitiesRepo;
     private final ModelMapper mapper;
+    private final MailService mailService;
 
     //get all homes
     @GetMapping("/homes")
@@ -58,6 +60,12 @@ public class ApartmentController {
             Optional<Apartments> updatedApartment = apartmentRepo.findById(id);
             updatedApartment.get().setHomeState(HomeState.VERIFIED);
             apartmentRepo.save(updatedApartment.get());
+
+            mailService.sendSimpleMessage(updatedApartment.get().getUsers().getEmail()
+                    ,"Listing has been verified"
+                    ,"Your listing with the title "+updatedApartment.get().getName()
+                            +" has been verified and user are now able to be reserved.");
+
             return getAllPendingHomes();
 
         }else {
