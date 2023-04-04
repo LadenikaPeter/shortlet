@@ -14,10 +14,6 @@ public class UsersDTO {
     private String name;
     private String phoneNo;
     private String email;
-//    @Lob
-//    private String picture;
 
-//    private Set<ReservationDTO> reservation = new HashSet<>();
-//    private Set<ApartmentsDTO> apartments=new HashSet<>();
 
 }
