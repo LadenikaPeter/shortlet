@@ -14,12 +14,15 @@ import { DataStorageService } from 'src/app/services/data-storage.service';
 // }
 
 export interface UserData {
-  image: string;
+  apartmentPicture: string;
+  apartmentId: number;
   apartmentName: string;
-  location: string;
-  checkindate: string;
-  checkoutdate: string;
-  amountpaid: number;
+  apartmentCountry: string;
+  apartmentState: string;
+  checkInDate: Date;
+  checkOutDate: Date;
+  price: number;
+  id: number;
 }
 
 @Component({
@@ -27,17 +30,17 @@ export interface UserData {
   templateUrl: './trips.component.html',
   styleUrls: ['./trips.component.css'],
 })
-export class TripsComponent implements OnInit, AfterViewInit {
+export class TripsComponent {
   reservations: any;
-  reservationPictures: any = [];
+  // reservationPictures: any = [];
   // displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
   displayedColumns: string[] = [
-    'image',
+    'apartmentPicture',
+    'apartmentCountry',
     'apartmentName',
-    'location',
-    'checkindate',
-    'checkoutdate',
-    'amountpaid',
+    'checkInDate',
+    'checkOutDate',
+    'price',
   ];
   dataSource: MatTableDataSource<UserData>;
 
@@ -45,35 +48,16 @@ export class TripsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private dataS: DataStorageService) {
-    this.dataS
-      .getAllReservations()
-      .pipe(
-        map((data) => {
-          // console.log(data[1].price);
-
-          console.log(data);
-          return data;
-        })
-      )
-      .subscribe((res) => {
-        // console.log(res);
-      });
+    this.dataS.getAllReservations().subscribe((res) => {
+      console.log(res);
+      this.reservations = res;
+      this.dataSource = new MatTableDataSource(this.reservations);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
 
     // Assign the data to the data source for the table to render
     // this.dataSource = new MatTableDataSource(users);
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  ngOnInit(): void {
-    // this.dataS.getAllReservations().subscribe((res) => {
-    //   console.log(res);
-    //   // console.log(res.apartment.pictures);
-    //   this.reservations = res;
-    // });
   }
 
   applyFilter(event: Event) {
