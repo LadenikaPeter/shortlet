@@ -47,7 +47,13 @@
               *ngFor="let shortletPics of shortlet.pictures; let i = index"
               [ngClass]="{ active: i === 0 }"
             >
-              <img [src]="shortletPics.url" class="d-block w-100" alt="..." />
+              <img
+                routerLink="shortlet/{{ shortlet.id }}"
+                style="cursor: pointer"
+                [src]="shortletPics.url"
+                class="d-block w-100"
+                alt="..."
+              />
             </div>
             <!-- <div class="carousel-item">
               <img
@@ -84,7 +90,11 @@
           </button>
         </div>
       </div>
-      <div class="shortlet_details">
+      <div
+        class="shortlet_details"
+        routerLink="shortlet/{{ shortlet.id }}"
+        style="cursor: pointer"
+      >
         <div style="margin-top: 15px; margin-bottom: 5px">
           <p
             class="shortlet_name"

@@ -34,7 +34,7 @@
     <input
       matInput
       (keyup)="applyFilter($event)"
-      placeholder="Ex. Mia"
+      placeholder="Ex. Nigeria"
       #input
     />
   </mat-form-field>
@@ -42,9 +42,19 @@
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
       <!-- Image Column -->
-      <ng-container matColumnDef="image">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
-        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      <ng-container matColumnDef="apartmentPicture">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let row">
+          <img src="{{ row.apartmentPicture }}" alt="" />
+        </td>
+      </ng-container>
+
+      <!-- Location Column -->
+      <ng-container matColumnDef="apartmentCountry">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+        <td mat-cell *matCellDef="let row" style="color: #484848">
+          {{ row.apartmentState }}, {{ row.apartmentCountry }}
+        </td>
       </ng-container>
 
       <!-- Apartment name Column -->
@@ -52,33 +62,35 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Apartment Name
         </th>
-        <td mat-cell *matCellDef="let row">{{ row.progress }}%</td>
-      </ng-container>
-
-      <!-- Location Column -->
-      <ng-container matColumnDef="location">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
-        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        <td mat-cell *matCellDef="let row" style="color: #484848">
+          {{ row.apartmentName }}
+        </td>
       </ng-container>
 
       <!-- Check in date Column -->
-      <ng-container matColumnDef="checkindate">
+      <ng-container matColumnDef="checkInDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Check In Date</th>
-        <td mat-cell *matCellDef="let row">{{ row.fruit }}</td>
+        <td mat-cell *matCellDef="let row" style="color: #484848">
+          {{ row.checkInDate }}
+        </td>
       </ng-container>
 
       <!-- Check out date Column -->
-      <ng-container matColumnDef="checkoutdate">
+      <ng-container matColumnDef="checkOutDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Check Out Date
         </th>
-        <td mat-cell *matCellDef="let row">{{ row.fruit }}</td>
+        <td mat-cell *matCellDef="let row" style="color: #484848">
+          {{ row.checkOutDate }}
+        </td>
       </ng-container>
 
       <!-- Amount Paid Column -->
-      <ng-container matColumnDef="amountpaid">
+      <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount Paid</th>
-        <td mat-cell *matCellDef="let row">{{ row.fruit }}</td>
+        <td mat-cell *matCellDef="let row" style="color: #484848">
+          ₦ {{ row.price }}
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
