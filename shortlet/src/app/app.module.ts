@@ -38,6 +38,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { MatSortModule } from '@angular/material/sort';
     TripsComponent,
     ClickOutsideDirective,
     NotFoundComponent,
+    AdminComponent,
   ],
   imports: [
     CommonModule,
@@ -73,6 +76,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatTabsModule,
     ToastrModule.forRoot(),
     Angular4PaystackModule.forRoot(fromenvironment.environment.paystack_key),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

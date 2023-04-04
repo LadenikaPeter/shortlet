@@ -1,0 +1,4 @@
+::ng-deep .mat-mdc-tab .mdc-tab__text-label,
+.mat-mdc-tab-link .mdc-tab__text-label {
+  color: #484848;
+}
