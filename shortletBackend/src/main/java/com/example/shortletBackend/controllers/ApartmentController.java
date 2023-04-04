@@ -1,9 +1,11 @@
 package com.example.shortletBackend.controllers;
 
 import com.example.shortletBackend.dto.ApartmentsDTO;
+import com.example.shortletBackend.dto.PlainApartmentDTO;
 import com.example.shortletBackend.entities.*;
 import com.example.shortletBackend.enums.HomeState;
 import com.example.shortletBackend.enums.PropertyType;
+import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.enums.Status;
 import com.example.shortletBackend.repositories.AmenitiesRepository;
 import com.example.shortletBackend.repositories.ApartmentRepository;
@@ -38,6 +40,33 @@ public class ApartmentController {
         return ResponseEntity.ok(apartmentRepo.findAll());
     }
 
+    @GetMapping("/homes/PENDING")
+    public ResponseEntity getAllPendingHomes(){
+        ArrayList<PlainApartmentDTO> hotelList = new ArrayList<>();
+        for (Apartments hotel:apartmentRepo.findAllByHomeStateIs(HomeState.PENDING)
+        ) {
+            hotelList.add(mapper.map(hotel, PlainApartmentDTO.class));
+        }
+        return ResponseEntity.ok(hotelList);
+    }
+
+    //make a house verified
+    @PutMapping("/home/update/")
+    public ResponseEntity updatePendingHouse(@RequestHeader("user_email")String email
+            , @RequestParam("apartment_id") long id){
+        if (userRepository.findUsersByEmail(email).get().getRole() == Role.ADMIN){
+            Optional<Apartments> updatedApartment = apartmentRepo.findById(id);
+            updatedApartment.get().setHomeState(HomeState.VERIFIED);
+            apartmentRepo.save(updatedApartment.get());
+            return getAllPendingHomes();
+
+        }else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have clearance ");
+        }
+
+    }
+
+
     //get all verified homes
     @GetMapping("/verified_homes")
     public ResponseEntity<ArrayList> getAllVerifiedHomes(){
@@ -59,6 +88,8 @@ public class ApartmentController {
         }
         return ResponseEntity.ok(hotelList);
     }
+
+
 
     @GetMapping("/verified_homes/search")
     public ResponseEntity getAllVerifiedHomesWithNumberOfGuest(@RequestParam("number_of_guests")int number){
@@ -107,7 +138,7 @@ public class ApartmentController {
                 amenitiesRepo.save(apartments.getAmenities());
             }
             apartments.setStatus(Status.UNOCCUPIED);
-            apartments.setHomeState(HomeState.UNVERIFIED);
+            apartments.setHomeState(HomeState.PENDING);
             apartments.setHouseRefCode(apartments.getCountry().substring(0,2),apartmentRepo.findAll().size());
             users.get().getApartmentsSet().add(apartments);
             apartments.setUsers(users.get());

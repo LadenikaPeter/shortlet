@@ -48,24 +48,7 @@ public class ReservationController {
 
     }
 
-//    @GetMapping(value = "/reservation/availability/")
-//    public ResponseEntity checkAvailability(@RequestParam("apartment_id") long id, @RequestBody Reservation reservation) {
-//        log.info("{} {}", reservation.getCheckInDate(), reservation.getCheckOutDate());
-//
-////        if (!reservationRepo.existsByCheckInDateIsBetweenAndApartment_Id(reservation.getCheckInDate(),
-////                reservation.getCheckOutDate(), id)) {
-////            if (!(reservationRepo.gggggggg(reservation.getCheckInDate(), reservation.getCheckOutDate(),
-////                    id) == 0L)) {
-////                return ResponseEntity.ok("the two dates are free");
-////            } else {
-////                return ResponseEntity.status(HttpStatus.CONFLICT).body("there is already a check out date in this range");
-////            }
-////        } else {
-////            return ResponseEntity.status(HttpStatus.CONFLICT).body("there already a check in date within this range");
-////        }
-//
-//
-//    }
+
 
     @PutMapping("/reservation/state/")
     public ResponseEntity changeReservationState(@RequestParam("reservation_id") long id, @RequestBody Reservation reservation) {
