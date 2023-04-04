@@ -1,9 +1,6 @@
 package com.example.shortletBackend.controllers;
 
-import com.example.shortletBackend.dto.ApartmentForReservation;
-import com.example.shortletBackend.dto.ReservationDTO;
-import com.example.shortletBackend.dto.ReservationTableDTO;
-import com.example.shortletBackend.dto.UsersDTO;
+import com.example.shortletBackend.dto.*;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
@@ -35,6 +32,38 @@ public class UserController {
     public ResponseEntity getUser(@RequestHeader("user_email")String email){
         return ResponseEntity.of(userRepository.findUsersByEmail(email));
     }
+
+    //get all user with role users
+    @GetMapping("/user")
+    public ResponseEntity getAllNormalUsers(){
+        ArrayList<UsersCommentDTO> userList = new ArrayList<>();
+        for (Users user: userRepository.findAllByRole(Role.USER)
+             ) {
+            userList.add(mapper.map(user, UsersCommentDTO.class));
+        }
+        return ResponseEntity.ok(userList);
+    }
+
+    @PutMapping("/user/update/")
+    public ResponseEntity createAnAdminUser(@RequestHeader("admin_email")String email
+            , @RequestParam("user_id") long id){
+        Optional<Users> admin_user =userRepository.findUsersByEmail(email);
+        Optional<Users> users=userRepository.findById(id);
+        if (admin_user.isPresent() && users.isPresent()){
+            if (admin_user.get().getRole() == Role.ADMIN){
+                users.get().setRole(Role.ADMIN);
+                userRepository.save(users.get());
+                return ResponseEntity.ok("User "+users.get().getName()+" has been made an admin");
+            }else {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User does not have permission to do this");
+            }
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User doesn't exist");
+        }
+
+    }
+
+
 
     @PostMapping("/signup")
     public ResponseEntity signUp(@RequestBody Users users){
@@ -127,6 +156,8 @@ public class UserController {
 
 
     }
+
+
 
 
 
