@@ -40,8 +40,7 @@ public class ReservationController {
 //        TODO check if the user is the owner of the room #issue1
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
         ArrayList<Reservation> reservations = new ArrayList<>(reservationRepo.findAllByApartment(apartmentRepo.findById(id).get()));
-        for (Reservation reserve : reservations
-        ) {
+        for (Reservation reserve : reservations) {
 
             reservationDTOS.add(mapper.map(reserve, ReservationDTO.class));
         }
