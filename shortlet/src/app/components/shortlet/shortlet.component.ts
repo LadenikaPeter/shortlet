@@ -74,6 +74,9 @@ export class ShortletComponent implements OnInit {
         this.username = user.displayName;
         this.user_email = user.email;
         // console.log(this.username);
+      } else {
+        this.username = null;
+        this.user_email = null;
       }
     });
   }

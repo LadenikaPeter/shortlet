@@ -118,3 +118,9 @@ ul > li:hover {
 #e {
   color: #ea4335;
 }
+
+.Admin {
+  margin: 0;
+  font-weight: 600;
+  cursor: pointer;
+}

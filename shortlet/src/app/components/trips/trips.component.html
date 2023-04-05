@@ -1,31 +1,97 @@
-<div class="container">
+<div *ngIf="pageDisplay" class="container">
   <p>
     <span id="home"><a class="home_link" routerLink="">Home</a></span
     ><span id="pointing_character">></span><span id="account">Trips</span>
   </p>
   <h4>Trips</h4>
 
-  <div class="trips_container">
-    <div class="row">
-      <div *ngFor="let trip of reservations" class="col-xs-12">
-        <div class="image_container">
-          <img
-            src="{{ trip.apartment.pictures[0].url }}"
-            alt="apartment-image"
-          />
-        </div>
-        <div class="apartment_container">
-          <h5 style="margin-bottom: 0">{{ trip.apartment.name }}</h5>
-          <p>{{ trip.apartment.state }}, {{ trip.apartment.country }}</p>
+  <div *ngIf="!anyReservation" class="message_if_noReservation">
+    <p style="text-align: center; margin-top: 3rem">
+      You need to make a reservation to see them here!
+    </p>
+  </div>
 
-          <div class="reservation dates">
-            <h5>Check in date: {{ trip.checkInDate }}</h5>
-            <h5>Check out date: {{ trip.checkOutDate }}</h5>
-          </div>
+  <div id="reservationTable" *ngIf="anyReservation">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Ex. Nigeria"
+        #input
+      />
+    </mat-form-field>
 
-          <h5>Amount Paid: ₦{{ trip.price }}</h5>
-        </div>
-      </div>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Image Column -->
+        <ng-container matColumnDef="apartmentPicture">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let row">
+            <img src="{{ row.apartmentPicture }}" alt="" />
+          </td>
+        </ng-container>
+
+        <!-- Location Column -->
+        <ng-container matColumnDef="apartmentCountry">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+          <td mat-cell *matCellDef="let row" style="color: #484848">
+            {{ row.apartmentState }}, {{ row.apartmentCountry }}
+          </td>
+        </ng-container>
+
+        <!-- Apartment name Column -->
+        <ng-container matColumnDef="apartmentName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Apartment Name
+          </th>
+          <td mat-cell *matCellDef="let row" style="color: #484848">
+            {{ row.apartmentName }}
+          </td>
+        </ng-container>
+
+        <!-- Check in date Column -->
+        <ng-container matColumnDef="checkInDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Check In Date
+          </th>
+          <td mat-cell *matCellDef="let row" style="color: #484848">
+            {{ row.checkInDate }}
+          </td>
+        </ng-container>
+
+        <!-- Check out date Column -->
+        <ng-container matColumnDef="checkOutDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Check Out Date
+          </th>
+          <td mat-cell *matCellDef="let row" style="color: #484848">
+            {{ row.checkOutDate }}
+          </td>
+        </ng-container>
+
+        <!-- Amount Paid Column -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount Paid</th>
+          <td mat-cell *matCellDef="let row" style="color: #484848">
+            ₦ {{ row.price }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">
+            No data matching the filter "{{ input.value }}"
+          </td>
+        </tr>
+      </table>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page of users"
+      ></mat-paginator>
     </div>
   </div>
 </div>

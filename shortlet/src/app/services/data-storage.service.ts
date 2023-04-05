@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NewShortlet, Shortlet } from '../interface/shortlet';
+import { NewShortlet, ReservationObj, Shortlet } from '../interface/shortlet';
 import { NotificationService } from './notifications.service';
 
 @Injectable({ providedIn: 'root' })
@@ -97,8 +97,27 @@ export class DataStorageService {
       });
   }
 
-  getAllReservations() {
-    return this.http.get('http://localhost:8080/reservation/');
+  getAllReservations(): Observable<ReservationObj> {
+    return this.http.get<ReservationObj>('http://localhost:8080/reservation/');
+  }
+
+  getAllUsers() {
+    return this.http.get('http://localhost:8080/user');
+  }
+
+  makeUserAdmin(id: number, email: string) {
+    return this.http.put(
+      `http://localhost:8080/user/update/?user_id=${id}`,
+      {},
+      {
+        headers: new HttpHeaders({ admin_email: email }),
+      }
+    );
+    // console.log(id);
+  }
+
+  getAllPendingRequest() {
+    return this.http.get('http://localhost:8080/homes/PENDING?');
   }
 
   sendComment(userComment: { comment: string }, id: number, email: string) {

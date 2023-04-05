@@ -4,9 +4,9 @@
     *ngFor="let property of filterbar; let i = index"
     [ngClass]="{ ifSelected: property.name === toggleActiveApartment }"
   >
-    <div class="test" (click)="getProperty(property.name)">
+    <div class="test" (click)="getProperty(property.value)">
       <img [src]="property.image" [alt]="property.name" />
-      <p style="text-align: center">{{property.name | lowercase}}</p>
+      <p style="text-align: center">{{ property.name }}</p>
     </div>
   </div>
 </div>

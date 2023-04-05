@@ -35,7 +35,15 @@ import { AuthServiceInterceptor } from './auth/auth.interceptor.service';
 import { TripsComponent } from './components/trips/trips.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+<<<<<<< HEAD
 import { ListingComponent } from './components/new-shortlet/listing/listing.component';
+=======
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AdminComponent } from './components/admin/admin.component';
+>>>>>>> 5b36060b2cbc82e9ef5e83cb7f50ecfde53d07a4
 
 @NgModule({
   declarations: [
@@ -53,7 +61,11 @@ import { ListingComponent } from './components/new-shortlet/listing/listing.comp
     TripsComponent,
     ClickOutsideDirective,
     NotFoundComponent,
+<<<<<<< HEAD
     ListingComponent,
+=======
+    AdminComponent,
+>>>>>>> 5b36060b2cbc82e9ef5e83cb7f50ecfde53d07a4
   ],
   imports: [
     CommonModule,
@@ -69,6 +81,10 @@ import { ListingComponent } from './components/new-shortlet/listing/listing.comp
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTabsModule,
     ToastrModule.forRoot(),
     Angular4PaystackModule.forRoot(fromenvironment.environment.paystack_key),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

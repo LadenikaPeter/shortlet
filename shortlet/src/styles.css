@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "ngx-toastr/toastr";
+<<<<<<< HEAD
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300&display=swap'); */
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,500&display=swap');
@@ -8,6 +9,12 @@
 
 * {
   font-family: 'Open Sans', sans-serif;
+=======
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300&display=swap");
+
+* {
+  font-family: "Roboto Condensed", sans-serif;
+>>>>>>> 5b36060b2cbc82e9ef5e83cb7f50ecfde53d07a4
   scroll-behavior: smooth;
 }
 
@@ -15,5 +22,11 @@
   background-color: saddlebrown;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

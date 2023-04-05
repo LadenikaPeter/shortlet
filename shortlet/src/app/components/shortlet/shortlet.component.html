@@ -6,10 +6,6 @@
       <p>· {{ shortletData.users.name }}</p>
       <p>· {{ shortletData.address }}</p>
     </div>
-    <!-- <div style="display: flex; gap: 1rem">
-      <p>Share</p>
-      <p>Save</p>
-    </div> -->
   </div>
 
   <div class="parent">
@@ -31,134 +27,55 @@
   </div>
   <!-- flex -->
 
-  <div style="display: flex; padding-top: 2rem">
-    <div>
+  <div class="row shortlet_content">
+    <div class="col-md-8 shortlet_dets">
       <div>
-        <h2>Entire home hosted by {{ shortletData.users.name }}</h2>
-        <div style="display: flex; gap: 0.5rem">
-          <p>{{ shortletData.maxNoOfGuests }} guests</p>
-          <p>{{ shortletData.noOfBedrooms }} bedrooms</p>
-          <p>{{ shortletData.noOfBeds }} beds</p>
-          <p>{{ shortletData.noOfBathrooms }} baths</p>
-        </div>
-        <hr />
-
-        <!-- <div style="display: flex; gap: 0.5rem">
-          <i class="pi-calendar"></i>
-          <div>
-            <h5>Designed by</h5>
-            <p>Cadaval & Solà-Morales</p>
+        <div>
+          <h2>Entire home hosted by {{ shortletData.users.name }}</h2>
+          <div style="display: flex; gap: 0.5rem">
+            <p>{{ shortletData.maxNoOfGuests }} guests</p>
+            <p>{{ shortletData.noOfBedrooms }} bedrooms</p>
+            <p>{{ shortletData.noOfBeds }} beds</p>
+            <p>{{ shortletData.noOfBathrooms }} baths</p>
           </div>
-        </div> -->
+          <hr />
 
-        <!-- <div style="display: flex; gap: 0.5rem">
-          <p>icon</p>
-          <div>
-            <h5>Featured in</h5>
-            <p>The New York Times, January 2014<br />Wallpaper*, May 2015</p>
-          </div>
-        </div> -->
-
-        <div style="display: flex; gap: 0.5rem">
-          <img
-            style="width: 24px; width: 24px"
-            src="../../../assets/svg/clock.svg"
-            alt="clock-img"
-          />
-          <div>
-            <h5 style="margin: 0">Free cancellation for 48 hours.</h5>
-          </div>
-        </div>
-      </div>
-      <hr />
-
-      <p>
-        {{ shortletData.description }}
-      </p>
-      <!-- <h5>The space</h5>
-      <p>The house has been featured in the New York Times and in Wallpaper.</p>
-      <h5>Show more</h5> -->
-
-      <!-- <hr />
-      <h4>Where you'll sleep</h4>
-      <p>carousel</p> -->
-      <hr />
-      <h4>What this place offers</h4>
-      <!-- amenities -->
-      <div class="row">
-        <div class="col-md-6" *ngFor="let item of amenities">{{ item }}</div>
-      </div>
-      <div>
-        <!-- Button trigger modal -->
-        <!-- <button
-          type="button"
-          class="btn btn-primary modal-button"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModalx"
-          (click)="toggleAmenities()"
-        >
-          Show all 49 amenities
-        </button> -->
-
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="exampleModalx"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-                style="padding: 1rem"
-              ></button>
-              <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">
-                  What this place offers
-                </h4>
-              </div>
-
-              <div class="modal-body">
-                <h6>Scenic view</h6>
-                <p>Park view</p>
-                <hr />
-                <p>Bay view</p>
-                <hr />
-                <p>Pool view</p>
-                <hr />
-                <p>Beach view</p>
-                <hr />
-                <p>Sea view</p>
-                <hr />
-                <p>Ocean view</p>
-                <hr />
-                <h6>Bathroom</h6>
-                <p>Bathtub</p>
-                <hr />
-                <p>Hair dryer</p>
-                <hr />
-                <p>Outdoor shower</p>
-                <hr />
-                <p>Hot water</p>
-                <hr />
-              </div>
+          <div style="display: flex; gap: 0.5rem">
+            <img
+              style="width: 24px; width: 24px"
+              src="../../../assets/svg/clock.svg"
+              alt="clock-img"
+            />
+            <div>
+              <h5 style="margin: 0">Free cancellation for 48 hours.</h5>
             </div>
           </div>
         </div>
         <hr />
+
+        <p>
+          {{ shortletData.description }}
+        </p>
+
+        <hr />
+        <h4>What this place offers</h4>
+
+        <div class="row">
+          <div class="col-md-6" *ngFor="let item of amenities">{{ item }}</div>
+        </div>
+        <div></div>
+        <hr />
         <div>
-          <!-- <h5>Select checkout date</h5>
-                        <p>Minimum of 5 nights</p> -->
           <h5>{{ numberOfNights }} nights in {{ shortletData.address }}</h5>
 
           <p>{{ checkinDate | date }} - {{ minDateForCheckOut | date }}</p>
 
-          <mat-form-field appearance="fill" style="margin-right: 15px">
+          <mat-form-field
+            style="margin-right: 15px"
+            appearance="fill"
+            (click)="picker.open()"
+            class="removeOnScreen425"
+          >
             <mat-label>Check in date</mat-label>
             <input
               matInput
@@ -175,7 +92,11 @@
             <mat-datepicker #picker (dateChange)="trialM($event)"></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field
+            appearance="fill"
+            (click)="picker2.open()"
+            class="removeOnScreen425"
+          >
             <mat-label>Check out date</mat-label>
             <input
               matInput
@@ -194,42 +115,103 @@
         </div>
       </div>
     </div>
-
-    <!-- here -->
-    <!-- reservation -->
-    <div class="reservation">
-      <div style="display: flex; justify-content: space-between">
-        <!-- <p ><span style="font-size: 1.3rem; font-weight: bold;">$509</span> night</p> -->
-        <p>₦{{ shortletData.price }} per night</p>
-        <div style="display: flex; gap: 0.1rem">
-          <p>★ {{ shortletData.rating }}</p>
+    <div class="col-md-4">
+      <div class="reservation">
+        <div style="display: flex; justify-content: space-between">
+          <p>₦{{ shortletData.price }} per night</p>
+          <div style="display: flex; gap: 0.1rem">
+            <p>★ {{ shortletData.rating }}</p>
+          </div>
         </div>
-      </div>
-      <!-- check in and out picker -->
 
-      <div class="row">
-        <div class="col" style="padding-left: 12px; padding-right: 0">
-          <mat-form-field
-            appearance="fill"
-            class="reserve_datepicker"
-            style="margin-right: 5px"
+        <div class="row">
+          <div class="col">
+            <mat-form-field
+              appearance="fill"
+              class="reserve_datepicker"
+              (click)="picker3.open()"
+            >
+              <mat-label>Check in date</mat-label>
+              <input
+                matInput
+                [min]="minDate"
+                [(ngModel)]="checkinDate"
+                [matDatepicker]="picker3"
+                [matDatepickerFilter]="myHolidayFilter"
+                (dateChange)="trialM($event)"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker3"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field
+              appearance="fill"
+              class="reserve_datepicker secondDatepicker"
+              (click)="picker4.open()"
+            >
+              <mat-label>Check out date</mat-label>
+              <input
+                matInput
+                [min]="checkoutDate"
+                [(ngModel)]="minDateForCheckOut"
+                [matDatepicker]="picker4"
+                [matDatepickerFilter]="myHolidayFilter"
+                (dateChange)="trialM($event)"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker4"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker4></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="guest_counter">
+          <p class="guests_label">Guests</p>
+          <span (click)="decrement()"
+            ><img
+              [ngClass]="{
+                minGuestReached: counter === 1
+              }"
+              style="
+                width: 30px;
+                height: 30px;
+                margin-left: 10px;
+                cursor: pointer;
+              "
+              src="../../../assets/svg/minus.svg"
+              alt=""
+          /></span>
+
+          <div
+            style="display: inline-block; text-align: center"
+            class="counter_number_div"
           >
-            <mat-label>Check in date</mat-label>
-            <input
-              matInput
-              [min]="minDate"
-              [(ngModel)]="checkinDate"
-              [matDatepicker]="picker3"
-              [matDatepickerFilter]="myHolidayFilter"
-              (dateChange)="trialM($event)"
-            />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker3"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker3></mat-datepicker>
-          </mat-form-field>
+            <span class="guest_number" style="font-size: 20px">{{
+              counter
+            }}</span>
+          </div>
+          <span class="float-end" (click)="increment()"
+            ><img
+              [ngClass]="{
+                maxGuestReached: counter === shortletData.maxNoOfGuests
+              }"
+              style="
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+                cursor: pointer;
+              "
+              src="../../../assets/svg/add.svg"
+              alt=""
+          /></span>
         </div>
+<<<<<<< HEAD
         <div class="col" style="padding-left: 0; padding-right: 0">
           <mat-form-field appearance="fill" class="reserve_datepicker">
             <mat-label>Check out date</mat-label>
@@ -250,86 +232,50 @@
           </mat-form-field>
         </div>
       </div>
+=======
+>>>>>>> 5b36060b2cbc82e9ef5e83cb7f50ecfde53d07a4
 
-      <div class="guest_counter">
-        <p class="guests_label">Guests</p>
-        <span (click)="decrement()"
-          ><img
-            [ngClass]="{
-              minGuestReached: counter === 1
-            }"
-            style="
-              width: 30px;
-              height: 30px;
-              margin-left: 10px;
-              cursor: pointer;
-            "
-            src="../../../assets/svg/minus.svg"
-            alt=""
-        /></span>
-
-        <div style="width: 70%; display: inline-block; text-align: center">
-          <span class="guest_number" style="font-size: 20px">{{
-            counter
-          }}</span>
+        <!-- if check in date and checkout dates are picked, display this -->
+        <div class="bill">
+          <p>₦{{ shortletData.price }} x {{ numberOfNights }} nights</p>
+          <!-- <p>${{ shortletData.price * numberOfNights }}</p> -->
+          <p>₦{{ calculateNumberOfNights }}</p>
         </div>
-        <span class="float-end" (click)="increment()"
-          ><img
-            [ngClass]="{
-              maxGuestReached: counter === shortletData.maxNoOfGuests
+        <div class="bill">
+          <p>Cleaning fee</p>
+          <p>₦{{ shortletData.cleaningFee }}</p>
+        </div>
+        <div class="bill">
+          <p>HMS Service fee</p>
+          <p>₦{{ shortletData.serviceFee }}</p>
+        </div>
+        <hr />
+        <div class="bill">
+          <p>Total before taxes</p>
+          <p>₦ {{ total }}</p>
+        </div>
+        <div class="reserve-btn">
+          <button
+            routerLink="booking"
+            [disabled]="buttonDisable"
+            [queryParams]="{
+              checkin: checkinDate,
+              checkout: minDateForCheckOut,
+              nights: numberOfNights,
+              guests: counter
             }"
-            style="
-              width: 30px;
-              height: 30px;
-              margin-right: 10px;
-              cursor: pointer;
-            "
-            src="../../../assets/svg/add.svg"
-            alt=""
-        /></span>
-      </div>
-
-      <!-- if check in date and checkout dates are picked, display this -->
-      <div class="bill">
-        <p>₦{{ shortletData.price }} x {{ numberOfNights }} nights</p>
-        <!-- <p>${{ shortletData.price * numberOfNights }}</p> -->
-        <p>₦{{ calculateNumberOfNights }}</p>
-      </div>
-      <div class="bill">
-        <p>Cleaning fee</p>
-        <p>₦{{ shortletData.cleaningFee }}</p>
-      </div>
-      <div class="bill">
-        <p>HMS Service fee</p>
-        <p>₦{{ shortletData.serviceFee }}</p>
-      </div>
-      <hr />
-      <div class="bill">
-        <p>Total before taxes</p>
-        <p>₦ {{ total }}</p>
-      </div>
-      <div class="reserve-btn">
-        <button
-          routerLink="booking"
-          [disabled]="buttonDisable"
-          [queryParams]="{
-            checkin: checkinDate,
-            checkout: minDateForCheckOut,
-            nights: numberOfNights,
-            guests: counter
-          }"
-        >
-          {{ buttonDisable ? "Not Available" : "Reserve" }}
-        </button>
-        <p *ngIf="!buttonDisable" class="small">You won't be charged yet</p>
+          >
+            {{ buttonDisable ? "Not Available" : "Reserve" }}
+          </button>
+          <p *ngIf="!buttonDisable" class="small">You won't be charged yet</p>
+        </div>
       </div>
     </div>
   </div>
-
   <hr />
   <h3>Comments</h3>
   <div class="row">
-    <div *ngFor="let comment of comments" class="col-md-5">
+    <div *ngFor="let comment of comments" class="col-md-6">
       <div class="user_info">
         <div class="user-img">
           <img
@@ -351,17 +297,20 @@
       </div>
     </div>
   </div>
-  <div *ngIf="username" class="signedIn_user">
-    <h5>{{ username }}</h5>
-    <input
-      class="form-control w-100"
-      type="text"
-      placeholder="Comment..."
-      [(ngModel)]="UserComment"
-    />
-    <button class="send_comment float-end" (click)="onSendComment()">
-      Send
-    </button>
+  <div class="row">
+    <div class="col-md-12">
+      <div *ngIf="username" class="signedIn_user">
+        <h5>{{ username }}</h5>
+        <input
+          class="form-control w-100"
+          type="text"
+          placeholder="Comment..."
+          [(ngModel)]="UserComment"
+        />
+        <button class="send_comment float-end" (click)="onSendComment()">
+          Send
+        </button>
+      </div>
+    </div>
   </div>
-  <!-- end -->
 </div>

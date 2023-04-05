@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Lob;
 
-@AllArgsConstructor @NoArgsConstructor
 @Data
-public class UsersDTO {
-
-    private long id;
+@AllArgsConstructor
+@NoArgsConstructor
+public class PlainApartmentDTO {
+    private int id;
     private String name;
-    private String phoneNo;
-    private String email;
-
+    private String address;
+    private String state;
+    private String country;
 
 }

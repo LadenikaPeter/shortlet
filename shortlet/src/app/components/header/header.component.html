@@ -62,9 +62,10 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#" routerLink="host/shortlets"
-              >Rent your home</a
-            >
+            <a class="nav-link" routerLink="host/shortlets">Rent your home</a>
+          </li>
+          <li *ngIf="isUserAdmin" class="nav-item" routerLink="/admin">
+            <a class="nav-link">Switch to admin</a>
           </li>
           <li class="nav-item" (click)="onLogOut()">
             <a class="nav-link" style="color: red">Log out</a>
@@ -72,6 +73,14 @@
         </ul>
       </div>
 
+      <p
+        *ngIf="isUserAdmin"
+        class="Admin removemine"
+        (click)="switchToAdmin()"
+        routerLink="/admin"
+      >
+        Switch to admin
+      </p>
       <div class="float-end links removemine">
         <div
           class="profile"

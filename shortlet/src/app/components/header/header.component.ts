@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, take } from 'rxjs';
+import { user } from '@angular/fire/auth';
+import { Subscription, map, take } from 'rxjs';
+import { UserRole } from 'src/app/Model/user-role.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { HandlingClosingProfileTab } from 'src/app/services/handling-profile.service';
 
@@ -11,8 +13,11 @@ import { HandlingClosingProfileTab } from 'src/app/services/handling-profile.ser
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated: any;
   isAuth_Subcription: Subscription;
+  userRole_subcription: Subscription;
   closeProfileDivSubscription: Subscription;
   isProfileClicked: boolean = false;
+  isUserAdmin: any;
+  // switchTextClick :boolean =false
 
   constructor(
     private authS: AuthService,
@@ -23,6 +28,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isAuth_Subcription = this.authS.user.subscribe((user) => {
       this.isAuthenticated = user;
     });
+
+    this.authS.userRole
+      .pipe(
+        map((res) => {
+          if (res) {
+            if (res.role === 'ADMIN') {
+              return true;
+            } else {
+              return false;
+            }
+          } else {
+            return false;
+          }
+        })
+      )
+      .subscribe((res) => {
+        console.log(res);
+        this.isUserAdmin = res;
+      });
   }
 
   toggleProfileDiv() {
@@ -43,9 +67,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.isAuth_Subcription.unsubscribe();
+    this.userRole_subcription.unsubscribe();
   }
 
   onLogOut() {
     this.authS.logOut();
+  }
+
+  switchToAdmin() {
+    // this.switchTextClick = !this.switchTextClick
   }
 }

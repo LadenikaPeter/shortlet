@@ -1,3 +1,21 @@
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${email}
+    password: ${emailPassword}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl: true
+          starttls:
+            enable: true
+        transport:
+          protocol: smtp
+    protocol: smtp
+
+paystack:
+  secret_key: ${paystackKey}

@@ -1,14 +1,18 @@
 package com.example.shortletBackend.controllers;
 
 import com.example.shortletBackend.dto.ApartmentsDTO;
+import com.example.shortletBackend.dto.PlainApartmentDTO;
+import com.example.shortletBackend.dto.TextResponse;
 import com.example.shortletBackend.entities.*;
 import com.example.shortletBackend.enums.HomeState;
 import com.example.shortletBackend.enums.PropertyType;
+import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.enums.Status;
 import com.example.shortletBackend.repositories.AmenitiesRepository;
 import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.PicturesRepository;
 import com.example.shortletBackend.repositories.UserRepository;
+import com.example.shortletBackend.service.MailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -31,12 +35,69 @@ public class ApartmentController {
     private final UserRepository userRepository;
     private final AmenitiesRepository amenitiesRepo;
     private final ModelMapper mapper;
+    private final TextResponse customResponse;
+    private final MailService mailService;
 
     //get all homes
     @GetMapping("/homes")
     public ResponseEntity getAllHomes(){
         return ResponseEntity.ok(apartmentRepo.findAll());
     }
+
+    @GetMapping("/homes/PENDING")
+    public ResponseEntity getAllPendingHomes(){
+        ArrayList<PlainApartmentDTO> hotelList = new ArrayList<>();
+        for (Apartments hotel:apartmentRepo.findAllByHomeStateIs(HomeState.PENDING)
+        ) {
+            hotelList.add(mapper.map(hotel, PlainApartmentDTO.class));
+        }
+        return ResponseEntity.ok(hotelList);
+    }
+
+    //make a house verified
+    @PutMapping("/home/update/verify")
+    public ResponseEntity updatePendingHouse(@RequestHeader("user_email")String email
+            , @RequestParam("apartment_id") long id){
+        if (userRepository.findUsersByEmail(email).get().getRole() == Role.ADMIN){
+            Optional<Apartments> updatedApartment = apartmentRepo.findById(id);
+            updatedApartment.get().setHomeState(HomeState.VERIFIED);
+            apartmentRepo.save(updatedApartment.get());
+
+            mailService.sendSimpleMessage(updatedApartment.get().getUsers().getEmail()
+                    ,"Listing has been verified"
+                    ,"Your listing with the title "+updatedApartment.get().getName()
+                            +" has been verified and user are now able to be reserved.");
+
+            return getAllPendingHomes();
+
+        }else {
+            customResponse.setMessage("You don't have clearance ");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(customResponse);
+        }
+
+    }
+    @PutMapping("/home/update/unverify")
+    public ResponseEntity updateHouse(@RequestHeader("user_email")String email
+            , @RequestParam("apartment_id") long id){
+        if (userRepository.findUsersByEmail(email).get().getRole() == Role.ADMIN){
+            Optional<Apartments> updatedApartment = apartmentRepo.findById(id);
+            updatedApartment.get().setHomeState(HomeState.UNVERIFIED);
+            apartmentRepo.save(updatedApartment.get());
+
+            mailService.sendSimpleMessage(updatedApartment.get().getUsers().getEmail()
+                    ,"Listing has been verified"
+                    ,"Your listing with the title "+updatedApartment.get().getName()
+                            +" has been listed unverified please contact support for additional aid.");
+
+            return getAllPendingHomes();
+
+        }else {
+            customResponse.setMessage("You don't have clearance ");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(customResponse);
+        }
+
+    }
+
 
     //get all verified homes
     @GetMapping("/verified_homes")
@@ -60,6 +121,8 @@ public class ApartmentController {
         return ResponseEntity.ok(hotelList);
     }
 
+
+
     @GetMapping("/verified_homes/search")
     public ResponseEntity getAllVerifiedHomesWithNumberOfGuest(@RequestParam("number_of_guests")int number){
         ArrayList<ApartmentsDTO> hotelList = new ArrayList<>();
@@ -70,7 +133,7 @@ public class ApartmentController {
         return ResponseEntity.ok(hotelList);
     }
     @GetMapping("/home/")
-    public ResponseEntity getHotel(@RequestParam("house_id") long id ) throws IllegalAccessException, NoSuchFieldException {
+    public ResponseEntity getHotel(@RequestParam("house_id") long id ) throws IllegalAccessException, NoSuchFieldException{
         Optional<Apartments> apartments = apartmentRepo.findById(id);
         if (apartments.isPresent()){
             // return only amenities that have true as a reply
@@ -79,7 +142,8 @@ public class ApartmentController {
             Map<String, Object> map= new ObjectMapper().convertValue(apartments.get().getAmenities(),Map.class);
             for (String key:map.keySet()) {
                 if (map.get(key) == (Object) true) {
-                    apartmentsDTO.getAmenities().add(key);
+                    String amenityName= key.replaceAll("_"," ");
+                    apartmentsDTO.getAmenities().add(amenityName.substring(0,1).toUpperCase()+amenityName.substring(1,amenityName.length()));
                 }
             }
 
@@ -106,26 +170,29 @@ public class ApartmentController {
                 amenitiesRepo.save(apartments.getAmenities());
             }
             apartments.setStatus(Status.UNOCCUPIED);
-            apartments.setHomeState(HomeState.UNVERIFIED);
-            apartments.setHouseRefCode(apartments.getAddress().substring(0,2),apartmentRepo.findAll().size());
+            apartments.setHomeState(HomeState.PENDING);
+            apartments.setHouseRefCode(apartments.getCountry().substring(0,2),apartmentRepo.findAll().size());
             users.get().getApartmentsSet().add(apartments);
             apartments.setUsers(users.get());
             userRepository.save(users.get());
             apartmentRepo.save(apartments);
             return ResponseEntity.ok(apartments);
         }else {
-            return new ResponseEntity<>("You should really signup or login else you won't" +
-            " be able to do this ",HttpStatus.FORBIDDEN);
+            customResponse.setMessage("You should really signup or login else you won't" +
+                    " be able to do this ");
+            return new ResponseEntity<>(customResponse,HttpStatus.FORBIDDEN);
         }
 
     }
 
 
 
-    @PutMapping("/home/picture/delete")
+
+    @DeleteMapping("/home/picture/delete")
     public ResponseEntity deleteHousePictures(@RequestParam("picture_id")long picture_id){
         picRepo.deleteById(picture_id);
-        return ResponseEntity.ok("Successfully deleted image");
+        customResponse.setMessage("Successfully deleted image");
+        return ResponseEntity.ok(customResponse);
 
 
     }

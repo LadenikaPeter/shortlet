@@ -1,7 +1,6 @@
 package com.example.shortletBackend.controllers;
 
-import com.example.shortletBackend.dto.ReservationDTO;
-import com.example.shortletBackend.dto.UsersDTO;
+import com.example.shortletBackend.dto.*;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
@@ -10,6 +9,7 @@ import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.ReservationRepository;
 import com.example.shortletBackend.repositories.UserRepository;
+import com.example.shortletBackend.service.MailService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -26,13 +26,54 @@ public class UserController {
     private final UserRepository userRepository;
     private final ApartmentRepository apartmentRepo;
     private final ReservationRepository reservationRepo;
+    private final MailService mailService;
     private final ModelMapper mapper;
+    private final TextResponse customResponse ;
 
 
     @GetMapping("/")
     public ResponseEntity getUser(@RequestHeader("user_email")String email){
         return ResponseEntity.of(userRepository.findUsersByEmail(email));
     }
+
+    //get all user with role users
+    @GetMapping("/user")
+    public ResponseEntity getAllNormalUsers(){
+        ArrayList<UsersDTO> userList = new ArrayList<>();
+        for (Users user: userRepository.findAllByRole(Role.USER)
+             ) {
+            userList.add(mapper.map(user, UsersDTO.class));
+        }
+        return ResponseEntity.ok(userList);
+    }
+
+    //make a user an admin
+    @PutMapping("/user/update/")
+    public ResponseEntity createAnAdminUser(@RequestHeader("admin_email")String email
+            , @RequestParam("user_id") long id){
+        Optional<Users> admin_user =userRepository.findUsersByEmail(email);
+        Optional<Users> users=userRepository.findById(id);
+        if (admin_user.isPresent() && users.isPresent()){
+            if (admin_user.get().getRole() == Role.ADMIN){
+                users.get().setRole(Role.ADMIN);
+                userRepository.save(users.get());
+                mailService.sendSimpleMessage(users.get().getEmail(),"New admin"
+                        ,"You have been selected to be an admin");
+                customResponse.setMessage("User "+users.get().getName()+" has been made an admin");
+                return ResponseEntity.ok(customResponse);
+            }else {
+                customResponse.setMessage("User does not have permission to do this");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(customResponse);
+            }
+        }else {
+            customResponse.setMessage("User doesn't exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
+
+        }
+
+    }
+
+
 
     @PostMapping("/signup")
     public ResponseEntity signUp(@RequestBody Users users){
@@ -89,23 +130,47 @@ public class UserController {
                 userRepository.save(user.get());
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body(reservation);
             }else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The house can not be found");
+                customResponse.setMessage("The house can not be found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
             }
         }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The user can not be found");
+            customResponse.setMessage("The user can not be found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
         }
 
     }
 
     @GetMapping("/reservation/")
     public ResponseEntity getAllUserReservation(@RequestHeader("user_email")String email){
-        ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
+        ArrayList reservationDTOS = new ArrayList<>();
         for (Reservation reservation: reservationRepo.findAllByUsers(userRepository.findUsersByEmail(email).get())){
-            reservationDTOS.add(mapper.map(reservation, ReservationDTO.class));
+            ReservationTableDTO old= mapper.map(reservation, ReservationTableDTO.class);
+            old.setApartmentPicture(reservation.getApartment().getPictures().stream().findFirst().get().getUrl());
+            reservationDTOS.add(old);
         }
         return ResponseEntity.ok(reservationDTOS);
 
+
     }
+
+    @GetMapping("/user/listings/")
+    public ResponseEntity getAllUserHouses(@RequestHeader("user_email") String email){
+        Optional<Users> users= userRepository.findUsersByEmail(email);
+        if (users == null) {
+            customResponse.setMessage("The user does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
+        }else {
+            ArrayList apartmentDto= new ArrayList<>();
+            for (Apartments apartments:apartmentRepo.findAllByUsers(users.get()) ){
+                apartmentDto.add(mapper.map(apartments,ApartmentForReservation.class));
+            }
+            return ResponseEntity.ok(apartmentDto) ;
+        }
+
+
+    }
+
+
 
 
 
