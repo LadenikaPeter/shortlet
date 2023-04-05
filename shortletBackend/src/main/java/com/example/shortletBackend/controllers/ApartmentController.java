@@ -87,7 +87,7 @@ public class ApartmentController {
             mailService.sendSimpleMessage(updatedApartment.get().getUsers().getEmail()
                     ,"Listing has been verified"
                     ,"Your listing with the title "+updatedApartment.get().getName()
-                            +" has been verified and user are now able to be reserved.");
+                            +" has been listed unverified please contact support for additional aid.");
 
             return getAllPendingHomes();
 
