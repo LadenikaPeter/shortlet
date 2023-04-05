@@ -28,6 +28,7 @@ public class UserController {
     private final ReservationRepository reservationRepo;
     private final MailService mailService;
     private final ModelMapper mapper;
+    TextResponse customError = new TextResponse();
 
 
     @GetMapping("/")
@@ -38,10 +39,10 @@ public class UserController {
     //get all user with role users
     @GetMapping("/user")
     public ResponseEntity getAllNormalUsers(){
-        ArrayList<UsersCommentDTO> userList = new ArrayList<>();
+        ArrayList<UsersDTO> userList = new ArrayList<>();
         for (Users user: userRepository.findAllByRole(Role.USER)
              ) {
-            userList.add(mapper.map(user, UsersCommentDTO.class));
+            userList.add(mapper.map(user, UsersDTO.class));
         }
         return ResponseEntity.ok(userList);
     }
