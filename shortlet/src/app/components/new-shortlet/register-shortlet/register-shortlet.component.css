@@ -1,132 +1,41 @@
-/* .input-wrapper {
-    position: relative;
-  }
-  
-  input {
-    border: 1px solid gray;
-    position: relative;
-    margin: 10px;
-    line-height: 6ex;
-    padding-left: 0.5rem;
-  }
-  
-  .label {
-    position: absolute;
-    top: 0.2ex;
-    z-index: 1;
-    left: 1em;
-    background-color: white;
-    padding: 0 5px;
-  }
-
-
-
-
- /* enter */
-
-/* 
-
- .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2rem;
+    /* align-items: center; */
+    
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 700px;
-  width: 100%;
-
-  margin-top: 13rem;
+input {
+    width: 30rem;
+    height: 2.5rem;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  margin-bottom: 20px;
+label {
+    font-size: 1.5rem; 
 }
 
-.form-group label {
-  font-weight: bold;
-  margin-bottom: 10px;
+.control {
+    position: fixed;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    position: fixed;
+    bottom: 30px;
+    left: 120px;
 }
 
-.form-group input,
-.form-group select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
+.controls {
+    display: flex;
+    gap: 1rem;
 }
 
-.form-group input[type="number"] {
-  width: 150px;
+button {
+    border: 1px solid red;
+    border-radius: 10px;
+    padding: 0.2rem 1rem;
+    color: red;
+    background-color: ;
 }
-
-.form-group select {
-  width: 170px;
-}
-
-.form-group input[type="file"] {
-  padding: 10px 0;
-  border: none;
-  width: 100%;
-}
-
-.form-check {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.form-check input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-button[type="submit"] {
-  padding: 10px 20px;
-  background-color: black;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button[type="submit"]:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.amenities {
-  display: flex;
-  flex-direction: column;
-}
-
-.amenities div {
-  display: flex;
-  align-items: center;
-}
-
-.amenities label {
-  margin-right: 10px;
-}
-
-@media only screen and (max-width: 768px) {
-  .form-group input,
-  .form-group select {
-    font-size: 14px;
-  }
-}
- */
-
-
- .heading {
-  display: flex;
-  gap: 3rem;
- }
