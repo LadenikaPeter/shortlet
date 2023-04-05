@@ -2,6 +2,7 @@ package com.example.shortletBackend.controllers;
 
 import com.example.shortletBackend.dto.ApartmentsDTO;
 import com.example.shortletBackend.dto.PlainApartmentDTO;
+import com.example.shortletBackend.dto.TextResponse;
 import com.example.shortletBackend.entities.*;
 import com.example.shortletBackend.enums.HomeState;
 import com.example.shortletBackend.enums.PropertyType;
@@ -34,6 +35,7 @@ public class ApartmentController {
     private final UserRepository userRepository;
     private final AmenitiesRepository amenitiesRepo;
     private final ModelMapper mapper;
+    private final TextResponse customResponse;
     private final MailService mailService;
 
     //get all homes
@@ -69,7 +71,8 @@ public class ApartmentController {
             return getAllPendingHomes();
 
         }else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You don't have clearance ");
+            customResponse.setMessage("You don't have clearance ");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(customResponse);
         }
 
     }
@@ -154,18 +157,21 @@ public class ApartmentController {
             apartmentRepo.save(apartments);
             return ResponseEntity.ok(apartments);
         }else {
-            return new ResponseEntity<>("You should really signup or login else you won't" +
-            " be able to do this ",HttpStatus.FORBIDDEN);
+            customResponse.setMessage("You should really signup or login else you won't" +
+                    " be able to do this ");
+            return new ResponseEntity<>(customResponse,HttpStatus.FORBIDDEN);
         }
 
     }
 
 
 
-    @PutMapping("/home/picture/delete")
+
+    @DeleteMapping("/home/picture/delete")
     public ResponseEntity deleteHousePictures(@RequestParam("picture_id")long picture_id){
         picRepo.deleteById(picture_id);
-        return ResponseEntity.ok("Successfully deleted image");
+        customResponse.setMessage("Successfully deleted image");
+        return ResponseEntity.ok(customResponse);
 
 
     }

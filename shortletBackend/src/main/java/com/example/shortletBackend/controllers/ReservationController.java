@@ -1,6 +1,7 @@
 package com.example.shortletBackend.controllers;
 
 import com.example.shortletBackend.dto.ReservationDTO;
+import com.example.shortletBackend.dto.TextResponse;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
@@ -29,6 +30,7 @@ public class ReservationController {
     private final ApartmentRepository apartmentRepo;
     private final UserRepository userRepository;
     private final ModelMapper mapper;
+    private final TextResponse customResponse;
 
     @GetMapping("/reservation")
     public ResponseEntity getAllReservation() {
@@ -58,7 +60,8 @@ public class ReservationController {
             reservationRepo.save(oldReservation.get());
             return ResponseEntity.ok("Successfully changed the status to " + oldReservation.get().getReservationState());
         }
-        return new ResponseEntity<>("This reservation does not exist", HttpStatus.NOT_FOUND);
+        customResponse.setMessage("This reservation does not exist");
+        return new ResponseEntity<>(customResponse, HttpStatus.NOT_FOUND);
     }
 
     //when you want to cancel a reservation
@@ -75,9 +78,11 @@ public class ReservationController {
             //checks to see if the user is the creator of the reservation or the owner of the apartment
             reservation.get().setReservationState(ReservationState.CANCELLED);
             reservationRepo.save(reservation.get());
-            return ResponseEntity.ok("The reservation has been cancelled " + reservation.get());
+            customResponse.setMessage("The reservation has been cancelled " + reservation.get());
+            return ResponseEntity.ok(customResponse);
         } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not allowed to perform this");
+            customResponse.setMessage("You are not allowed to perform this");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(customResponse);
         }
 
     }
@@ -94,9 +99,11 @@ public class ReservationController {
             apartments.setStatus(Status.OCCUPIED);
             reservationRepo.save(reservation.get());
             apartmentRepo.save(apartments);
-            return ResponseEntity.ok("The trip has started and the home is now occupied");
+            customResponse.setMessage("The trip has started and the home is now occupied");
+            return ResponseEntity.ok(customResponse);
         } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only the owner is allowed to start a trip");
+            customResponse.setMessage("Only the owner is allowed to start a trip");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(customResponse);
         }
     }
 
@@ -113,9 +120,11 @@ public class ReservationController {
             apartments.setStatus(Status.UNOCCUPIED);
             reservationRepo.save(reservation.get());
             apartmentRepo.save(apartments);
-            return ResponseEntity.ok("The trip has ended and the home is now unoccupied");
+            customResponse.setMessage("The trip has ended and the home is now unoccupied");
+            return ResponseEntity.ok(customResponse);
         } else {
-            return new ResponseEntity<>("You are not allowed to do this", HttpStatus.FORBIDDEN);//ok("The trip has ended and the home is now unoccupied");
+            customResponse.setMessage("You are not allowed to do this");
+            return new ResponseEntity<>(customResponse, HttpStatus.FORBIDDEN);//ok("The trip has ended and the home is now unoccupied");
         }
     }
 
