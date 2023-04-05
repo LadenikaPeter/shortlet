@@ -104,7 +104,7 @@ th {
 }
 .mat-elevation-z8 {
   margin-bottom: 50px;
-  overflow: auto;
+  overflow-x: scroll;
 }
 
 ::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {

@@ -13,6 +13,9 @@ spring:
           ssl: true
           starttls:
             enable: true
+        transport:
+          protocol: smtp
+    protocol: smtp
 
 paystack:
   secret_key: ${paystackKey}

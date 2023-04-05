@@ -32,6 +32,8 @@ export interface UserData {
 })
 export class TripsComponent {
   reservations: any;
+  anyReservation: boolean;
+  pageDisplay: boolean;
   // reservationPictures: any = [];
   // displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
   displayedColumns: string[] = [
@@ -48,9 +50,18 @@ export class TripsComponent {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private dataS: DataStorageService) {
+    this.pageDisplay = false;
     this.dataS.getAllReservations().subscribe((res) => {
-      console.log(res);
+      // console.log(res);
+
       this.reservations = res;
+
+      if (this.reservations.length === 0) {
+        this.anyReservation = false;
+      } else {
+        this.anyReservation = true;
+      }
+      this.pageDisplay = true;
       this.dataSource = new MatTableDataSource(this.reservations);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
