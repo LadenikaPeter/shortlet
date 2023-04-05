@@ -28,7 +28,7 @@ public class UserController {
     private final ReservationRepository reservationRepo;
     private final MailService mailService;
     private final ModelMapper mapper;
-//    TextResponse customError = new TextResponse();
+    private final TextResponse customResponse ;
 
 
     @GetMapping("/")
@@ -57,14 +57,18 @@ public class UserController {
             if (admin_user.get().getRole() == Role.ADMIN){
                 users.get().setRole(Role.ADMIN);
                 userRepository.save(users.get());
-//                mailService.sendSimpleMessage(users.get().getEmail(),"New admin"
-//                        ,"You have been selected to be an admin");
-                return ResponseEntity.ok("User "+users.get().getName()+" has been made an admin");
+                mailService.sendSimpleMessage(users.get().getEmail(),"New admin"
+                        ,"You have been selected to be an admin");
+                customResponse.setMessage("User "+users.get().getName()+" has been made an admin");
+                return ResponseEntity.ok(customResponse);
             }else {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User does not have permission to do this");
+                customResponse.setMessage("User does not have permission to do this");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(customResponse);
             }
         }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User doesn't exist");
+            customResponse.setMessage("User doesn't exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
+
         }
 
     }
@@ -126,10 +130,12 @@ public class UserController {
                 userRepository.save(user.get());
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body(reservation);
             }else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The house can not be found");
+                customResponse.setMessage("The house can not be found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
             }
         }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The user can not be found");
+            customResponse.setMessage("The user can not be found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
         }
 
     }
@@ -151,7 +157,8 @@ public class UserController {
     public ResponseEntity getAllUserHouses(@RequestHeader("user_email") String email){
         Optional<Users> users= userRepository.findUsersByEmail(email);
         if (users == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The user does not exist");
+            customResponse.setMessage("The user does not exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
         }else {
             ArrayList apartmentDto= new ArrayList<>();
             for (Apartments apartments:apartmentRepo.findAllByUsers(users.get()) ){

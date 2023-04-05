@@ -1,5 +1,6 @@
 package com.example.shortletBackend.config;
 
+import com.example.shortletBackend.dto.TextResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -33,5 +34,10 @@ public class config {
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder){
         return new RestTemplateBuilder().build();
+    }
+
+    @Bean
+    public TextResponse returnText(){
+        return new TextResponse();
     }
 }
