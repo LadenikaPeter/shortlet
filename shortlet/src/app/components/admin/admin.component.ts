@@ -103,6 +103,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.pendingReqSub = this.dataS.getAllPendingRequest().subscribe((res) => {
       console.log(res);
       this.requests = res;
+
       if (this.requests.length === 0) {
         this.noPendingReq = false;
       } else {
