@@ -121,6 +121,12 @@ export class DataStorageService {
     return this.http.get<ReservationObj>('http://localhost:8080/reservation/');
   }
 
+  getAllUsers() {
+    this.http.get('http://localhost:8080/user').subscribe((res) => {
+      console.log(res);
+    });
+  }
+
   sendComment(userComment: { comment: string }, id: number, email: string) {
     console.log(userComment, id, email);
     return this.http.post(
