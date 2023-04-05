@@ -6,6 +6,7 @@ import { Observable, Observer, Subscription } from 'rxjs';
 import { User } from 'src/app/Model/user.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { DataStorageService } from 'src/app/services/data-storage.service';
+import { NotificationService } from 'src/app/services/notifications.service';
 
 export interface ExampleTab {
   label: string;
@@ -44,6 +45,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   username = '';
   user_email: string;
   hold_userdata: RowData;
+  noPendingReq: boolean;
   getAlluserSub: Subscription;
   pendingReqSub: Subscription;
   userSub: Subscription;
@@ -64,7 +66,11 @@ export class AdminComponent implements OnInit, OnDestroy {
   @ViewChild('paginator2') paginator2: MatPaginator;
   @ViewChild('sort2') sort2: MatSort;
 
-  constructor(private dataS: DataStorageService, private authS: AuthService) {}
+  constructor(
+    private dataS: DataStorageService,
+    private authS: AuthService,
+    private notif: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.getAlluserSub = this.dataS.getAllUsers().subscribe((res) => {
@@ -82,6 +88,11 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.pendingReqSub = this.dataS.getAllPendingRequest().subscribe((res) => {
       console.log(res);
       this.requests = res;
+      if (this.requests.length === 0) {
+        this.noPendingReq = false;
+      } else {
+        this.noPendingReq = true;
+      }
       this.dataSource1 = new MatTableDataSource(this.requests);
       this.dataSource1.paginator = this.paginator1;
       this.dataSource1.sort = this.sort1;
@@ -115,11 +126,17 @@ export class AdminComponent implements OnInit, OnDestroy {
   makeUserAdmin() {
     console.log(this.hold_userdata);
     this.dataS.makeUserAdmin(this.hold_userdata.id, this.user_email).subscribe(
-      (res) => {
+      (res: { message: string }) => {
         console.log(res);
+        this.notif.successMessage(res.message);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
+        console.log(error.message);
+        this.notif.errorMessage(error.message);
       }
     );
   }
