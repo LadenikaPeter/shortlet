@@ -3,14 +3,18 @@ spring:
     url: jdbc:h2:mem:testdb
   mail:
     host: smtp.gmail.com
-    port: 587
+    port: 465
     username: ${email}
     password: ${emailPassword}
     properties:
       mail:
         smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
           auth: true
-          ssl: true
+          ssl:
+            enable: true
+            trust: smtp.gmail.com
           starttls:
             enable: true
         transport:
