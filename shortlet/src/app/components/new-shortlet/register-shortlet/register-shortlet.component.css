@@ -1,41 +1,179 @@
-.input-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 2rem;
-    /* align-items: center; */
-    
-}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
 
-input {
-    width: 30rem;
-    height: 2.5rem;
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
 }
-
-label {
-    font-size: 1.5rem; 
-}
-
-.control {
-    position: fixed;
-    margin-top: 2rem;
+  
+  .checkbox-group {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
-    position: fixed;
-    bottom: 30px;
-    left: 120px;
-}
-
-.controls {
+  }
+  
+  .form-check {
     display: flex;
-    gap: 1rem;
-}
+    align-items: center;
+    margin-right: 1rem;
+  }
+  
+  .form-check-input {
+    margin-right: 0.5rem;
+  }
+  
+  .control {
+    margin-top: 2rem;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  button {
+    background-color: #f1317e;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #f1317e;
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  #button-2.slide {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  #button-2.slide:hover {
+    transform: scale(1.05);
+  }
+/*   
+  .amenities {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .amenities > div {
+    flex-basis: 45%;
+    margin-bottom: 10px;
+  }
+  
+  .amenities label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .amenities input[type="checkbox"] {
+    margin-right: 5px;
+  }
+   */
 
-button {
-    border: 1px solid red;
-    border-radius: 10px;
-    padding: 0.2rem 1rem;
-    color: red;
-    background-color: ;
-}
+   
+   .amenities {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .amenities label {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .amenities input[type="checkbox"] {
+    display: none;
+  }
+  
+  .amenities label:before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  
+  .amenities input[type="checkbox"]:checked + label:before {
+    content: '\2713';
+    color: #fff;
+    background-color: #f1317e;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+
+  /* progress bar */
+  .progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #ddd;
+    margin-bottom: 20px;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: #f1317e;
+    transition: width 0.3s ease-in-out;
+  }
+  

@@ -41,6 +41,7 @@ export class RegisterShortletComponent {
       name: new FormControl(''),
       description: new FormControl(''),
       address: new FormControl(''),
+      country: new FormControl(''),
       price: new FormControl(''),
       maxNoOfGuests: new FormControl(''),
       noOfBedrooms: new FormControl(''),
@@ -53,6 +54,7 @@ export class RegisterShortletComponent {
         wifi: new FormControl(false),
         patio: new FormControl(false),
         washer: new FormControl(false),
+        airCondition: new FormControl(false)
       }),
       pictures: new FormArray([])
     });

@@ -35,6 +35,7 @@ import { AuthServiceInterceptor } from './auth/auth.interceptor.service';
 import { TripsComponent } from './components/trips/trips.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ListingComponent } from './components/new-shortlet/listing/listing.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     TripsComponent,
     ClickOutsideDirective,
     NotFoundComponent,
+    ListingComponent,
   ],
   imports: [
     CommonModule,

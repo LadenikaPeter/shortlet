@@ -1,94 +1,141 @@
 <div class="container">
-  <div class="form">
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
-      <div class="input-wrapper" *ngIf="step == 1">
-        <div>
-          <label>Title</label><br>
-          <input formControlName="name" type="text" required />
-        </div>
+    <h1 >Shortlet your Home</h1>
+    <p>Send a request to list your home</p>
 
-        <div>
-            <label>Description</label><br>
-        <!-- <input formControlName="description" type="text" required > -->
-        <textarea formControlName="description"></textarea>
-        </div>
-
-        <div>
-            <label>Address</label><br>
-            <input formControlName="address" required />
-        </div>
-      </div>
-
-      <div class="input-wrapper" *ngIf="step == 2">
-        <label>Guest Capacity</label>
-        <input formControlName="maxNoOfGuests" type="number" required />
-
-        <label> No of Bedrooms </label>
-        <input formControlName="noOfBedrooms" type="number" required />
-
-        <label> No of Bathrooms </label>
-        <input formControlName="noOfBathrooms" type="number" />
-      </div>
-
-      <div class="input-wrapper" *ngIf="step == 3">
-        <label></label>
-        <select formControlName="houseType" class="form-control" required>
-          <option value="" disabled selected>Select your House Type</option>
-          <option value="PRIVATE_ROOM">Private Room</option>
-        </select>
-
-        <label></label>
-        <select formControlName="propertyType" class="form-control" required>
-          <option value="" disabled selected>Select your Property Type</option>
-          <option value="HOTEL">Hotel</option>
-        </select>
-        <label>Price(NGN)</label>
-        <input
-          formControlName="price"
-          type="number"
-          placeholder="Per Night"
-          required
-        />
-      </div>
-
-      <div formGroupName="amenities" *ngIf="step == 4">
-        <div class="amenities">
-          <div>
-            <div>
-              <input id="gym" type="checkbox" formControlName="gym" />
-              <label for="gym">Gym</label>
+    <div class="progress-bar">
+        <div class="progress" [style.width.%]="step * 25"></div>
+        
+    </div>
+    <p>Step {{ step }} of 4</p>
+    <div class="form">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" novalidate>
+        <div *ngIf="step === 1">
+            <div class="form-group">
+              <label>Title</label>
+              <input formControlName="name" type="text" class="form-control" required />
             </div>
-
-            <div>
-              <input type="checkbox" formControlName="pool" />
-              <label for="pool">Pool</label>
+      
+            <div class="form-group">
+              <label>Description</label>
+              <textarea formControlName="description" class="form-control"></textarea>
             </div>
-
-            <div>
-              <input type="checkbox" formControlName="wifi" />
-              <label for="wifi">Free Wi-Fi</label>
+      
+            <div class="form-group">
+              <label>Address</label>
+              <input formControlName="address" type="text" class="form-control" required />
+            </div>
+      
+            <div class="form-group">
+              <label>Country</label>
+              <input formControlName="country" type="text" class="form-control" required />
             </div>
           </div>
-          <div>
-            <div>
-              <input id="gym" type="checkbox" formControlName="gym" />
-              <label for="gym">Gym</label>
-            </div>
 
-            <div>
-              <input type="checkbox" formControlName="pool" />
-              <label for="pool">Pool</label>
-            </div>
-
-            <div>
-              <input type="checkbox" formControlName="wifi" />
-              <label for="wifi">Free Wi-Fi</label>
-            </div>
-          </div>
+      <div *ngIf="step === 2">
+        <div class="form-group">
+          <label>Guest Capacity</label>
+          <input formControlName="maxNoOfGuests" type="number" class="form-control" required />
+        </div>
+  
+        <div class="form-group">
+          <label>No of Bedrooms</label>
+          <input formControlName="noOfBedrooms" type="number" class="form-control" required />
+        </div>
+  
+        <div class="form-group">
+          <label>No of Bathrooms</label>
+          <input formControlName="noOfBathrooms" type="number" class="form-control" />
         </div>
       </div>
 
-      <div formArrayName="images" *ngIf="step == 5">
+      <div *ngIf="step === 3">
+        <div class="form-group">
+          <label>House Type</label>
+          <select formControlName="houseType" required>
+            <option value="" disabled selected>Select your House Type</option>
+            <option value="PRIVATE_ROOM">Private Room</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label>Property Type</label>
+          <select formControlName="propertyType"  required>
+            <option value="" disabled selected>Select your Property Type</option>
+            <option value="HOTEL">Hotel</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+                <label>Price(NGN)</label>
+                <input formControlName="price" type="number" placeholder="Per Night" class="form-control" required />
+        </div>
+  
+        
+      </div>
+
+        <div formGroupName="amenities" *ngIf="step == 4">
+            <label>Select Amenities</label>
+
+
+
+
+            <!-- new -->
+            <div class="amenities">
+            <div>
+                <div>
+                <input id="gym" type="checkbox" formControlName="gym" />
+                <label for="gym">Gym</label>
+                </div>
+
+                <div>
+                <input type="checkbox" formControlName="pool" />
+                <label for="pool">Pool</label>
+                </div>
+
+                <div>
+                <input type="checkbox" formControlName="wifi" />
+                <label for="wifi">Free Wi-Fi</label>
+                </div>
+            </div>
+            <div>
+                <div>
+                <input id="gym" type="checkbox" formControlName="patio" />
+                <label for="patio">Patio</label>
+                </div>
+
+                <div>
+                <input type="checkbox" formControlName="airCondition" />
+                <label for="airCondition">Air Condition</label>
+                </div>
+
+                <div>
+                <input type="checkbox" formControlName="washer" />
+                <label for="washer">Washer</label>
+                </div>
+            </div>
+            <div>
+                <div>
+                <input id="gym" type="checkbox" formControlName="patio" />
+                <label for="patio">Patio</label>
+                </div>
+
+                <div>
+                <input type="checkbox" formControlName="airCondition" />
+                <label for="airCondition">Air Condition</label>
+                </div>
+
+                <div>
+                <input type="checkbox" formControlName="washer" />
+                <label for="washer">Washer</label>
+                </div>
+            </div>
+
+            
+            </div>
+        </div>
+
+      <div formArrayName="images" *ngIf="step == 3">
+        <label>Upload Pictures</label>
         <input
           type="file"
           accept=".png, .jpg, .jpeg"
@@ -101,12 +148,14 @@
       <div class="control">
         <div class="controls">
             <button *ngIf="step != 1" (click)="previous()">Previous</button>
-            <button *ngIf="step != 5" (click)="next()">Next</button>
-        </div>
+            <button *ngIf="step != 4" (click)="next()">Next</button>
 
-        <button [disabled]="!myForm.valid" type="submit" *ngIf="step == 5">
+
+        <button [disabled]="!myForm.valid" type="submit" *ngIf="step == 4" id="button-2 slide" routerLink="listing">
+    
             Request to Add Home
         </button>
+        </div>
       </div>
     </form>
   </div>
