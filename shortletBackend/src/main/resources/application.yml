@@ -10,9 +10,9 @@ spring:
       mail:
         smtp:
           auth: true
+          ssl: true
           starttls:
             enable: true
 
 paystack:
   secret_key: ${paystackKey}
-

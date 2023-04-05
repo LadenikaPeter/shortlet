@@ -55,12 +55,33 @@ public class ApartmentController {
     }
 
     //make a house verified
-    @PutMapping("/home/update/")
+    @PutMapping("/home/update/verify")
     public ResponseEntity updatePendingHouse(@RequestHeader("user_email")String email
             , @RequestParam("apartment_id") long id){
         if (userRepository.findUsersByEmail(email).get().getRole() == Role.ADMIN){
             Optional<Apartments> updatedApartment = apartmentRepo.findById(id);
             updatedApartment.get().setHomeState(HomeState.VERIFIED);
+            apartmentRepo.save(updatedApartment.get());
+
+            mailService.sendSimpleMessage(updatedApartment.get().getUsers().getEmail()
+                    ,"Listing has been verified"
+                    ,"Your listing with the title "+updatedApartment.get().getName()
+                            +" has been verified and user are now able to be reserved.");
+
+            return getAllPendingHomes();
+
+        }else {
+            customResponse.setMessage("You don't have clearance ");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(customResponse);
+        }
+
+    }
+    @PutMapping("/home/update/unverify")
+    public ResponseEntity updateHouse(@RequestHeader("user_email")String email
+            , @RequestParam("apartment_id") long id){
+        if (userRepository.findUsersByEmail(email).get().getRole() == Role.ADMIN){
+            Optional<Apartments> updatedApartment = apartmentRepo.findById(id);
+            updatedApartment.get().setHomeState(HomeState.UNVERIFIED);
             apartmentRepo.save(updatedApartment.get());
 
             mailService.sendSimpleMessage(updatedApartment.get().getUsers().getEmail()
