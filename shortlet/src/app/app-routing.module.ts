@@ -13,11 +13,8 @@ import { BookingComponent } from './components/shortlet/booking/booking.componen
 import { ShortletComponent } from './components/shortlet/shortlet.component';
 import { TripsComponent } from './components/trips/trips.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-<<<<<<< HEAD
 import { ListingComponent } from './components/new-shortlet/listing/listing.component';
-=======
 import { AdminComponent } from './components/admin/admin.component';
->>>>>>> 5b36060b2cbc82e9ef5e83cb7f50ecfde53d07a4
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
@@ -54,14 +51,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
-<<<<<<< HEAD
   {
     path: 'listings',
     component: ListingComponent
   },
-=======
   { path: 'admin', component: AdminComponent },
->>>>>>> 5b36060b2cbc82e9ef5e83cb7f50ecfde53d07a4
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' },
 ];

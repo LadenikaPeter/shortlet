@@ -68,3 +68,11 @@ export interface NewShortlet {
   amenities?: any;
   // photos: File
 }
+
+export interface Listings {
+  name: string,
+  status: string,
+  noOfBedrooms: number,
+  noOfBathrooms: number,
+  location: string
+}

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NewShortlet, ReservationObj, Shortlet } from '../interface/shortlet';
+import { Listings, NewShortlet, ReservationObj, Shortlet } from '../interface/shortlet';
 import { NotificationService } from './notifications.service';
 
 @Injectable({ providedIn: 'root' })
@@ -156,4 +156,15 @@ export class DataStorageService {
     const formattedDate2 = year + '-' + month + '-' + day;
     return formattedDate2;
   }
+
+
+
+  //get all listings under a user 
+
+  // userListings(): Observable<Listings> {
+  //   return this.http.get<Listings>(
+  //     `http://localhost:8080/home/?house_id=${id}`
+  //   );
+  // }
+
 }
