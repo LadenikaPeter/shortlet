@@ -122,9 +122,22 @@ export class DataStorageService {
   }
 
   getAllUsers() {
-    this.http.get('http://localhost:8080/user').subscribe((res) => {
-      console.log(res);
-    });
+    return this.http.get('http://localhost:8080/user');
+  }
+
+  makeUserAdmin(id: number, email: string) {
+    return this.http.put(
+      `http://localhost:8080/user/update/?user_id=${id}`,
+      {},
+      {
+        headers: new HttpHeaders({ admin_email: email }),
+      }
+    );
+    // console.log(id);
+  }
+
+  getAllPendingRequest() {
+    return this.http.get('http://localhost:8080/homes/PENDING?');
   }
 
   sendComment(userComment: { comment: string }, id: number, email: string) {

@@ -28,7 +28,7 @@ public class UserController {
     private final ReservationRepository reservationRepo;
     private final MailService mailService;
     private final ModelMapper mapper;
-    TextResponse customError = new TextResponse();
+//    TextResponse customError = new TextResponse();
 
 
     @GetMapping("/")
@@ -57,8 +57,8 @@ public class UserController {
             if (admin_user.get().getRole() == Role.ADMIN){
                 users.get().setRole(Role.ADMIN);
                 userRepository.save(users.get());
-                mailService.sendSimpleMessage(users.get().getEmail(),"New admin"
-                        ,"You have been selected to be an admin");
+//                mailService.sendSimpleMessage(users.get().getEmail(),"New admin"
+//                        ,"You have been selected to be an admin");
                 return ResponseEntity.ok("User "+users.get().getName()+" has been made an admin");
             }else {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User does not have permission to do this");
