@@ -33,6 +33,13 @@ export interface RowData {
   name: string;
   phoneNo: number;
 }
+export interface RowDataForListingRequest {
+  address: string;
+  country: string;
+  id: number;
+  name: string;
+  state: string;
+}
 
 @Component({
   selector: 'app-admin',
@@ -45,7 +52,10 @@ export class AdminComponent implements OnInit, OnDestroy {
   username = '';
   user_email: string;
   hold_userdata: RowData;
+  hold_rejectListing_Data: RowDataForListingRequest;
+  hold_acceptListing_Data: RowDataForListingRequest;
   noPendingReq: boolean;
+  noUsers: boolean;
   getAlluserSub: Subscription;
   pendingReqSub: Subscription;
   userSub: Subscription;
@@ -76,6 +86,11 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.getAlluserSub = this.dataS.getAllUsers().subscribe((res) => {
       console.log(res);
       this.users = res;
+      if (this.users.length === 0) {
+        this.noUsers = false;
+      } else {
+        this.noUsers = true;
+      }
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator2;
       this.dataSource.sort = this.sort2;
@@ -139,6 +154,50 @@ export class AdminComponent implements OnInit, OnDestroy {
         this.notif.errorMessage(error.message);
       }
     );
+  }
+
+  onReject(row: RowDataForListingRequest) {
+    // console.log(row);
+    this.hold_rejectListing_Data = row;
+  }
+
+  rejectListing() {
+    this.dataS
+      .rejectListing(this.hold_rejectListing_Data.id, this.user_email)
+      .subscribe(
+        (res) => {
+          // console.log(res);
+          this.notif.successMessage('Listing successfully rejected');
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
+  }
+
+  onAccept(row: RowDataForListingRequest) {
+    // console.log(row);
+    this.hold_acceptListing_Data = row;
+  }
+
+  acceptListing() {
+    this.dataS
+      .acceptListing(this.hold_acceptListing_Data.id, this.user_email)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.notif.successMessage('Listing successfully accepted!');
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
   }
 
   ngOnDestroy(): void {
