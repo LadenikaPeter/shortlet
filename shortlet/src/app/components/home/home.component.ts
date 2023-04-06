@@ -22,6 +22,14 @@ export class HomeComponent implements OnInit {
         this.availableShortlets = selectedProperty;
       }
     });
+
+    this.dataStorage.returnAllHomes.subscribe((all_shortlets) => {
+      this.availableShortlets = all_shortlets;
+    });
     console.log('WORKING!');
+  }
+
+  print(string, id) {
+    console.log(string + id);
   }
 }
