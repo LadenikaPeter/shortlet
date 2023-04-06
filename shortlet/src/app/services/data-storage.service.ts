@@ -10,6 +10,7 @@ export class DataStorageService {
   // baseURL: string = "http://localhost:8080/";
 
   propertyType = new BehaviorSubject(null);
+  returnAllHomes = new BehaviorSubject(null);
   checkInDateforDB: any;
   checkOutDateforDB: any;
 

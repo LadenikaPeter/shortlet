@@ -16,6 +16,8 @@ export class BookingComponent implements OnDestroy, OnInit {
   checkin: Date;
   checkout: Date;
   nights: number;
+  serviceFee: number;
+  cleaningFee: number;
   calculateNumberOfNights: number;
   total: number;
   isAuth_Subcription: Subscription;
@@ -45,24 +47,17 @@ export class BookingComponent implements OnDestroy, OnInit {
     this.isAuth_Subcription = this.authS.user.subscribe((user) => {
       this.isAuthenticated = user;
       this.emailForPayment = user.email;
-
-      // console.log(this.emailForPayment);
     });
 
     this.checkin = this.activatedRoute.snapshot.queryParams['checkin'];
     this.checkout = this.activatedRoute.snapshot.queryParams['checkout'];
     this.nights = this.activatedRoute.snapshot.queryParams['nights'];
     this.guests = this.activatedRoute.snapshot.queryParams['guests'];
-
+    this.serviceFee = +this.activatedRoute.snapshot.queryParams['service'];
+    this.cleaningFee = +this.activatedRoute.snapshot.queryParams['cleaning'];
     this.calculateBill();
     this.reference = `${Math.ceil(Math.random() * 10e10)}`;
   }
-
-  // options: PaystackOptions = {
-  //   amount: this.total,
-  //   email: this.emailForPayment,
-  //   ref: `${Math.ceil(Math.random() * 10e10)}`,
-  // };
 
   shortletData: Partial<Shortlet> = {};
   shortletPictures: any = [];
@@ -74,7 +69,6 @@ export class BookingComponent implements OnDestroy, OnInit {
         console.log(this.shortletData);
         this.calculateBill();
         this.shortletPictures = response.pictures;
-        // this.shortletPictures = response.pictures; //pictures of shortlet from API
       },
       (error) => console.log(error)
     );
@@ -82,28 +76,16 @@ export class BookingComponent implements OnDestroy, OnInit {
 
   calculateBill() {
     this.calculateNumberOfNights = this.shortletData.price * this.nights;
-    this.total = this.calculateNumberOfNights + 107 + 231;
+
+    this.total =
+      this.calculateNumberOfNights + this.cleaningFee + this.serviceFee;
+
     this.totalForPaystack = this.total * 100;
   }
 
   googleAuth() {
     this.authS.loginWithGoogle();
   }
-
-  // onPayment() {
-  //   if (this.isAuthenticated) {
-  //     // console.log('authenticated');
-  //     this.getEmailFromLocalStorage();
-  //   } else {
-  //     this.notif.warningMessage('Please login to book');
-  //   }
-  // }
-
-  // private getEmailFromLocalStorage() {
-  //   const user = JSON.parse(localStorage.getItem('shortletUserData'));
-  //   console.log(user);
-  //   this.emailForPayment = user.email;
-  // }
 
   paymentInit() {
     console.log('Payment initialized');

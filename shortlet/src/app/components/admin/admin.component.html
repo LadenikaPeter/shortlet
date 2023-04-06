@@ -1,15 +1,4 @@
 <div class="container">
-  <!-- <ng-container *ngIf="(asyncTabs | async) === null">
-    Loading tabs...
-  </ng-container>
-
-  <mat-tab-group>
-    <mat-tab *ngFor="let tab of asyncTabs | async">
-      <ng-template mat-tab-label>{{ tab.label }}</ng-template>
-      {{ tab.content }}
-    </mat-tab>
-  </mat-tab-group> -->
-
   <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
     <mat-tab label="Pending Requests">
       <div [hidden]="noPendingReq">
@@ -82,13 +71,12 @@
               </td>
             </tr>
           </table>
-
-          <mat-paginator
-            #paginator1="matPaginator"
-            [pageSizeOptions]="[5, 10, 25, 100]"
-            aria-label="Select page of users"
-          ></mat-paginator>
         </div>
+        <mat-paginator
+          #paginator1="matPaginator"
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Select page of users"
+        ></mat-paginator>
       </div>
     </mat-tab>
     <!-- break -->
@@ -156,13 +144,12 @@
               </td>
             </tr>
           </table>
-
-          <mat-paginator
-            #paginator2="matPaginator"
-            [pageSizeOptions]="[5, 10, 25, 100]"
-            aria-label="Select page of users"
-          ></mat-paginator>
         </div>
+        <mat-paginator
+          #paginator2="matPaginator"
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Select page of users"
+        ></mat-paginator>
       </div>
     </mat-tab>
     <!-- <mat-tab label="Third">Content 3</mat-tab> -->
