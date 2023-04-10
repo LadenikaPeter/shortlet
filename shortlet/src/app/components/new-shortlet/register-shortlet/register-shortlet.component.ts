@@ -44,8 +44,8 @@ export class RegisterShortletComponent {
       country: new FormControl(''),
       price: new FormControl(''),
       maxNoOfGuests: new FormControl(''),
-      noOfBedrooms: new FormControl(''),
-      noOfBathrooms: new FormControl(''),
+      noOfBedrooms: new FormControl(),
+      noOfBathrooms: new FormControl(),
       propertyType: new FormControl(''),
       houseType: new FormControl(''),
       amenities: new FormGroup({

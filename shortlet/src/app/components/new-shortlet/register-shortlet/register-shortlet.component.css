@@ -127,21 +127,27 @@
    
    .amenities {
     display: flex;
+    gap: 2rem;
     /* justify-content: space-between; */
     align-items: center;
     margin-bottom: 20px;
   }
   
   .amenities label {
+    padding-left: 0.5rem;
     font-weight: bold;
     margin-bottom: 10px;
   }
-  
-  .amenities input[type="checkbox"] {
-    display: none;
+
+  .amenity {
+    display: flex;
   }
   
-  .amenities label:before {
+  /* .amenities input[type="checkbox"] {
+    display: none;
+  } */
+  
+  /* .amenities label:before {
     content: '';
     display: inline-block;
     width: 20px;
@@ -150,9 +156,9 @@
     border: 2px solid #ccc;
     border-radius: 3px;
     vertical-align: middle;
-  }
+  } */
   
-  .amenities input[type="checkbox"]:checked + label:before {
+  /* .amenities input[type="checkbox"]:checked + label:before {
     content: '\2713';
     color: #fff;
     background-color: #f1317e;
@@ -160,7 +166,7 @@
     vertical-align: middle;
     font-size: 14px;
     line-height: 20px;
-  }
+  } */
 
 
   /* progress bar */
