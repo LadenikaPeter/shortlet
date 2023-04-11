@@ -12,6 +12,7 @@ import { RegisterShortletComponent } from './components/new-shortlet/register-sh
 import { BookingComponent } from './components/shortlet/booking/booking.component';
 import { ShortletComponent } from './components/shortlet/shortlet.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ListingComponent } from './components/new-shortlet/listing/listing.component';
 import { AdminComponent } from './components/admin/admin.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
