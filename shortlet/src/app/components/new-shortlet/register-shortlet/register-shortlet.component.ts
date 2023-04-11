@@ -18,6 +18,7 @@ export class RegisterShortletComponent {
   step: any = 1;
   newShortlet: NewShortlet;
   imagePreview: any;
+  savedFormData: any;
 
   username: string;
   user_email: string;
@@ -105,17 +106,36 @@ export class RegisterShortletComponent {
   }
 
   //function to handle image uploads and convert to base64
+  // onImageUpload(event: any) {
+  //   this.pictures = event.target.files[0];
+  //   const reader = new FileReader(); // to read content of files
+  //   reader.onload = () => {
+  //     const base64 = reader.result as string;
+  //     this.imagePreview = base64;
+  //     const picturesArray = this.myForm.get('pictures') as FormArray;
+  //     picturesArray.push(new FormControl(base64)); //push pictures to the array
+  //   };
+  //   reader.readAsDataURL(this.pictures);
+  // }
+
   onImageUpload(event: any) {
-    this.pictures = event.target.files[0];
-    const reader = new FileReader(); // to read content of files
-    reader.onload = () => {
-      const base64 = reader.result as string;
-      this.imagePreview = base64;
-      const picturesArray = this.myForm.get('pictures') as FormArray;
-      picturesArray.push(new FormControl(base64)); //push pictures to the array
-    };
-    reader.readAsDataURL(this.pictures);
+    const selectedFiles = event.target.files;
+    const picturesArray = this.myForm.get('pictures') as FormArray;
+    
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const file = selectedFiles[i];
+      const reader = new FileReader();
+  
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        this.imagePreview = base64;
+        picturesArray.push(new FormControl(base64));
+      };
+  
+      reader.readAsDataURL(file);
+    }
   }
+  
 
   // getSafeUrl(url: string) {
   //   return this.sanitizer.bypassSecurityTrustUrl(url);
