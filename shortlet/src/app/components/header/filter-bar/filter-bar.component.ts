@@ -12,6 +12,11 @@ export class FilterBarComponent {
 
   filterbar: { name: string; image: string; value: string }[] = [
     {
+      name: 'Show all',
+      image: '../../../../assets/svg/overview.svg',
+      value: 'ALL',
+    },
+    {
       name: 'Apartment',
       image: '../../../../assets/property/apatment.jpg',
       value: 'APARTMENT',
@@ -57,7 +62,14 @@ export class FilterBarComponent {
   getProperty(apartment: string) {
     this.toggleActiveApartment = apartment;
     // this.searchS.propertyType.next(apartment)
-    this.dataS.getSelectedApartment(apartment);
+    if (apartment === 'ALL') {
+      this.dataS.getShortlets().subscribe((res) => {
+        this.dataS.returnAllHomes.next(res);
+      });
+    } else {
+      this.dataS.getSelectedApartment(apartment);
+    }
+
     // console.log(apartment);
   }
 }

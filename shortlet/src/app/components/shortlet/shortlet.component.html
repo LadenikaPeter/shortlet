@@ -259,7 +259,9 @@
               checkin: checkinDate,
               checkout: minDateForCheckOut,
               nights: numberOfNights,
-              guests: counter
+              guests: counter,
+              service: shortletData.serviceFee,
+              cleaning: shortletData.cleaningFee
             }"
           >
             {{ buttonDisable ? "Not Available" : "Reserve" }}

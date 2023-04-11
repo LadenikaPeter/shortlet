@@ -10,6 +10,7 @@ export class DataStorageService {
   // baseURL: string = "http://localhost:8080/";
 
   propertyType = new BehaviorSubject(null);
+  returnAllHomes = new BehaviorSubject(null);
   checkInDateforDB: any;
   checkOutDateforDB: any;
 
@@ -118,6 +119,27 @@ export class DataStorageService {
 
   getAllPendingRequest() {
     return this.http.get('http://localhost:8080/homes/PENDING?');
+  }
+
+  rejectListing(id: number, email: string) {
+    // console.log(id);
+    return this.http.put(
+      `http://localhost:8080/home/update/unverify?apartment_id=${id}`,
+      {},
+      {
+        headers: new HttpHeaders({ user_email: email }),
+      }
+    );
+  }
+
+  acceptListing(id: number, email: string) {
+    return this.http.put(
+      `http://localhost:8080/home/update/verify?apartment_id=${id}`,
+      {},
+      {
+        headers: new HttpHeaders({ user_email: email }),
+      }
+    );
   }
 
   sendComment(userComment: { comment: string }, id: number, email: string) {

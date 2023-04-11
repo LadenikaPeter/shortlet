@@ -6,6 +6,7 @@ import { Observable, Observer, Subscription } from 'rxjs';
 import { User } from 'src/app/Model/user.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { DataStorageService } from 'src/app/services/data-storage.service';
+import { NotificationService } from 'src/app/services/notifications.service';
 
 export interface ExampleTab {
   label: string;
@@ -32,6 +33,13 @@ export interface RowData {
   name: string;
   phoneNo: number;
 }
+export interface RowDataForListingRequest {
+  address: string;
+  country: string;
+  id: number;
+  name: string;
+  state: string;
+}
 
 @Component({
   selector: 'app-admin',
@@ -44,6 +52,10 @@ export class AdminComponent implements OnInit, OnDestroy {
   username = '';
   user_email: string;
   hold_userdata: RowData;
+  hold_rejectListing_Data: RowDataForListingRequest;
+  hold_acceptListing_Data: RowDataForListingRequest;
+  noPendingReq: boolean;
+  noUsers: boolean;
   getAlluserSub: Subscription;
   pendingReqSub: Subscription;
   userSub: Subscription;
@@ -64,12 +76,21 @@ export class AdminComponent implements OnInit, OnDestroy {
   @ViewChild('paginator2') paginator2: MatPaginator;
   @ViewChild('sort2') sort2: MatSort;
 
-  constructor(private dataS: DataStorageService, private authS: AuthService) {}
+  constructor(
+    private dataS: DataStorageService,
+    private authS: AuthService,
+    private notif: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.getAlluserSub = this.dataS.getAllUsers().subscribe((res) => {
       console.log(res);
       this.users = res;
+      if (this.users.length === 0) {
+        this.noUsers = false;
+      } else {
+        this.noUsers = true;
+      }
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator2;
       this.dataSource.sort = this.sort2;
@@ -82,6 +103,12 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.pendingReqSub = this.dataS.getAllPendingRequest().subscribe((res) => {
       console.log(res);
       this.requests = res;
+
+      if (this.requests.length === 0) {
+        this.noPendingReq = false;
+      } else {
+        this.noPendingReq = true;
+      }
       this.dataSource1 = new MatTableDataSource(this.requests);
       this.dataSource1.paginator = this.paginator1;
       this.dataSource1.sort = this.sort1;
@@ -115,13 +142,63 @@ export class AdminComponent implements OnInit, OnDestroy {
   makeUserAdmin() {
     console.log(this.hold_userdata);
     this.dataS.makeUserAdmin(this.hold_userdata.id, this.user_email).subscribe(
-      (res) => {
+      (res: { message: string }) => {
         console.log(res);
+        this.notif.successMessage(res.message);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
+        console.log(error.message);
+        this.notif.errorMessage(error.message);
       }
     );
+  }
+
+  onReject(row: RowDataForListingRequest) {
+    // console.log(row);
+    this.hold_rejectListing_Data = row;
+  }
+
+  rejectListing() {
+    this.dataS
+      .rejectListing(this.hold_rejectListing_Data.id, this.user_email)
+      .subscribe(
+        (res) => {
+          // console.log(res);
+          this.notif.successMessage('Listing successfully rejected');
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
+  }
+
+  onAccept(row: RowDataForListingRequest) {
+    // console.log(row);
+    this.hold_acceptListing_Data = row;
+  }
+
+  acceptListing() {
+    this.dataS
+      .acceptListing(this.hold_acceptListing_Data.id, this.user_email)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.notif.successMessage('Listing successfully accepted!');
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
   }
 
   ngOnDestroy(): void {

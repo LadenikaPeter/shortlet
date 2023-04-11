@@ -25,8 +25,13 @@ th {
 /* table css */
 
 .mat-elevation-z8 {
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
   overflow: auto;
+}
+
+mat-paginator {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 ::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
@@ -102,10 +107,31 @@ th {
 .rejectbtn {
   background-color: #eaeaea;
   color: #484848;
-  margin-right: 10px;
+  margin-right: 6px;
 }
 
 .acceptbtn {
   background-color: #ff0066;
   color: white;
+}
+
+@media only screen and (max-width: 768.98px) {
+  .rejectbtn {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-right: 0;
+  }
+
+  .acceptbtn {
+    margin-bottom: 6px;
+  }
+}
+
+@media only screen and (max-width: 425.98px) {
+  .btn {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
 }
