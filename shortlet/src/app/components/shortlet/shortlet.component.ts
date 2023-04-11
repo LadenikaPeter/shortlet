@@ -50,6 +50,8 @@ export class ShortletComponent implements OnInit {
 
   UserComment: string = '';
 
+  showShortlet: boolean;
+
   constructor(
     private dataStorage: DataStorageService,
     private activatedRoute: ActivatedRoute,
@@ -83,9 +85,10 @@ export class ShortletComponent implements OnInit {
 
   //to display shortlet
   displayShortlet(id: number) {
+    this.showShortlet = false;
     this.dataStorage.displayShortlet(id).subscribe(
       (response) => {
-        console.log((this.shortletData = response));
+        // console.log((this.shortletData = response));
         this.shortletData = response;
         this.overallArray = response.reservations;
         this.maxNoOfGuests = response.maxNoOfGuests;
@@ -103,6 +106,7 @@ export class ShortletComponent implements OnInit {
         this.calculateBill(); //details of shortlet from API
         this.shortletPictures = response.pictures; //pictures of shortlet from API
         this.disableReserveDate();
+        this.showShortlet = true;
       },
       (error) => console.log(error)
     );
@@ -227,8 +231,10 @@ export class ShortletComponent implements OnInit {
         .subscribe((res) => {
           console.log(res);
           this.UserComment = '';
-          // this.notif.successMessage('Comment added!');
-          window.location.reload();
+          this.notif.successMessage('Comment added!');
+          setTimeout(() => {
+            window.location.reload();
+          }, 2500);
         });
     }
   }
