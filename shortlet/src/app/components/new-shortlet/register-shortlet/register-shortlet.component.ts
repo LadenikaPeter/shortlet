@@ -105,18 +105,20 @@ export class RegisterShortletComponent {
     this.step = this.step - 1;
   }
 
-  //function to handle image uploads and convert to base64
-  // onImageUpload(event: any) {
-  //   this.pictures = event.target.files[0];
-  //   const reader = new FileReader(); // to read content of files
-  //   reader.onload = () => {
-  //     const base64 = reader.result as string;
-  //     this.imagePreview = base64;
-  //     const picturesArray = this.myForm.get('pictures') as FormArray;
-  //     picturesArray.push(new FormControl(base64)); //push pictures to the array
-  //   };
-  //   reader.readAsDataURL(this.pictures);
-  // }
+  keyPress(event: any) {
+
+    // const pattern = /[0-9\+\-\ ]/;
+    const pattern = /[0-9\ ]/;
+    
+    let inputChar = String.fromCharCode(event.charCode);
+    
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+    
+    event.preventDefault();
+    
+    }
+    
+  }
 
   onImageUpload(event: any) {
     const selectedFiles = event.target.files;
