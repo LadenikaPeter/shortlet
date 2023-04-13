@@ -162,7 +162,9 @@ public class UserController {
         }else {
             ArrayList apartmentDto= new ArrayList<>();
             for (Apartments apartments:apartmentRepo.findAllByUsers(users.get()) ){
-                apartmentDto.add(mapper.map(apartments,ApartmentForReservation.class));
+                ApartmentForListing listing = mapper.map(apartments,ApartmentForListing.class);
+                listing.setPictures(apartments.getPictures().stream().findFirst().get());
+                apartmentDto.add(listing);
             }
             return ResponseEntity.ok(apartmentDto) ;
         }
