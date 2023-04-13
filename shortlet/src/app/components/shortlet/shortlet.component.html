@@ -65,54 +65,6 @@
         </div>
         <div></div>
         <hr />
-        <div>
-          <h5>{{ numberOfNights }} nights in {{ shortletData.address }}</h5>
-
-          <p>{{ checkinDate | date }} - {{ minDateForCheckOut | date }}</p>
-
-          <mat-form-field
-            style="margin-right: 15px"
-            appearance="fill"
-            (click)="picker.open()"
-            class="removeOnScreen425"
-          >
-            <mat-label>Check in date</mat-label>
-            <input
-              matInput
-              [min]="minDate"
-              [(ngModel)]="checkinDate"
-              [matDatepicker]="picker"
-              [matDatepickerFilter]="myHolidayFilter"
-              (dateChange)="trialM($event)"
-            />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker (dateChange)="trialM($event)"></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field
-            appearance="fill"
-            (click)="picker2.open()"
-            class="removeOnScreen425"
-          >
-            <mat-label>Check out date</mat-label>
-            <input
-              matInput
-              [min]="checkoutDate"
-              [(ngModel)]="minDateForCheckOut"
-              [matDatepicker]="picker2"
-              [matDatepickerFilter]="myHolidayFilter"
-              (dateChange)="trialM($event)"
-            />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker2"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-        </div>
       </div>
     </div>
     <div class="col-md-4">
@@ -206,26 +158,6 @@
             /></span>
           </h5>
         </div>
-        <div class="col" style="padding-left: 0; padding-right: 0">
-          <mat-form-field appearance="fill" class="reserve_datepicker">
-            <mat-label>Check out date</mat-label>
-            <input
-              matInput
-              [min]="checkoutDate"
-              [(ngModel)]="minDateForCheckOut"
-              [matDatepicker]="picker4"
-              [matDatepickerFilter]="myHolidayFilter"
-              (dateChange)="trialM($event)"
-
-            />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker4"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker4></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
 
         <!-- if check in date and checkout dates are picked, display this -->
         <div class="bill">
@@ -307,4 +239,4 @@
       </div>
     </div>
   </div>
-
+</div>
