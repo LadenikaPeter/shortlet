@@ -90,10 +90,6 @@ export class RegisterShortletComponent {
       },
       (error) => console.log(error)
     )
-
-
-    
-
     console.log(this.myForm.value)
   }
 
@@ -115,9 +111,7 @@ export class RegisterShortletComponent {
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
     
     event.preventDefault();
-    
-    }
-    
+    } 
   }
 
   onImageUpload(event: any) {

@@ -61,6 +61,10 @@ const routes: Routes = [
     path: 'host/shortlets/new',
     component: RegisterShortletComponent,
   },
+  {
+    path: 'user-listings',
+    component: ListingComponent
+  },
   //mogen will handle this
 
   {

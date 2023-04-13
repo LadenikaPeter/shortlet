@@ -46,6 +46,19 @@ export class DataStorageService {
     );
   }
 
+  getListing(){
+    const options = {
+      headers: {
+        user_email: 'sami@gmail.com',
+      },
+    };
+
+    return this.http.get<Listings>(
+      `http://localhost:8080/user/listings/`,
+     options
+    );
+  }
+
   getUser() {
     return this.http.get('http://localhost:8080/');
   }
@@ -152,6 +165,8 @@ export class DataStorageService {
       }
     );
   }
+
+
 
   private dateConverterforCheckIn(reserveDate: Date) {
     const date = new Date(reserveDate);

@@ -69,10 +69,20 @@ export interface NewShortlet {
   // photos: File
 }
 
+// export interface Listings {
+//   name: string,
+//   status: string,
+//   noOfBedrooms: number,
+//   noOfBathrooms: number,
+//   country: string
+// }
+
+
 export interface Listings {
+  id: number,
   name: string,
-  status: string,
-  noOfBedrooms: number,
-  noOfBathrooms: number,
-  location: string
+  address: string,
+  state: string,
+  country: string,
+  pictures: Array<Pictures>
 }
