@@ -83,7 +83,7 @@ export class ShortletComponent implements OnInit {
     });
   }
 
-  //to display shortlet
+  //to diplay hortlet
   displayShortlet(id: number) {
     this.showShortlet = false;
     this.dataStorage.displayShortlet(id).subscribe(
@@ -104,6 +104,7 @@ export class ShortletComponent implements OnInit {
         }
 
         this.calculateBill(); //details of shortlet from API
+        // console.log(this.shortletPrice = response.price)
         this.shortletPictures = response.pictures; //pictures of shortlet from API
         this.disableReserveDate();
         this.showShortlet = true;
@@ -116,7 +117,6 @@ export class ShortletComponent implements OnInit {
     this.showAmenities != this.showAmenities;
   }
 
-  //to effect date change in angular material date picker
   trialM(e) {
     this.fetchDateSelected();
     this.disableReserveDate();
