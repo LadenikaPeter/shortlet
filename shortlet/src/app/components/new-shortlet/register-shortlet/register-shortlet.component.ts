@@ -18,7 +18,6 @@ export class RegisterShortletComponent {
   step: any = 1;
   newShortlet: NewShortlet;
   imagePreview: any;
-  savedFormData: any;
 
   username: string;
   user_email: string;
@@ -101,6 +100,7 @@ export class RegisterShortletComponent {
     this.step = this.step - 1;
   }
 
+<<<<<<< HEAD
   keyPress(event: any) {
 
     // const pattern = /[0-9\+\-\ ]/;
@@ -114,24 +114,20 @@ export class RegisterShortletComponent {
     } 
   }
 
+=======
+  //function to handle image uploads and convert to base64
+>>>>>>> a60e7a6b03757b8830b1ded2b10c8010e1dab35d
   onImageUpload(event: any) {
-    const selectedFiles = event.target.files;
-    const picturesArray = this.myForm.get('pictures') as FormArray;
-    
-    for (let i = 0; i < selectedFiles.length; i++) {
-      const file = selectedFiles[i];
-      const reader = new FileReader();
-  
-      reader.onload = () => {
-        const base64 = reader.result as string;
-        this.imagePreview = base64;
-        picturesArray.push(new FormControl(base64));
-      };
-  
-      reader.readAsDataURL(file);
-    }
+    this.pictures = event.target.files[0];
+    const reader = new FileReader(); // to read content of files
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      this.imagePreview = base64;
+      const picturesArray = this.myForm.get('pictures') as FormArray;
+      picturesArray.push(new FormControl(base64)); //push pictures to the array
+    };
+    reader.readAsDataURL(this.pictures);
   }
-  
 
   // getSafeUrl(url: string) {
   //   return this.sanitizer.bypassSecurityTrustUrl(url);
