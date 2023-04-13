@@ -10,19 +10,19 @@
 
   <div class="parent">
     <div class="div1">
-      <img src="{{ shortletPictures[0].url }}" alt="apartment-pic" />
+      <img src="{{ shortletPictures[0]?.url }}" alt="apartment-pic" />
     </div>
     <div class="div2">
-      <img src="{{ shortletPictures[1].url }}" alt="apartment-pic" />
+      <img src="{{ shortletPictures[1]?.url }}" alt="apartment-pic" />
     </div>
     <div class="div3">
-      <img src="{{ shortletPictures[2].url }}" alt="apartment-pic" />
+      <img src="{{ shortletPictures[2]?.url }}" alt="apartment-pic" />
     </div>
     <div class="div4">
-      <img src="{{ shortletPictures[3].url }}" alt="apartment-pic" />
+      <img src="{{ shortletPictures[3]?.url }}" alt="apartment-pic" />
     </div>
     <div class="div5">
-      <img src="{{ shortletPictures[4].url }}" alt="apartment-pic" />
+      <img src="{{ shortletPictures[4]?.url }}" alt="apartment-pic" />
     </div>
   </div>
   <!-- flex -->
@@ -63,8 +63,12 @@
         <div class="row">
           <div class="col-md-6" *ngFor="let item of amenities">{{ item }}</div>
         </div>
-        <div></div>
         <hr />
+        <h4 style="font-weight: 600">
+          <span style="color: #ff0066">HM</span>Cover
+        </h4>
+        Every booking includes free protection from Host cancellations, listing
+        inaccuracies, and other issues like trouble checking in.
       </div>
     </div>
     <div class="col-md-4">

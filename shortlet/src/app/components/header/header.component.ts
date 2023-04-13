@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { user } from '@angular/fire/auth';
-import { Subscription, map, take } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
+import { Subscription, filter, map, take } from 'rxjs';
 import { UserRole } from 'src/app/Model/user-role.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { HandlingClosingProfileTab } from 'src/app/services/handling-profile.service';
@@ -17,14 +18,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
   closeProfileDivSubscription: Subscription;
   isProfileClicked: boolean = false;
   isUserAdmin: any;
+  isUseronAdminPage: boolean;
   // switchTextClick :boolean =false
 
   constructor(
     private authS: AuthService,
-    private closeTab: HandlingClosingProfileTab
+    private closeTab: HandlingClosingProfileTab,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.router.events
+      .pipe(
+        filter(
+          (event): event is NavigationEnd => event instanceof NavigationEnd
+        )
+      )
+      .subscribe((event: NavigationEnd) => {
+        // console.log(event.url);
+        if (event.url === '/admin') {
+          this.isUseronAdminPage = true;
+        } else {
+          this.isUseronAdminPage = false;
+        }
+      });
+
     this.isAuth_Subcription = this.authS.user.subscribe((user) => {
       this.isAuthenticated = user;
     });

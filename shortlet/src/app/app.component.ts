@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
-import { HandlingClosingProfileTab } from './services/handling-profile.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +7,7 @@ import { HandlingClosingProfileTab } from './services/handling-profile.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private authS: AuthService,
-    private closeTab: HandlingClosingProfileTab
-  ) {}
+  constructor(private authS: AuthService) {}
   title = 'shortlet';
 
   ngOnInit(): void {

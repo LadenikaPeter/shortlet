@@ -65,7 +65,9 @@
             <a class="nav-link" routerLink="host/shortlets">Rent your home</a>
           </li>
           <li *ngIf="isUserAdmin" class="nav-item" routerLink="/admin">
-            <a class="nav-link">Switch to admin</a>
+            <a class="nav-link">{{
+              isUseronAdminPage ? "Switch to user" : "Switch to admin"
+            }}</a>
           </li>
           <li class="nav-item" (click)="onLogOut()">
             <a class="nav-link" style="color: red">Log out</a>
@@ -79,7 +81,7 @@
         (click)="switchToAdmin()"
         routerLink="/admin"
       >
-        Switch to admin
+        {{ isUseronAdminPage ? "Switch to user" : "Switch to admin" }}
       </p>
       <div class="float-end links removemine">
         <div

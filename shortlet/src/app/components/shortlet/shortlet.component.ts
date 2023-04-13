@@ -88,6 +88,7 @@ export class ShortletComponent implements OnInit {
     this.showShortlet = false;
     this.dataStorage.displayShortlet(id).subscribe(
       (response) => {
+        console.log(response);
         // console.log((this.shortletData = response));
         this.shortletData = response;
         this.overallArray = response.reservations;
@@ -200,8 +201,12 @@ export class ShortletComponent implements OnInit {
   }
 
   myHolidayFilter = (d: Date): boolean => {
-    const time = d.getTime();
-    return !this.myHolidayDates.find((x) => x.getTime() == time);
+    if (d) {
+      const time = d.getTime();
+      return !this.myHolidayDates.find((x) => x.getTime() == time);
+    } else {
+      return true;
+    }
   };
 
   increment() {
