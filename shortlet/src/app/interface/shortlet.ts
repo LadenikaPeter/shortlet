@@ -81,8 +81,11 @@ export interface NewShortlet {
 export interface Listings {
   id: number,
   name: string,
+  noOfBedrooms: number,
+  noOfBathrooms: number,
+  noOfBeds:number,
   address: string,
   state: string,
   country: string,
-  pictures: Array<Pictures>
+  pictures: Pictures
 }

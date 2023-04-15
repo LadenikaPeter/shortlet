@@ -8,6 +8,7 @@ import { NewShortlet } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { NotificationService } from 'src/app/services/notifications.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-register-shortlet',
@@ -17,13 +18,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RegisterShortletComponent {
   step: any = 1;
   newShortlet: NewShortlet;
+  isAuthenticated;
+  isAuth_Subcription: Subscription;
+  
   imagePreview: any;
 
   username: string;
   user_email: string;
 
   myForm: FormGroup;
-  pictures: File
+  picture: File;
+  pictures: FormArray;
 
   constructor(
     // private sanitizer: DomSanitizer,
@@ -35,7 +40,6 @@ export class RegisterShortletComponent {
 
 
   ngOnInit() {
-
     //reactive form
     this.myForm = new FormGroup({
       name: new FormControl(''),
@@ -58,9 +62,13 @@ export class RegisterShortletComponent {
       }),
       pictures: new FormArray([])
     });
-
+    
+    this.setPictureFormArray();
+    this.addPicture();
+    
+    
     //google user info displays
-    this.authS.user.subscribe((user: User) => {
+    this.isAuth_Subcription = this.authS.user.subscribe((user: User) => {
       if (user) {
         this.username = user.displayName;
         this.user_email = user.email;
@@ -69,27 +77,32 @@ export class RegisterShortletComponent {
     });
   }
 
+
+  googleAuth() {
+    this.authS.loginWithGoogle();
+  }
+  
   onSubmit(form: FormGroup) {
-    console.log('Valid?', form.valid); // true or false
-    // this.notification.successMessage("you have added home, support will verify you home in a few minutes");
+    // console.log('Valid?', form.valid); // true or false
 
-    ///timeout function that redirects back to the /host/shortlets of the new homes after a user successfully submits the form
-    // setTimeout(()=>{
-    //   this.router.navigate(['/host/shortlets']);
-    // }, 3000)
-
-    let formData = form.value
-    // formData.append('image', this.pictures);
+    let formData = this.myForm.value
+    console.log(formData)
 
     //api service called 
-    this.dataStorage.registerNewShortlet(formData, this.user_email).subscribe(
-      (response) => {
-        console.log((this.newShortlet = response));
-        // function to return all users, show error if usernot registered to be implemented
-      },
-      (error) => console.log(error)
-    )
-    console.log(this.myForm.value)
+    // this.dataStorage.registerNewShortlet(formData, this.user_email).subscribe(
+    //   (response) => {
+    //     console.log((this.newShortlet = response));
+    //     // function to return all users, show error if usernot registered to be implemented
+    //   },
+    //   (error) => console.log(error)
+    // )
+    // this.notification.successMessage("You have successfully added a home");
+
+    // //timeout function that redirects back to the /user-listings of the new homes after a user successfully submits the form
+    // setTimeout(()=>{
+    //   this.router.navigate(['/user-listings']);
+    // }, 3000)
+    // console.log(this.myForm.value)
   }
 
   next () {
@@ -100,7 +113,6 @@ export class RegisterShortletComponent {
     this.step = this.step - 1;
   }
 
-<<<<<<< HEAD
   keyPress(event: any) {
 
     // const pattern = /[0-9\+\-\ ]/;
@@ -114,22 +126,48 @@ export class RegisterShortletComponent {
     } 
   }
 
-=======
   //function to handle image uploads and convert to base64
->>>>>>> a60e7a6b03757b8830b1ded2b10c8010e1dab35d
-  onImageUpload(event: any) {
-    this.pictures = event.target.files[0];
-    const reader = new FileReader(); // to read content of files
-    reader.onload = () => {
-      const base64 = reader.result as string;
-      this.imagePreview = base64;
-      const picturesArray = this.myForm.get('pictures') as FormArray;
-      picturesArray.push(new FormControl(base64)); //push pictures to the array
-    };
-    reader.readAsDataURL(this.pictures);
+  onImageUpload(event: any, i) {
+    if(event.target.files[0]){
+      console.log(event.target.files[0])
+      this.pictures.at(i).get('filename').setValue(event.target.files[0].name);
+      console.log(this.pictures.value)
+      const reader = new FileReader(); // to read content of files
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        this.imagePreview = base64;
+        console.log(this.imagePreview)
+        const picturesArray = this.myForm.get('pictures') as FormArray;
+        picturesArray.at(i).get('url').setValue(base64); //push pictures to the array
+      };
+      // reader.readAsDataURL(this.picture);
+    }
   }
+
+  addPicture(){
+    for(let i=0;i<5;i++){
+      this.pictures.push(
+        new FormGroup({
+          image: new FormControl(''),
+          filename: new FormControl(''),
+          url: new FormControl('')
+        })
+      )
+    }
+  }
+
 
   // getSafeUrl(url: string) {
   //   return this.sanitizer.bypassSecurityTrustUrl(url);
   // }
+
+
+  // ngOnDestroy(): void {
+  //   this.isAuth_Subcription.unsubscribe();
+  // }
+
+  setPictureFormArray(){
+    this.myForm.setControl('pictures', new FormArray([]))
+    this.pictures = this.myForm.get('pictures') as FormArray;
+  }
 }

@@ -39,6 +39,9 @@ export class DataStorageService {
       },
     };
 
+    console
+    .log(formData)
+
     return this.http.post<NewShortlet>(
       `http://localhost:8080/addHome/`,
       formData,
@@ -46,10 +49,10 @@ export class DataStorageService {
     );
   }
 
-  getListing(){
+  getListing(email){
     const options = {
       headers: {
-        user_email: 'sami@gmail.com',
+        user_email: email,
       },
     };
 

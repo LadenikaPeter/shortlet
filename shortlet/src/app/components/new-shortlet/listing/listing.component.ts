@@ -24,7 +24,10 @@ export class ListingComponent {
   displayedColumns: string[] = [
   'name',
   'address',
-  'state',
+  'noOfBathrooms',
+  'noOfBedrooms',
+  'maxNoOfGuests',
+  'noOfBeds',
   'country'
 ];
   dataSource: MatTableDataSource<UserData>;
@@ -32,25 +35,7 @@ export class ListingComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
  
-  constructor(private dataStorage: DataStorageService, private authS: AuthService){
-    // console.log('con')
-
-    this.dataStorage.getListing().subscribe(
-      (response) => {
-        this.newListing = response
-        this.dataSource = new MatTableDataSource(this.newListing);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-    
-        // console.log((this.newListing = response));
-       
-        
-        // function to return all users, show error if usernot registered to be implemented
-      },
-      (error) => console.log(error)
-    )
-
-  }
+  constructor(private dataStorage: DataStorageService, private authS: AuthService){}
 
   ngOnInit() {
     // console.log('ng')
@@ -59,9 +44,24 @@ export class ListingComponent {
       if (user) {
         this.username = user.displayName;
         this.user_email = user.email;
-        // console.log(this.username);
+        
       }
     });
+
+    this.dataStorage.getListing(this.user_email).subscribe(
+      (response) => {
+        this.newListing = response
+        this.dataSource = new MatTableDataSource(this.newListing);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    
+        console.log((this.newListing = response));
+       
+        
+        // function to return all users, show error if usernot registered to be implemented
+      },
+      (error) => console.log(error)
+    )
 
 
    
