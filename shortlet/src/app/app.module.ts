@@ -26,6 +26,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AuthServiceInterceptor } from './auth/auth.interceptor.service';
 
@@ -35,14 +39,16 @@ import { AdminModule } from './components/admin/admin.module';
 import { NotFoundModule } from './components/not-found/not-found.module';
 import { HomeModule } from './components/home/home.module';
 import { ShortletModule } from './components/shortlet/shortlet-module.module';
+import { NewShortletModule } from './components/new-shortlet/new-shortlet.module';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    NewShortletComponent,
-    RegisterShortletComponent,
     SearchBarComponent,
     ClickOutsideDirective,
   ],
@@ -59,12 +65,17 @@ import { ShortletModule } from './components/shortlet/shortlet-module.module';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
     TripsModule,
     ProfileModule,
     AdminModule,
     NotFoundModule,
     HomeModule,
     ShortletModule,
+    NewShortletModule,
     ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

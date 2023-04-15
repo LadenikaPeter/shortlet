@@ -40,6 +40,9 @@
     margin-bottom: 0.5rem;
   }
   
+  .login {
+    margin-top: 2rem;
+  }
 
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button { 
