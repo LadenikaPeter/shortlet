@@ -60,6 +60,14 @@ const routes: Routes = [
   {
     path: 'host/shortlets/new',
     component: RegisterShortletComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'user-listings',
+    component: ListingComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
   //mogen will handle this
 

@@ -1,0 +1,162 @@
+
+h1 {
+    padding: 1rem 0;
+}
+
+
+
+::ng-deep .mat-mdc-tab .mdc-tab__text-label,
+.mat-mdc-tab-link .mdc-tab__text-label {
+  color: #484848;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.btn {
+  background-color: #ff0066;
+  border: none;
+}
+
+/* table css */
+
+.mat-elevation-z8 {
+  /* margin-bottom: 50px; */
+  overflow: auto;
+}
+
+mat-paginator {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: #484848;
+}
+
+::ng-deep .mat-mdc-tab .mdc-tab__text-label,
+.mat-mdc-tab-link .mdc-tab__text-label {
+    color: #484848;
+
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #eaeaea;
+}
+
+::ng-deep
+  .mdc-text-field:not(.mdc-text-field--disabled)
+  .mdc-text-field__input {
+  color: #484848;
+}
+
+.mat-focused ::placeholder {
+  color: #484848;
+}
+
+.mat-sort-header {
+  color: #484848;
+}
+
+.mat-mdc-table {
+  background-color: transparent;
+}
+
+.mat-mdc-paginator {
+  color: #484848;
+  background-color: #eaeaea;
+}
+
+.mdc-icon-button {
+  color: #484848;
+}
+
+::ng-deep .mat-mdc-select-value {
+  color: #484848;
+}
+
+::ng-deep .mat-mdc-select-arrow {
+  color: #484848;
+}
+
+::ng-deep .mat-mdc-paginator-icon {
+  fill: #484848;
+}
+
+::ng-deep .mat-mdc-icon-button {
+  --mat-mdc-button-persistent-ripple-color: #ea4335;
+  --mat-mdc-button-ripple-color: rgba(255, 255, 255, 0.1);
+}
+
+.mat-mdc-header-row {
+  background-color: #eaeaea;
+}
+
+::ng-deep .mat-mdc-table .mdc-data-table__row:nth-child(even) {
+  background-color: #fff5f4;
+}
+
+::ng-deep .mat-mdc-table .mdc-data-table__row:nth-child(even):hover {
+  background-color: #fff5f4;
+}
+
+.mat-mdc-tab-body-content {
+  margin-top: 20px;
+}
+
+/* pending req table */
+
+.rejectbtn {
+  background-color: #eaeaea;
+  color: #484848;
+  margin-right: 6px;
+}
+
+.acceptbtn {
+  background-color: #ff0066;
+  color: white;
+}
+
+@media only screen and (max-width: 768.98px) {
+  .rejectbtn {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-right: 0;
+  }
+
+  .acceptbtn {
+    margin-bottom: 6px;
+  }
+}
+
+@media only screen and (max-width: 425.98px) {
+  .btn {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+
+/* mg */
+
+.mat-column-maxNoOfGuests,
+.mat-column-noOfBathrooms,
+.mat-column-noOfBedrooms,
+.mat-column-noOfBeds{
+  width: 10%;
+  padding: 10px 16px;
+  
+}

@@ -27,14 +27,16 @@
       
             <div class="form-group">
               <label>Country</label>
-              <input formControlName="country" type="text" class="form-control" required />
+              <select formControlName="country">
+                <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
+              </select>
             </div>
           </div>
 
       <div *ngIf="step === 2">
         <div class="form-group">
           <label>Guest Capacity</label>
-          <input formControlName="maxNoOfGuests" type="number" class="form-control" required />
+          <input formControlName="maxNoOfGuests" type="number" class="form-control" (keypress)="keyPress($event)" required />
         </div>
   
         <div class="form-group">
@@ -130,21 +132,26 @@
             </div>
         </div>
 
-      <div formArrayName="images" *ngIf="step == 3">
+      <div formArrayName="pictures" *ngIf="step == 3">
         <label>Upload Pictures</label>
-        <input
-          type="file"
-          accept=".png, .jpg, .jpeg"
-          (change)="onImageUpload($event)"
-          multiple
-          required
-        />
+        <div *ngFor="let image of pictures.controls; let i = index">
+          <div [formGroupName]="i">
+            <input 
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              (change)="onImageUpload($event, i)"
+              required
+              formControlName="image"
+            />
+          </div>
+        </div>
+
       </div>
 
       <div class="control">
         <div class="controls">
-            <button *ngIf="step != 1" (click)="previous()">Previous</button>
-            <button *ngIf="step != 4" (click)="next()">Next</button>
+            <button *ngIf="step != 1" (click)="previous()" type="button">Previous</button>
+            <button *ngIf="step != 4" (click)="next()" type="button">Next</button>
 
 
         <button [disabled]="!myForm.valid" type="submit" *ngIf="step == 4" id="button-2 slide" routerLink="listing">
@@ -156,63 +163,21 @@
     </form>
   </div>
 
-  <h1>{{ user_email }}</h1>
+
+ 
 </div>
 
-<!-- 
-<div class="container">
-    <h2>
-       No. Listings
-    </h2>
-
-    <div class="heading">
-        <p>Listing</p>
-        <p>Status</p>
-        <p>TO DO</p>
-        <p>Instant BOOK</p>
-        <p>Bedrooms<p>
-        <p>Beds</p>
-        <p>Baths</p>
-        <p>Location</p>
-        <p>Last modified</p>
-    </div>
-
-</div>
-
-
-<!-- 
-<div class="container">
-    <div>
-        <h2>
-            Select the amenities your house has:
-        </h2>
-        <form >
-            <label for="">
-                <input type="checkbox" name="" id="">
-                Wifi
-            </label>
-            <label for="">
-                <input type="checkbox" name="" id="">
-                Gym
-            </label>
-            <label for="">
-                <input type="checkbox" name="" id="">
-                Parking
-            </label>
-            <label for="">
-                <input type="checkbox" name="" id="">
-                Swimming Pool
-            </label>
-            <label for="">
-                <input type="checkbox" name="" id="">
-                Wifi
-            </label>
-
-            <label for="">
-                <input type="checkbox" name="" id="">
-                Wifi
-            </label>
-        </form>
-        
-    </div>
+<!-- <div class="container" *ngIf="!username">
+  <div class="login">
+    <h5>Log in or sign up to add your home</h5>
+    <button class="social_button w-100" (click)="googleAuth()">
+      Continue with
+      <span>
+        <span id="g">G</span> <span id="o_first">o</span>
+        <span id="o_second">o</span> <span id="g_second">g</span>
+        <span id="l">l</span> <span id="e">e</span>
+      </span>
+    </button>
+    google logo
+  </div>
 </div> -->

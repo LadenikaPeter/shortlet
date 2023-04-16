@@ -53,9 +53,22 @@
         </div>
         <hr />
 
-        <p>
+        <!-- <p>
           {{ shortletData.description }}
-        </p>
+        </p> -->
+
+
+
+        <div *ngIf="showFullDescription">
+          <p>{{ shortletData.description }}</p>
+          <button (click)="toggleDescription()" id="see-more">See less</button>
+        </div>
+        
+        <div *ngIf="!showFullDescription">
+          <p>{{ shortletData.description.substring(0, 200) }}...</p>
+          <button (click)="toggleDescription()" id="see-more">See more</button>
+        </div>
+
 
         <hr />
         <h4>What this place offers</h4>

@@ -39,10 +39,26 @@ export class DataStorageService {
       },
     };
 
+    console
+    .log(formData)
+
     return this.http.post<NewShortlet>(
       `http://localhost:8080/addHome/`,
       formData,
       options
+    );
+  }
+
+  getListing(email){
+    const options = {
+      headers: {
+        user_email: email,
+      },
+    };
+
+    return this.http.get<Listings>(
+      `http://localhost:8080/user/listings/`,
+     options
     );
   }
 
@@ -153,6 +169,8 @@ export class DataStorageService {
     );
   }
 
+
+
   private dateConverterforCheckIn(reserveDate: Date) {
     const date = new Date(reserveDate);
 
@@ -188,5 +206,13 @@ export class DataStorageService {
   //     `http://localhost:8080/home/?house_id=${id}`
   //   );
   // }
+
+  //countries
+  getCountry(){
+
+
+    return this.http.get<any[]>('https://restcountries.com/v2/all');
+
+  }
 
 }
