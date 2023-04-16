@@ -64,7 +64,7 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="host/shortlets">Rent your home</a>
           </li>
-          <li *ngIf="isUserAdmin" class="nav-item" routerLink="/admin">
+          <li *ngIf="isUserAdmin" class="nav-item" (click)="onSwitchRole()">
             <a class="nav-link">{{
               isUseronAdminPage ? "Switch to user" : "Switch to admin"
             }}</a>
@@ -75,12 +75,7 @@
         </ul>
       </div>
 
-      <p
-        *ngIf="isUserAdmin"
-        class="Admin removemine"
-        (click)="switchToAdmin()"
-        routerLink="/admin"
-      >
+      <p *ngIf="isUserAdmin" class="Admin removemine" (click)="onSwitchRole()">
         {{ isUseronAdminPage ? "Switch to user" : "Switch to admin" }}
       </p>
       <div class="float-end links removemine">
@@ -155,7 +150,9 @@
   </ul>
   <hr />
   <ul style="list-style-type: none; padding: 0">
-    <li (click)="toggleProfileDiv()" routerLink="host/shortlets">Rent your home</li>
+    <li (click)="toggleProfileDiv()" routerLink="host/shortlets">
+      Rent your home
+    </li>
     <li (click)="toggleProfileDiv()">Help</li>
     <li (click)="toggleProfileDiv(); onLogOut()" style="color: red">Log out</li>
   </ul>

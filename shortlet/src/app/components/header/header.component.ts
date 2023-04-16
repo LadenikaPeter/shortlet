@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isProfileClicked: boolean = false;
   isUserAdmin: any;
   isUseronAdminPage: boolean;
+  currentUrl: string;
   // switchTextClick :boolean =false
 
   constructor(
@@ -36,6 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       )
       .subscribe((event: NavigationEnd) => {
         // console.log(event.url);
+        this.currentUrl = event.url;
         if (event.url === '/admin') {
           this.isUseronAdminPage = true;
         } else {
@@ -92,7 +94,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authS.logOut();
   }
 
-  switchToAdmin() {
-    // this.switchTextClick = !this.switchTextClick
+  onSwitchRole() {
+    if (this.currentUrl === '/admin') {
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/admin']);
+    }
   }
 }
