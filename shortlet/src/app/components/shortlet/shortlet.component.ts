@@ -105,7 +105,9 @@ export class ShortletComponent implements OnInit {
 
         this.calculateBill(); //details of shortlet from API
         // console.log(this.shortletPrice = response.price)
-        this.shortletPictures = response.pictures; //pictures of shortlet from API
+        this.shortletPictures = response.pictures;
+        
+        console.log(this.shortletPictures)//pictures of shortlet from API
         this.disableReserveDate();
         this.showShortlet = true;
       },
@@ -237,5 +239,16 @@ export class ShortletComponent implements OnInit {
           }, 2500);
         });
     }
+  }
+
+
+
+  showFullDescription = false;
+  descriptionLimit = 200;
+
+  // ...
+
+  toggleDescription() {
+    this.showFullDescription = !this.showFullDescription;
   }
 }

@@ -207,6 +207,26 @@ mat-label {
   border-color: #4a4a4a;
 }
 
+
+#see-more {
+  display: inline-block;
+  background-color: #ff0066;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.see-more:hover {
+  background-color: #ff0066;
+}
+
+
 .send_comment {
   margin-top: 10px;
   width: 20%;
@@ -271,3 +291,6 @@ mat-label {
     padding: 10px 80px;
   }
 }
+
+
+
