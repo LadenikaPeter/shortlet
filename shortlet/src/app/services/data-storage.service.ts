@@ -207,4 +207,12 @@ export class DataStorageService {
   //   );
   // }
 
+  //countries
+  getCountry(){
+
+
+    return this.http.get<any[]>('https://restcountries.com/v2/all');
+
+  }
+
 }
