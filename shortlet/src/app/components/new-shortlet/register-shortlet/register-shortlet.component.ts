@@ -55,19 +55,21 @@ export class RegisterShortletComponent {
       description: new FormControl(''),
       address: new FormControl(''),
       country: new FormControl(''),
+      cleaningFee: new FormControl(''),
       price: new FormControl(''),
       maxNoOfGuests: new FormControl(''),
       noOfBedrooms: new FormControl(),
+      noOfBeds: new FormControl(''),
       noOfBathrooms: new FormControl(),
       propertyType: new FormControl(''),
       houseType: new FormControl(''),
       amenities: new FormGroup({
-        gym: new FormControl(false),
+        bbq_grill: new FormControl(false),
         pool: new FormControl(false),
         wifi: new FormControl(false),
         patio: new FormControl(false),
         washer: new FormControl(false),
-        airCondition: new FormControl(false),
+        air_condition: new FormControl(false),
         work_space: new FormControl(false),
         fireplace: new FormControl(false),
         first_aid_kit: new FormControl(false),
@@ -153,7 +155,7 @@ export class RegisterShortletComponent {
       reader.onload = () => {
         const base64 = reader.result as string;
         this.imagePreview = base64;
-        console.log(this.imagePreview);
+        // console.log(this.imagePreview);
 
         const picturesArray = this.myForm.get('pictures') as FormArray;
         picturesArray.at(i).get('url').setValue(base64); //push pictures to the array

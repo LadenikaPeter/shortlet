@@ -11,11 +11,19 @@
           margin-right: 30px;
         "
         routerLink="/user-listings"
+        *ngIf="isUserAuth"
       >
         View Listings
       </p>
       <p style="margin-bottom: 0px; line-height: 36px">Ready to shortlet it?</p>
-      <button routerLink="new">Setup</button>
+      <button
+        *ngIf="!isUserAuth"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        login to setup
+      </button>
+      <button *ngIf="isUserAuth" routerLink="new">Setup</button>
     </div>
   </div>
 
@@ -73,4 +81,46 @@
       </div>
     </div>
   </section>
+</div>
+
+<!-- modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Log in or sign up
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h5>Welcome to Logo name</h5>
+        <div class="social_buttons">
+          <button
+            class="w-100"
+            (click)="authenticateWithGoogle()"
+            data-bs-dismiss="modal"
+          >
+            Continue with
+            <span>
+              <span id="g">G</span> <span id="o_first">o</span>
+              <span id="o_second">o</span> <span id="g_second">g</span>
+              <span id="l">l</span> <span id="e">e</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

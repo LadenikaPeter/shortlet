@@ -34,9 +34,9 @@
           <h2>Entire home hosted by {{ shortletData.users.name }}</h2>
           <div style="display: flex; gap: 0.5rem">
             <p>{{ shortletData.maxNoOfGuests }} guests</p>
-            <p>{{ shortletData.noOfBedrooms }} bedrooms</p>
-            <p>{{ shortletData.noOfBeds }} beds</p>
-            <p>{{ shortletData.noOfBathrooms }} baths</p>
+            <p>· {{ shortletData.noOfBedrooms }} bedrooms</p>
+            <p>· {{ shortletData.noOfBeds }} beds</p>
+            <p>· {{ shortletData.noOfBathrooms }} baths</p>
           </div>
           <hr />
 
@@ -57,18 +57,15 @@
           {{ shortletData.description }}
         </p> -->
 
-
-
         <div *ngIf="showFullDescription">
           <p>{{ shortletData.description }}</p>
           <button (click)="toggleDescription()" id="see-more">See less</button>
         </div>
-        
+
         <div *ngIf="!showFullDescription">
           <p>{{ shortletData.description.substring(0, 200) }}...</p>
           <button (click)="toggleDescription()" id="see-more">See more</button>
         </div>
-
 
         <hr />
         <h4>What this place offers</h4>
