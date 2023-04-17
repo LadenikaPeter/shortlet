@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'src/app/Model/user.model';
 import {
   NgForm,
@@ -35,8 +35,12 @@ export class RegisterShortletComponent {
   user_email: string;
 
   myForm: FormGroup;
-  picture: File;
-  pictures: FormArray;
+  // picture: File;
+  // pictures: FormArray;
+  // base64Pictures: any = [];
+  @ViewChild('shortletFile', /* TODO: add static flag */ { read: ElementRef })
+  shortletFile: ElementRef;
+  shortletDocumentFile: Array<any> = new Array();
 
   countries: any[] = [];
 
@@ -77,8 +81,8 @@ export class RegisterShortletComponent {
       pictures: new FormArray([]),
     });
 
-    this.setPictureFormArray();
-    this.addPicture();
+    // this.setPictureFormArray();
+    // this.addPicture();
 
     // get countries list - step 3
     this.dataStorage.getCountry().subscribe((response) => {
@@ -102,10 +106,24 @@ export class RegisterShortletComponent {
     this.authS.loginWithGoogle();
   }
 
+  removeFile(i) {
+    this.shortletDocumentFile.splice(i, 1);
+  }
+
+  onFileSelect(event) {
+    this.onImageUpload(event.target.files[0]);
+  }
   onSubmit(form: FormGroup) {
     // console.log('Valid?', form.valid); // true or false
 
+    // let formData = this.myForm.value
+
+    this.myForm.patchValue({
+      pictures: this.shortletDocumentFile,
+    });
+
     let formData = this.myForm.value;
+
     console.log(formData);
 
     // api service called
@@ -145,68 +163,72 @@ export class RegisterShortletComponent {
   }
 
   //function to handle image uploads and convert to base64
-  onImageUpload(event: any, i) {
-    if (event.target.files[0]) {
-      console.log(event.target.files[0]);
-      this.pictures.at(i).get('filename').setValue(event.target.files[0].name);
-      console.log(this.pictures.value);
-
-      const reader = new FileReader(); // to read content of files
-      reader.onload = () => {
-        const base64 = reader.result as string;
-        this.imagePreview = base64;
-        // console.log(this.imagePreview);
-
-        const picturesArray = this.myForm.get('pictures') as FormArray;
-        picturesArray.at(i).get('url').setValue(base64); //push pictures to the array
-      };
-
-      reader.readAsDataURL(event.target.files[0]);
-    }
-  }
-
   // onImageUpload(event: any, i) {
-  //   if(event.target.files[0]){
+  //   if (event.target.files[0]) {
   //     console.log(event.target.files[0]);
   //     this.pictures.at(i).get('filename').setValue(event.target.files[0].name);
   //     console.log(this.pictures.value);
-  //     const reader = new FileReader();
+
+  //     const reader = new FileReader(); // to read content of files
   //     reader.onload = () => {
   //       const base64 = reader.result as string;
   //       this.imagePreview = base64;
-  //       console.log(this.imagePreview);
+  //       // console.log(this.imagePreview);
+
   //       const picturesArray = this.myForm.get('pictures') as FormArray;
-  //       picturesArray.at(i).get('url').setValue(base64.split(',')[1]); //push pictures to the array
+  //       picturesArray.at(i).get('url').setValue(base64); //push pictures to the array
   //     };
+
   //     reader.readAsDataURL(event.target.files[0]);
   //   }
   // }
 
-  // onImageUpload(event: any, i) {
-  //   if(event.target.files[0]){
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       const base64 = reader.result as string;
-  //       const base64WithoutHeader = base64.split(',')[1];
-  //       console.log(base64WithoutHeader);
-  //       const picturesArray = this.myForm.get('pictures') as FormArray;
-  //       picturesArray.at(i).get('url').setValue(base64WithoutHeader); // push pictures to the array
-  //     };
-  //     reader.readAsDataURL(event.target.files[0]);
-  //   }
-  // }
+  onImageUpload(fileDetail) {
+    let file: File = fileDetail;
+    let fileName = file.name;
 
-  addPicture() {
-    for (let i = 0; i < 5; i++) {
-      this.pictures.push(
-        new FormGroup({
-          image: new FormControl(''),
-          filename: new FormControl(''),
-          url: new FormControl(''),
-        })
-      );
+    const toBase64 = (file) =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+
+    toBase64(file).then((data) => {
+      this.imagePreview = data;
+      const imageObject = {
+        image: this.imagePreview,
+        filename: fileName,
+        fileType: this.getFileType(file.type),
+        url: this.imagePreview,
+      };
+      console.log(imageObject);
+      this.shortletDocumentFile.push(imageObject);
+      console.log(this.shortletDocumentFile);
+    });
+  }
+
+  getFileType(type) {
+    if (type.includes('png') || type.includes('jpg') || type.includes('jpeg')) {
+      return 'jpg';
+    } else {
+      return false;
     }
   }
+
+  // addPicture() {
+  //   for (let i = 0; i < 5; i++) {
+  //     this.pictures.push(
+  //       new FormGroup({
+  //         filename: new FormControl(''),
+  //         image: new FormControl(''),
+  //         url: new FormControl(''),
+  //       })
+  //       new FormControl(null, [Validators.required])
+  //     );
+  //   }
+  // }
 
   // getSafeUrl(url: string) {
   //   return this.sanitizer.bypassSecurityTrustUrl(url);
@@ -216,8 +238,8 @@ export class RegisterShortletComponent {
   //   this.isAuth_Subcription.unsubscribe();
   // }
 
-  setPictureFormArray() {
-    this.myForm.setControl('pictures', new FormArray([]));
-    this.pictures = this.myForm.get('pictures') as FormArray;
-  }
+  // setPictureFormArray() {
+  //   this.myForm.setControl('pictures', new FormArray([]));
+  //   this.pictures = this.myForm.get('pictures') as FormArray;
+  // }
 }
