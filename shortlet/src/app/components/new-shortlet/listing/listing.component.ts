@@ -9,33 +9,34 @@ import { User } from 'src/app/Model/user.model';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { UserData } from '../../admin/admin.component';
 
-
-
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
-  styleUrls: ['./listing.component.css']
+  styleUrls: ['./listing.component.css'],
 })
 export class ListingComponent {
   user_email: string;
   username: string;
   newListing: any;
- 
+
   displayedColumns: string[] = [
-  'name',
-  'address',
-  'noOfBathrooms',
-  'noOfBedrooms',
-  'maxNoOfGuests',
-  'noOfBeds',
-  'country'
-];
+    'name',
+    'address',
+    'noOfBathrooms',
+    'noOfBedrooms',
+    'maxNoOfGuests',
+    'noOfBeds',
+    'country',
+  ];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
- 
-  constructor(private dataStorage: DataStorageService, private authS: AuthService){}
+
+  constructor(
+    private dataStorage: DataStorageService,
+    private authS: AuthService
+  ) {}
 
   ngOnInit() {
     // console.log('ng')
@@ -44,33 +45,26 @@ export class ListingComponent {
       if (user) {
         this.username = user.displayName;
         this.user_email = user.email;
-        
       }
     });
 
     this.dataStorage.getListing(this.user_email).subscribe(
       (response) => {
-        this.newListing = response
+        console.log(response);
+        this.newListing = response;
         this.dataSource = new MatTableDataSource(this.newListing);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-    
-        console.log((this.newListing = response));
-       
-        
+
+        // console.log((this.newListing = response));
+
         // function to return all users, show error if usernot registered to be implemented
       },
       (error) => console.log(error)
-    )
-
-
-   
-
+    );
   }
 
-
-  userListings() {
-  }
+  userListings() {}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -81,8 +75,3 @@ export class ListingComponent {
     }
   }
 }
-
-
-
-
-

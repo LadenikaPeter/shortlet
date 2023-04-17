@@ -62,7 +62,19 @@
         <div class="form-group">
           <label>No of Bedrooms</label>
           <input
+            (keypress)="keyPress($event)"
             formControlName="noOfBedrooms"
+            type="number"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>No of Beds</label>
+          <input
+            (keypress)="keyPress($event)"
+            formControlName="noOfBeds"
             type="number"
             class="form-control"
             required
@@ -72,6 +84,7 @@
         <div class="form-group">
           <label>No of Bathrooms</label>
           <input
+            (keypress)="keyPress($event)"
             formControlName="noOfBathrooms"
             type="number"
             class="form-control"
@@ -104,8 +117,20 @@
         </div>
 
         <div class="form-group">
+          <label>Cleaning Fee (NGN)</label>
+          <input
+            (keypress)="keyPress($event)"
+            formControlName="cleaningFee"
+            type="number"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="form-group">
           <label>Price (NGN)</label>
           <input
+            (keypress)="keyPress($event)"
             formControlName="price"
             type="number"
             placeholder="Per Night"
@@ -121,8 +146,8 @@
         <div class="amenities">
           <div>
             <div class="amenity">
-              <input id="gym" type="checkbox" formControlName="gym" />
-              <label for="gym">Gym</label>
+              <input id="gym" type="checkbox" formControlName="bbq_grill" />
+              <label for="bbq grill">BBQ Grill</label>
             </div>
 
             <div class="amenity">
@@ -142,7 +167,7 @@
             </div>
 
             <div class="amenity">
-              <input type="checkbox" formControlName="airCondition" />
+              <input type="checkbox" formControlName="air_condition" />
               <label for="airCondition">Air Condition</label>
             </div>
 
