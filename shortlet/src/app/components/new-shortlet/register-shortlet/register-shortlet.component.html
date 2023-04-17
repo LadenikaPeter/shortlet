@@ -85,6 +85,8 @@
           <select formControlName="houseType" required>
             <option value="" disabled selected>Select your House Type</option>
             <option value="PRIVATE_ROOM">Private Room</option>
+            <option value="WHOLE_HOUSE">Whole House</option>
+            <option value="SHARED_ROOM">Shared Room</option>
           </select>
         </div>
 
@@ -95,6 +97,9 @@
               Select your Property Type
             </option>
             <option value="HOTEL">Hotel</option>
+            <option value="GUESTHOUSE">GuestHouse</option>
+            <option value="CAMPER">Camper</option>
+            <option value="HOUSE">House</option>
           </select>
         </div>
 
@@ -148,18 +153,18 @@
           </div>
           <div>
             <div class="amenity">
-              <input id="gym" type="checkbox" formControlName="patio" />
-              <label for="patio">Patio</label>
+              <input id="gym" type="checkbox" formControlName="first_aid_kit" />
+              <label for="first_aid_kit">First Aid Kit</label>
             </div>
 
             <div class="amenity">
-              <input type="checkbox" formControlName="airCondition" />
-              <label for="airCondition">Air Condition</label>
+              <input type="checkbox" formControlName="fireplace" />
+              <label for="fireplace">Fireplace</label>
             </div>
 
             <div class="amenity">
-              <input type="checkbox" formControlName="washer" />
-              <label for="washer">Washer</label>
+              <input type="checkbox" formControlName="work_space" />
+              <label for="work_space">Work Space</label>
             </div>
           </div>
         </div>

@@ -68,6 +68,9 @@ export class RegisterShortletComponent {
         patio: new FormControl(false),
         washer: new FormControl(false),
         airCondition: new FormControl(false),
+        work_space: new FormControl(false),
+        fireplace: new FormControl(false),
+        first_aid_kit: new FormControl(false),
       }),
       pictures: new FormArray([]),
     });
