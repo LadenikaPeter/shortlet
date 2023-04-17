@@ -29,6 +29,7 @@ public class Apartments {
 
     private String address;
     private String state;
+    @NonNull
     private String country;
     private String continent;
     private String houseRefCode;
@@ -38,7 +39,7 @@ public class Apartments {
     private Status status;
     private int price;
     private int cleaningFee;
-    private int serviceFee;
+    private final int serviceFee = 50;
     private double rating;
 
     private int maxNoOfGuests;
