@@ -47,6 +47,7 @@ export class ShortletComponent implements OnInit {
   myHolidayDates = [];
   mynewArray = [];
   overallArray = [];
+  testArray = [];
 
   UserComment: string = '';
 
@@ -107,8 +108,8 @@ export class ShortletComponent implements OnInit {
         this.calculateBill(); //details of shortlet from API
         // console.log(this.shortletPrice = response.price)
         this.shortletPictures = response.pictures;
-        
-        console.log(this.shortletPictures)//pictures of shortlet from API
+
+        console.log(this.shortletPictures); //pictures of shortlet from API
         this.disableReserveDate();
         this.showShortlet = true;
       },
@@ -186,20 +187,40 @@ export class ShortletComponent implements OnInit {
     // console.log(this.myHolidayDates);
     // const testArray: Array<Date> = [...this.myHolidayDates];
 
+    console.log(this.mynewArray);
+    console.log(new Date(checkIn));
+    console.log(checkOut);
+
     for (let date of this.mynewArray) {
       const newDate = this.dateConverter(date);
-      console.log(newDate);
-      if (
-        new Date(newDate).getTime() === new Date(checkIn).getTime() ||
-        new Date(newDate).getTime() === new Date(checkOut).getTime()
-      ) {
-        console.log(true);
-        this.buttonDisable = true;
-      } else {
-        console.log(false);
-        this.buttonDisable = false;
-      }
+      this.testArray.push(newDate);
     }
+
+    if (
+      this.testArray.indexOf(checkIn) != -1 ||
+      this.testArray.indexOf(checkOut) != -1
+    ) {
+      console.log('it is there');
+      this.buttonDisable = true;
+    } else {
+      console.log('it is not');
+      this.buttonDisable = false;
+    }
+
+    // for (let date of this.mynewArray) {
+    //   const newDate = this.dateConverter(date);
+    //   console.log(newDate);
+    //   if (
+    //     new Date(newDate).getTime() === new Date(checkIn).getTime() ||
+    //     new Date(newDate).getTime() === new Date(checkOut).getTime()
+    //   ) {
+    //     console.log(true);
+    //     this.buttonDisable = true;
+    //   } else {
+    //     console.log(false);
+    //     this.buttonDisable = false;
+    //   }
+    // }
   }
 
   myHolidayFilter = (d: Date): boolean => {
@@ -245,8 +266,6 @@ export class ShortletComponent implements OnInit {
         });
     }
   }
-
-
 
   showFullDescription = false;
   descriptionLimit = 200;

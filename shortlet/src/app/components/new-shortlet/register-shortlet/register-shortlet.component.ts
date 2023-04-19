@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 
 // import { HttpClient } from '@angular/common/http'; // step 1
 
-import { NewShortlet } from 'src/app/interface/shortlet';
+import { NewShortlet, amenities } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { NotificationService } from 'src/app/services/notifications.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -44,12 +44,15 @@ export class RegisterShortletComponent {
 
   countries: any[] = [];
 
+  allowedMimeType: any[] = ['image/png', 'image/jpeg', 'image/jpg'];
+
   constructor(
     // private sanitizer: DomSanitizer,
     private dataStorage: DataStorageService,
     private authS: AuthService,
     private notification: NotificationService,
-    private router: Router
+    private router: Router,
+    private notif: NotificationService
   ) {}
 
   ngOnInit() {
@@ -81,9 +84,6 @@ export class RegisterShortletComponent {
       pictures: new FormArray([]),
     });
 
-    // this.setPictureFormArray();
-    // this.addPicture();
-
     // get countries list - step 3
     this.dataStorage.getCountry().subscribe((response) => {
       this.countries = response.map((country) => {
@@ -113,35 +113,6 @@ export class RegisterShortletComponent {
   onFileSelect(event) {
     this.onImageUpload(event.target.files[0]);
   }
-  onSubmit(form: FormGroup) {
-    // console.log('Valid?', form.valid); // true or false
-
-    // let formData = this.myForm.value
-
-    this.myForm.patchValue({
-      pictures: this.shortletDocumentFile,
-    });
-
-    let formData = this.myForm.value;
-
-    console.log(formData);
-
-    // api service called
-    this.dataStorage.registerNewShortlet(formData, this.user_email).subscribe(
-      (response) => {
-        console.log((this.newShortlet = response));
-        // function to return all users, show error if usernot registered to be implemented
-      },
-      (error) => console.log(error)
-    );
-    this.notification.successMessage('You have successfully added a home');
-
-    //timeout function that redirects back to the /user-listings of the new homes after a user successfully submits the form
-    setTimeout(() => {
-      this.router.navigate(['/user-listings']);
-    }, 3000);
-    console.log(this.myForm.value);
-  }
 
   next() {
     this.step = this.step + 1;
@@ -152,7 +123,6 @@ export class RegisterShortletComponent {
   }
 
   keyPress(event: any) {
-    // const pattern = /[0-9\+\-\ ]/;
     const pattern = /[0-9\ ]/;
 
     let inputChar = String.fromCharCode(event.charCode);
@@ -162,51 +132,41 @@ export class RegisterShortletComponent {
     }
   }
 
-  //function to handle image uploads and convert to base64
-  // onImageUpload(event: any, i) {
-  //   if (event.target.files[0]) {
-  //     console.log(event.target.files[0]);
-  //     this.pictures.at(i).get('filename').setValue(event.target.files[0].name);
-  //     console.log(this.pictures.value);
-
-  //     const reader = new FileReader(); // to read content of files
-  //     reader.onload = () => {
-  //       const base64 = reader.result as string;
-  //       this.imagePreview = base64;
-  //       // console.log(this.imagePreview);
-
-  //       const picturesArray = this.myForm.get('pictures') as FormArray;
-  //       picturesArray.at(i).get('url').setValue(base64); //push pictures to the array
-  //     };
-
-  //     reader.readAsDataURL(event.target.files[0]);
-  //   }
-  // }
+  resetFileInput() {
+    this.shortletFile.nativeElement.reset();
+  }
 
   onImageUpload(fileDetail) {
     let file: File = fileDetail;
-    let fileName = file.name;
 
-    const toBase64 = (file) =>
-      new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
+    if (this.allowedMimeType.indexOf(file.type) != -1) {
+      let fileName =
+        file.name.length > 10 ? file.name.substring(0, 10) + '...' : file.name;
+
+      const toBase64 = (file) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        });
+
+      toBase64(file).then((data) => {
+        this.imagePreview = data;
+        const imageObject = {
+          image: this.imagePreview,
+          filename: fileName,
+          fileType: this.getFileType(file.type),
+          url: this.imagePreview,
+        };
+        console.log(imageObject);
+        this.shortletDocumentFile.push(imageObject);
+        console.log(this.shortletDocumentFile);
       });
-
-    toBase64(file).then((data) => {
-      this.imagePreview = data;
-      const imageObject = {
-        image: this.imagePreview,
-        filename: fileName,
-        fileType: this.getFileType(file.type),
-        url: this.imagePreview,
-      };
-      console.log(imageObject);
-      this.shortletDocumentFile.push(imageObject);
-      console.log(this.shortletDocumentFile);
-    });
+    } else {
+      this.resetFileInput();
+      this.notif.errorMessage('File format not supported');
+    }
   }
 
   getFileType(type) {
@@ -217,29 +177,29 @@ export class RegisterShortletComponent {
     }
   }
 
-  // addPicture() {
-  //   for (let i = 0; i < 5; i++) {
-  //     this.pictures.push(
-  //       new FormGroup({
-  //         filename: new FormControl(''),
-  //         image: new FormControl(''),
-  //         url: new FormControl(''),
-  //       })
-  //       new FormControl(null, [Validators.required])
-  //     );
-  //   }
-  // }
+  onSubmit(form: FormGroup) {
+    if (this.shortletDocumentFile.length < 5) {
+      this.notif.warningMessage('Please Upload 5 pictures');
+    } else {
+      const formData = {
+        ...this.myForm.value,
+        pictures: this.shortletDocumentFile,
+      };
 
-  // getSafeUrl(url: string) {
-  //   return this.sanitizer.bypassSecurityTrustUrl(url);
-  // }
+      // api service called
+      this.dataStorage.registerNewShortlet(formData, this.user_email).subscribe(
+        (response) => {
+          console.log((this.newShortlet = response));
+          // function to return all users, show error if usernot registered to be implemented
+        },
+        (error) => console.log(error)
+      );
+      this.notification.successMessage('You have successfully added a home');
 
-  // ngOnDestroy(): void {
-  //   this.isAuth_Subcription.unsubscribe();
-  // }
-
-  // setPictureFormArray() {
-  //   this.myForm.setControl('pictures', new FormArray([]));
-  //   this.pictures = this.myForm.get('pictures') as FormArray;
-  // }
+      //timeout function that redirects back to the /user-listings of the new homes after a user successfully submits the form
+      setTimeout(() => {
+        this.router.navigate(['/user-listings']);
+      }, 3000);
+    }
+  }
 }

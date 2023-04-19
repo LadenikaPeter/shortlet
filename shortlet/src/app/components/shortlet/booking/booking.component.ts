@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Shortlet } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { NotificationService } from 'src/app/services/notifications.service';
+import { Location } from '@angular/common';
+
 import { PaystackOptions } from 'angular4-paystack';
 
 @Component({
@@ -33,7 +35,8 @@ export class BookingComponent implements OnDestroy, OnInit {
     private dataStorage: DataStorageService,
     private activatedRoute: ActivatedRoute,
     private authS: AuthService,
-    private notif: NotificationService
+    private notif: NotificationService,
+    private _location: Location
   ) {}
 
   ngOnInit() {
@@ -110,6 +113,10 @@ export class BookingComponent implements OnDestroy, OnInit {
 
   paymentCancel() {
     console.log('payment failed');
+  }
+
+  back() {
+    this._location.back();
   }
 
   ngOnDestroy(): void {

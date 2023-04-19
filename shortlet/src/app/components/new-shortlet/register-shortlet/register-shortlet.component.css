@@ -192,3 +192,17 @@ button:disabled {
   margin-top: -2px;
   position: absolute; */
 }
+
+.selected-file {
+  display: flex;
+  text-align: center;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  margin-left: 2rem;
+  font-size: 12px;
+  background-color: #fff;
+  padding: 8px;
+  color: #bbb;
+  cursor: pointer;
+  gap: 1rem;
+}
