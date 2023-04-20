@@ -18,7 +18,6 @@ public class Amenities {
     private boolean washer;
     private boolean free_parking;
     private boolean paid_parking;
-
     private boolean air_condition;
     private boolean work_space;
     private boolean pool;
@@ -34,9 +33,4 @@ public class Amenities {
     private boolean smoke_alarm;
     private boolean first_aid_kit;
     private boolean fire_extinguisher;
-
-
-
-
-
 }
