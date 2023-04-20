@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subscription, filter, map, take } from 'rxjs';
 import { UserRole } from 'src/app/Model/user-role.model';
 import { AuthService } from 'src/app/auth/auth.service';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 import { HandlingClosingProfileTab } from 'src/app/services/handling-profile.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private authS: AuthService,
     private closeTab: HandlingClosingProfileTab,
-    private router: Router
+    private router: Router,
+    private dataS: DataStorageService
   ) {}
 
   ngOnInit(): void {

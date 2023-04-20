@@ -83,7 +83,7 @@ const routes: Routes = [
         (m) => m.NotFoundModule
       ),
   },
-  // { path: '**', redirectTo: '/not-found' },
+  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({
