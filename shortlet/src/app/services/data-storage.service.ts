@@ -127,6 +127,10 @@ export class DataStorageService {
     return this.http.get('http://localhost:8080/user');
   }
 
+  getAllAdmins() {
+    return this.http.get('http://localhost:8080/admin');
+  }
+
   makeUserAdmin(id: number, email: string) {
     return this.http.put(
       `http://localhost:8080/user/update/?user_id=${id}`,

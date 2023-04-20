@@ -48,6 +48,7 @@ export interface RowDataForListingRequest {
 })
 export class AdminComponent implements OnInit, OnDestroy {
   users: any;
+  admins: any;
   requests: any;
   username = '';
   user_email: string;
@@ -56,7 +57,9 @@ export class AdminComponent implements OnInit, OnDestroy {
   hold_acceptListing_Data: RowDataForListingRequest;
   noPendingReq: boolean;
   noUsers: boolean;
+  noAdmins: boolean;
   getAlluserSub: Subscription;
+  getAllAdmins: Subscription;
   pendingReqSub: Subscription;
   userSub: Subscription;
   asyncTabs: Observable<ExampleTab[]>;
@@ -69,12 +72,16 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   dataSource: MatTableDataSource<UserData>;
   dataSource1: MatTableDataSource<RequestData>;
+  // dataSource2: MatTableDataSource<UserData>
 
   @ViewChild('paginator1') paginator1: MatPaginator;
   @ViewChild('sort1') sort1: MatSort;
 
   @ViewChild('paginator2') paginator2: MatPaginator;
   @ViewChild('sort2') sort2: MatSort;
+
+  @ViewChild('paginator3') paginator3: MatPaginator;
+  @ViewChild('sort3') sort3: MatSort;
 
   constructor(
     private dataS: DataStorageService,
@@ -94,7 +101,17 @@ export class AdminComponent implements OnInit, OnDestroy {
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator2;
       this.dataSource.sort = this.sort2;
-      console.log('hello');
+      // console.log('hello');
+    });
+
+    this.getAlluserSub = this.dataS.getAllAdmins().subscribe((res) => {
+      console.log(res);
+      this.admins = res;
+      if (this.admins.length === 0) {
+        this.noAdmins = false;
+      } else {
+        this.noAdmins = true;
+      }
     });
 
     this.userSub = this.authS.user.subscribe((user: User) => {
@@ -126,6 +143,15 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   applyFilter1(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource1.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource1.paginator) {
+      this.dataSource1.paginator.firstPage();
+    }
+  }
+
+  applyFilter2(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource1.filter = filterValue.trim().toLowerCase();
 
