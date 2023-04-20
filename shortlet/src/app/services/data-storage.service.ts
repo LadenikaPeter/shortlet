@@ -142,6 +142,16 @@ export class DataStorageService {
     // console.log(id);
   }
 
+  revokeAdminAccess(id: number, email: string) {
+    return this.http.put(
+      `http://localhost:8080/user/update/role/?user_id=${id}`,
+      {},
+      {
+        headers: new HttpHeaders({ admin_email: email }),
+      }
+    );
+  }
+
   getAllPendingRequest() {
     return this.http.get('http://localhost:8080/homes/PENDING?');
   }

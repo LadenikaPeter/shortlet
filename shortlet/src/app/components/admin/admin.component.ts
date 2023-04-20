@@ -19,6 +19,12 @@ export interface UserData {
   email: string;
 }
 
+export interface AdminData {
+  id: number;
+  name: string;
+  email: string;
+}
+
 export interface RequestData {
   address: string;
   country: string;
@@ -72,7 +78,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   dataSource: MatTableDataSource<UserData>;
   dataSource1: MatTableDataSource<RequestData>;
-  // dataSource2: MatTableDataSource<UserData>
+  dataSource2: MatTableDataSource<AdminData>;
 
   @ViewChild('paginator1') paginator1: MatPaginator;
   @ViewChild('sort1') sort1: MatSort;
@@ -112,6 +118,9 @@ export class AdminComponent implements OnInit, OnDestroy {
       } else {
         this.noAdmins = true;
       }
+      this.dataSource2 = new MatTableDataSource(this.admins);
+      this.dataSource2.paginator = this.paginator3;
+      this.dataSource2.sort = this.sort3;
     });
 
     this.userSub = this.authS.user.subscribe((user: User) => {
@@ -153,10 +162,10 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   applyFilter2(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource1.filter = filterValue.trim().toLowerCase();
+    this.dataSource2.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource1.paginator) {
-      this.dataSource1.paginator.firstPage();
+    if (this.dataSource2.paginator) {
+      this.dataSource2.paginator.firstPage();
     }
   }
 
@@ -182,6 +191,25 @@ export class AdminComponent implements OnInit, OnDestroy {
         this.notif.errorMessage(error.message);
       }
     );
+  }
+
+  removeAdmin() {
+    this.dataS
+      .revokeAdminAccess(this.hold_userdata.id, this.user_email)
+      .subscribe(
+        (res: { message: string }) => {
+          console.log(res);
+          this.notif.successMessage(res.message);
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          // console.log(error);
+          console.log(error.message);
+          this.notif.errorMessage(error.message);
+        }
+      );
   }
 
   onReject(row: RowDataForListingRequest) {
