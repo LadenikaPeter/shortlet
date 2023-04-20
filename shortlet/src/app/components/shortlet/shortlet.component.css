@@ -1,5 +1,5 @@
 .container {
-  padding-bottom: 30px;
+  padding-bottom: 4.375rem;
 }
 
 .parent {
@@ -207,7 +207,6 @@ mat-label {
   border-color: #4a4a4a;
 }
 
-
 #see-more {
   display: inline-block;
   background-color: #ff0066;
@@ -225,7 +224,6 @@ mat-label {
 .see-more:hover {
   background-color: #ff0066;
 }
-
 
 .send_comment {
   margin-top: 10px;
@@ -291,6 +289,3 @@ mat-label {
     padding: 10px 80px;
   }
 }
-
-
-

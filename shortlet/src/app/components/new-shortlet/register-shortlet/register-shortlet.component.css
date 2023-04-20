@@ -185,3 +185,24 @@ button:disabled {
   background-color: #f1317e;
   transition: width 0.3s ease-in-out;
 }
+
+.file-icon {
+  width: 4.8rem;
+  /* margin-left: -24px;
+  margin-top: -2px;
+  position: absolute; */
+}
+
+.selected-file {
+  display: flex;
+  text-align: center;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  margin-left: 2rem;
+  font-size: 12px;
+  background-color: #fff;
+  padding: 8px;
+  color: #bbb;
+  cursor: pointer;
+  gap: 1rem;
+}

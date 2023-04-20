@@ -1,4 +1,4 @@
-<div style="padding-bottom: 16px" class="container">
+<div style="padding-bottom: 4.375rem" class="container">
   <h1>Shortlet your Home</h1>
   <p>Send a request to list your home</p>
 
@@ -138,6 +138,65 @@
             required
           />
         </div>
+
+        <div formArrayName="pictures">
+          <label>Upload Pictures</label>
+          <!-- <div *ngFor="let image of pictures.controls; let i = index">
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              (change)="onImageUpload($event, i)"
+              required
+              [formControlName]="i"
+              class="form-control"
+              style="margin-bottom: 8px"
+            />
+          </div> -->
+          <div
+            class="add-file col-sm-2"
+            (click)="fileInput.click()"
+            style="cursor: pointer"
+          >
+            <img
+              class="add-file-icon"
+              src="../../../../assets/Doc Mgnt icons/attach.svg"
+            />
+            <span>Add File</span>
+          </div>
+          <div class="selected-file" style="margin-top: 5px">
+            <ng-container
+              *ngFor="let file of shortletDocumentFile; let i = index"
+            >
+              <div>
+                <img
+                  class="file-icon"
+                  src="../../../../assets/Doc Mgnt icons/{{
+                    file.fileType
+                  }}.svg"
+                />{{ shortletDocumentFile[i].filename }}
+                <i
+                  class="fa fa-close"
+                  (click)="removeFile(i)"
+                  style="
+                    float: right;
+                    margin-top: 3px;
+                    cursor: pointer;
+                    color: red;
+                  "
+                ></i>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <form id="staff-file-upload" #shortletFile style="display: none">
+          <input
+            type="file"
+            class="hidden"
+            id="file-upload-1"
+            (change)="onFileSelect($event)"
+            #fileInput
+          />
+        </form>
       </div>
 
       <div formGroupName="amenities" *ngIf="step == 4">
@@ -195,23 +254,6 @@
         </div>
       </div>
 
-      <div formArrayName="pictures" *ngIf="step == 3">
-        <label>Upload Pictures</label>
-        <div *ngFor="let image of pictures.controls; let i = index">
-          <div [formGroupName]="i">
-            <input
-              type="file"
-              accept=".png, .jpg, .jpeg"
-              (change)="onImageUpload($event, i)"
-              required
-              formControlName="image"
-              class="form-control"
-              style="margin-bottom: 8px"
-            />
-          </div>
-        </div>
-      </div>
-
       <div class="control">
         <div class="controls">
           <button *ngIf="step != 1" (click)="previous()" type="button">
@@ -224,7 +266,6 @@
             type="submit"
             *ngIf="step == 4"
             id="button-2 slide"
-            routerLink="listing"
           >
             Request to Add Home
           </button>
