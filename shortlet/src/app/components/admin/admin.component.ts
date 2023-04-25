@@ -96,50 +96,62 @@ export class AdminComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getAlluserSub = this.dataS.getAllUsers().subscribe((res) => {
-      console.log(res);
-      this.users = res;
-      if (this.users.length === 0) {
-        this.noUsers = false;
-      } else {
-        this.noUsers = true;
-      }
-      this.dataSource = new MatTableDataSource(this.users);
-      this.dataSource.paginator = this.paginator2;
-      this.dataSource.sort = this.sort2;
-      // console.log('hello');
-    });
+    this.getAlluserSub = this.dataS.getAllUsers().subscribe(
+      (res) => {
+        console.log(res);
+        this.users = res;
+        if (this.users.length === 0) {
+          this.noUsers = false;
+        } else {
+          this.noUsers = true;
+        }
+        this.dataSource = new MatTableDataSource(this.users);
+        this.dataSource.paginator = this.paginator2;
+        this.dataSource.sort = this.sort2;
+        // console.log('hello');
+      },
+      (error) => this.notif.errorMessage(error.message)
+    );
 
-    this.getAlluserSub = this.dataS.getAllAdmins().subscribe((res) => {
-      console.log(res);
-      this.admins = res;
-      if (this.admins.length === 0) {
-        this.noAdmins = false;
-      } else {
-        this.noAdmins = true;
-      }
-      this.dataSource2 = new MatTableDataSource(this.admins);
-      this.dataSource2.paginator = this.paginator3;
-      this.dataSource2.sort = this.sort3;
-    });
+    this.getAlluserSub = this.dataS.getAllAdmins().subscribe(
+      (res) => {
+        console.log(res);
+        this.admins = res;
+        if (this.admins.length === 0) {
+          this.noAdmins = false;
+        } else {
+          this.noAdmins = true;
+        }
+        this.dataSource2 = new MatTableDataSource(this.admins);
+        this.dataSource2.paginator = this.paginator3;
+        this.dataSource2.sort = this.sort3;
+      },
+      (error) => this.notif.errorMessage(error.message)
+    );
 
-    this.userSub = this.authS.user.subscribe((user: User) => {
-      this.user_email = user.email;
-    });
+    this.userSub = this.authS.user.subscribe(
+      (user: User) => {
+        this.user_email = user.email;
+      },
+      (error) => this.notif.errorMessage(error.message)
+    );
 
-    this.pendingReqSub = this.dataS.getAllPendingRequest().subscribe((res) => {
-      console.log(res);
-      this.requests = res;
+    this.pendingReqSub = this.dataS.getAllPendingRequest().subscribe(
+      (res) => {
+        console.log(res);
+        this.requests = res;
 
-      if (this.requests.length === 0) {
-        this.noPendingReq = false;
-      } else {
-        this.noPendingReq = true;
-      }
-      this.dataSource1 = new MatTableDataSource(this.requests);
-      this.dataSource1.paginator = this.paginator1;
-      this.dataSource1.sort = this.sort1;
-    });
+        if (this.requests.length === 0) {
+          this.noPendingReq = false;
+        } else {
+          this.noPendingReq = true;
+        }
+        this.dataSource1 = new MatTableDataSource(this.requests);
+        this.dataSource1.paginator = this.paginator1;
+        this.dataSource1.sort = this.sort1;
+      },
+      (error) => this.notif.errorMessage(error.message)
+    );
   }
 
   applyFilter(event: Event) {
@@ -230,6 +242,7 @@ export class AdminComponent implements OnInit, OnDestroy {
         },
         (error) => {
           console.log(error.message);
+          this.notif.errorMessage(error.message);
         }
       );
   }
@@ -252,6 +265,7 @@ export class AdminComponent implements OnInit, OnDestroy {
         },
         (error) => {
           console.log(error.message);
+          this.notif.errorMessage(error.message);
         }
       );
   }
