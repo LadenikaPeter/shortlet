@@ -127,6 +127,10 @@ export class DataStorageService {
     return this.http.get('http://localhost:8080/user');
   }
 
+  getAllAdmins() {
+    return this.http.get('http://localhost:8080/admin');
+  }
+
   makeUserAdmin(id: number, email: string) {
     return this.http.put(
       `http://localhost:8080/user/update/?user_id=${id}`,
@@ -136,6 +140,16 @@ export class DataStorageService {
       }
     );
     // console.log(id);
+  }
+
+  revokeAdminAccess(id: number, email: string) {
+    return this.http.put(
+      `http://localhost:8080/user/update/role/?user_id=${id}`,
+      {},
+      {
+        headers: new HttpHeaders({ admin_email: email }),
+      }
+    );
   }
 
   getAllPendingRequest() {

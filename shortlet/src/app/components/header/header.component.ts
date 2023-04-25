@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { user } from '@angular/fire/auth';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription, filter, map, take } from 'rxjs';
-import { UserRole } from 'src/app/Model/user-role.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { HandlingClosingProfileTab } from 'src/app/services/handling-profile.service';
+import { NotificationService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +26,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private authS: AuthService,
     private closeTab: HandlingClosingProfileTab,
     private router: Router,
-    private dataS: DataStorageService
+    private dataS: DataStorageService,
+    private notif: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -37,19 +37,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
           (event): event is NavigationEnd => event instanceof NavigationEnd
         )
       )
-      .subscribe((event: NavigationEnd) => {
-        // console.log(event.url);
-        this.currentUrl = event.url;
-        if (event.url === '/admin') {
-          this.isUseronAdminPage = true;
-        } else {
-          this.isUseronAdminPage = false;
-        }
-      });
+      .subscribe(
+        (event: NavigationEnd) => {
+          // console.log(event.url);
+          this.currentUrl = event.url;
+          if (event.url === '/admin') {
+            this.isUseronAdminPage = true;
+          } else {
+            this.isUseronAdminPage = false;
+          }
+        },
+        (error) => this.notif.errorMessage(error.message)
+      );
 
-    this.isAuth_Subcription = this.authS.user.subscribe((user) => {
-      this.isAuthenticated = user;
-    });
+    this.isAuth_Subcription = this.authS.user.subscribe(
+      (user) => {
+        this.isAuthenticated = user;
+      },
+      (error) => this.notif.errorMessage(error.message)
+    );
 
     this.authS.userRole
       .pipe(
@@ -65,10 +71,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
           }
         })
       )
-      .subscribe((res) => {
-        console.log(res);
-        this.isUserAdmin = res;
-      });
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.isUserAdmin = res;
+        },
+        (error) => this.notif.errorMessage(error.message)
+      );
   }
 
   toggleProfileDiv() {
@@ -82,10 +91,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   authenticateWithGoogle() {
     this.authS.loginWithGoogle();
   }
-
-  // authenticateWithFacebook() {
-  //   this.auth.loginWithFacebook();
-  // }
 
   ngOnDestroy(): void {
     this.isAuth_Subcription.unsubscribe();

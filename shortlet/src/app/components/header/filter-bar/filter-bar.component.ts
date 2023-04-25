@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataStorageService } from 'src/app/services/data-storage.service';
+import { NotificationService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-filter-bar',
@@ -7,7 +8,10 @@ import { DataStorageService } from 'src/app/services/data-storage.service';
   styleUrls: ['./filter-bar.component.css'],
 })
 export class FilterBarComponent {
-  constructor(private dataS: DataStorageService) {}
+  constructor(
+    private dataS: DataStorageService,
+    private notif: NotificationService
+  ) {}
   toggleActiveApartment: string;
 
   filterbar: { name: string; image: string; value: string }[] = [
@@ -63,9 +67,12 @@ export class FilterBarComponent {
     this.toggleActiveApartment = apartment;
     // this.searchS.propertyType.next(apartment)
     if (apartment === 'ALL') {
-      this.dataS.getShortlets().subscribe((res) => {
-        this.dataS.returnAllHomes.next(res);
-      });
+      this.dataS.getShortlets().subscribe(
+        (res) => {
+          this.dataS.returnAllHomes.next(res);
+        },
+        (error) => this.notif.errorMessage(error.message)
+      );
     } else {
       this.dataS.getSelectedApartment(apartment);
     }
