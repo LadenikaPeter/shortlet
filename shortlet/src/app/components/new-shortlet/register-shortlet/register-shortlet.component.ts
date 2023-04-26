@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef} from '@angular/core';
 import { User } from 'src/app/Model/user.model';
 import {
   NgForm,
@@ -83,6 +83,9 @@ export class RegisterShortletComponent {
       }),
       pictures: new FormArray([]),
     });
+
+    // this.setPictureFormArray();
+    // this.addPicture();
 
     // get countries list - step 3
     this.dataStorage.getCountry().subscribe((response) => {
@@ -192,7 +195,7 @@ export class RegisterShortletComponent {
           console.log((this.newShortlet = response));
           // function to return all users, show error if usernot registered to be implemented
         },
-        (error) => console.log(error)
+        (error) => this.notification.errorMessage(error.message)
       );
       this.notification.successMessage('You have successfully added a home');
 
