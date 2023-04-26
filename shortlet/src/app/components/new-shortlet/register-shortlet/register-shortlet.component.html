@@ -1,4 +1,4 @@
-<div style="padding-bottom: 16px" class="container">
+<div style="padding-bottom: 4.375rem" class="container">
   <h1>Shortlet your Home</h1>
   <p>Send a request to list your home</p>
 
@@ -163,21 +163,26 @@
             />
             <span>Add File</span>
           </div>
-          <div class="selected-file col-sm-4" style="margin-top: 5px">
+          <div class="selected-file" style="margin-top: 5px">
             <ng-container
               *ngFor="let file of shortletDocumentFile; let i = index"
             >
-              <div style="display: flex">
+              <div>
                 <img
                   class="file-icon"
                   src="../../../../assets/Doc Mgnt icons/{{
                     file.fileType
                   }}.svg"
-                />{{ file.name }}
+                />{{ shortletDocumentFile[i].filename }}
                 <i
                   class="fa fa-close"
                   (click)="removeFile(i)"
-                  style="float: right; margin-top: 3px"
+                  style="
+                    float: right;
+                    margin-top: 3px;
+                    cursor: pointer;
+                    color: red;
+                  "
                 ></i>
               </div>
             </ng-container>
@@ -261,7 +266,6 @@
             type="submit"
             *ngIf="step == 4"
             id="button-2 slide"
-            routerLink="listing"
           >
             Request to Add Home
           </button>

@@ -1,8 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Listings, NewShortlet, ReservationObj, Shortlet } from '../interface/shortlet';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import {
+  Listings,
+  NewShortlet,
+  ReservationObj,
+  Shortlet,
+} from '../interface/shortlet';
 import { NotificationService } from './notifications.service';
 
 @Injectable({ providedIn: 'root' })
@@ -11,6 +16,7 @@ export class DataStorageService {
 
   propertyType = new BehaviorSubject(null);
   returnAllHomes = new BehaviorSubject(null);
+  notFoundPageActive = new Subject();
   checkInDateforDB: any;
   checkOutDateforDB: any;
 
@@ -39,8 +45,7 @@ export class DataStorageService {
       },
     };
 
-    console
-    .log(formData)
+    console.log(formData);
 
     return this.http.post<NewShortlet>(
       `http://localhost:8080/addHome/`,
@@ -49,7 +54,7 @@ export class DataStorageService {
     );
   }
 
-  getListing(email){
+  getListing(email) {
     const options = {
       headers: {
         user_email: email,
@@ -58,7 +63,7 @@ export class DataStorageService {
 
     return this.http.get<Listings>(
       `http://localhost:8080/user/listings/`,
-     options
+      options
     );
   }
 
@@ -122,6 +127,10 @@ export class DataStorageService {
     return this.http.get('http://localhost:8080/user');
   }
 
+  getAllAdmins() {
+    return this.http.get('http://localhost:8080/admin');
+  }
+
   makeUserAdmin(id: number, email: string) {
     return this.http.put(
       `http://localhost:8080/user/update/?user_id=${id}`,
@@ -131,6 +140,16 @@ export class DataStorageService {
       }
     );
     // console.log(id);
+  }
+
+  revokeAdminAccess(id: number, email: string) {
+    return this.http.put(
+      `http://localhost:8080/user/update/role/?user_id=${id}`,
+      {},
+      {
+        headers: new HttpHeaders({ admin_email: email }),
+      }
+    );
   }
 
   getAllPendingRequest() {
@@ -169,8 +188,6 @@ export class DataStorageService {
     );
   }
 
-
-
   private dateConverterforCheckIn(reserveDate: Date) {
     const date = new Date(reserveDate);
 
@@ -197,9 +214,7 @@ export class DataStorageService {
     return formattedDate2;
   }
 
-
-
-  //get all listings under a user 
+  //get all listings under a user
 
   // userListings(): Observable<Listings> {
   //   return this.http.get<Listings>(
@@ -208,11 +223,7 @@ export class DataStorageService {
   // }
 
   //countries
-  getCountry(){
-
-
+  getCountry() {
     return this.http.get<any[]>('https://restcountries.com/v2/all');
-
   }
-
 }

@@ -1,6 +1,13 @@
-<div class="container">
+<div class="container" style="padding-bottom: 4.375rem">
   <div>
-    <h2><i class="fa-solid fa-angle-left"></i>Request to book</h2>
+    <h2>
+      <i
+        (click)="back()"
+        style="font-size: 26px; margin-right: 10px; cursor: pointer"
+        class="fa-solid fa-angle-left"
+      ></i
+      >Request to book
+    </h2>
   </div>
 
   <div class="row">
@@ -55,7 +62,7 @@
         <!-- bill-section -->
         <div class="bill-section">
           <div style="display: flex">
-            <img src="{{ shortletPictures[0].url }}" alt="" />
+            <img src="{{ shortletPictures[0]?.url }}" alt="" />
             <div style="height: 1px; padding-left: 0.5rem">
               <div style="line-height: 0.25rem">
                 <p style="font-size: 12px">Entire rental unit</p>
