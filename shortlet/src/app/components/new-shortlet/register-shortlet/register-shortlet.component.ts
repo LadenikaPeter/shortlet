@@ -42,6 +42,7 @@ export class RegisterShortletComponent {
 
   allowedMimeType: any[] = ['image/png', 'image/jpeg', 'image/jpg'];
   houseType: string[] = [];
+  propertyType: string[] = [];
 
   constructor(
     // private sanitizer: DomSanitizer,
@@ -98,9 +99,14 @@ export class RegisterShortletComponent {
     });
 
     //api call to get all house types
+    this.dataStorage.getAllPropertyTypes().subscribe((response) => {
+      this.propertyType = response
+      // console.log(this.propertyType);
+    })
+
     this.dataStorage.getAllHouseTypes().subscribe((response) => {
       this.houseType = response
-      // console.log(this.houseType);
+      console.log(this.houseType);
     })
   }
 

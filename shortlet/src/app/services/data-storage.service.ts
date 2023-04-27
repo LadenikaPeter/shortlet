@@ -228,6 +228,10 @@ export class DataStorageService {
   }
 
   getAllHouseTypes() {
-    return this.http.get<any[]>('http://localhost:8080/property_type');
+    return this.http.get<any[]>('http://localhost:8080/house_type');
+  }
+
+  getAllPropertyTypes(){
+    return this.http.get<any[]>('http://localhost:8080/property_type')
   }
 }

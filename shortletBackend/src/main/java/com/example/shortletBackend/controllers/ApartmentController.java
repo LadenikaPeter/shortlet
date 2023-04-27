@@ -4,10 +4,7 @@ import com.example.shortletBackend.dto.ApartmentsDTO;
 import com.example.shortletBackend.dto.PlainApartmentDTO;
 import com.example.shortletBackend.dto.TextResponse;
 import com.example.shortletBackend.entities.*;
-import com.example.shortletBackend.enums.HomeState;
-import com.example.shortletBackend.enums.PropertyType;
-import com.example.shortletBackend.enums.Role;
-import com.example.shortletBackend.enums.Status;
+import com.example.shortletBackend.enums.*;
 import com.example.shortletBackend.repositories.AmenitiesRepository;
 import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.PicturesRepository;
@@ -57,6 +54,11 @@ public class ApartmentController {
     @GetMapping("/property_type")
     public ResponseEntity returnAllPropertyTypes(){
         PropertyType[] propertyTypes = PropertyType.values();
+        return ResponseEntity.ok(propertyTypes);
+    }
+    @GetMapping("/house_type")
+    public ResponseEntity returnAllHouseTypes(){    
+        HouseType[] propertyTypes = HouseType.values();
         return ResponseEntity.ok(propertyTypes);
     }
 
