@@ -74,6 +74,7 @@ export class ShortletComponent implements OnInit {
 
     this.authS.user.subscribe((user: User) => {
       if (user) {
+        console.log(user.displayName);
         this.username = user.displayName;
         this.user_email = user.email;
         // console.log(this.username);
