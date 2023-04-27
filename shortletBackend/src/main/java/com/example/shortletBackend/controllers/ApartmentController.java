@@ -53,6 +53,12 @@ public class ApartmentController {
         }
         return ResponseEntity.ok(hotelList);
     }
+    //get all property files
+    @GetMapping("/property_type")
+    public ResponseEntity returnAllPropertyTypes(){
+        PropertyType[] propertyTypes = PropertyType.values();
+        return ResponseEntity.ok(propertyTypes);
+    }
 
     //make a house verified
     @PutMapping("/home/update/verify")
