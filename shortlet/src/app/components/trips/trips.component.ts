@@ -35,6 +35,7 @@ export class TripsComponent {
     'checkInDate',
     'checkOutDate',
     'price',
+    'moreInfo'
   ];
   dataSource: MatTableDataSource<UserData>;
 
@@ -48,7 +49,7 @@ export class TripsComponent {
     this.pageDisplay = false;
     this.dataS.getAllReservations().subscribe(
       (res) => {
-        // console.log(res);
+        console.log(res);
 
         this.reservations = res;
 
@@ -76,5 +77,9 @@ export class TripsComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onSeeMore(row: UserData ){
+    console.log(row)
   }
 }
