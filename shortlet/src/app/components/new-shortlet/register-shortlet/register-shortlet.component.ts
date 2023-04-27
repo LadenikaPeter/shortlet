@@ -45,6 +45,7 @@ export class RegisterShortletComponent {
   countries: any[] = [];
 
   allowedMimeType: any[] = ['image/png', 'image/jpeg', 'image/jpg'];
+  houseType: string[] = [];
 
   constructor(
     // private sanitizer: DomSanitizer,
@@ -103,7 +104,14 @@ export class RegisterShortletComponent {
         // console.log(this.username);
       }
     });
+
+    this.dataStorage.getAllHouseTypes().subscribe((response) => {
+      this.houseType = response
+      console.log(this.houseType);
+    })
   }
+
+  
 
   googleAuth() {
     this.authS.loginWithGoogle();
