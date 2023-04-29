@@ -1,6 +1,23 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:mysql://${RDS_HOSTNAME:localhost}:${RDS_PORT:3306}/shortlet
+    username: ${RDS_USERNAME:root}
+    password: ${RDS_PASSWORD:admin}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+#    properties:
+#      javax:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              create-target: shortlet.sql
+
   mail:
     host: smtp.gmail.com
     port: 465
