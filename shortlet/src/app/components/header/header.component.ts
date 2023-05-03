@@ -20,13 +20,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isUserAdmin: any;
   isUseronAdminPage: boolean;
   currentUrl: string;
+  notifications: string[] = [];
   // switchTextClick :boolean =false
 
   constructor(
     private authS: AuthService,
     private closeTab: HandlingClosingProfileTab,
     private router: Router,
-    private dataS: DataStorageService,
+    private dataStorage: DataStorageService,
     private notif: NotificationService
   ) {}
 
@@ -78,6 +79,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
         },
         (error) => this.notif.errorMessage(error.message)
       );
+
+
+      this.notif.notifications.subscribe(notification => {
+        // add new notification to list
+        this.notifications.push(notification);
+        console.log(notification)
+      });
+
+      this.dataStorage.getAllPendingRequest().subscribe(
+        (response) => {
+          console.log(response);
+        })
   }
 
   toggleProfileDiv() {
