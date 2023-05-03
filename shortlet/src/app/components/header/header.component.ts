@@ -20,8 +20,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isUserAdmin: any;
   isUseronAdminPage: boolean;
   currentUrl: string;
-  notifications: string[] = [];
+  // notifications: string[] = [];
   // switchTextClick :boolean =false
+  pendingReq: any = [];
+  pendingRequestvalue: number;
+  request: boolean = false;
 
   constructor(
     private authS: AuthService,
@@ -80,17 +83,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
         (error) => this.notif.errorMessage(error.message)
       );
 
+    // this.notif.notifications.subscribe(notification => {
+    //   // add new notification to list
+    //   this.notifications.push(notification);
+    //   console.log(notification)
+    // });
 
-      this.notif.notifications.subscribe(notification => {
-        // add new notification to list
-        this.notifications.push(notification);
-        console.log(notification)
-      });
+    this.dataStorage.getAllPendingRequest().subscribe((response) => {
+      console.log(response);
+      this.pendingReq = response;
+      this.pendingRequestvalue = this.pendingReq.length;
+      this.dataStorage.pendindRequestValue.next(this.pendingRequestvalue);
+      if (this.pendingRequestvalue > 0) {
+        this.request = true;
+      }
+    });
 
-      this.dataStorage.getAllPendingRequest().subscribe(
-        (response) => {
-          console.log(response);
-        })
+    this.dataStorage.pendindRequestValue.subscribe((value) => {
+      this.pendingRequestvalue = +value;
+      if (this.pendingRequestvalue > 0) {
+        this.request = true;
+      }
+    });
   }
 
   toggleProfileDiv() {
