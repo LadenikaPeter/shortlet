@@ -1,21 +1,23 @@
-<div class="container">
+<div class="container" style="padding-bottom: 4.375rem">
   <div id="header">
     <h3></h3>
     <div class="select">
       <p
         style="
           margin-bottom: 0px;
-          line-height: 36px;
+          /* line-height: 36px; */
           font-weight: 600;
           cursor: pointer;
-          margin-right: 30px;
+          /* margin-right: 30px; */
         "
         routerLink="/user-listings"
         *ngIf="isUserAuth"
       >
         View Listings
       </p>
-      <p style="margin-bottom: 0px; line-height: 36px">Ready to shortlet it?</p>
+      <p style="margin-bottom: 0px; 
+      /* line-height: 36px */
+      ">Ready to shortlet it?</p>
       <button
         *ngIf="!isUserAuth"
         data-bs-toggle="modal"

@@ -4,26 +4,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs/operators';
 import * as fromReservation from 'src/app/interface/shortlet';
+import { UserData } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
+import { NotificationService } from 'src/app/services/notifications.service';
 
-// export interface UserData {
-//   id: string;
-//   name: string;
-//   progress: string;
-//   fruit: string;
-// }
-
-export interface UserData {
-  apartmentPicture: string;
-  apartmentId: number;
-  apartmentName: string;
-  apartmentCountry: string;
-  apartmentState: string;
-  checkInDate: Date;
-  checkOutDate: Date;
-  price: number;
-  id: number;
-}
 
 @Component({
   selector: 'app-trips',
@@ -34,8 +18,6 @@ export class TripsComponent {
   reservations: any;
   anyReservation: boolean;
   pageDisplay: boolean;
-  // reservationPictures: any = [];
-  // displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
   displayedColumns: string[] = [
     'apartmentPicture',
     'apartmentCountry',
@@ -43,29 +25,40 @@ export class TripsComponent {
     'checkInDate',
     'checkOutDate',
     'price',
+    'moreInfo'
   ];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private dataS: DataStorageService) {
+  // moreInfo: Partial<UserData> = {};
+
+  UserData: any = {};
+
+  constructor(
+    private dataS: DataStorageService,
+    private notif: NotificationService
+  ) {
     this.pageDisplay = false;
-    this.dataS.getAllReservations().subscribe((res) => {
-      // console.log(res);
+    this.dataS.getAllReservations().subscribe(
+      (res) => {
+        console.log(res);
 
-      this.reservations = res;
+        this.reservations = res;
 
-      if (this.reservations.length === 0) {
-        this.anyReservation = false;
-      } else {
-        this.anyReservation = true;
-      }
-      this.pageDisplay = true;
-      this.dataSource = new MatTableDataSource(this.reservations);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+        if (this.reservations.length === 0) {
+          this.anyReservation = false;
+        } else {
+          this.anyReservation = true;
+        }
+        this.pageDisplay = true;
+        this.dataSource = new MatTableDataSource(this.reservations);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      (error) => this.notif.errorMessage(error.message)
+    );
 
     // Assign the data to the data source for the table to render
     // this.dataSource = new MatTableDataSource(users);
@@ -79,4 +72,11 @@ export class TripsComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  onSeeMore(row){
+
+    this.UserData = row;
+    console.log(this.UserData)
+  }
+
 }

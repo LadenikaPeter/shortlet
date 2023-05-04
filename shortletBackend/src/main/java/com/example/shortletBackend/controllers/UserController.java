@@ -48,8 +48,44 @@ public class UserController {
         return ResponseEntity.ok(userList);
     }
 
-    //promoteToAdmin
-    @SneakyThrows
+//    get all user with admin role
+    @GetMapping("/admin")
+    public ResponseEntity getAllAdminUsers(){
+        ArrayList<UsersDTO> userList = new ArrayList<>();
+        for (Users user: userRepository.findAllByRole(Role.ADMIN)
+        ) {
+            userList.add(mapper.map(user, UsersDTO.class));
+        }
+        return ResponseEntity.ok(userList);
+    }
+    //make an admin a user
+    @PutMapping("/user/update/role/")
+    public ResponseEntity removeAnAdminUser(@RequestHeader("admin_email")String email
+            , @RequestParam("user_id") long id){
+        Optional<Users> admin_user =userRepository.findUsersByEmail(email);
+        Optional<Users> users=userRepository.findById(id);
+        if (admin_user.isPresent() && users.isPresent()){
+            if (admin_user.get().getRole() == Role.ADMIN){
+                users.get().setRole(Role.USER);
+                userRepository.save(users.get());
+                mailService.sendSimpleMessage(users.get().getEmail(),"Administrative Status Revoked"
+                        ,"Your administrative status has been revoked,reach out to the super admin to find out" +
+                                " why this happened and if it can be changed . \n Till then you are now a plain ol user" +
+                                " enjoy the rest of your day");
+                customResponse.setMessage("User "+users.get().getName()+" is no longer an admin");
+                return ResponseEntity.ok(customResponse);
+            }else {
+                customResponse.setMessage("User does not have permission to do this");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(customResponse);
+            }
+        }else {
+            customResponse.setMessage("User doesn't exist");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
+
+        }
+
+    }
+
     @PutMapping("/user/update/")
     public ResponseEntity createAnAdminUser(@RequestHeader("admin_email")String email
             , @RequestParam("user_id") long id){

@@ -1,4 +1,4 @@
-<div style="padding-bottom: 16px" class="container">
+<div style="padding-bottom: 4.375rem" class="container">
   <h1>Shortlet your Home</h1>
   <p>Send a request to list your home</p>
 
@@ -97,9 +97,9 @@
           <label>House Type</label>
           <select formControlName="houseType" required>
             <option value="" disabled selected>Select your House Type</option>
-            <option value="PRIVATE_ROOM">Private Room</option>
-            <option value="WHOLE_HOUSE">Whole House</option>
-            <option value="SHARED_ROOM">Shared Room</option>
+            <option value="" *ngFor="let house of houseType" [value]="house">
+              {{ house }}
+            </option>
           </select>
         </div>
 
@@ -109,10 +109,13 @@
             <option value="" disabled selected>
               Select your Property Type
             </option>
-            <option value="HOTEL">Hotel</option>
-            <option value="GUESTHOUSE">GuestHouse</option>
-            <option value="CAMPER">Camper</option>
-            <option value="HOUSE">House</option>
+            <option
+              value=""
+              *ngFor="let property of propertyType"
+              [value]="property"
+            >
+              {{ property }}
+            </option>
           </select>
         </div>
 
@@ -140,7 +143,7 @@
         </div>
 
         <div formArrayName="pictures">
-          <label>Upload Pictures</label>
+          <label>Upload Pictures (5 pictures only)</label>
           <!-- <div *ngFor="let image of pictures.controls; let i = index">
             <input
               type="file"
@@ -274,18 +277,3 @@
     </form>
   </div>
 </div>
-
-<!-- <div class="container" *ngIf="!username">
-  <div class="login">
-    <h5>Log in or sign up to add your home</h5>
-    <button class="social_button w-100" (click)="googleAuth()">
-      Continue with
-      <span>
-        <span id="g">G</span> <span id="o_first">o</span>
-        <span id="o_second">o</span> <span id="g_second">g</span>
-        <span id="l">l</span> <span id="e">e</span>
-      </span>
-    </button>
-    google logo
-  </div>
-</div> -->
