@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -61,17 +62,17 @@ public class UserController {
     //make an admin a user
     @PutMapping("/user/update/role/")
     public ResponseEntity removeAnAdminUser(@RequestHeader("admin_email")String email
-            , @RequestParam("user_id") long id){
+            , @RequestParam("user_id") long id) throws MessagingException {
         Optional<Users> admin_user =userRepository.findUsersByEmail(email);
         Optional<Users> users=userRepository.findById(id);
         if (admin_user.isPresent() && users.isPresent()){
             if (admin_user.get().getRole() == Role.ADMIN){
                 users.get().setRole(Role.USER);
                 userRepository.save(users.get());
-                mailService.sendSimpleMessage(users.get().getEmail(),"Administrative Status Revoked"
+                mailService.sendHtmlMessage(users.get().getEmail(),"Administrative Status Revoked"
                         ,"Your administrative status has been revoked,reach out to the super admin to find out" +
                                 " why this happened and if it can be changed . \n Till then you are now a plain ol user" +
-                                " enjoy the rest of your day");
+                                " enjoy the rest of your day", users.get().getName(),"/index.html");
                 customResponse.setMessage("User "+users.get().getName()+" is no longer an admin");
                 return ResponseEntity.ok(customResponse);
             }else {
@@ -88,7 +89,7 @@ public class UserController {
 
     @PutMapping("/user/update/")
     public ResponseEntity createAnAdminUser(@RequestHeader("admin_email")String email
-            , @RequestParam("user_id") long id){
+            , @RequestParam("user_id") long id) throws MessagingException {
         Optional<Users> admin_user =userRepository.findUsersByEmail(email);
         Optional<Users> users=userRepository.findById(id);
         if (admin_user.isPresent() && users.isPresent()){
@@ -97,7 +98,8 @@ public class UserController {
                 userRepository.save(users.get());
 //                mailService.sendSimpleMessage(users.get().getEmail(),"New admin"
 //                        ,"You have been selected to be an admin");
-                mailService.sendHtmlMessage(users.get().getEmail(),"Promotion",users.get().getName(),"index.html");
+                mailService.sendHtmlMessage(users.get().getEmail(),"Promotion",
+                        "You are receiving this message because you have being promoted to an administrator.",users.get().getName(),"/index.html");
                 customResponse.setMessage("User "+users.get().getName()+" has been made an admin");
                 return ResponseEntity.ok(customResponse);
             }else {
