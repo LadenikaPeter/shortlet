@@ -3,12 +3,17 @@ package com.example.shortletBackend.controllers;
 import com.example.shortletBackend.dto.ApartmentsDTO;
 import com.example.shortletBackend.dto.PlainApartmentDTO;
 import com.example.shortletBackend.dto.TextResponse;
-import com.example.shortletBackend.entities.*;
-import com.example.shortletBackend.enums.*;
+import com.example.shortletBackend.entities.Apartments;
+import com.example.shortletBackend.entities.Pictures;
+import com.example.shortletBackend.entities.Users;
+import com.example.shortletBackend.enums.HomeState;
+import com.example.shortletBackend.enums.PropertyType;
+import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.repositories.AmenitiesRepository;
 import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.PicturesRepository;
 import com.example.shortletBackend.repositories.UserRepository;
+import com.example.shortletBackend.service.ApartmentService;
 import com.example.shortletBackend.service.MailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -17,9 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,6 +30,7 @@ import java.util.Optional;
 @CrossOrigin
 @AllArgsConstructor
 public class ApartmentController {
+    private final ApartmentService apartmentService;
     private final ApartmentRepository apartmentRepo;
     private final PicturesRepository picRepo;
     private final UserRepository userRepository;
@@ -177,13 +181,10 @@ public class ApartmentController {
             if (apartments.getAmenities() != null) {
                 amenitiesRepo.save(apartments.getAmenities());
             }
-            apartments.setStatus(Status.UNOCCUPIED);
-            apartments.setHomeState(HomeState.PENDING);
-            apartments.setHouseRefCode(apartments.getCountry().substring(0,2),apartmentRepo.findAll().size());
             users.get().getApartmentsSet().add(apartments);
-            apartments.setUsers(users.get());
+            apartmentService.addHome(apartments,users.get());
             userRepository.save(users.get());
-            apartmentRepo.save(apartments);
+
             return ResponseEntity.ok(apartments);
         }else {
             customResponse.setMessage("You should really signup or login else you won't" +

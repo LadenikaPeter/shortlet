@@ -11,6 +11,7 @@ import com.example.shortletBackend.repositories.ReservationRepository;
 import com.example.shortletBackend.repositories.UserRepository;
 import com.example.shortletBackend.service.MailService;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -94,8 +95,9 @@ public class UserController {
             if (admin_user.get().getRole() == Role.ADMIN){
                 users.get().setRole(Role.ADMIN);
                 userRepository.save(users.get());
-                mailService.sendSimpleMessage(users.get().getEmail(),"New admin"
-                        ,"You have been selected to be an admin");
+//                mailService.sendSimpleMessage(users.get().getEmail(),"New admin"
+//                        ,"You have been selected to be an admin");
+                mailService.sendHtmlMessage(users.get().getEmail(),"Promotion",users.get().getName(),"index.html");
                 customResponse.setMessage("User "+users.get().getName()+" has been made an admin");
                 return ResponseEntity.ok(customResponse);
             }else {
@@ -197,7 +199,7 @@ public class UserController {
             customResponse.setMessage("The user does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
         }else {
-            ArrayList apartmentDto= new ArrayList<>();
+            ArrayList<ApartmentForListing> apartmentDto= new ArrayList<>();
             for (Apartments apartments:apartmentRepo.findAllByUsers(users.get()) ){
                 ApartmentForListing listing = mapper.map(apartments,ApartmentForListing.class);
                 listing.setPictures(apartments.getPictures().stream().findFirst().get());
