@@ -7,6 +7,7 @@ import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Pictures;
 import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.HomeState;
+import com.example.shortletBackend.enums.HouseType;
 import com.example.shortletBackend.enums.PropertyType;
 import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.repositories.AmenitiesRepository;
@@ -22,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
@@ -69,16 +71,17 @@ public class ApartmentController {
     //make a house verified
     @PutMapping("/home/update/verify")
     public ResponseEntity updatePendingHouse(@RequestHeader("user_email")String email
-            , @RequestParam("apartment_id") long id){
+            , @RequestParam("apartment_id") long id) throws MessagingException {
         if (userRepository.findUsersByEmail(email).get().getRole() == Role.ADMIN){
             Optional<Apartments> updatedApartment = apartmentRepo.findById(id);
             updatedApartment.get().setHomeState(HomeState.VERIFIED);
             apartmentRepo.save(updatedApartment.get());
 
-            mailService.sendSimpleMessage(updatedApartment.get().getUsers().getEmail()
+            mailService.sendHtmlMessage(updatedApartment.get().getUsers().getEmail()
                     ,"Listing has been verified"
                     ,"Your listing with the title "+updatedApartment.get().getName()
-                            +" has been verified and user are now able to be reserved.");
+                            +" has been verified and user are now able to be reserved.",updatedApartment.get().getUsers().getName()
+            ,"/index.html");
 
             return getAllPendingHomes();
 
@@ -90,16 +93,17 @@ public class ApartmentController {
     }
     @PutMapping("/home/update/unverify")
     public ResponseEntity updateHouse(@RequestHeader("user_email")String email
-            , @RequestParam("apartment_id") long id){
+            , @RequestParam("apartment_id") long id) throws MessagingException {
         if (userRepository.findUsersByEmail(email).get().getRole() == Role.ADMIN){
             Optional<Apartments> updatedApartment = apartmentRepo.findById(id);
             updatedApartment.get().setHomeState(HomeState.UNVERIFIED);
             apartmentRepo.save(updatedApartment.get());
 
-            mailService.sendSimpleMessage(updatedApartment.get().getUsers().getEmail()
-                    ,"Listing has been verified"
+            mailService.sendHtmlMessage(updatedApartment.get().getUsers().getEmail()
+                    ,"Listing is not verified"
                     ,"Your listing with the title "+updatedApartment.get().getName()
-                            +" has been listed unverified please contact support for additional aid.");
+                            +" has been listed unverified please contact support for additional aid.",updatedApartment.get().getUsers().getName()
+                    ,"/index.html");
 
             return getAllPendingHomes();
 

@@ -427,7 +427,7 @@
                                                             <tr>
                                                                 <td style="padding:0;Margin:0;font-size:0px"
                                                                     align="center"><img class="adapt-img" src="../static/images/g2e0a6c8042bf57318600c984b0340f8fbf61b0f09b486fcfae9dbb3c35645da5083cf17645e31a6f62de5c0d3767c32b_640.jpeg"
-																						th:src="@{/images/g2e0a6c8042bf57318600c984b0340f8fbf61b0f09b486fcfae9dbb3c35645da5083cf17645e31a6f62de5c0d3767c32b_640.jpeg}"
+																						th:src="|${imageResourceName}|"
                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
                                                                         width="520" alt="home"></td>
                                                             </tr>
@@ -459,7 +459,7 @@
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Imprima, Arial, sans-serif;line-height:27px;color:#2D3142;font-size:18px">
                                                                         <br></p>
                                                                     <p
-                                                                        style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Imprima, Arial, sans-serif;line-height:27px;color:#2D3142;font-size:18px">
+                                                                        style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Imprima, Arial, sans-serif;line-height:27px;color:#2D3142;font-size:18px" th:text="${text}">
                                                                         You're receiving this message because you have
                                                                         being promoted to an administrator.</p>
                                                                     <p
@@ -468,7 +468,7 @@
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Imprima, Arial, sans-serif;line-height:27px;color:#2D3142;font-size:18px">
                                                                         Please reach out to the support team for more
-                                                                        information pertaining to the role.</p>
+                                                                        information.</p>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -553,7 +553,7 @@
                                                                 <td class="es-m-txt-c"
                                                                     style="padding:0;Margin:0;font-size:0px"
                                                                     align="left"><img src="../static/images/44591551869356388.png"
-																		th:src="@{/images/44591551869356388.png}"
+																		th:src= |${logo}|
                                                                         alt="logo"
                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
                                                                         width="80" ></td>
@@ -582,6 +582,7 @@
                                                                                 style="padding:0;Margin:0;padding-right:10px">
                                                                                 <img title="Facebook"
                                                                                     src="../static/images/facebook-circle-black.png"
+																					 th:src= |${Fblogo}|
                                                                                     alt="Fb" width="32"
                                                                                     style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic">
                                                                             </td>
@@ -589,6 +590,7 @@
                                                                                 style="padding:0;Margin:0;padding-right:10px">
                                                                                 <img title="Twitter"
                                                                                     src="../static/images/twitter-circle-black.png"
+																					 th:src= |${Twitterlogo}|
                                                                                     alt="Tw" width="32"
                                                                                     style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic">
                                                                             </td>
@@ -596,6 +598,7 @@
                                                                                 style="padding:0;Margin:0;padding-right:10px">
                                                                                 <img title="Instagram"
                                                                                     src="../static/images/instagram-circle-black.png"
+																					 th:src= |${Instalogo}|
                                                                                     alt="Inst" width="32"
                                                                                     style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic">
                                                                             </td>
@@ -603,6 +606,7 @@
                                                                                 style="padding:0;Margin:0"><img
                                                                                     title="Youtube"
                                                                                     src="../static/images/youtube-circle-black.png"
+																					th:src= |${YTlogo}|
                                                                                     alt="Yt" width="32"
                                                                                     style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic">
                                                                             </td>
