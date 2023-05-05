@@ -1,5 +1,9 @@
 package com.example.shortletBackend.service;
 
-public class UserService {
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@AllArgsConstructor
+public class UserService {
 }

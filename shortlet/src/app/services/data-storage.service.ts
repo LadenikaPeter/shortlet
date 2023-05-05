@@ -17,6 +17,7 @@ export class DataStorageService {
   propertyType = new BehaviorSubject(null);
   returnAllHomes = new BehaviorSubject(null);
   notFoundPageActive = new Subject();
+  pendindRequestValue = new Subject();
   checkInDateforDB: any;
   checkOutDateforDB: any;
 
@@ -231,7 +232,7 @@ export class DataStorageService {
     return this.http.get<any[]>('http://localhost:8080/house_type');
   }
 
-  getAllPropertyTypes(){
-    return this.http.get<any[]>('http://localhost:8080/property_type')
+  getAllPropertyTypes() {
+    return this.http.get<any[]>('http://localhost:8080/property_type');
   }
 }
