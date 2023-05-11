@@ -7,7 +7,7 @@ import * as fromReservation from 'src/app/interface/shortlet';
 import { UserData } from 'src/app/interface/shortlet';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { NotificationService } from 'src/app/services/notifications.service';
-
+import { TripsService } from 'src/app/services/trips.service';
 
 @Component({
   selector: 'app-trips',
@@ -25,7 +25,7 @@ export class TripsComponent {
     'checkInDate',
     'checkOutDate',
     'price',
-    'moreInfo'
+    'moreInfo',
   ];
   dataSource: MatTableDataSource<UserData>;
 
@@ -38,10 +38,11 @@ export class TripsComponent {
 
   constructor(
     private dataS: DataStorageService,
-    private notif: NotificationService
+    private notif: NotificationService,
+    private tripS: TripsService
   ) {
     this.pageDisplay = false;
-    this.dataS.getAllReservations().subscribe(
+    this.tripS.getAllReservations().subscribe(
       (res) => {
         console.log(res);
 
@@ -73,10 +74,8 @@ export class TripsComponent {
     }
   }
 
-  onSeeMore(row){
-
+  onSeeMore(row) {
     this.UserData = row;
-    console.log(this.UserData)
+    console.log(this.UserData);
   }
-
 }

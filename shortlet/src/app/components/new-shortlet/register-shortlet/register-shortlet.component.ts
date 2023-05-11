@@ -15,6 +15,8 @@ import { DataStorageService } from 'src/app/services/data-storage.service';
 import { NotificationService } from 'src/app/services/notifications.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { NewShortletService } from 'src/app/services/new-shortlet.service';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-register-shortlet',
@@ -47,11 +49,13 @@ export class RegisterShortletComponent {
 
   constructor(
     // private sanitizer: DomSanitizer,
+    private newshortletS: NewShortletService,
     private dataStorage: DataStorageService,
     private authS: AuthService,
     private notification: NotificationService,
     private router: Router,
-    private notif: NotificationService
+    private notif: NotificationService,
+    private adminS: AdminService
   ) {}
 
   ngOnInit() {
@@ -84,7 +88,7 @@ export class RegisterShortletComponent {
     });
 
     // get countries list
-    this.dataStorage.getCountry().subscribe((response) => {
+    this.newshortletS.getCountry().subscribe((response) => {
       this.countries = response.map((country) => {
         return { name: country.name, code: country.alpha2Code };
       });
@@ -100,12 +104,12 @@ export class RegisterShortletComponent {
     });
 
     //api call to get all house types
-    this.dataStorage.getAllPropertyTypes().subscribe((response) => {
+    this.newshortletS.getAllPropertyTypes().subscribe((response) => {
       this.propertyType = response;
       // console.log(this.propertyType);
     });
 
-    this.dataStorage.getAllHouseTypes().subscribe((response) => {
+    this.newshortletS.getAllHouseTypes().subscribe((response) => {
       this.houseType = response;
       console.log(this.houseType);
     });
@@ -203,18 +207,20 @@ export class RegisterShortletComponent {
       };
 
       // api service called
-      this.dataStorage.registerNewShortlet(formData, this.user_email).subscribe(
-        (response) => {
-          // console.log((this.newShortlet = response));
-          // function to return all users, show error if usernot registered to be implemented
-        },
-        (error) => this.notification.errorMessage(error.message)
-      );
+      this.newshortletS
+        .registerNewShortlet(formData, this.user_email)
+        .subscribe(
+          (response) => {
+            // console.log((this.newShortlet = response));
+            // function to return all users, show error if usernot registered to be implemented
+          },
+          (error) => this.notification.errorMessage(error.message)
+        );
       this.notification.successMessage('You have successfully added a home');
 
       //timeout function that redirects back to the /user-listings of the new homes after a user successfully submits the form
       setTimeout(() => {
-        this.dataStorage.getAllPendingRequest().subscribe((res) => {
+        this.adminS.getAllPendingRequest().subscribe((res) => {
           this.pendingRequestArray = res;
           this.dataStorage.pendindRequestValue.next(
             this.pendingRequestArray.length

@@ -136,15 +136,25 @@
         </div>
         <div class="modal-body">
           <!-- <p>Reservation ID: {{ UserData.id }}</p> -->
-          <p>Name: {{ UserData.apartmentName }}</p>
-          <p>Country: {{ UserData.apartmentCountry }}</p>
+          <p>
+            <span class="moreInfo_headings">Name:</span>
+            {{ UserData.apartmentName }}
+          </p>
+          <p>
+            <span class="moreInfo_headings">Country:</span>
+            {{ UserData.apartmentCountry }}
+          </p>
           <!-- <p>Guests: {{ UserData.numGuests }}</p>
         <p>Rooms: {{ UserData.numRooms }}</p> -->
           <p>
-            From: {{ UserData.checkInDate | date }} to
+            <span class="moreInfo_headings">From:</span>
+            {{ UserData.checkInDate | date }} to
             {{ UserData.checkOutDate | date }}
           </p>
-          <p>Price: {{ UserData.price | number : "1.0" : "en-US" }}</p>
+          <p>
+            <span class="moreInfo_headings">Price:</span>
+            {{ UserData.price | number : "1.0" : "en-US" }}
+          </p>
         </div>
       </div>
     </div>
