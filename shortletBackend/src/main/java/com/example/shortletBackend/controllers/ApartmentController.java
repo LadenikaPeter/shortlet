@@ -1,7 +1,6 @@
 package com.example.shortletBackend.controllers;
 
 import com.example.shortletBackend.dto.ApartmentsDTO;
-import com.example.shortletBackend.dto.PlainApartmentDTO;
 import com.example.shortletBackend.dto.TextResponse;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Pictures;
@@ -50,7 +49,7 @@ public class ApartmentController {
 
     @GetMapping("/homes/PENDING")
     public ResponseEntity getAllPendingHomes(){
-        return ResponseEntity.ok(apartmentService.findAllApartmentByHomeState(HomeState.PENDING,PlainApartmentDTO.class));
+        return ResponseEntity.ok(apartmentService.findAllApartmentByHomeState(HomeState.PENDING,ApartmentsDTO.class));
     }
     //get all property files
     @GetMapping("/property_type")
