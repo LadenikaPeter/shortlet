@@ -15,6 +15,7 @@ import { User } from '../Model/user.model';
 import { BehaviorSubject } from 'rxjs';
 import { SignedinUser } from '../interface/shortlet';
 import { UserRole } from '../Model/user-role.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -102,7 +103,7 @@ export class AuthService {
     expiresIn: number
   ) {
     this.http
-      .post('http://localhost:8080/signup', {
+      .post(environment.endpoint + '/signup', {
         name: displayName,
         email: email,
       })

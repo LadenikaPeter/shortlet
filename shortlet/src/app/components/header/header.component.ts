@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription, filter, map, take } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { AdminService } from 'src/app/services/admin.service';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { HandlingClosingProfileTab } from 'src/app/services/handling-profile.service';
 import { NotificationService } from 'src/app/services/notifications.service';
@@ -31,7 +32,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private closeTab: HandlingClosingProfileTab,
     private router: Router,
     private dataStorage: DataStorageService,
-    private notif: NotificationService
+    private notif: NotificationService,
+    private adminS: AdminService
   ) {}
 
   ngOnInit(): void {
@@ -89,7 +91,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     //   console.log(notification)
     // });
 
-    this.dataStorage.getAllPendingRequest().subscribe((response) => {
+    this.adminS.getAllPendingRequest().subscribe((response) => {
       console.log(response);
       this.pendingReq = response;
       this.pendingRequestvalue = this.pendingReq.length;
