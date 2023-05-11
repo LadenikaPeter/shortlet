@@ -7,12 +7,13 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export class AuthServiceInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     if (
-      req.url === 'http://localhost:8080/' ||
-      req.url === 'http://localhost:8080/reservation/'
+      req.url === environment.endpoint + '/' ||
+      req.url === environment.endpoint + '/reservation/'
     ) {
       console.log('here');
       const user = JSON.parse(localStorage.getItem('shortletUserData'));

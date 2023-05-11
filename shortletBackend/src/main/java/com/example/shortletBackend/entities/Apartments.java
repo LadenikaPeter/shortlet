@@ -1,5 +1,6 @@
 package com.example.shortletBackend.entities;
 
+import com.example.shortletBackend.enums.HomeState;
 import com.example.shortletBackend.enums.HouseType;
 import com.example.shortletBackend.enums.PropertyType;
 import com.example.shortletBackend.enums.Status;
@@ -8,12 +9,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
-
-import com.example.shortletBackend.enums.HomeState;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,15 +56,19 @@ public class Apartments {
     @Lob
     private String description;
 
-    @OneToMany(mappedBy = "apartment")//,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "apartment")
+    @ToString.Exclude//,cascade = CascadeType.ALL)
     private Set<Reservation> reservations = new HashSet<>();
-    @OneToMany//(cascade = CascadeType.ALL)
+    @OneToMany
+    @ToString.Exclude//(cascade = CascadeType.ALL)
     private Set<Pictures> pictures = new HashSet<>();
 
     @OneToMany(mappedBy = "apartments")
+    @ToString.Exclude
     private Set<Review> reviews = new HashSet<>();
 
     @OneToMany(mappedBy = "apartments")
+    @ToString.Exclude
     private Set<Comments> comments = new HashSet<>();
 
 
