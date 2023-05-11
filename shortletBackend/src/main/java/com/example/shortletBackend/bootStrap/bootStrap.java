@@ -233,24 +233,10 @@
 //                "The space\n" +
 //                "Riad Chamali is a guest house with pool, in the medina of Marrakech, ideal for romantic or family holiday.\n" +
 //                "\n" +
-//                "We are located 15 minutes walk from the famous Jemaa El Fna square, in the quiet and traditional neighborhood of Berrima (Badii Palace, the old Jewish quarter, tinsmiths' square, the Bahia Palace ...) near the door “Bab Hmar”, which gives quick access to the Golf Courses.\n" +
+//                "We are located 15 minutes walk from the famous Jemaa El Fna square, in the quiet and traditional neighborhood of Berrima (Badii Palace, the old Jewish quarter, tinsmiths' square, the Bahia Palace ...) near the door Bab Hmar, which gives quick access to the Golf Courses.\n" +
 //                "\n" +
-//                "Our Riad offers a perfect combination of traditional lifestyle and modern high standard facilities. The riad decoration is sleek, warm and feels natural with paintings and rugs made from local craftmen. The architecture is from the original house called \"Zelliges\" which gives the place a friendly, peaceful and out of time atmosphere.\n" +
-//                "\n" +
-//                "A stay with us will give you the opportunity to experiment the traditional moroccan lifestyle with a touch of luxury, at an affordable price.\n" +
-//                "\n" +
-//                "Our 15 rooms are all unique and overlooking the patio with our charming green-tiled swimming pool (not heated) and orange trees. They all are air-conditionned, and have ensuite bathrooms with toilettes, a shower and toiletry products. Breakfast are included.\n" +
-//                "\n" +
-//                "Besides, our manager Moutaa and our staff will take care of you and make sure you have everything you need.\n" +
-//                "\n" +
-//                "We can also arrange a wide range of services to make sure your stay is perfect : from airport transfer, massages and spa day to cooking classes and desert adventures...\n" +
-//                "Guest access\n" +
-//                "except the kitchen and the porter's lodge, you will have access to all the riad\n" +
-//                "Other things to note\n" +
-//                "The advertised rate applies to a double room for 2 people, including breakfasts.\n" +
-//                "To add : the tourist taxes (+ 2.50 euros / pers / day)\n" +
-//                "\n" +
-//                "Airport transfers are offered at €15 per day, and €20 from 8 p.m. per trip (up to 3 people, if more people the price varies according to the number).");
+//                "Our Riad offers a perfect combination of traditional lifestyle and modern high standard facilities. The riad decoration is sleek, warm and feels natural with paintings and rugs made from local craftmen. The architecture is from the original house called \"Zelliges\" which gives the place a friendly, peaceful and out of time atmosphere.\n"
+//                );
 //        House4.setNoOfBeds(2);
 //        House4.setNoOfBathrooms(1);
 //        House4.setNoOfBedrooms(1);
@@ -799,18 +785,17 @@
 //        Comments comment25= new Comments("We had a problem with wi fi and it was sorted very promptly. Would highly recommend this property",new Date(2022 - 1900, Calendar.DECEMBER, 15),melisa,House12);
 //        Comments comment26= new Comments("The pool and patio area with BBQ are great for spending time outdoors in the lovely weather.",new Date(2022 - 1900, Calendar.DECEMBER, 25),emily,House12);
 //
-////        House12.setComments(comment26);
-////        House12.getComments().addAll();
 //
-//        ArrayList<Apartments> houseCollection = new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse, House2,
-//                House3, House4, House5, House6, House7, House8, House9, House10, House11, House12}));
-//        ArrayList<Pictures> picturesCollection = new ArrayList<>(Arrays.asList(new Pictures[]{picture1, picture2, picture3, picture4,
+//        ArrayList<Apartments> houseCollection = new ArrayList<>(Arrays.asList(firstHouse, House2,
+//                House3, House4, House5, House6, House7, House8, House9, House10, House11, House12));
+//
+//        ArrayList<Pictures> picturesCollection = new ArrayList<>(Arrays.asList(picture1, picture2, picture3, picture4,
 //                picture5, picture6, picture7, picture8, picture9, picture10, picture11, picture12, picture13, picture14, picture15,
 //                picture16, picture17, picture18, picture19, picture20, picture21, pictures22, pictures23, pictures24, pictures25, pictures26,
 //                pictures27, pictures28, pictures29, pictures30, pictures31, pictures32, pictures33, pictures34, pictures35, pictures36, pictures37,
 //                pictures38, pictures39, pictures40, pictures41, pictures42, pictures43, pictures44, pictures45, pictures46, pictures47, pictures48,
 //                pictures49, pictures50, pictures51, pictures52, pictures53, pictures54, pictures55, pictures56, pictures57, pictures58, pictures59,
-//                pictures60}));
+//                pictures60));
 //
 //
 ////        Admin.getApartmentsSet().addAll(new ArrayList<>(Arrays.asList(new Apartments[]{firstHouse, House2, House3, House4, House5
@@ -835,12 +820,6 @@
 //                ,comment15,comment16,comment17,comment18,comment19,comment20,comment21,comment22,comment23,comment24
 //                ,comment25,comment26)));
 //        reservationRepo.save(reservation);
-//
-//
-//
-//        System.out.println("house..........." + House2);
-//        System.out.println("user ......." + Admin);
-//        System.out.println("reservation........" + reservation);
 //
 //
 //    }

@@ -13,9 +13,9 @@ import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.repositories.AmenitiesRepository;
 import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.PicturesRepository;
-import com.example.shortletBackend.repositories.UserRepository;
 import com.example.shortletBackend.service.ApartmentService;
 import com.example.shortletBackend.service.MailService;
+import com.example.shortletBackend.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -33,9 +33,10 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ApartmentController {
     private final ApartmentService apartmentService;
+    private final UserService userService;
     private final ApartmentRepository apartmentRepo;
     private final PicturesRepository picRepo;
-    private final UserRepository userRepository;
+
     private final AmenitiesRepository amenitiesRepo;
     private final ModelMapper mapper;
     private final TextResponse customResponse;
@@ -44,17 +45,12 @@ public class ApartmentController {
     //get all homes
     @GetMapping("/homes")
     public ResponseEntity getAllHomes(){
-        return ResponseEntity.ok(apartmentRepo.findAll());
+        return ResponseEntity.ok(apartmentService.findAllApartments());
     }
 
     @GetMapping("/homes/PENDING")
     public ResponseEntity getAllPendingHomes(){
-        ArrayList<PlainApartmentDTO> hotelList = new ArrayList<>();
-        for (Apartments hotel:apartmentRepo.findAllByHomeStateIs(HomeState.PENDING)
-        ) {
-            hotelList.add(mapper.map(hotel, PlainApartmentDTO.class));
-        }
-        return ResponseEntity.ok(hotelList);
+        return ResponseEntity.ok(apartmentService.findAllApartmentByHomeState(HomeState.PENDING,PlainApartmentDTO.class));
     }
     //get all property files
     @GetMapping("/property_type")
@@ -72,10 +68,10 @@ public class ApartmentController {
     @PutMapping("/home/update/verify")
     public ResponseEntity updatePendingHouse(@RequestHeader("user_email")String email
             , @RequestParam("apartment_id") long id) throws MessagingException {
-        if (userRepository.findUsersByEmail(email).get().getRole() == Role.ADMIN){
-            Optional<Apartments> updatedApartment = apartmentRepo.findById(id);
+        if (userService.findUserByEmail(email).get().getRole() == Role.ADMIN){
+            Optional<Apartments> updatedApartment = apartmentService.findById(id);
             updatedApartment.get().setHomeState(HomeState.VERIFIED);
-            apartmentRepo.save(updatedApartment.get());
+            apartmentService.save(updatedApartment.get());
 
             mailService.sendHtmlMessage(updatedApartment.get().getUsers().getEmail()
                     ,"Listing has been verified"
@@ -94,10 +90,10 @@ public class ApartmentController {
     @PutMapping("/home/update/unverify")
     public ResponseEntity updateHouse(@RequestHeader("user_email")String email
             , @RequestParam("apartment_id") long id) throws MessagingException {
-        if (userRepository.findUsersByEmail(email).get().getRole() == Role.ADMIN){
-            Optional<Apartments> updatedApartment = apartmentRepo.findById(id);
+        if (userService.findUserByEmail(email).get().getRole() == Role.ADMIN){
+            Optional<Apartments> updatedApartment = apartmentService.findById(id);
             updatedApartment.get().setHomeState(HomeState.UNVERIFIED);
-            apartmentRepo.save(updatedApartment.get());
+            apartmentService.save(updatedApartment.get());
 
             mailService.sendHtmlMessage(updatedApartment.get().getUsers().getEmail()
                     ,"Listing is not verified"
@@ -117,13 +113,9 @@ public class ApartmentController {
 
     //get all verified homes
     @GetMapping("/verified_homes")
-    public ResponseEntity<ArrayList> getAllVerifiedHomes(){
-        ArrayList<ApartmentsDTO> hotelList = new ArrayList<>();
-        for (Apartments hotel:apartmentRepo.findAllByHomeStateIs(HomeState.VERIFIED)
-        ) {
-            hotelList.add(mapper.map(hotel, ApartmentsDTO.class));
-        }
-        return ResponseEntity.ok(hotelList);
+    public ResponseEntity getAllVerifiedHomes(){
+
+        return ResponseEntity.ok(apartmentService.findAllApartmentByHomeState(HomeState.VERIFIED,ApartmentsDTO.class));
     }
 
     //get all verified homes of a specified property type
@@ -150,7 +142,7 @@ public class ApartmentController {
     }
     @GetMapping("/home/")
     public ResponseEntity getHotel(@RequestParam("house_id") long id ) throws IllegalAccessException, NoSuchFieldException{
-        Optional<Apartments> apartments = apartmentRepo.findById(id);
+        Optional<Apartments> apartments = apartmentService.findById(id);
         if (apartments.isPresent()){
             // return only amenities that have true as a reply
             ApartmentsDTO apartmentsDTO = mapper.map(apartments.get(),ApartmentsDTO.class);
@@ -173,7 +165,7 @@ public class ApartmentController {
     //user creating a new home
     @PostMapping("/addHome/")
     public ResponseEntity addHome(@RequestHeader("user_email") String email, @RequestBody Apartments apartments){
-        Optional<Users> users= userRepository.findUsersByEmail(email);
+        Optional<Users> users= userService.findUserByEmail(email);
         if (users.isPresent()) {
             if (apartments.getPictures() != null) {
                 for (Pictures picture: apartments.getPictures()
@@ -187,7 +179,7 @@ public class ApartmentController {
             }
             users.get().getApartmentsSet().add(apartments);
             apartmentService.addHome(apartments,users.get());
-            userRepository.save(users.get());
+            userService.save(users.get());
 
             return ResponseEntity.ok(apartments);
         }else {
