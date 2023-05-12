@@ -41,11 +41,18 @@ public class UserController {
         return ResponseEntity.of(userService.findUserByEmail(email));
     }
 
-    //get all user with role users
-    @GetMapping("/user")
+    //get all user with role staff
+    @GetMapping("/staff")
     public ResponseEntity getAllStaff(){
         return ResponseEntity.ok(userService.findAllUsersByRole(Role.STAFF));
     }
+
+    //get all user with role user
+    @GetMapping("/user")
+    public ResponseEntity getAllUser(){
+        return ResponseEntity.ok(userService.findAllUsersByRole(Role.USER));
+    }
+
 
 
 //    get all user with admin role
