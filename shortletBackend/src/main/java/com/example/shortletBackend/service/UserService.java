@@ -37,7 +37,7 @@ public class UserService {
 
     public ArrayList<UsersDTO> findAllUsersByRole(Role role){
         ArrayList<UsersDTO> userList = new ArrayList<>();
-        for (Users user: userRepository.findAllByRole(Role.ADMIN)
+        for (Users user: userRepository.findAllByRole(role)
         ) {
             userList.add(mapper.map(user, UsersDTO.class));
         }
