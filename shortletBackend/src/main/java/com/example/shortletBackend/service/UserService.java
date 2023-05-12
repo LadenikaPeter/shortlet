@@ -27,6 +27,7 @@ public class UserService {
         Optional<Users> oldUser = userRepository.findUsersByEmail(users.getEmail());
         if (!oldUser.isPresent()) {//if the user does not exist it creates a new user
             users.setRole(Role.USER);
+
             save(users);
             return users;
         }else {// if it does exist, the user is then returned
@@ -36,7 +37,7 @@ public class UserService {
 
     public ArrayList<UsersDTO> findAllUsersByRole(Role role){
         ArrayList<UsersDTO> userList = new ArrayList<>();
-        for (Users user: userRepository.findAllByRole(Role.ADMIN)
+        for (Users user: userRepository.findAllByRole(role)
         ) {
             userList.add(mapper.map(user, UsersDTO.class));
         }
