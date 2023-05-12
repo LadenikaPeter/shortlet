@@ -43,9 +43,10 @@ public class UserController {
 
     //get all user with role users
     @GetMapping("/user")
-    public ResponseEntity getAllNormalUsers(){
-        return ResponseEntity.ok(userService.findAllUsersByRole(Role.USER));
+    public ResponseEntity getAllStaff(){
+        return ResponseEntity.ok(userService.findAllUsersByRole(Role.STAFF));
     }
+
 
 //    get all user with admin role
     @GetMapping("/admin")
@@ -60,7 +61,7 @@ public class UserController {
         Optional<Users> users=userService.findUsersById(id);
         if (admin_user.isPresent() && users.isPresent()){
             if (admin_user.get().getRole() == Role.ADMIN){
-                users.get().setRole(Role.USER);
+                users.get().setRole(Role.STAFF);
                 userService.save(users.get());
                 mailService.sendHtmlMessage(users.get().getEmail(),"Administrative Status Revoked"
                         ,"Your administrative status has been revoked,reach out to the super admin to find out" +
@@ -86,7 +87,7 @@ public class UserController {
         Optional<Users> admin_user =userService.findUserByEmail(email);
         Optional<Users> users=userService.findUsersById(id);
         if (admin_user.isPresent() && users.isPresent()){
-            if (admin_user.get().getRole() == Role.ADMIN){
+            if (admin_user.get().getRole() == Role.ADMIN && users.get().getRole() == Role.STAFF){
                 users.get().setRole(Role.ADMIN);
                 userService.save(users.get());
 //
