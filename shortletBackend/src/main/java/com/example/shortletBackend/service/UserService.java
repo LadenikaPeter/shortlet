@@ -27,6 +27,7 @@ public class UserService {
         Optional<Users> oldUser = userRepository.findUsersByEmail(users.getEmail());
         if (!oldUser.isPresent()) {//if the user does not exist it creates a new user
             users.setRole(Role.USER);
+
             save(users);
             return users;
         }else {// if it does exist, the user is then returned
