@@ -216,10 +216,6 @@ public class ApartmentController {
 
         }
     }
-//    TODO delete listing
-
-
-
 
     @DeleteMapping("/home/picture/delete")
     public ResponseEntity deleteHousePictures(@RequestParam("picture_id")long picture_id){
@@ -228,6 +224,11 @@ public class ApartmentController {
         return ResponseEntity.ok(customResponse);
 
 
+    }
+
+    @DeleteMapping("/apartment/delete/")
+    public ResponseEntity deleteApartment(@RequestParam("apartment_id")long id){
+        return ResponseEntity.ok(apartmentService.deleteApartment(id));
     }
 
 

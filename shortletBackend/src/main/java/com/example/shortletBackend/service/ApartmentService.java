@@ -55,4 +55,9 @@ public class ApartmentService {
         apartments.setStatus(status);
         save(apartments);
     }
+
+    public String deleteApartment(long id){
+        apartmentRepository.deleteById(id);
+        return "The apartment has been deleted";
+    }
 }
