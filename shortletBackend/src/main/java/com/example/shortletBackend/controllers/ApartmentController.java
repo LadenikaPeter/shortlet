@@ -164,7 +164,7 @@ public class ApartmentController {
 
     //user creating a new home
     @PostMapping("/addHome/")
-    public ResponseEntity addHome(@RequestHeader("user_email") String email, @RequestBody Apartments apartments){
+    public ResponseEntity addHome(@RequestHeader("user_email") String email, @RequestBody Apartments apartments) throws MessagingException {
         Optional<Users> users= userService.findUserByEmail(email);
         if (users.isPresent()) {
             if (apartments.getPictures() != null) {
@@ -190,31 +190,10 @@ public class ApartmentController {
 
     }
 //    TODO edit listing
-    @PutMapping("/editHome/")
+    @PutMapping("/apartment/edit/")
     public ResponseEntity editHome(@RequestHeader("user_email") String email,@RequestParam("apartment_id") long id
             ,@RequestBody Apartments updatedApartments) {
-        Optional<Users> owner = userService.findUserByEmail(email);
-        Optional<Apartments> oldHouse = apartmentService.findById(id);
-        if (owner.isPresent()) {
-            if (oldHouse.get().getUsers() == owner.get()) {
-                if (updatedApartments.getPictures() != null) {
-                    picRepo.saveAll(updatedApartments.getPictures());
-                }
-                if (updatedApartments.getAmenities() != null) {
-                    amenitiesRepo.save(updatedApartments.getAmenities());
-                }
-                apartmentService.save(updatedApartments);
-                return ResponseEntity.ok(updatedApartments);
-            } else {
-                customResponse.setMessage("This isn't your apartment ");
-                return new ResponseEntity<>(customResponse, HttpStatus.FORBIDDEN);
-            }
-        }else {
-            customResponse.setMessage("You should really signup or login else you won't" +
-                    " be able to do this ");
-            return new ResponseEntity<>(customResponse, HttpStatus.FORBIDDEN);
-
-        }
+        return apartmentService.updateApartment(updatedApartments,email,id);
     }
 
     @DeleteMapping("/home/picture/delete")
@@ -227,8 +206,8 @@ public class ApartmentController {
     }
 
     @DeleteMapping("/apartment/delete/")
-    public ResponseEntity deleteApartment(@RequestParam("apartment_id")long id){
-        return ResponseEntity.ok(apartmentService.deleteApartment(id));
+    public ResponseEntity deleteApartment(@RequestParam("apartment_id")long id, @RequestHeader("user_email")String email){
+        return ResponseEntity.ok(apartmentService.deleteApartment(id,email));
     }
 
 

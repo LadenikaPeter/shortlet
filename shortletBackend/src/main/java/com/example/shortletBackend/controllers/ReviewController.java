@@ -19,8 +19,8 @@ public class ReviewController {
 
     @PostMapping("/apartment/comment/add/")
     public ResponseEntity addComment(@RequestParam("apartment_id")long id, @RequestBody Comments comments
-            , @RequestHeader("user_email")String email){
-        return reviewService.addComment(email, comments, id);
+            , @RequestHeader("user_email")String email,@RequestParam("reservation_id") long reservation_id){
+        return reviewService.addComment(email, comments, id,reservation_id);
     }
 
     @PostMapping("/apartment/review/add/")

@@ -25,6 +25,7 @@ public class Comments {
 
     @ManyToOne
     private Apartments apartments;
+    private long replyId;
 
     public Comments(String comment, Date commentDate) {
         this.comment = comment;
