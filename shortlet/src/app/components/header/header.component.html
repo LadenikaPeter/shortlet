@@ -49,6 +49,13 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="host/shortlets">Rent your home</a>
           </li>
+          <li
+            class="nav-item"
+            data-bs-target="#staticBackdrop"
+            data-bs-toggle="modal"
+          >
+            <a class="nav-link">filters</a>
+          </li>
         </ul>
       </div>
 
@@ -63,6 +70,13 @@
 
           <li class="nav-item">
             <a class="nav-link" routerLink="host/shortlets">Rent your home</a>
+          </li>
+          <li
+            class="nav-item"
+            data-bs-target="#staticBackdrop"
+            data-bs-toggle="modal"
+          >
+            <a class="nav-link">filters</a>
           </li>
           <li *ngIf="isUserAdmin" class="nav-item" (click)="onSwitchRole()">
             <a class="nav-link">{{
@@ -102,6 +116,18 @@
             />
           </button>
         </div>
+      </div>
+      <div
+        class="filter-holder removemine"
+        data-bs-target="#staticBackdrop"
+        data-bs-toggle="modal"
+      >
+        <span>Filters</span>
+        <img
+          src="../../../assets/svg/filter.svg"
+          style="width: 25px; margin-left: 5px"
+          alt=""
+        />
       </div>
     </div>
   </div>
@@ -212,3 +238,5 @@
     </div>
   </div>
 </div>
+
+<app-filter-modal></app-filter-modal>
