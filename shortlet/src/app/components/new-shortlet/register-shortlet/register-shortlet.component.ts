@@ -65,6 +65,7 @@ export class RegisterShortletComponent {
       description: new FormControl(''),
       address: new FormControl(''),
       country: new FormControl(''),
+      contact: new FormControl(''),
       cleaningFee: new FormControl(''),
       price: new FormControl(''),
       maxNoOfGuests: new FormControl(''),
