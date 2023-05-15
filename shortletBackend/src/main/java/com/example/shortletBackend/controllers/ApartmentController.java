@@ -139,6 +139,7 @@ public class ApartmentController {
         }
         return ResponseEntity.ok(hotelList);
     }
+
     @GetMapping("/home/")
     public ResponseEntity getHotel(@RequestParam("house_id") long id ) throws IllegalAccessException, NoSuchFieldException{
         Optional<Apartments> apartments = apartmentService.findById(id);
@@ -163,7 +164,7 @@ public class ApartmentController {
 
     //user creating a new home
     @PostMapping("/addHome/")
-    public ResponseEntity addHome(@RequestHeader("user_email") String email, @RequestBody Apartments apartments){
+    public ResponseEntity addHome(@RequestHeader("user_email") String email, @RequestBody Apartments apartments) throws MessagingException {
         Optional<Users> users= userService.findUserByEmail(email);
         if (users.isPresent()) {
             if (apartments.getPictures() != null) {
@@ -188,9 +189,12 @@ public class ApartmentController {
         }
 
     }
-
-
-
+//    TODO edit listing
+    @PutMapping("/apartment/edit/")
+    public ResponseEntity editHome(@RequestHeader("user_email") String email,@RequestParam("apartment_id") long id
+            ,@RequestBody Apartments updatedApartments) {
+        return apartmentService.updateApartment(updatedApartments,email,id);
+    }
 
     @DeleteMapping("/home/picture/delete")
     public ResponseEntity deleteHousePictures(@RequestParam("picture_id")long picture_id){
@@ -199,6 +203,11 @@ public class ApartmentController {
         return ResponseEntity.ok(customResponse);
 
 
+    }
+
+    @DeleteMapping("/apartment/delete/")
+    public ResponseEntity deleteApartment(@RequestParam("apartment_id")long id, @RequestHeader("user_email")String email){
+        return ResponseEntity.ok(apartmentService.deleteApartment(id,email));
     }
 
 

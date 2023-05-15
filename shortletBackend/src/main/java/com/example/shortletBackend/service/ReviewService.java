@@ -1,9 +1,6 @@
 package com.example.shortletBackend.service;
 
-import com.example.shortletBackend.entities.Apartments;
-import com.example.shortletBackend.entities.Comments;
-import com.example.shortletBackend.entities.Review;
-import com.example.shortletBackend.entities.Users;
+import com.example.shortletBackend.entities.*;
 import com.example.shortletBackend.enums.ReservationState;
 import com.example.shortletBackend.repositories.CommentRepository;
 import com.example.shortletBackend.repositories.ReservationRepository;
@@ -30,26 +27,37 @@ public class ReviewService {
 
 
 
-    public ResponseEntity addComment(String email, Comments comments,long id){
+    public ResponseEntity addComment(String email, Comments comments,long id,long reservation_id){
         Optional<Users> users = userService.findUserByEmail(email);
-        if ( users.isPresent()) {
-//            if (reservationRepository.existsReservationsByReservationStateAndApartment_IdAndUsers_Email(ReservationState.COMPLETED,id,email)){
-
-            Optional<Apartments> apartments=apartmentService.findById(id);
-            comments.setCommentDate(new Date());
-            comments.setUsers(users.get());
-            comments.setApartments(apartments.get());
+        Optional<Reservation> reservation = reservationRepository.findById(reservation_id);
+        //checks if the user exist and if they are the one who created the reservation
+        if ( users.isPresent() ) {
+            if ( reservation.get().getUsers() ==users.get() || reservation.get().getApartment().getUsers() == users.get()) {
+                if (reservation.get().getCheckInDate().after(new Date())) {
 
 
-            apartmentService.save(apartments.get());
-            commentRepository.save(comments);//save a comment
-            userService.save(users.get());
-            return ResponseEntity.ok(apartments.get());
-//            }else {
-//                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("this user hasn't completed a stayed at the house" +
-//                        " as such can't comment ");
-//            }
 
+
+        //            if (reservationRepository.existsReservationsByReservationStateAndApartment_IdAndUsers_Email(ReservationState.COMPLETED,id,email)){
+
+                    Optional<Apartments> apartments=apartmentService.findById(id);
+                    comments.setCommentDate(new Date());
+                    comments.setUsers(users.get());
+                    comments.setApartments(apartments.get());
+
+
+                    apartmentService.save(apartments.get());
+                    commentRepository.save(comments);//save a comment
+                    userService.save(users.get());
+                    return ResponseEntity.ok(apartments.get());
+
+                }else {
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(" This user hasn't completed a stayed at the house" +
+                            " as such can't comment ");
+                }
+            }else {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("The user has no relation to this reservation ");
+            }
 
         }else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("The user doesn't exist");
