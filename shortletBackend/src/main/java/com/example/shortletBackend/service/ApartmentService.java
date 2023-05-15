@@ -101,6 +101,7 @@ public class ApartmentService {
 
     public String deleteApartment(long id,String email) {
         if (apartmentRepository.findById(id).get().getUsers() == userService.findUserByEmail(email).get()) {
+            // check if the user deleting the apartment is the owner
             apartmentRepository.deleteById(id);
             return "The apartment has been deleted";
         } else {
