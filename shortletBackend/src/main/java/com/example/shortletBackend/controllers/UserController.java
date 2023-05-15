@@ -119,7 +119,6 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity signUp(@RequestBody Users users){
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(users));
-
     }
 
     @PutMapping("/update_user/")
@@ -140,6 +139,8 @@ public class UserController {
                 reservation.setUsers(user.get());
                 reservation.setApartment(apartments.get());
                 reservation.setReservationState(ReservationState.PENDING);
+                reservation.setReservationCode(apartments.get().getName().substring(0,2)+reservationRepo.findAll().size()+
+                        user.get().getEmail().substring(0,1));
                 user.get().getReservationSet().add(reservation);
                 apartments.get().getReservations().add(reservation);
 
@@ -187,11 +188,6 @@ public class UserController {
             return ResponseEntity.ok(apartmentDto) ;
         }
 
-
     }
-
-
-
-
 
 }
