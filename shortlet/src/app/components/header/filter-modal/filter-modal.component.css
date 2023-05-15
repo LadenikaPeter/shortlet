@@ -1,0 +1,40 @@
+.mat-mdc-slider {
+  width: 90%;
+}
+
+.modal-body {
+  width: 90%;
+  margin: auto;
+}
+
+.modal-body__controls {
+  /* border: 1px solid #cccccc; */
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.mat-slider__price {
+  padding-top: 24px;
+}
+
+.maxGuestReached {
+  visibility: hidden;
+}
+
+.minGuestReached {
+  visibility: hidden;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+}

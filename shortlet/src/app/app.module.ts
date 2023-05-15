@@ -30,6 +30,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { AuthServiceInterceptor } from './auth/auth.interceptor.service';
 
@@ -40,9 +41,7 @@ import { NotFoundModule } from './components/not-found/not-found.module';
 import { HomeModule } from './components/home/home.module';
 import { ShortletModule } from './components/shortlet/shortlet-module.module';
 import { NewShortletModule } from './components/new-shortlet/new-shortlet.module';
-
-
-
+import { FilterModalComponent } from './components/header/filter-modal/filter-modal.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +50,7 @@ import { NewShortletModule } from './components/new-shortlet/new-shortlet.module
     FooterComponent,
     SearchBarComponent,
     ClickOutsideDirective,
+    FilterModalComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +69,7 @@ import { NewShortletModule } from './components/new-shortlet/new-shortlet.module
     MatSortModule,
     MatTableModule,
     MatTabsModule,
+    MatSliderModule,
     TripsModule,
     ProfileModule,
     AdminModule,
