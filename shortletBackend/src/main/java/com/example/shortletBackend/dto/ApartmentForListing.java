@@ -1,6 +1,7 @@
 package com.example.shortletBackend.dto;
 
 import com.example.shortletBackend.entities.Pictures;
+import com.example.shortletBackend.enums.HomeState;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,6 @@ public class ApartmentForListing {
     private int noOfBedrooms;
     private int noOfBeds;
     private int noOfBathrooms;
+    private HomeState homeState;
 
 }
