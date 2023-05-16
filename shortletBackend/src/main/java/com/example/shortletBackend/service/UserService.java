@@ -1,5 +1,6 @@
 package com.example.shortletBackend.service;
 
+import com.example.shortletBackend.dto.TextResponse;
 import com.example.shortletBackend.dto.UsersDTO;
 import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.Role;
@@ -72,7 +73,16 @@ public class UserService {
         }
     }
 
-
+    public TextResponse disableUser(long id, String admin_email){
+        if (findUserByEmail(admin_email).get().getRole() == Role.ADMIN){
+        Users users = findUsersById(id).get();
+        users.setActiveUser(false);
+        save(users);
+        return new TextResponse( "The user "+ users.getName()+" has been disable",200);
+        }else {
+    return new TextResponse("You can not perform this function",403);
+        }
+    }
 
 
 }

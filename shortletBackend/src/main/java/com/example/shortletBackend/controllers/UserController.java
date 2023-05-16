@@ -190,4 +190,12 @@ public class UserController {
 
     }
 
+    @GetMapping("/user/disable/")
+    public ResponseEntity disableUser(@RequestHeader("admin_email")String email, long diasbledUserId){
+        TextResponse response = userService.disableUser(diasbledUserId,email);
+        return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
+    }
+
+
+
 }

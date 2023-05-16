@@ -88,11 +88,12 @@ public class ApartmentService {
         apartments.setHomeState(HomeState.PENDING);
         apartments.setHouseRefCode(apartments.getCountry().substring(0,2),apartmentRepository.findAll().size());
         if (apartments.getUsers() != null) {
-            apartments.getUsers().setId(users.getId());
+           users.setPhoneNo(apartments.getUsers().getPhoneNo());
+
             userService.save(users);
-        } else {
-            apartments.setUsers(users);
         }
+            apartments.setUsers(users);
+
         changeStatus(apartments,Status.UNOCCUPIED);
         mailService.sendHtmlMessage(users.getEmail(), "Pending Apartment Request","Your listing with the title "+apartments.getName()
                         +" has been listed unverified please contact support for additional aid.",apartments.getUsers().getName()

@@ -8,4 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TextResponse {
     private String message;
+    private int statusCode;
 }
