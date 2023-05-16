@@ -47,6 +47,7 @@ public class ApartmentController {
         return ResponseEntity.ok(apartmentService.findAllApartments());
     }
 
+
     @GetMapping("/homes/PENDING")
     public ResponseEntity getAllPendingHomes(){
         return ResponseEntity.ok(apartmentService.findAllApartmentByHomeState(HomeState.PENDING,ApartmentsDTO.class));

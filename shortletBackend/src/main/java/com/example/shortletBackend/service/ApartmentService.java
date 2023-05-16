@@ -65,6 +65,7 @@ public class ApartmentService {
                 if (updatedApartments.getAmenities() != null) {
                     amenitiesRepo.save(updatedApartments.getAmenities());
                 }
+
                 updatedApartments.setHomeState(HomeState.PENDING);
 
                 save(updatedApartments);
@@ -86,7 +87,13 @@ public class ApartmentService {
     public Apartments addHome(Apartments apartments, Users users) throws MessagingException {
         apartments.setHomeState(HomeState.PENDING);
         apartments.setHouseRefCode(apartments.getCountry().substring(0,2),apartmentRepository.findAll().size());
-        apartments.setUsers(users);
+        if (apartments.getUsers() != null) {
+           users.setPhoneNo(apartments.getUsers().getPhoneNo());
+
+            userService.save(users);
+        }
+            apartments.setUsers(users);
+
         changeStatus(apartments,Status.UNOCCUPIED);
         mailService.sendHtmlMessage(users.getEmail(), "Pending Apartment Request","Your listing with the title "+apartments.getName()
                         +" has been listed unverified please contact support for additional aid.",apartments.getUsers().getName()
