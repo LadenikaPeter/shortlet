@@ -42,6 +42,7 @@ import { HomeModule } from './components/home/home.module';
 import { ShortletModule } from './components/shortlet/shortlet-module.module';
 import { NewShortletModule } from './components/new-shortlet/new-shortlet.module';
 import { FilterModalComponent } from './components/header/filter-modal/filter-modal.component';
+// import { CommentModalComponent } from './components/modals/comment-modal/comment-modal.component';
 
 @NgModule({
   declarations: [

@@ -49,13 +49,13 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="host/shortlets">Rent your home</a>
           </li>
-          <li
+          <!-- <li
             class="nav-item"
             data-bs-target="#staticBackdrop"
             data-bs-toggle="modal"
           >
             <a class="nav-link">filters</a>
-          </li>
+          </li> -->
         </ul>
       </div>
 
@@ -71,13 +71,13 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="host/shortlets">Rent your home</a>
           </li>
-          <li
+          <!-- <li
             class="nav-item"
             data-bs-target="#staticBackdrop"
             data-bs-toggle="modal"
           >
             <a class="nav-link">filters</a>
-          </li>
+          </li> -->
           <li *ngIf="isUserAdmin" class="nav-item" (click)="onSwitchRole()">
             <a class="nav-link">{{
               isUseronAdminPage ? "Switch to user" : "Switch to admin"
@@ -117,7 +117,7 @@
           </button>
         </div>
       </div>
-      <div
+      <!-- <div
         class="filter-holder removemine"
         data-bs-target="#staticBackdrop"
         data-bs-toggle="modal"
@@ -128,7 +128,7 @@
           style="width: 25px; margin-left: 5px"
           alt=""
         />
-      </div>
+      </div> -->
     </div>
   </div>
 </nav>

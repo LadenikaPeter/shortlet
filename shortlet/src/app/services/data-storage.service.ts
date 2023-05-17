@@ -51,16 +51,16 @@ export class DataStorageService {
       });
   }
 
-  sendComment(userComment: { comment: string }, id: number, email: string) {
-    console.log(userComment, id, email);
-    return this.http.post(
-      environment.endpoint + `/apartment/comment/add/?apartment_id=${id}`,
-      userComment,
-      {
-        headers: new HttpHeaders({ user_email: email }),
-      }
-    );
-  }
+  // sendComment(userComment: { comment: string }, id: number, email: string) {
+  //   console.log(userComment, id, email);
+  //   return this.http.post(
+  //     environment.endpoint + `/apartment/comment/add/?apartment_id=${id}`,
+  //     userComment,
+  //     {
+  //       headers: new HttpHeaders({ user_email: email }),
+  //     }
+  //   );
+  // }
 
   //get all listings under a user
 

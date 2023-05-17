@@ -26,6 +26,7 @@ export class TripsComponent {
     'checkOutDate',
     'price',
     'moreInfo',
+    'comment',
   ];
   dataSource: MatTableDataSource<UserData>;
 
@@ -76,6 +77,7 @@ export class TripsComponent {
 
   onSeeMore(row) {
     this.UserData = row;
+    this.tripS.newComment.next(row);
     console.log(this.UserData);
   }
 }

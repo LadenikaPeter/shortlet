@@ -219,27 +219,27 @@ export class ShortletComponent implements OnInit {
     }
   }
 
-  onSendComment() {
-    if (this.UserComment === '') {
-      return;
-    } else {
-      const userComment = {
-        comment: this.UserComment,
-      };
+  // onSendComment() {
+  //   if (this.UserComment === '') {
+  //     return;
+  //   } else {
+  //     const userComment = {
+  //       comment: this.UserComment,
+  //     };
 
-      // console.log(userComment);
-      this.dataStorage
-        .sendComment(userComment, +this.apartmentID, this.user_email)
-        .subscribe((res) => {
-          console.log(res);
-          this.UserComment = '';
-          this.notif.successMessage('Comment added!');
-          setTimeout(() => {
-            window.location.reload();
-          }, 2500);
-        });
-    }
-  }
+  //     // console.log(userComment);
+  //     this.dataStorage
+  //       .sendComment(userComment, +this.apartmentID, this.user_email)
+  //       .subscribe((res) => {
+  //         console.log(res);
+  //         this.UserComment = '';
+  //         this.notif.successMessage('Comment added!');
+  //         setTimeout(() => {
+  //           window.location.reload();
+  //         }, 2500);
+  //       });
+  //   }
+  // }
 
   showFullDescription = false;
   descriptionLimit = 200;
