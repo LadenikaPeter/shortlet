@@ -33,7 +33,7 @@ public class ReviewService {
         //checks if the user exist and if they are the one who created the reservation
         if ( users.isPresent() ) {
             if ( reservation.get().getUsers() ==users.get() || reservation.get().getApartment().getUsers() == users.get()) {
-                if (reservation.get().getCheckInDate().before (new Date())) {
+                if (reservation.get().getCheckInDate().before(new Date())) {
 //            if (reservationRepository.existsReservationsByReservationStateAndApartment_IdAndUsers_Email(ReservationState.COMPLETED,id,email)){
                     
                     Optional<Apartments> apartments=apartmentService.findById(id);
@@ -48,7 +48,7 @@ public class ReviewService {
                     return ResponseEntity.ok(apartments.get());
 
                 }else {
-                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(" This user hasn't completed a stayed at the house" +
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(" This user hasn't stayed at the house" +
                             " as such can't comment ");
                 }
             }else {

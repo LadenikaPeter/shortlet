@@ -35,7 +35,8 @@ public class ReservationController {
     @GetMapping("/home/reservation/")
     public ResponseEntity getReservationByHomes(@RequestHeader("email") String email, @RequestParam("apartment_id") long id) {
 //        TODO check if the user is the owner of the room #issue1
-        return reservationService.getReservationByHomes(email, id);
+        TextResponse response = reservationService.getReservationByHomes(email, id);
+        return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
 
     }
 

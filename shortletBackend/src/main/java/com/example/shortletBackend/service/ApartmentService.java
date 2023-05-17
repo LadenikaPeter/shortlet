@@ -11,7 +11,6 @@ import com.example.shortletBackend.repositories.PicturesRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -52,7 +51,7 @@ public class ApartmentService {
         return hotelList;
     }
 
-    public ResponseEntity updateApartment(Apartments updatedApartments, String email , long id){
+    public TextResponse updateApartment(Apartments updatedApartments, String email , long id){
         Optional<Users> owner = userService.findUserByEmail(email);
         Optional<Apartments> oldHouse = findById(id);
         if (owner.isPresent()) {
@@ -69,15 +68,15 @@ public class ApartmentService {
                 updatedApartments.setHomeState(HomeState.PENDING);
 
                 save(updatedApartments);
-                return ResponseEntity.ok(updatedApartments);
+                return new TextResponse(updatedApartments,200);
             } else {
-                customResponse.setMessage("This isn't your apartment ");
-                return new ResponseEntity<>(customResponse, HttpStatus.FORBIDDEN);
+
+                return new TextResponse("This isn't your apartment ", HttpStatus.FORBIDDEN.value());
             }
         }else {
             customResponse.setMessage("You should really signup or login else you won't" +
                     " be able to do this ");
-            return new ResponseEntity<>(customResponse, HttpStatus.FORBIDDEN);
+            return new TextResponse(customResponse, HttpStatus.FORBIDDEN.value());
 
         }
     }
