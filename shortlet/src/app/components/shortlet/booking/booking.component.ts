@@ -50,8 +50,12 @@ export class BookingComponent implements OnDestroy, OnInit {
     });
 
     this.isAuth_Subcription = this.authS.user.subscribe((user) => {
-      this.isAuthenticated = user;
-      this.emailForPayment = user.email;
+      if (user) {
+        this.isAuthenticated = user;
+        this.emailForPayment = user.email;
+      } else {
+        this.isAuthenticated = null;
+      }
     });
 
     this.checkin = this.activatedRoute.snapshot.queryParams['checkin'];

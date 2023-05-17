@@ -16,9 +16,11 @@ import { BehaviorSubject } from 'rxjs';
 import { SignedinUser } from '../interface/shortlet';
 import { UserRole } from '../Model/user-role.model';
 import { environment } from 'src/environments/environment';
+import { UserService } from '../services/user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  activeUser: boolean;
   private expirationTimer: any;
   user = new BehaviorSubject<User>(null);
   userRole = new BehaviorSubject<UserRole>(null);
@@ -27,7 +29,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private auth: Auth,
-    private notif: NotificationService
+    private notif: NotificationService,
+    private userS: UserService
   ) {}
 
   loginWithGoogle() {
@@ -123,6 +126,7 @@ export class AuthService {
     this.user.next(user);
     // this.autoLogOut(expiresIn * 1000);
     localStorage.setItem('shortletUserData', JSON.stringify(user));
+    this.activeUserCheck();
   }
 
   logOut() {
@@ -145,4 +149,20 @@ export class AuthService {
   //     this.logOut();
   //   }, expirationDuration);
   // }
+
+  private activeUserCheck() {
+    this.userS.getUser().subscribe((res: { activeUser: boolean }) => {
+      console.log(res.activeUser);
+      const userstatus = res.activeUser;
+
+      if (!userstatus) {
+        this.notif.errorMessage(
+          'Your account has been disabled, contact support for help'
+        );
+        this.logOut();
+      } else {
+        console.log(true);
+      }
+    });
+  }
 }

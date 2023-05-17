@@ -29,22 +29,22 @@ export class HomeComponent implements OnInit {
       (error) => this.notif.errorMessage(error.message)
     );
 
-    // this.user
-    //   .getUser()
-    //   .subscribe((res: { activeUser: boolean;}) => {
-    //     // console.log(res);
-    //     // console.log(this.activeUser = res.activeUser)
+    // this.user.getUser().subscribe((res: { activeUser: boolean }) => {
+    //   // console.log(res);
+    //   // console.log(this.activeUser = res.activeUser)
 
-    //     if(this.activeUser){
-    //       console.log(this.activeUser)
-    //       // after this, the user is logged out
-    //       this.notif.errorMessage('Your account has been disabled, contact support for help');
-    //       this.onLogOut();
-    //     } else {
-    //       // else block not necessary, test with disabled user
-    //       this.notif.successMessage('Active user')
-    //     }
-    //   });
+    //   if (this.activeUser) {
+    //     console.log(this.activeUser);
+    //     // after this, the user is logged out
+    //     this.notif.errorMessage(
+    //       'Your account has been disabled, contact support for help'
+    //     );
+    //     this.onLogOut();
+    //   } else {
+    //     // else block not necessary, test with disabled user
+    //     this.notif.successMessage('Active user');
+    //   }
+    // });
 
     this.dataStorage.propertyType.subscribe(
       (selectedProperty) => {

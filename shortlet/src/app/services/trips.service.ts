@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ReservationObj } from '../interface/shortlet';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NotificationService } from './notifications.service';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class TripsService {
+  newComment = new Subject();
   constructor(
     private http: HttpClient,
     private notif: NotificationService,
@@ -43,6 +44,22 @@ export class TripsService {
   getAllReservations(): Observable<ReservationObj> {
     return this.http.get<ReservationObj>(
       environment.endpoint + '/reservation/'
+    );
+  }
+
+  sendComment(
+    userComment: { comment: string },
+    reservation_id: number,
+    apartment_id: number,
+    email: string
+  ) {
+    console.log(userComment, reservation_id, apartment_id, email);
+    return this.http.post(
+      `http://localhost:8080/apartment/comment/add/?apartment_id=${apartment_id}&reservation_id=${reservation_id}`,
+      userComment,
+      {
+        headers: new HttpHeaders({ user_email: email }),
+      }
     );
   }
 

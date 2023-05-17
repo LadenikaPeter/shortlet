@@ -92,6 +92,20 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="comment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Comment</th>
+          <td
+            mat-cell
+            *matCellDef="let row"
+            style="color: #484848"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdropComment"
+          >
+            {{ row.comment }}
+            <i class="fa-solid fa-comment" (click)="onSeeMore(row)"></i>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
@@ -169,6 +183,8 @@
       </div>
     </div>
   </div>
+
+  <app-comment-modal></app-comment-modal>
 
   <!-- modal end -->
 </div>

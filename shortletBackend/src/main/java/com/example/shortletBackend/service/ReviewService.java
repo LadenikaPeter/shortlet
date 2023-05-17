@@ -35,7 +35,7 @@ public class ReviewService {
             if ( reservation.get().getUsers() ==users.get() || reservation.get().getApartment().getUsers() == users.get()) {
                 if (reservation.get().getCheckInDate().before(new Date())) {
 //            if (reservationRepository.existsReservationsByReservationStateAndApartment_IdAndUsers_Email(ReservationState.COMPLETED,id,email)){
-
+                    
                     Optional<Apartments> apartments=apartmentService.findById(id);
                     comments.setCommentDate(new Date());
                     comments.setUsers(users.get());

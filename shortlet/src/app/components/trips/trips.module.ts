@@ -10,11 +10,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { TripsComponent } from './trips.component';
 import { TripsRoutingModule } from './trips-routing.module';
+import { CommentModalComponent } from '../modals/comment-modal/comment-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [TripsComponent],
+  declarations: [TripsComponent, CommentModalComponent],
   imports: [
     RouterModule,
+    FormsModule,
     CommonModule,
     TripsRoutingModule,
     MatTabsModule,
@@ -24,6 +27,6 @@ import { TripsRoutingModule } from './trips-routing.module';
     MatInputModule,
     MatFormFieldModule,
   ],
-  exports: [TripsComponent],
+  exports: [TripsComponent, CommentModalComponent],
 })
 export class TripsModule {}
