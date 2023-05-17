@@ -6,6 +6,7 @@ import com.example.shortletBackend.dto.TextResponse;
 import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
+import com.example.shortletBackend.enums.ReservationState;
 import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.repositories.ReservationRepository;
 import com.example.shortletBackend.repositories.UserRepository;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 @RestController
@@ -142,6 +144,13 @@ public class UserController {
     public ResponseEntity getAllUserReservation(@RequestHeader("user_email")String email){
         ArrayList reservationDTOS = new ArrayList<>();
         for (Reservation reservation: reservationRepo.findAllByUsers(userRepository.findUsersByEmail(email).get())){
+            if (reservation.getCheckInDate().before(new Date())){
+                reservation.setReservationState(ReservationState.STARTED);
+            }
+            if (reservation.getCheckOutDate().before(new Date())){
+                reservation.setReservationState(ReservationState.COMPLETED);
+            }
+            reservationService.save(reservation);
             ReservationTableDTO old= mapper.map(reservation, ReservationTableDTO.class);
             old.setApartmentPicture(reservation.getApartment().getPictures().stream().findFirst().get().getUrl());
             reservationDTOS.add(old);
