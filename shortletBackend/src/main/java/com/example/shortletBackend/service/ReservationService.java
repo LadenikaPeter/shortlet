@@ -8,11 +8,13 @@ import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.ReservationState;
 import com.example.shortletBackend.repositories.ReservationRepository;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,14 +46,26 @@ public class ReservationService {
     }
 
     public TextResponse getReservationByHomes(String email, long id ){
+
         ArrayList<ReservationDTO> reservationDTOS = new ArrayList<>();
 
         for (Object reserve : getReservationByApartmentId(id)) {
-
+            updateReservation((Reservation) reserve);
             reservationDTOS.add(mapper.map(reserve, ReservationDTO.class));
         }
         return new TextResponse(reservationDTOS,200);
 
+    }
+
+    public Reservation updateReservation(@NonNull Reservation reservation){
+        if (reservation.getCheckInDate().before(new Date())){
+            reservation.setReservationState(ReservationState.STARTED);
+        }
+        if (reservation.getCheckOutDate().before(new Date())){
+            reservation.setReservationState(ReservationState.COMPLETED);
+        }
+        save(reservation);
+        return reservation;
     }
 
     public TextResponse addReservation(Reservation reservation, String email, long home_id){
