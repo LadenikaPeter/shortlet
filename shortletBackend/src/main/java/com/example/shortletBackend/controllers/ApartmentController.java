@@ -59,7 +59,7 @@ public class ApartmentController {
         return ResponseEntity.ok(propertyTypes);
     }
     @GetMapping("/house_type")
-    public ResponseEntity returnAllHouseTypes(){    
+    public ResponseEntity returnAllHouseTypes(){
         HouseType[] propertyTypes = HouseType.values();
         return ResponseEntity.ok(propertyTypes);
     }
