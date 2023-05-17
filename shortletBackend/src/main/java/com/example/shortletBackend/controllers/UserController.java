@@ -191,11 +191,16 @@ public class UserController {
     }
 
     @GetMapping("/user/disable/")
-    public ResponseEntity disableUser(@RequestHeader("admin_email")String email, long diasbledUserId){
+    public ResponseEntity disableUser(@RequestHeader("admin_email")String email,@RequestParam("user_id") long diasbledUserId){
         TextResponse response = userService.disableUser(diasbledUserId,email);
         return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
     }
 
+    @GetMapping("/user/enable/")
+    public ResponseEntity enableUser(@RequestHeader("admin_email")String email,@RequestParam("user_id") long enabledUserId){
+        TextResponse response = userService.enableUser(enabledUserId,email);
+        return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
+    }
 
 
 }
