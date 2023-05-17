@@ -1,11 +1,10 @@
 package com.example.shortletBackend.service;
 
-import com.example.shortletBackend.dto.ApartmentForListing;
 import com.example.shortletBackend.dto.TextResponse;
 import com.example.shortletBackend.dto.UsersDTO;
-import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.Role;
+import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -19,8 +18,10 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final ApartmentService apartmentService;
+
+
     private final ModelMapper mapper;
+    private final ApartmentRepository apartmentRepository;
 
     public void save(Users users){
         userRepository.save(users);
@@ -75,21 +76,7 @@ public class UserService {
         }
     }
 
-    public TextResponse getAllUserListing(String email){
-        Optional<Users> users= findUserByEmail(email);
-        if (users == null) {
 
-            return new TextResponse("The user does not exist",HttpStatus.NOT_FOUND.value());
-        }else {
-            ArrayList<ApartmentForListing> apartmentDto= new ArrayList<>();
-            for (Apartments apartments:apartmentService.findByUser(users.get()) ){
-                ApartmentForListing listing = mapper.map(apartments,ApartmentForListing.class);
-                listing.setPictures(apartments.getPictures().stream().findFirst().get());
-                apartmentDto.add(listing);
-            }
-            return new TextResponse(apartmentDto,200) ;
-        }
-    }
 
 
 

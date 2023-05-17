@@ -1,7 +1,9 @@
 package com.example.shortletBackend.controllers;
 
+import com.example.shortletBackend.dto.ApartmentForListing;
 import com.example.shortletBackend.dto.ReservationTableDTO;
 import com.example.shortletBackend.dto.TextResponse;
+import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.Role;
@@ -151,8 +153,19 @@ public class UserController {
 
     @GetMapping("/user/listings/")
     public ResponseEntity getAllUserHouses(@RequestHeader("user_email") String email){
-        TextResponse response = userService.getAllUserListing(email);
-        return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
+        Optional<Users> users= userService.findUserByEmail(email);
+        if (users == null) {
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The user does not exist");
+        }else {
+            ArrayList<ApartmentForListing> apartmentDto= new ArrayList<>();
+            for (Apartments apartments:apartmentService.findByUser(users.get()) ){
+                ApartmentForListing listing = mapper.map(apartments,ApartmentForListing.class);
+                listing.setPictures(apartments.getPictures().stream().findFirst().get());
+                apartmentDto.add(listing);
+            }
+            return ResponseEntity.status(200).body(apartmentDto);
+        }
 
     }
 
