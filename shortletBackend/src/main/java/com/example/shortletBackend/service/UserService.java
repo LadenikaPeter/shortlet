@@ -91,5 +91,15 @@ public class UserService {
         }
     }
 
+    public TextResponse enableUser(long id, String admin_email){
+        if (findUserByEmail(admin_email).get().getRole() == Role.ADMIN){
+            Users users = findUsersById(id).get();
+            users.setActiveUser(true);
+            save(users);
+            return new TextResponse( "The user "+ users.getName()+" has been enabled",200);
+        }else {
+            return new TextResponse("You can not perform this function",403);
+        }
+    }
 
 }

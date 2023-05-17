@@ -1,0 +1,201 @@
+<!-- filter modal -->
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button> -->
+
+<!-- Modal -->
+
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Filters</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <label>Country</label>
+        <select [(ngModel)]="selectedCountry">
+          <option *ngFor="let country of countries" [value]="country.name">
+            {{ country.name }}
+          </option>
+        </select>
+
+        <hr />
+
+        <div class="modal-body__controls">
+          <div class="row">
+            <div class="col-md-8">Minimum number of guests</div>
+            <div class="col-md-4">
+              <div class="guest_counter">
+                <h5 style="text-align: center">
+                  <span class="float-start" (click)="decrement('guest')"
+                    ><img
+                      [ngClass]="{
+                        minGuestReached: counter_maxguests === 1
+                      }"
+                      style="
+                        width: 30px;
+                        height: 30px;
+                        margin-left: 5px;
+                        cursor: pointer;
+                      "
+                      src="../../../assets/svg/minus.svg"
+                      alt=""
+                  /></span>
+                  {{ counter_maxguests }}
+                  <span class="float-end" (click)="increment('guest')"
+                    ><img
+                      [ngClass]="{
+                        maxGuestReached: counter_maxguests === max_num
+                      }"
+                      style="
+                        width: 30px;
+                        height: 30px;
+                        margin-right: 5px;
+                        cursor: pointer;
+                      "
+                      src="../../../assets/svg/add.svg"
+                      alt=""
+                  /></span>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="modal-body__controls">
+          <div class="row">
+            <div class="col-md-8">Minimum number of bedrooms</div>
+            <div class="col-md-4">
+              <div class="guest_counter">
+                <h5 style="text-align: center">
+                  <span class="float-start" (click)="decrement('bedrooms')"
+                    ><img
+                      [ngClass]="{
+                        minGuestReached: counter_bedrooms === 1
+                      }"
+                      style="
+                        width: 30px;
+                        height: 30px;
+                        margin-left: 5px;
+                        cursor: pointer;
+                      "
+                      src="../../../assets/svg/minus.svg"
+                      alt=""
+                  /></span>
+                  {{ counter_bedrooms }}
+                  <span class="float-end" (click)="increment('bedrooms')"
+                    ><img
+                      [ngClass]="{
+                        maxGuestReached: counter_bedrooms == max_num
+                      }"
+                      style="
+                        width: 30px;
+                        height: 30px;
+                        margin-right: 5px;
+                        cursor: pointer;
+                      "
+                      src="../../../assets/svg/add.svg"
+                      alt=""
+                  /></span>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+        <div class="modal-body__controls">
+          <div class="row">
+            <div class="col-md-8">Minimum number of beds</div>
+            <div class="col-md-4">
+              <div class="guest_counter">
+                <h5 style="text-align: center">
+                  <span class="float-start" (click)="decrement('beds')"
+                    ><img
+                      [ngClass]="{
+                        minGuestReached: counter_beds === 1
+                      }"
+                      style="
+                        width: 30px;
+                        height: 30px;
+                        margin-left: 5px;
+                        cursor: pointer;
+                      "
+                      src="../../../assets/svg/minus.svg"
+                      alt=""
+                  /></span>
+                  {{ counter_beds }}
+                  <span class="float-end" (click)="increment('beds')"
+                    ><img
+                      [ngClass]="{
+                        maxGuestReached: counter_beds == max_num
+                      }"
+                      style="
+                        width: 30px;
+                        height: 30px;
+                        margin-right: 5px;
+                        cursor: pointer;
+                      "
+                      src="../../../assets/svg/add.svg"
+                      alt=""
+                  /></span>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+
+        <div class="modal-body__controls">
+          <label
+            >Price from ₦{{ value_min_price }} to ₦{{ value_max_price }}</label
+          >
+          <div class="mat-slider__price">
+            <mat-slider
+              [min]="min_price"
+              [max]="max_price"
+              [discrete]="thumbLabel"
+            >
+              <input
+                value="300"
+                matSliderStartThumb
+                [(ngModel)]="value_min_price"
+              />
+              <input
+                value="400"
+                matSliderEndThumb
+                [(ngModel)]="value_max_price"
+              />
+            </mat-slider>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Clear all
+        </button>
+        <button type="button" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </div>
+</div>

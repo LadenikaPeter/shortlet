@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { HandlingClosingProfileTab } from 'src/app/services/handling-profile.service';
+import { NewShortletService } from 'src/app/services/new-shortlet.service';
 import { NotificationService } from 'src/app/services/notifications.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // notifications: string[] = [];
   // switchTextClick :boolean =false
   pendingReq: any = [];
+  countries: any[] = [];
   pendingRequestvalue: number;
   request: boolean = false;
 
@@ -33,7 +35,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private router: Router,
     private dataStorage: DataStorageService,
     private notif: NotificationService,
-    private adminS: AdminService
+    private adminS: AdminService,
+    private newshortletS: NewShortletService
   ) {}
 
   ngOnInit(): void {
@@ -85,14 +88,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         (error) => this.notif.errorMessage(error.message)
       );
 
-    // this.notif.notifications.subscribe(notification => {
-    //   // add new notification to list
-    //   this.notifications.push(notification);
-    //   console.log(notification)
-    // });
-
     this.adminS.getAllPendingRequest().subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       this.pendingReq = response;
       this.pendingRequestvalue = this.pendingReq.length;
       this.dataStorage.pendindRequestValue.next(this.pendingRequestvalue);
@@ -106,6 +103,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (this.pendingRequestvalue > 0) {
         this.request = true;
       }
+    });
+
+    this.newshortletS.getCountry().subscribe((response) => {
+      this.countries = response.map((country) => {
+        return { name: country.name, code: country.alpha2Code };
+      });
+      // console.log(this.countries);
     });
   }
 

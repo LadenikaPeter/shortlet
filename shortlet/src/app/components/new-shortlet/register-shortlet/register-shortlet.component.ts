@@ -65,6 +65,9 @@ export class RegisterShortletComponent {
       description: new FormControl(''),
       address: new FormControl(''),
       country: new FormControl(''),
+      users: new FormGroup({
+        phoneNo: new FormControl('')
+      }),
       cleaningFee: new FormControl(''),
       price: new FormControl(''),
       maxNoOfGuests: new FormControl(''),
@@ -86,6 +89,8 @@ export class RegisterShortletComponent {
       }),
       pictures: new FormArray([]),
     });
+
+    
 
     // get countries list
     this.newshortletS.getCountry().subscribe((response) => {
@@ -179,9 +184,13 @@ export class RegisterShortletComponent {
           fileType: this.getFileType(file.type),
           url: this.imagePreview,
         };
-        console.log(imageObject);
-        this.shortletDocumentFile.push(imageObject);
-        console.log(this.shortletDocumentFile);
+        if (this.shortletDocumentFile.length < 5) {
+          // console.log(imageObject);
+          this.shortletDocumentFile.push(imageObject);
+          console.log(this.shortletDocumentFile);
+        } else {
+          this.notif.warningMessage('Maximum of 5 pictures');
+        }
       });
     } else {
       this.resetFileInput();
@@ -198,6 +207,10 @@ export class RegisterShortletComponent {
   }
 
   onSubmit(form: FormGroup) {
+    const users = {
+      phoneNo: 'number'
+    }
+
     if (this.shortletDocumentFile.length < 5) {
       this.notif.warningMessage('Please Upload 5 pictures');
     } else {
