@@ -4,11 +4,11 @@ import com.example.shortletBackend.dto.TextResponse;
 import com.example.shortletBackend.dto.UsersDTO;
 import com.example.shortletBackend.entities.Users;
 import com.example.shortletBackend.enums.Role;
+import com.example.shortletBackend.repositories.ApartmentRepository;
 import com.example.shortletBackend.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,7 +18,10 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+
+
     private final ModelMapper mapper;
+    private final ApartmentRepository apartmentRepository;
 
     public void save(Users users){
         userRepository.save(users);
@@ -42,7 +45,7 @@ public class UserService {
         ) {
             userList.add(mapper.map(user, UsersDTO.class));
         }
-        return userList;
+        return  userList;
     }
 
     public Optional<Users> findUsersById(Long id){
@@ -54,7 +57,7 @@ public class UserService {
         return userRepository.findUsersByEmail(email);
     }
 
-    public ResponseEntity updateUser(String email, Users users){
+    public TextResponse updateUser(String email, Users users){
         Optional<Users> oldInfo= findUserByEmail(email);
         if (oldInfo.isPresent()){
 
@@ -66,12 +69,16 @@ public class UserService {
             }
 
             save(oldInfo.get());
-            return ResponseEntity.ok(mapper.map(oldInfo.get(), UsersDTO.class));
+            return new TextResponse((mapper.map(oldInfo.get(), UsersDTO.class)),200);
         }
         else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return new TextResponse("This user does not exist",HttpStatus.NOT_FOUND.value());
         }
     }
+
+
+
+
 
     public TextResponse disableUser(long id, String admin_email){
         if (findUserByEmail(admin_email).get().getRole() == Role.ADMIN){

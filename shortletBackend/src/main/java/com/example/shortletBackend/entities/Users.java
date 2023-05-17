@@ -49,5 +49,7 @@ public class Users {
     private Set<Review> reviewSet= new HashSet<>();
     @OneToMany(mappedBy = "users")
     private Set<Comments> comments = new HashSet<>();
+    @OneToOne
+    private Wallet wallet;
 
 }
