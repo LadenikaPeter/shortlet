@@ -1,17 +1,15 @@
 package com.example.shortletBackend.controllers;
 
-import com.example.shortletBackend.dto.ApartmentForListing;
 import com.example.shortletBackend.dto.ReservationTableDTO;
 import com.example.shortletBackend.dto.TextResponse;
-import com.example.shortletBackend.entities.Apartments;
 import com.example.shortletBackend.entities.Reservation;
 import com.example.shortletBackend.entities.Users;
-import com.example.shortletBackend.enums.ReservationState;
 import com.example.shortletBackend.enums.Role;
 import com.example.shortletBackend.repositories.ReservationRepository;
 import com.example.shortletBackend.repositories.UserRepository;
 import com.example.shortletBackend.service.ApartmentService;
 import com.example.shortletBackend.service.MailService;
+import com.example.shortletBackend.service.ReservationService;
 import com.example.shortletBackend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -31,6 +29,7 @@ public class UserController {
     private final UserRepository userRepository;
     private final ApartmentService apartmentService;
     private final ReservationRepository reservationRepo;
+    private final ReservationService reservationService;
     private final MailService mailService;
     private final ModelMapper mapper;
     private final TextResponse customResponse ;
@@ -124,38 +123,16 @@ public class UserController {
     @PutMapping("/update_user/")
     public ResponseEntity updateUser(@RequestHeader("user_email") String email,
          @RequestBody Users users){
-        return userService.updateUser(email, users);
+        TextResponse response = userService.updateUser(email, users);
+        return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
     }
+
 
     @PutMapping("/addReservation/")
     public ResponseEntity addReservation(@RequestBody Reservation reservation,
          @RequestParam("user_email")String email,@RequestParam("apartment_id") long home_id){
-        Optional<Users> user = userService.findUserByEmail(email);
-        Optional<Apartments> apartments= apartmentService.findById(home_id);
-
-        if(user.isPresent()){
-            if(apartments.isPresent()){
-
-                reservation.setUsers(user.get());
-                reservation.setApartment(apartments.get());
-                reservation.setReservationState(ReservationState.PENDING);
-                reservation.setReservationCode(apartments.get().getName().substring(0,2)+reservationRepo.findAll().size()+
-                        user.get().getEmail().substring(0,1));
-                user.get().getReservationSet().add(reservation);
-                apartments.get().getReservations().add(reservation);
-
-                apartmentService.save(apartments.get());
-                reservationRepo.save(reservation);
-                userRepository.save(user.get());
-                return ResponseEntity.status(HttpStatus.ACCEPTED).body(reservation);
-            }else {
-                customResponse.setMessage("The house can not be found");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
-            }
-        }else {
-            customResponse.setMessage("The user can not be found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
-        }
+        TextResponse response = reservationService.addReservation(reservation,email,home_id);
+        return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
 
     }
 
@@ -174,19 +151,8 @@ public class UserController {
 
     @GetMapping("/user/listings/")
     public ResponseEntity getAllUserHouses(@RequestHeader("user_email") String email){
-        Optional<Users> users= userRepository.findUsersByEmail(email);
-        if (users == null) {
-            customResponse.setMessage("The user does not exist");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(customResponse);
-        }else {
-            ArrayList<ApartmentForListing> apartmentDto= new ArrayList<>();
-            for (Apartments apartments:apartmentService.findByUser(users.get()) ){
-                ApartmentForListing listing = mapper.map(apartments,ApartmentForListing.class);
-                listing.setPictures(apartments.getPictures().stream().findFirst().get());
-                apartmentDto.add(listing);
-            }
-            return ResponseEntity.ok(apartmentDto) ;
-        }
+        TextResponse response = userService.getAllUserListing(email);
+        return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
 
     }
 

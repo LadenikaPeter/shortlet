@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor
 @NoArgsConstructor
 public class TextResponse {
-    private String message;
+    private Object message;
     private int statusCode;
 }

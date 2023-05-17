@@ -194,7 +194,8 @@ public class ApartmentController {
     @PutMapping("/apartment/edit/")
     public ResponseEntity editHome(@RequestHeader("user_email") String email,@RequestParam("apartment_id") long id
             ,@RequestBody Apartments updatedApartments) {
-        return apartmentService.updateApartment(updatedApartments,email,id);
+        TextResponse response = apartmentService.updateApartment(updatedApartments,email,id);
+        return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
     }
 
     @DeleteMapping("/home/picture/delete")

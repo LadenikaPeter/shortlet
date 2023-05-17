@@ -1,16 +1,15 @@
 package com.example.shortletBackend.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @AllArgsConstructor @Getter @Setter
-@ToString
+@ToString  @NoArgsConstructor @Entity
 public class Wallet {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int balance;
     @OneToOne
