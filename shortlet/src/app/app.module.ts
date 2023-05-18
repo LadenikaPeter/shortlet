@@ -42,6 +42,9 @@ import { HomeModule } from './components/home/home.module';
 import { ShortletModule } from './components/shortlet/shortlet-module.module';
 import { NewShortletModule } from './components/new-shortlet/new-shortlet.module';
 import { FilterModalComponent } from './components/header/filter-modal/filter-modal.component';
+import { EditListingComponent } from './components/modals/edit-listing/edit-listing.component';
+import { ViewListingComponent } from './components/modals/view-listing/view-listing.component';
+import { DeleteListingComponent } from './components/modals/delete-listing/delete-listing.component';
 // import { CommentModalComponent } from './components/modals/comment-modal/comment-modal.component';
 
 @NgModule({
@@ -52,6 +55,7 @@ import { FilterModalComponent } from './components/header/filter-modal/filter-mo
     SearchBarComponent,
     ClickOutsideDirective,
     FilterModalComponent,
+    EditListingComponent,
   ],
   imports: [
     CommonModule,

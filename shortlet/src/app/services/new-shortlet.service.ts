@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { NewShortlet, Listings } from '../interface/shortlet';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class NewShortletService {
+  getListingData = new Subject();
   constructor(private http: HttpClient) {}
   registerNewShortlet(formData, email) {
     // const email = '';
@@ -34,6 +36,16 @@ export class NewShortletService {
     return this.http.get<Listings>(
       environment.endpoint + `/user/listings/`,
       options
+    );
+  }
+
+  DeleteListing(id: number, email: string) {
+    return this.http.delete(
+      `http://localhost:8080/apartment/delete/?apartment_id=${id}`,
+      {
+        headers: new HttpHeaders({ user_email: email }),
+        responseType: 'text',
+      }
     );
   }
 

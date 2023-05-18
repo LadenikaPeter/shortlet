@@ -19,11 +19,13 @@ export class AuthServiceInterceptor implements HttpInterceptor {
       const user = JSON.parse(localStorage.getItem('shortletUserData'));
       const user_email = user.email;
       const modifiedRequest = req.clone({
-        headers: new HttpHeaders({ user_email: user_email }),
+        headers: new HttpHeaders({
+          user_email: user_email,
+          'Access-Control-Allow-Headers': 'Content-Type',
+        }),
       });
       return next.handle(modifiedRequest);
     }
-
     return next.handle(req);
   }
 }

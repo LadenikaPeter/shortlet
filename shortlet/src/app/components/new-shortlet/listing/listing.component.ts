@@ -27,11 +27,10 @@ export class ListingComponent {
   displayedColumns: string[] = [
     'name',
     'address',
-    'noOfBathrooms',
-    'noOfBedrooms',
-    'maxNoOfGuests',
-    'noOfBeds',
     'country',
+    'maxNoOfGuests',
+    'status',
+    'action',
   ];
   dataSource: MatTableDataSource<UserData>;
 
@@ -86,5 +85,10 @@ export class ListingComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onSeemore(row: any) {
+    // console.log(row);
+    this.newshortletS.getListingData.next(row);
   }
 }

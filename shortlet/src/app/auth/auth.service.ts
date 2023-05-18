@@ -36,7 +36,7 @@ export class AuthService {
   loginWithGoogle() {
     signInWithPopup(this.auth, new GoogleAuthProvider())
       .then((authenticated_user) => {
-        // console.log(authentica);
+        console.log(authenticated_user);
         let userToken: string;
         authenticated_user.user.getIdToken().then((token: string) => {
           const expiresIn = 3600;
