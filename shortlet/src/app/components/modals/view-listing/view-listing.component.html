@@ -1,0 +1,56 @@
+<div
+  class="modal fade"
+  id="viewListing"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">More info</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <span class="moreInfo_headings">Name:</span>
+          {{ userData.name }}
+        </p>
+        <p>
+          <span class="moreInfo_headings">Address:</span>
+          {{ userData.address }}
+        </p>
+        <p>
+          <span class="moreInfo_headings">Country:</span>
+          {{ userData.country }}
+        </p>
+
+        <p>
+          <span class="moreInfo_headings">Status:</span>
+          {{ userData.homeState | lowercase }}
+        </p>
+        <p>
+          <span class="moreInfo_headings">Maximum number of guests:</span>
+          {{ userData.maxNoOfGuests }}
+        </p>
+        <p>
+          <span class="moreInfo_headings"> Number of bathrooms:</span>
+          {{ userData.noOfBathrooms }}
+        </p>
+        <p>
+          <span class="moreInfo_headings">Number of bedrooms:</span>
+          {{ userData.noOfBedrooms }}
+        </p>
+        <p>
+          <span class="moreInfo_headings">Number of beds:</span>
+          {{ userData.noOfBeds }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

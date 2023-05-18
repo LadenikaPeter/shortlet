@@ -12,21 +12,35 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewShortletRoutingModule } from './new-shortlet-routing.module';
+import { ViewListingComponent } from '../modals/view-listing/view-listing.component';
+import { DeleteListingComponent } from '../modals/delete-listing/delete-listing.component';
 
 @NgModule({
-    declarations:[ListingComponent, RegisterShortletComponent, NewShortletComponent],
-    imports:[
-        ReactiveFormsModule,
-        CommonModule,
-        RouterModule,
-        MatTabsModule,
-        MatSortModule,
-        MatPaginatorModule,
-        MatTableModule,
-        MatInputModule,
-        MatFormFieldModule,
-        NewShortletRoutingModule
-    ],
-    exports:[ListingComponent, RegisterShortletComponent, NewShortletComponent]
+  declarations: [
+    ListingComponent,
+    RegisterShortletComponent,
+    NewShortletComponent,
+    ViewListingComponent,
+    DeleteListingComponent,
+  ],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterModule,
+    MatTabsModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatInputModule,
+    MatFormFieldModule,
+    NewShortletRoutingModule,
+  ],
+  exports: [
+    ListingComponent,
+    RegisterShortletComponent,
+    NewShortletComponent,
+    ViewListingComponent,
+    DeleteListingComponent,
+  ],
 })
 export class NewShortletModule {}

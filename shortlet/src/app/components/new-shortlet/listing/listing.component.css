@@ -1,10 +1,28 @@
-
 h1 {
-    padding: 1rem 0;
+  padding: 1rem 0;
 }
 
+.fa-xl {
+  cursor: pointer;
+  color: #ff0066;
+  margin-right: 10px;
+}
 
+.mat-column-status {
+  width: 14%;
+}
 
+.mat-column-address {
+  width: 20%;
+}
+
+.mat-column-country {
+  width: 20%;
+}
+
+.mat-column-name {
+  width: 20%;
+}
 ::ng-deep .mat-mdc-tab .mdc-tab__text-label,
 .mat-mdc-tab-link .mdc-tab__text-label {
   color: #484848;
@@ -47,8 +65,7 @@ mat-paginator {
 
 ::ng-deep .mat-mdc-tab .mdc-tab__text-label,
 .mat-mdc-tab-link .mdc-tab__text-label {
-    color: #484848;
-
+  color: #484848;
 }
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -149,14 +166,12 @@ mat-paginator {
   }
 }
 
-
 /* mg */
 
 .mat-column-maxNoOfGuests,
 .mat-column-noOfBathrooms,
 .mat-column-noOfBedrooms,
-.mat-column-noOfBeds{
+.mat-column-noOfBeds {
   width: 10%;
   padding: 10px 16px;
-  
 }
