@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -39,9 +40,10 @@ public class UserController {
     private final TextResponse customResponse ;
 
 
+
     @GetMapping("/")
-    public ResponseEntity getUser(@RequestHeader("user_email")String email){
-        return ResponseEntity.of(userService.findUserByEmail(email));
+    public ResponseEntity getUser(Principal principal) {
+        return ResponseEntity.ok(userService.findUserByEmail(principal.getName()));
     }
 
     //get all user with role staff
@@ -61,13 +63,16 @@ public class UserController {
 //    get all user with admin role
     @GetMapping("/admin")
     public ResponseEntity getAllAdminUsers(){
+
         return ResponseEntity.ok(userService.findAllUsersByRole(Role.ADMIN));
     }
     //make an admin a user
     @PutMapping("/user/update/role/")
-    public ResponseEntity removeAnAdminUser(@RequestHeader("admin_email")String email
+    public ResponseEntity removeAnAdminUser(Principal principal
             , @RequestParam("user_id") long id) throws MessagingException {
-        Optional<Users> admin_user =userService.findUserByEmail(email);
+
+
+        Optional<Users> admin_user =userService.findUserByEmail(principal.getName());
         Optional<Users> users=userService.findUsersById(id);
         if (admin_user.isPresent() && users.isPresent()){
             if (admin_user.get().getRole() == Role.ADMIN){
@@ -92,9 +97,9 @@ public class UserController {
     }
 
     @PutMapping("/user/update/")
-    public ResponseEntity createAnAdminUser(@RequestHeader("admin_email")String email
+    public ResponseEntity createAnAdminUser(Principal principal
             , @RequestParam("user_id") long id) throws MessagingException {
-        Optional<Users> admin_user =userService.findUserByEmail(email);
+        Optional<Users> admin_user =userService.findUserByEmail(principal.getName());
         Optional<Users> users=userService.findUsersById(id);
         if (admin_user.isPresent() && users.isPresent()){
             if (admin_user.get().getRole() == Role.ADMIN && users.get().getRole() == Role.STAFF){
@@ -125,25 +130,25 @@ public class UserController {
     }
 
     @PutMapping("/update_user/")
-    public ResponseEntity updateUser(@RequestHeader("user_email") String email,
+    public ResponseEntity updateUser(Principal principal,
          @RequestBody Users users){
-        TextResponse response = userService.updateUser(email, users);
+        TextResponse response = userService.updateUser(principal.getName(), users);
         return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
     }
 
 
     @PutMapping("/addReservation/")
     public ResponseEntity addReservation(@RequestBody Reservation reservation,
-         @RequestParam("user_email")String email,@RequestParam("apartment_id") long home_id){
-        TextResponse response = reservationService.addReservation(reservation,email,home_id);
+         Principal principal,@RequestParam("apartment_id") long home_id){
+        TextResponse response = reservationService.addReservation(reservation,principal.getName(),home_id);
         return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
 
     }
 
     @GetMapping("/reservation/")
-    public ResponseEntity getAllUserReservation(@RequestHeader("user_email")String email){
+    public ResponseEntity getAllUserReservation(Principal principal){
         ArrayList reservationDTOS = new ArrayList<>();
-        for (Reservation reservation: reservationRepo.findAllByUsers(userRepository.findUsersByEmail(email).get())){
+        for (Reservation reservation: reservationRepo.findAllByUsers(userRepository.findUsersByEmail(principal.getName()).get())){
             if (reservation.getCheckInDate().before(new Date())){
                 reservation.setReservationState(ReservationState.STARTED);
             }
@@ -161,8 +166,8 @@ public class UserController {
     }
 
     @GetMapping("/user/listings/")
-    public ResponseEntity getAllUserHouses(@RequestHeader("user_email") String email){
-        Optional<Users> users= userService.findUserByEmail(email);
+    public ResponseEntity getAllUserHouses(Principal principal){
+        Optional<Users> users= userService.findUserByEmail(principal.getName());
         if (users == null) {
 
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The user does not exist");
@@ -179,14 +184,14 @@ public class UserController {
     }
 
     @GetMapping("/user/disable/")
-    public ResponseEntity disableUser(@RequestHeader("admin_email")String email,@RequestParam("user_id") long diasbledUserId){
-        TextResponse response = userService.disableUser(diasbledUserId,email);
+    public ResponseEntity disableUser(Principal principal,@RequestParam("disabledUserId") long disabledUserId){
+        TextResponse response = userService.disableUser(disabledUserId,principal.getName());
         return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
     }
 
     @GetMapping("/user/enable/")
-    public ResponseEntity enableUser(@RequestHeader("admin_email")String email,@RequestParam("user_id") long enabledUserId){
-        TextResponse response = userService.enableUser(enabledUserId,email);
+    public ResponseEntity enableUser(Principal principal,@RequestParam("user_id") long enabledUserId){
+        TextResponse response = userService.enableUser(enabledUserId,principal.getName());
         return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
     }
 

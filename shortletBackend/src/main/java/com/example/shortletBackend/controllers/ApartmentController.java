@@ -23,6 +23,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
@@ -66,9 +68,9 @@ public class ApartmentController {
 
     //make a house verified
     @PutMapping("/home/update/verify")
-    public ResponseEntity updatePendingHouse(@RequestHeader("user_email")String email
+    public ResponseEntity updatePendingHouse(Principal principal
             , @RequestParam("apartment_id") long id) throws MessagingException {
-        if (userService.findUserByEmail(email).get().getRole() == Role.ADMIN){
+        if (userService.findUserByEmail(principal.getName()).get().getRole() == Role.ADMIN){
             Optional<Apartments> updatedApartment = apartmentService.findById(id);
             updatedApartment.get().setHomeState(HomeState.VERIFIED);
             apartmentService.save(updatedApartment.get());
@@ -88,9 +90,9 @@ public class ApartmentController {
 
     }
     @PutMapping("/home/update/unverify")
-    public ResponseEntity updateHouse(@RequestHeader("user_email")String email
+    public ResponseEntity updateHouse(Principal principal
             , @RequestParam("apartment_id") long id) throws MessagingException {
-        if (userService.findUserByEmail(email).get().getRole() == Role.ADMIN){
+        if (userService.findUserByEmail(principal.getName()).get().getRole() == Role.ADMIN){
             Optional<Apartments> updatedApartment = apartmentService.findById(id);
             updatedApartment.get().setHomeState(HomeState.UNVERIFIED);
             apartmentService.save(updatedApartment.get());
@@ -165,8 +167,8 @@ public class ApartmentController {
 
     //user creating a new home
     @PostMapping("/addHome/")
-    public ResponseEntity addHome(@RequestHeader("user_email") String email, @RequestBody Apartments apartments) throws MessagingException {
-        Optional<Users> users= userService.findUserByEmail(email);
+    public ResponseEntity addHome(Principal principal, @RequestBody Apartments apartments) throws MessagingException {
+        Optional<Users> users= userService.findUserByEmail(principal.getName());
         if (users.isPresent()) {
             if (apartments.getPictures() != null) {
                 for (Pictures picture: apartments.getPictures()
@@ -190,11 +192,11 @@ public class ApartmentController {
         }
 
     }
-//    TODO edit listing
+
     @PutMapping("/apartment/edit/")
-    public ResponseEntity editHome(@RequestHeader("user_email") String email,@RequestParam("apartment_id") long id
+    public ResponseEntity editHome(Principal principal,@RequestParam("apartment_id") long id
             ,@RequestBody Apartments updatedApartments) {
-        TextResponse response = apartmentService.updateApartment(updatedApartments,email,id);
+        TextResponse response = apartmentService.updateApartment(updatedApartments,principal.getName(),id);
         return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
     }
 
@@ -208,8 +210,8 @@ public class ApartmentController {
     }
 
     @DeleteMapping("/apartment/delete/")
-    public ResponseEntity deleteApartment(@RequestParam("apartment_id")long id, @RequestHeader("user_email")String email){
-        return ResponseEntity.ok(apartmentService.deleteApartment(id,email));
+    public ResponseEntity deleteApartment(@RequestParam("apartment_id")long id, Principal principal){
+        return ResponseEntity.ok(apartmentService.deleteApartment(id,principal.getName()));
     }
 
 

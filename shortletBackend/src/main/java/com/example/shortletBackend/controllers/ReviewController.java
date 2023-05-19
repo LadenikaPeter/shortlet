@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @AllArgsConstructor
 @RestController
 @Slf4j
@@ -19,14 +21,14 @@ public class ReviewController {
 
     @PostMapping("/apartment/comment/add/")
     public ResponseEntity addComment(@RequestParam("apartment_id")long id, @RequestBody Comments comments
-            , @RequestHeader("user_email")String email,@RequestParam("reservation_id") long reservation_id){
-        return reviewService.addComment(email, comments, id,reservation_id);
+            , Principal principal, @RequestParam("reservation_id") long reservation_id){
+        return reviewService.addComment(principal.getName(), comments, id,reservation_id);
     }
 
     @PostMapping("/apartment/review/add/")
-    public ResponseEntity addReview(@RequestHeader("user_email")String email, @RequestParam("apartment_id")long id
+    public ResponseEntity addReview(Principal principal, @RequestParam("apartment_id")long id
             , @RequestBody Review review){
-       return reviewService.addRating(email,review,id);
+       return reviewService.addRating(principal.getName(),review,id);
 
     }
 
