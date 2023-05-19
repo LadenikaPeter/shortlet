@@ -25,15 +25,11 @@ export class TripsService {
     const checkout = this.dateConverterforCheckOut(checkOutDate);
     // console.log(checkin, checkout);
     this.http
-      .put(
-        environment.endpoint +
-          `/addReservation/?user_email=${email}&apartment_id=${id}`,
-        {
-          checkInDate: checkin,
-          checkOutDate: checkout,
-          price: price,
-        }
-      )
+      .put(environment.endpoint + `/addReservation/?apartment_id=${id}`, {
+        checkInDate: checkin,
+        checkOutDate: checkout,
+        price: price,
+      })
       .subscribe((res) => {
         console.log(res);
         this.notif.successMessage('Reservation Successful');
@@ -51,14 +47,15 @@ export class TripsService {
     userComment: { comment: string },
     reservation_id: number,
     apartment_id: number,
-    email: string
+    email: string,
+    token: string
   ) {
     console.log(userComment, reservation_id, apartment_id, email);
     return this.http.post(
       `http://localhost:8080/apartment/comment/add/?apartment_id=${apartment_id}&reservation_id=${reservation_id}`,
       userComment,
       {
-        headers: new HttpHeaders({ user_email: email }),
+        headers: new HttpHeaders({ Authorization: token }),
       }
     );
   }

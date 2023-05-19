@@ -22,6 +22,7 @@ export class ListingComponent {
   username: string;
   newListing: any;
   noPendingListings: boolean = false;
+  token: string;
   pendingListingsArray: any = [];
 
   displayedColumns: string[] = [
@@ -50,12 +51,13 @@ export class ListingComponent {
     //google user info displays
     this.authS.user.subscribe((user: User) => {
       if (user) {
+        this.token = user.oauthAccessToken;
         this.username = user.displayName;
         this.user_email = user.email;
       }
     });
 
-    this.newshortletS.getListing(this.user_email).subscribe(
+    this.newshortletS.getListing(this.user_email, this.token).subscribe(
       (response) => {
         console.log(response);
         this.newListing = response;

@@ -14,6 +14,7 @@ export class CommentModalComponent implements OnInit {
   apartmentId: number;
   reservationId: number;
   user_email: string;
+  token: string;
 
   constructor(
     private tripsS: TripsService,
@@ -33,10 +34,12 @@ export class CommentModalComponent implements OnInit {
     this.authS.user.subscribe((user: User) => {
       if (user) {
         console.log(user.displayName);
+        this.token = user.oauthAccessToken;
         this.user_email = user.email;
         // console.log(this.username);
       } else {
         this.user_email = null;
+        this.token = null;
       }
     });
   }
@@ -54,7 +57,8 @@ export class CommentModalComponent implements OnInit {
           userComment,
           +this.reservationId,
           +this.apartmentId,
-          this.user_email
+          this.user_email,
+          this.token
         )
         .subscribe((res) => {
           console.log(res);

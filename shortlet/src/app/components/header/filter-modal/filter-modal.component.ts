@@ -24,12 +24,12 @@ export class FilterModalComponent implements OnInit {
   constructor(private newshortletS: NewShortletService) {}
 
   ngOnInit(): void {
-    this.newshortletS.getCountry().subscribe((response) => {
-      this.countries = response.map((country) => {
-        return { name: country.name, code: country.alpha2Code };
-      });
-      // console.log(this.countries);
-    });
+    // this.newshortletS.getCountry().subscribe((response) => {
+    //   this.countries = response.map((country) => {
+    //     return { name: country.name, code: country.alpha2Code };
+    //   });
+    //   // console.log(this.countries);
+    // });
   }
 
   increment(id: any) {

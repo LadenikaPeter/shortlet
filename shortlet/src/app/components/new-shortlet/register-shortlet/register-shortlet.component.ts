@@ -39,6 +39,7 @@ export class RegisterShortletComponent {
   @ViewChild('shortletFile', /* TODO: add static flag */ { read: ElementRef })
   shortletFile: ElementRef;
   shortletDocumentFile: Array<any> = new Array();
+  token: string;
 
   countries: any[] = [];
 
@@ -66,7 +67,7 @@ export class RegisterShortletComponent {
       address: new FormControl(''),
       country: new FormControl(''),
       users: new FormGroup({
-        phoneNo: new FormControl('')
+        phoneNo: new FormControl(''),
       }),
       cleaningFee: new FormControl(''),
       price: new FormControl(''),
@@ -90,8 +91,6 @@ export class RegisterShortletComponent {
       pictures: new FormArray([]),
     });
 
-    
-
     // get countries list
     this.newshortletS.getCountry().subscribe((response) => {
       this.countries = response.map((country) => {
@@ -103,6 +102,7 @@ export class RegisterShortletComponent {
     //google user info displays
     this.isAuth_Subcription = this.authS.user.subscribe((user: User) => {
       if (user) {
+        this.token = user.oauthAccessToken;
         this.username = user.displayName;
         this.user_email = user.email;
       }
@@ -208,8 +208,8 @@ export class RegisterShortletComponent {
 
   onSubmit(form: FormGroup) {
     const users = {
-      phoneNo: 'number'
-    }
+      phoneNo: 'number',
+    };
 
     if (this.shortletDocumentFile.length < 5) {
       this.notif.warningMessage('Please Upload 5 pictures');
@@ -221,7 +221,7 @@ export class RegisterShortletComponent {
 
       // api service called
       this.newshortletS
-        .registerNewShortlet(formData, this.user_email)
+        .registerNewShortlet(formData, this.user_email, this.token)
         .subscribe(
           (response) => {
             // console.log((this.newShortlet = response));
@@ -233,7 +233,7 @@ export class RegisterShortletComponent {
 
       //timeout function that redirects back to the /user-listings of the new homes after a user successfully submits the form
       setTimeout(() => {
-        this.adminS.getAllPendingRequest().subscribe((res) => {
+        this.adminS.getAllPendingRequest(this.token).subscribe((res) => {
           this.pendingRequestArray = res;
           this.dataStorage.pendindRequestValue.next(
             this.pendingRequestArray.length
