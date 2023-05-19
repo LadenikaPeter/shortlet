@@ -84,10 +84,12 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
           <td mat-cell *matCellDef="let row">
-            <i
+            <!-- <i
               class="fa-solid fa-pen-to-square"
               style="color: grey; margin-right: 10px"
-            ></i>
+              data-bs-toggle="modal"
+              data-bs-target="#editListing"
+            ></i> -->
 
             <i
               class="fa fa-circle-info fa-xl"
@@ -124,3 +126,4 @@
 
 <app-view-listing />
 <app-delete-listing />
+<app-edit-listing />

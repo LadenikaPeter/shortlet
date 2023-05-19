@@ -21,6 +21,7 @@ import { UserService } from '../services/user.service';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   activeUser: boolean;
+  oauthAccessToken: string;
   private expirationTimer: any;
   user = new BehaviorSubject<User>(null);
   userRole = new BehaviorSubject<UserRole>(null);
@@ -35,23 +36,43 @@ export class AuthService {
 
   loginWithGoogle() {
     signInWithPopup(this.auth, new GoogleAuthProvider())
-      .then((authenticated_user) => {
-        console.log(authenticated_user);
-        let userToken: string;
-        authenticated_user.user.getIdToken().then((token: string) => {
-          const expiresIn = 3600;
+      .then(
+        (authenticated_user: {
+          user: any;
+          providerId: string;
+          _tokenResponse: any;
+          operationType: 'link' | 'reauthenticate' | 'signIn';
+        }) => {
+          console.log(authenticated_user);
+          const obj: {
+            user: any;
+            providerId: string;
+            _tokenResponse: any;
+            operationType: 'link' | 'reauthenticate' | 'signIn';
+          } = { ...authenticated_user };
+          console.log(obj);
+          let { _tokenResponse } = obj;
+          console.log(_tokenResponse);
+          console.log(_tokenResponse.oauthAccessToken);
+          this.oauthAccessToken = _tokenResponse.oauthAccessToken;
 
-          this.handleAuthentication(
-            authenticated_user.user.email,
-            authenticated_user.user.displayName,
-            authenticated_user.user.photoURL,
-            token,
-            expiresIn
-          );
-        });
+          let userToken: string;
+          authenticated_user.user.getIdToken().then((token: string) => {
+            const expiresIn = 3600;
 
-        this.notif.successMessage('Successfully logged in');
-      })
+            this.handleAuthentication(
+              authenticated_user.user.email,
+              authenticated_user.user.displayName,
+              authenticated_user.user.photoURL,
+              token,
+              expiresIn,
+              this.oauthAccessToken
+            );
+          });
+
+          this.notif.successMessage('Successfully logged in');
+        }
+      )
       .catch((error) => {
         this.notif.errorMessage(error.message);
       });
@@ -62,6 +83,7 @@ export class AuthService {
       email: string;
       displayName: string;
       photoUrl: string;
+      oauthAccessToken: string;
       _token: string;
       _tokenExpirationDate: Date;
     } = JSON.parse(localStorage.getItem('shortletUserData'));
@@ -78,6 +100,7 @@ export class AuthService {
       userData.email,
       userData.displayName,
       userData.photoUrl,
+      userData.oauthAccessToken,
       userData._token,
       new Date(userData._tokenExpirationDate)
     );
@@ -103,7 +126,8 @@ export class AuthService {
     displayName: string,
     photoURL: string,
     userToken: string,
-    expiresIn: number
+    expiresIn: number,
+    oauthAccessToken: string
   ) {
     this.http
       .post(environment.endpoint + '/signup', {
@@ -120,6 +144,7 @@ export class AuthService {
       email,
       displayName,
       photoURL,
+      oauthAccessToken,
       userToken,
       expirationDate
     );

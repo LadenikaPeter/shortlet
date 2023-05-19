@@ -21,6 +21,7 @@ export class AuthServiceInterceptor implements HttpInterceptor {
       const modifiedRequest = req.clone({
         headers: new HttpHeaders({
           user_email: user_email,
+
           'Access-Control-Allow-Headers': 'Content-Type',
         }),
       });
