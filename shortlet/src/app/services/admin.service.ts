@@ -13,48 +13,50 @@ export class AdminService {
     return this.http.get(environment.endpoint + '/admin');
   }
 
-  makeUserAdmin(id: number, email: string) {
+  makeUserAdmin(id: number, email: string, token: string) {
     return this.http.put(
       environment.endpoint + `/user/update/?user_id=${id}`,
       {},
       {
-        headers: new HttpHeaders({ admin_email: email }),
+        headers: new HttpHeaders({ Authorization: token }),
       }
     );
     // console.log(id);
   }
 
-  revokeAdminAccess(id: number, email: string) {
+  revokeAdminAccess(id: number, email: string, token: string) {
     return this.http.put(
       environment.endpoint + `/user/update/role/?user_id=${id}`,
       {},
       {
-        headers: new HttpHeaders({ admin_email: email }),
+        headers: new HttpHeaders({ Authorization: token }),
       }
     );
   }
 
-  getAllPendingRequest() {
-    return this.http.get(environment.endpoint + '/homes/PENDING?');
+  getAllPendingRequest(token: string) {
+    return this.http.get(environment.endpoint + '/homes/PENDING?', {
+      headers: new HttpHeaders({ Authorization: token }),
+    });
   }
 
-  rejectListing(id: number, email: string) {
+  rejectListing(id: number, email: string, token: string) {
     // console.log(id);
     return this.http.put(
       environment.endpoint + `/home/update/unverify?apartment_id=${id}`,
       {},
       {
-        headers: new HttpHeaders({ user_email: email }),
+        headers: new HttpHeaders({ Authorization: token }),
       }
     );
   }
 
-  acceptListing(id: number, email: string) {
+  acceptListing(id: number, email: string, token: string) {
     return this.http.put(
       environment.endpoint + `/home/update/verify?apartment_id=${id}`,
       {},
       {
-        headers: new HttpHeaders({ user_email: email }),
+        headers: new HttpHeaders({ Authorization: token }),
       }
     );
   }

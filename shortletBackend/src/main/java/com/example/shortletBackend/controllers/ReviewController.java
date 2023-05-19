@@ -13,7 +13,7 @@ import java.security.Principal;
 @AllArgsConstructor
 @RestController
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class ReviewController {
     private final ReviewService reviewService;
 

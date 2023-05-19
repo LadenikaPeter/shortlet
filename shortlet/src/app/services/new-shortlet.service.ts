@@ -8,12 +8,12 @@ import { Subject } from 'rxjs';
 export class NewShortletService {
   getListingData = new Subject();
   constructor(private http: HttpClient) {}
-  registerNewShortlet(formData, email) {
+  registerNewShortlet(formData, email, token: string) {
     // const email = '';
 
     const options = {
       headers: {
-        user_email: email,
+        Authorization: token,
       },
     };
 
@@ -26,10 +26,10 @@ export class NewShortletService {
     );
   }
 
-  getListing(email) {
+  getListing(email, token: string) {
     const options = {
       headers: {
-        user_email: email,
+        Authorization: token,
       },
     };
 
@@ -39,11 +39,11 @@ export class NewShortletService {
     );
   }
 
-  DeleteListing(id: number, email: string) {
+  DeleteListing(id: number, email: string, token: string) {
     return this.http.delete(
       `http://localhost:8080/apartment/delete/?apartment_id=${id}`,
       {
-        headers: new HttpHeaders({ user_email: email }),
+        headers: new HttpHeaders({ Authorization: email }),
         responseType: 'text',
       }
     );

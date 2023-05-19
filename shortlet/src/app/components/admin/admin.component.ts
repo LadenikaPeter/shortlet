@@ -61,6 +61,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   requests: any;
   username = '';
   user_email: string;
+  token: string;
   hold_userdata: RowData;
   generalData: any = {};
   hostData: any = {};
@@ -144,12 +145,15 @@ export class AdminComponent implements OnInit, OnDestroy {
 
     this.userSub = this.authS.user.subscribe(
       (user: User) => {
-        this.user_email = user.email;
+        if (user) {
+          this.user_email = user.email;
+          this.token = user.oauthAccessToken;
+        }
       },
       (error) => this.notif.errorMessage(error.message)
     );
 
-    this.pendingReqSub = this.adminS.getAllPendingRequest().subscribe(
+    this.pendingReqSub = this.adminS.getAllPendingRequest(this.token).subscribe(
       (res) => {
         console.log(res);
         this.requests = res;
@@ -202,25 +206,27 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   makeUserAdmin() {
     console.log(this.hold_userdata);
-    this.adminS.makeUserAdmin(this.hold_userdata.id, this.user_email).subscribe(
-      (res: { message: string }) => {
-        console.log(res);
-        this.notif.successMessage(res.message);
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
-      },
-      (error) => {
-        // console.log(error);
-        console.log(error.message);
-        this.notif.errorMessage(error.message);
-      }
-    );
+    this.adminS
+      .makeUserAdmin(this.hold_userdata.id, this.user_email, this.token)
+      .subscribe(
+        (res: { message: string }) => {
+          console.log(res);
+          this.notif.successMessage(res.message);
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        (error) => {
+          // console.log(error);
+          console.log(error.message);
+          this.notif.errorMessage(error.message);
+        }
+      );
   }
 
   removeAdmin() {
     this.adminS
-      .revokeAdminAccess(this.hold_userdata.id, this.user_email)
+      .revokeAdminAccess(this.hold_userdata.id, this.user_email, this.token)
       .subscribe(
         (res: { message: string }) => {
           console.log(res);
@@ -244,7 +250,11 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   rejectListing() {
     this.adminS
-      .rejectListing(this.hold_rejectListing_Data.id, this.user_email)
+      .rejectListing(
+        this.hold_rejectListing_Data.id,
+        this.user_email,
+        this.token
+      )
       .subscribe(
         (res) => {
           // console.log(res);
@@ -267,7 +277,11 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   acceptListing() {
     this.adminS
-      .acceptListing(this.hold_acceptListing_Data.id, this.user_email)
+      .acceptListing(
+        this.hold_acceptListing_Data.id,
+        this.user_email,
+        this.token
+      )
       .subscribe(
         (res) => {
           console.log(res);

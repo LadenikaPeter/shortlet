@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription, filter, map, take } from 'rxjs';
+import { User } from 'src/app/Model/user.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { DataStorageService } from 'src/app/services/data-storage.service';
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   countries: any[] = [];
   pendingRequestvalue: number;
   request: boolean = false;
+  token: string;
 
   constructor(
     private authS: AuthService,
@@ -60,8 +62,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       );
 
     this.isAuth_Subcription = this.authS.user.subscribe(
-      (user) => {
-        this.isAuthenticated = user;
+      (user: User) => {
+        if (user) {
+          this.token = user.oauthAccessToken;
+          this.isAuthenticated = user;
+        } else {
+          this.isAuthenticated = null;
+        }
       },
       (error) => this.notif.errorMessage(error.message)
     );
@@ -88,15 +95,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         (error) => this.notif.errorMessage(error.message)
       );
 
-    this.adminS.getAllPendingRequest().subscribe((response) => {
-      // console.log(response);
-      this.pendingReq = response;
-      this.pendingRequestvalue = this.pendingReq.length;
-      this.dataStorage.pendindRequestValue.next(this.pendingRequestvalue);
-      if (this.pendingRequestvalue > 0) {
-        this.request = true;
-      }
-    });
+    this.onlineChecker();
 
     this.dataStorage.pendindRequestValue.subscribe((value) => {
       this.pendingRequestvalue = +value;
@@ -139,6 +138,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.router.navigate(['/']);
     } else {
       this.router.navigate(['/admin']);
+    }
+  }
+
+  private onlineChecker() {
+    if (this.token) {
+      this.adminS.getAllPendingRequest(this.token).subscribe((response) => {
+        // console.log(response);
+        this.pendingReq = response;
+        this.pendingRequestvalue = this.pendingReq.length;
+        this.dataStorage.pendindRequestValue.next(this.pendingRequestvalue);
+        if (this.pendingRequestvalue > 0) {
+          this.request = true;
+        }
+      });
     }
   }
 }
