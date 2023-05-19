@@ -21,7 +21,7 @@ public class config {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration= new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://courageous-piroshki-f9154b.netlify.app/"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
@@ -35,6 +35,7 @@ public class config {
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder){
         return new RestTemplateBuilder().build();
     }
+
 
     @Bean
     public TextResponse returnText(){

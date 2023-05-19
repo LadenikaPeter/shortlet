@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @RestController
@@ -33,9 +34,9 @@ public class ReservationController {
     }
 
     @GetMapping("/home/reservation/")
-    public ResponseEntity getReservationByHomes(@RequestHeader("email") String email, @RequestParam("apartment_id") long id) {
+    public ResponseEntity getReservationByHomes(Principal principal, @RequestParam("apartment_id") long id) {
 //        TODO check if the user is the owner of the room #issue1
-        TextResponse response = reservationService.getReservationByHomes(email, id);
+        TextResponse response = reservationService.getReservationByHomes(principal.getName(), id);
         return ResponseEntity.status(response.getStatusCode()).body(response.getMessage());
 
     }
@@ -54,8 +55,8 @@ public class ReservationController {
     //when you want to cancel a reservation
     //both the reserver and the host can cancel a reservation
     @PutMapping("/reservation/state/cancel")
-    public ResponseEntity cancelReservation(@RequestParam("reservation_id") long reservation_id, @RequestParam("email") String email) {
-        Optional<Users> user = userService.findUserByEmail(email);
+    public ResponseEntity cancelReservation(@RequestParam("reservation_id") long reservation_id, Principal principal) {
+        Optional<Users> user = userService.findUserByEmail(principal.getName());
         Optional<Reservation> reservation = reservationService.findByReservationId(reservation_id);
         Apartments apartments = reservation.get().getApartment();
         //this checks if it's the reserver
@@ -75,8 +76,8 @@ public class ReservationController {
 
     //when you check in to the house
     @PutMapping("/reservation/state/start")
-    public ResponseEntity startTrip(@RequestParam("reservation_id") long reservation_id, @RequestParam("email") String email) {
-        Optional<Users> users = userService.findUserByEmail(email);
+    public ResponseEntity startTrip(@RequestParam("reservation_id") long reservation_id, Principal principal) {
+        Optional<Users> users = userService.findUserByEmail(principal.getName());
         Optional<Reservation> reservation = reservationService.findByReservationId(reservation_id);
         Apartments apartments = reservation.get().getApartment();
 
@@ -93,8 +94,8 @@ public class ReservationController {
 
     //when the user is checking out of the house
     @PutMapping("/reservation/state/end")
-    public ResponseEntity endTrip(@RequestParam("reservation_id") long reservation_id, @RequestParam("email") String email) {
-        Optional<Users> users = userService.findUserByEmail(email);
+    public ResponseEntity endTrip(@RequestParam("reservation_id") long reservation_id, Principal principal) {
+        Optional<Users> users = userService.findUserByEmail(principal.getName());
         Optional<Reservation> reservation = reservationService.findByReservationId(reservation_id);
         Apartments apartments = reservation.get().getApartment();
 
