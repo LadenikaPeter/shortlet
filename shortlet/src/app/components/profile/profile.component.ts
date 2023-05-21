@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { NotificationService } from 'src/app/services/notifications.service';
 import { UserService } from 'src/app/services/user.service';
@@ -15,13 +16,21 @@ export class ProfileComponent implements OnInit {
     private userS: UserService,
     private dataS: DataStorageService,
     private notif: NotificationService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {}
   profileForm: FormGroup;
   username: string;
   phoneNumber: any;
+  token: string;
 
   ngOnInit(): void {
+    this.auth.user.subscribe((res) => {
+      if (res) {
+        this.token = res.oauthAccessToken;
+      }
+    });
+
     this.userS
       .getUser()
       .subscribe((res: { email: string; name: string; phoneNo: any }) => {

@@ -31,6 +31,7 @@ export class BookingComponent implements OnDestroy, OnInit {
   reference;
   guests: number;
   id: number;
+  token: string;
 
   constructor(
     private dataStorage: DataStorageService,
@@ -53,6 +54,7 @@ export class BookingComponent implements OnDestroy, OnInit {
       if (user) {
         this.isAuthenticated = user;
         this.emailForPayment = user.email;
+        this.token = user.oauthAccessToken;
       } else {
         this.isAuthenticated = null;
       }

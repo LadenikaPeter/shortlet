@@ -19,7 +19,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 @Slf4j
 public class ReservationController {

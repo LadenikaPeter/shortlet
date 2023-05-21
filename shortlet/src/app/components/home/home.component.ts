@@ -26,7 +26,10 @@ export class HomeComponent implements OnInit {
         this.availableShortlets = shortlet;
         // console.log(this.availableShortlets);
       },
-      (error) => this.notif.errorMessage(error.message)
+      (error) => {
+        // console.log('from here');
+        this.notif.errorMessage(error.message);
+      }
     );
 
     // this.user.getUser().subscribe((res: { activeUser: boolean }) => {

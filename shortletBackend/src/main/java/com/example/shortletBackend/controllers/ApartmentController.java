@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 public class ApartmentController {
     private final ApartmentService apartmentService;

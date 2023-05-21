@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NewShortletRoutingModule } from './new-shortlet-routing.module';
 import { ViewListingComponent } from '../modals/view-listing/view-listing.component';
 import { DeleteListingComponent } from '../modals/delete-listing/delete-listing.component';
+import { EditListingComponent } from '../modals/edit-listing/edit-listing.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DeleteListingComponent } from '../modals/delete-listing/delete-listing.
     NewShortletComponent,
     ViewListingComponent,
     DeleteListingComponent,
+    EditListingComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -41,6 +43,7 @@ import { DeleteListingComponent } from '../modals/delete-listing/delete-listing.
     NewShortletComponent,
     ViewListingComponent,
     DeleteListingComponent,
+    EditListingComponent,
   ],
 })
 export class NewShortletModule {}
