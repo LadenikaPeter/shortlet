@@ -4,15 +4,26 @@ entity Users{
   email String,
   phoneNo String,
   role Role
+  activeUser Boolean
 }
 entity Apartment{
   id Long,
   name String,
   address String,
+  country String,
   houseRefCode String,
-  status Status,
+  homeState HomeState,
   price Integer,
-  reservationStatus Status
+  cleaningFee Integer,
+  rating Double,
+  maxNoOfGuest Integer,
+  noOfBedRooms Integer,
+  noOfBeds Integer,
+  noOfBathrooms Integer,
+  propertyType PropertyType,
+  houseType HouseType,
+  reservationStatus Status,
+  description String
 }
 
 entity Reservation{
@@ -20,11 +31,59 @@ entity Reservation{
   checkIn Date,
   checkOut Date,
   userid Integer,
-  apartmentId Integer
+  apartmentId Integer,
+  reservationState ReservationState,
 
 }
+entity Amenities{
+   id Long,
+   wifi Boolean,
+   tv Boolean,
+  kitchen Boolean,
+   washer Boolean,
+  free_parking Boolean,
+  paid_parking Boolean,
+  air_condition Boolean,
+   work_space Boolean,
+  pool Boolean,
+  hot_tub Boolean,
+  patio Boolean,
+  bbq_grill Boolean,
+  outdoor_dining Boolean,
+  pool_table Boolean,
+  fireplace Boolean,
+  lake_access Boolean,
+  beach_access Boolean,
+  outdoor_shower Boolean,
+  smoke_alarm Boolean,
+  first_aid_kit Boolean,
+  fire_extinguisher Boolean
+}
+entity Pictures{
+  id Long,
+  url String
+}
+entity Comments{
+  id Long,
+  comment String,
+  commentDate Date,
+}
+enum HomeState{
+  VERIFIED,PENDING,UNVERIFIED
+}
+enum PropertyType{
+  APARTMENT,BED_AND_BREAKFAST,
+  CASTLE,GUESTHOUSE,HOTEL,TENT,TINY_HOME,
+  TREEHOUSE
+}
+enum ReservationState{
+  PENDING,STARTED,COMPLETED,CANCELLED
+}
+enum HouseType{
+  WHOLE_HOUSE,PRIVATE_ROOM,SHARED_ROOM
+}
 enum Role{
-  ADMIN,USER
+  ADMIN,USER,STAFF
 }
 
 enum Status{
@@ -35,5 +94,14 @@ relationship OneToMany{
   Reservation{userId} to Users {Reservation}
   Reservation{id} to Apartment
   Apartment{userid} to Users
+  Pictures{apartmentId} to Apartment
+  Comments{id} to Apartment
+  Comments{id} to Users
+
+
+}
+relationship OneToOne{
+  Amenities to Apartment
+
 }
 
