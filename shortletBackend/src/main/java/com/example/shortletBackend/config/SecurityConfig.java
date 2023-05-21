@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .antMatchers("/signup/").permitAll()
                 .antMatchers("/verified_homes/**").permitAll()
                 .antMatchers("/home/").permitAll()
-                .antMatchers("/signup").permitAll()
+
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider());

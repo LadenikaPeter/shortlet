@@ -24,7 +24,8 @@ public class config {
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://courageous-piroshki-f9154b.netlify.app/"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
         configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
+
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type","Access-Control-Allow-Origin"));
         configuration.setExposedHeaders(Arrays.asList("X-Get-Header"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
