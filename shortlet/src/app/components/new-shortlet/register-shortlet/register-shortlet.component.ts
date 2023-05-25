@@ -163,8 +163,8 @@ export class RegisterShortletComponent {
   //converts image to  base64 and adds to the shortlet document file array
   onImageUpload(fileDetail) {
     let file: File = fileDetail;
-
-    if (file.size < 5120) {
+    console.log(file.size);
+    if (file.size < 5000000) {
       if (this.allowedMimeType.indexOf(file.type) != -1) {
         let fileName =
           file.name.length > 10
