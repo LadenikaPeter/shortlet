@@ -46,3 +46,8 @@ Shortlet is a web application designed to simplify the process of booking apartm
 - Start the Angular development server.
 - Deploy the Spring Boot application.
 5. **Access the application through the provided URL**
+
+## Contributors
+- Ladenika Peter
+- Inameti Bassey
+- Ikwemogena Abdulai
