@@ -36,8 +36,10 @@ Shortlet is a web application designed to simplify the process of booking apartm
 
 ## Installation
 1. Clone the repository:
+
   ```bash
  git clone https://github.com/your-username/shortlet.git
+
 
 2. Install dependencies for both the Angular front end and Spring Boot back end.
 3. Configure Firebase authentication in the project.
