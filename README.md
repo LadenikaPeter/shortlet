@@ -24,3 +24,16 @@ Shortlet is a web application designed to simplify the process of booking apartm
 - Space Management: Admins have the ability to oversee and moderate apartment space listings, ensuring accuracy and compliance with guidelines.
 
 - System Analytics: The admin dashboard includes analytics tools to provide insights into user activity, popular listings, and other relevant metrics.
+
+## Technologies Used
+- Angular: Front-end development framework for building dynamic and responsive user interfaces.
+
+- SCSS: CSS preprocessor used for styling to enhance maintainability and readability.
+
+- Spring Boot: Java-based framework for building robust and scalable back-end services.
+
+- Firebase Authentication: Secure authentication system to manage user registration and login.
+
+  ## Installation
+  ```
+  git clone https://github.com/your-username/shortlet.git
