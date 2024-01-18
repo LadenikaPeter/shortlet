@@ -49,5 +49,5 @@ Shortlet is a web application designed to simplify the process of booking apartm
 
 ## Contributors
 - Ladenika Peter
-- Inameti Bassey
+- Inameti Bassey (https://github.com/Animeghost)
 - Ikwemogena Abdulai
