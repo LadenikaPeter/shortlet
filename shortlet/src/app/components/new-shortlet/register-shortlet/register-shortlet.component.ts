@@ -164,7 +164,7 @@ export class RegisterShortletComponent {
   onImageUpload(fileDetail) {
     let file: File = fileDetail;
     console.log(file.size);
-    if (file.size < 5000000) {
+    if (file.size < 2000000) {
       if (this.allowedMimeType.indexOf(file.type) != -1) {
         let fileName =
           file.name.length > 10
